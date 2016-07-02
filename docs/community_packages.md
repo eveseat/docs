@@ -18,3 +18,5 @@ Installing packages like this will ensure that none of the core SeAT packages ar
 ## package list
 - [freedenizen/eveseat-notes](https://github.com/freedenizen/eveseat-notes)  
 a notes addon for seat 1.x
+- [warlof/slackbot](https://github.com/warlof/slackbot) [![Latest Stable Version](https://poser.pugx.org/warlof/slackbot/v/stable?format=flat-square)](https://packagist.org/packages/warlof/slackbot)
+a slack bot which handle invite and kick based on Api Key addon for seat 1.x
