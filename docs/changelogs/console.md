@@ -3,6 +3,29 @@
 # console change logs
 Generated with: `git log --oneline --decorate`
 
+### 1.0.16
+```
+c356fd3 (tag: 1.0.16) Version Bump
+ebbebf2 Default to 6 hours to reap jobs
+40707ef Add missing trait
+```
+### 1.0.15
+```
+43fc0b2 (tag: 1.0.15) Version Bump
+a1da1a0 Remove string concatenation causing systax errors
+```
+### 1.0.14
+```
+57132cf (tag: 1.0.14) Version Bump
+8c9abec Fix eveseat/seat#127 by removing string concatenation in Class property
+```
+### 1.0.13
+```
+974cfad (tag: 1.0.13) Version Bump
+f3f44dc Add analytics hit information.
+161cdee Add ClearExpired command
+a87e8d0 Add `seat:queue:clear-expired` command.
+```
 ### 1.0.12
 ```
 a6e5e54 (tag: 1.0.12) Version Bump

@@ -247,7 +247,7 @@ cd /var/www
 Next, we will download SeAT using `composer` and save it to the `seat` directory.
 **NOTE** This can take some time, Composer does a ton of magic here :+1: (like recursively resolving all dependencies :O)
 ```
-composer create-project eveseat/seat seat --keep-vcs --prefer-source --no-dev
+composer create-project eveseat/seat seat --keep-vcs --no-dev
 ```
 Successful installation should end with something like:
 ```

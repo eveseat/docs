@@ -17,6 +17,8 @@ pages:
         - Mailgun Setup: email/mailgun.md
     - Admin Guides:
         - Configuring Eve Online SSO: admin_guides/sso.md
+        - Role Based Access Control: admin_guides/rbac.md
+        - Understanding Tracking: admin_guides/tracking.md
     - SeAT API:
         - Overview: seat_api/overview.md
         - EVE Api Keys: seat_api/eve_api_keys.md
