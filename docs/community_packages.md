@@ -16,7 +16,22 @@ composer require <package vendor>/<package-name>
 Installing packages like this will ensure that none of the core SeAT packages are affected and you should be free to upgrade SeAT core at anytime.
 
 ## package list
+
+### SeAT specific packages
 - [freedenizen/eveseat-notes](https://github.com/freedenizen/eveseat-notes)  
+[![Latest Stable Version](https://poser.pugx.org/freedenizen/eveseat-notes/v/stable?format=flat-square)](https://packagist.org/packages/freedenizen/eveseat-notes)
 a notes addon for seat 1.x
-- [warlof/slackbot](https://github.com/warlof/slackbot) [![Latest Stable Version](https://poser.pugx.org/warlof/slackbot/v/stable?format=flat-square)](https://packagist.org/packages/warlof/slackbot)
-a slack bot which handle invite and kick based on Api Key addon for seat 1.x
+- [warlof/slackbot](https://github.com/warlof/slackbot)  
+[![Latest Stable Version](https://poser.pugx.org/warlof/slackbot/v/stable?format=flat-square)](https://packagist.org/packages/warlof/slackbot)
+a slack bot that handles invites and kicks based on an api key addon for seat 1.x
+- [eve-scout/eveseat-oauth2-server](https://github.com/eve-scout/eveseat-oauth2-server)  
+[![Latest Stable Version](https://poser.pugx.org/eve-scout/eveseat-oauth2-server/v/stable?format=flat-square)](https://packagist.org/packages/eve-scout/eveseat-oauth2-server)
+This EVE SeAT package enables an OAuth2 server for Single sign-on.
+
+### other SeAT related packages
+- [Betriebsrat/err-seat](https://github.com/Betriebsrat/err-seat)  
+Seat Api Interface for errbot
+- [eve-scout/passport-eveseat](https://github.com/eve-scout/passport-eveseat)  
+Passport strategy for authenticating with EVE SeAT using the OAuth 2.0 API.
+- [eve-scout/nodebb-plugin-sso-eveseat](https://github.com/eve-scout/nodebb-plugin-sso-eveseat)  
+This NodeBB plugin allows users login/register via their EVE SeAT account.
