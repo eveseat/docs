@@ -18,7 +18,6 @@ This list is supposed to give a very brief idea of *whats coming™*. It is the 
 - Integration: SMF
 - Character public views if key does not exist.
 - Read package schedules from a config file and seed them using the `ScheduleSeeder`
-- Add People groups to track mains and alts
 - Implement the Search functionality
 
 # wishlist
