@@ -307,8 +307,7 @@ systemctl enable supervisord.service
 We now have to configure the actual workers that supervisord will manage. We do this by adding a new configuration file to `/etc/supervisord.d/` called `seat.ini` Note that the number of workers that we want to start is set by the `numprocs` settings:
 ```
 [program:seat]
-;command=/usr/bin/php /var/www/seat/artisan queue:listen --queue=high,medium,low,default --tries 1 --timeout=3600
-command=/usr/bin/php /var/www/seat/artisan queue:work --darmon --queue=high,medium,low,default --tries=3 --sleep=3
+command=/usr/bin/php /var/www/seat/artisan queue:listen --queue=high,medium,low,default --tries 1 --timeout=3600
 process_name = %(program_name)s-80%(process_num)02d
 stdout_logfile = /var/log/seat-80%(process_num)02d.log
 stdout_logfile_maxbytes=100MB

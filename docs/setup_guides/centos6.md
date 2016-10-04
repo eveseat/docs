@@ -335,8 +335,7 @@ We now have to configure the actual workers that `supervisord` will manage. We d
 So, open up `/etc/supervisord.conf` and paste the below block in at the bottom of the file:
 ```
 [program:seat1]
-;command=/usr/bin/php /var/www/seat/artisan queue:listen --queue=high,medium,low,default --tries 1 --timeout=3600
-command=/usr/bin/php /var/www/seat/artisan queue:work --daemon --queue=high,medium,low,default --tries=3 --sleep=3
+command=/usr/bin/php /var/www/seat/artisan queue:listen --queue=high,medium,low,default --tries 1 --timeout=3600
 directory=/var/www/seat
 stopwaitsecs=600
 user=apache
