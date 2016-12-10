@@ -5,6 +5,26 @@ SeAT is able to query a supervisor instance for worker statuses and other inform
 
 ![seat supervisor](https://i.imgur.com/fCnYQ08.png)
 
+## requirements
+- Supervisor Monitoring need Supervisor version to be at least 3.0 or earlier. In order to check supervisor version, run `supervisord -v`
+
+### Update Supervisor on CentOS 6
+Centos is delivered with Supervisor prior to 3.x which is required by Supervisor Monitoring. Follow those steps in order to manually install an up to date package (thanks to basilisk):
+
+- Remove any existing supervisor using `yum remove supervisor`
+- Download GhettoForge auto-config package `cd /tmp && wget http://mirror.symnds.com/distributions/gf/el/6/gf/x86_64/gf-release-6-10.gf.el6.noarch.rpm`
+- Add GhettoForge repository with `yum install /tmp/gf-release-6-10.gf.el6.noarch.rpm`
+- Enable gf-plus for supervisor packages editing file `/etc/yum.repos.d/gf.repo`
+```
+[gf-plus]
+...
+enabled=1
+...
+includepkgs = supervisor* python*
+```
+- Reload package management cache using `yum update`
+- Install Supervisor running `yum install supervisor`
+
 ## the config
 A bit of setup work is needed in order to have your SeAT setup query a supervisor instance. The basic idea to get this working is:
 
