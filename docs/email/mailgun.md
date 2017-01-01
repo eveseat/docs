@@ -19,4 +19,4 @@ To find out the values you need to populate, login to your mailgun account and b
 
 The big title (`sandbox1XXXXXXX` in my case) is the domain name, and the field titled `API Key` is the `MAILGUN_SECRET`.
 
-Done!. To test, you can send yourself a password reset email.
+Done! To test, you can send yourself a password reset email.

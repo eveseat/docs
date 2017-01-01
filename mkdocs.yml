@@ -7,16 +7,27 @@ pages:
         - Contact: contact.md
         - Reporting Bugs : reporting_bugs.md
         - Community Packages: community_packages.md
-    - Setup Guides:
-        - Quick Install: setup_guides/quick_install.md
-        - CentOS 6.x: setup_guides/centos6.md
-        - CentOS 7.x: setup_guides/centos7.md
-        - Ubuntu 14.04.x: setup_guides/ubuntu1404.md
-        - Upgrading SeAT: setup_guides/upgrade.md
+    - Installation Guides:
+        - Getting Started: installation_guides/getting_started.md
+        - Quick Install: installation_guides/quick_install.md
+        - Generic Installation: installation_guides/generic_installation.md
+        - CentOS 6.x: installation_guides/centos6.md
+        - CentOS 7.x: installation_guides/centos7.md
+        - Ubuntu 16.x: installation_guides/ubuntu16x.md
+        - Development Project: installation_guides/developer_installation.md
+    - Upgrade Guides:
+        - General Upgrades: upgrade_guides/general_upgrades.md
+        - SeAT 1.x to SeAT 2.0: upgrade_guides/seat1_to_2.md
     - Email:
         - Mailgun Setup: email/mailgun.md
+        - Gmail Setup: email/gmail.md
     - Admin Guides:
         - Configuring Eve Online SSO: admin_guides/sso.md
+        - Scaled SeAT Deployments: admin_guides/scaling_seat.md
+        - Role Based Access Control: admin_guides/rbac.md
+        - Understanding Tracking: admin_guides/tracking.md
+        - SeAT & Supervisor Integration: admin_guides/seat_supervisor.md
+        - EVE Api Administrative Contact: admin_guides/eveapi_admin_contact.md
     - SeAT API:
         - Overview: seat_api/overview.md
         - EVE Api Keys: seat_api/eve_api_keys.md

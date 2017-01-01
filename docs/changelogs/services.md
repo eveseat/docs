@@ -3,6 +3,31 @@
 # services change logs
 Generated with: `git log --oneline --decorate`
 
+### 1.0.22
+```
+a0a0c75 (tag: 1.0.22) Version Bump
+02ad71e Seed the expired job time to run every 6 hours
+```
+### 1.0.21
+```
+0ad3ccf (tag: 1.0.21) Version Bump
+```
+### 1.0.20
+```
+cfcefda (tag: 1.0.20) Version Bump
+7fa3040 Add missing import of CharacterSheetCorporationTitles
+b4a8080 Set available options and defaults for usage tracking
+b2765c6 Add analytics Jobs using Google Analytics measurement protocol.
+9d23cb6 * Add corporation titles to character sheet (#7)
+26c1673 Fix eveseat/seat#112 by using an advanced where to group the filter (actually eveseat/seat#122)
+58cfc96 Add the `seat:queue:clear-expired` scheduled command
+```
+### 1.0.19
+```
+b2b9995 (tag: 1.0.19) Version Bump
+744e982 Paginate Killmails
+5711563 Paginate contracts. Part of the fix for eveseat/seat#111
+```
 ### 1.0.18
 ```
 b3d538d (tag: 1.0.18) Version Bump

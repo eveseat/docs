@@ -3,6 +3,19 @@
 # api change logs
 Generated with: `git log --oneline --decorate`
 
+### 1.0.13
+```
+b55b1aa (tag: 1.0.13) Version Bump
+8b80e11 Paginate the token logs
+```
+### 1.0.12
+```
+fbf3e88 (tag: 1.0.12) Version Bump
+e8f1882 Fix eveseat/seat#115 by adding new endpoints for role management
+729971f Convert from a resource to controller route for roles
+d2ff1df Merge pull request #1 from nizzan/patch-1
+dc80447 Typo on API Token generation
+```
 ### 1.0.11
 ```
 d35e7ef (tag: 1.0.11) Version Bump

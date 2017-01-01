@@ -1,21 +1,17 @@
 ![SeAT](http://i.imgur.com/aPPOxSK.png)
-# Welcome to the seat wiki!
 
-Please refer to the index on the side for installation instructions, documentation about SeAT internals and or development guidelines!
+Welcome to the [SeAT](https://github.com/eveseat/seat) documentation pages!
 
-## one line installer ([source](https://github.com/eveseat/scripts/blob/master/install/installer.sh))
-**Warning** This installer is meant for *fresh* installations of the base operating system. *No* checks are performed to ensure that nothing duplicate is installed.
+This documentation site hopes to provide you with useful information about SeAT. Please refer to the index on the side for detailed installation instructions, documentation about SeAT internals and or development guidelines!
 
-Quickly install SeAT with the following command:
-``` bash
-bash <(curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/install/installer.sh)
-```
+## contributing to documentation
+Great software is coupled with even greater documentation. If you would like to contribute to making this documentation even better, please don't hesitate to fork the [documentation repository](https://github.com/eveseat/docs) and submit a pull request with your contribution.
 
-To see the installer in action, click the image below:
-[![asciicast](https://asciinema.org/a/3zeyegk50qss86asaxfcb2yan.png)](https://asciinema.org/a/3zeyegk50qss86asaxfcb2yan)
+## quickstart
+SeAT comes with a handy command that can perform installations, upgrades and generic diagnostics of your environment for you. To get up and running the fastest, you should download this tool and run the `seat install:production` command. For more information, please refer to the [getting started](installation_guides/getting_started/) guide.
 
-## one line upgrader ([source](https://github.com/eveseat/scripts/blob/master/upgrade/upgrade-seat.sh))
-Upgrade your installation of SeAT with the following command:
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/upgrade/upgrade-seat.sh)
-```
+## upgrades
+New features, performance improvements and bug fixes are continuously being made to SeAT. The `seat` command provides an easy way to ensure that you are always up to date with the latest improvements. For details on how to stay up to date, please refer to the [general upgrades](upgrade_guides/general_upgrades/) guide.
+
+## contact
+Want to get in touch with developers, or just other users of SeAT? Refer to the [contact](contact/) details page to find out how!

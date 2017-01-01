@@ -9,6 +9,8 @@
 
 return [
 
+    'enable_joblog' => true,
+
     'pheal'            => [
         'cache_path' => storage_path() . '/app/pheal/',
         'log_file'   => storage_path('logs/pheal.log')
@@ -39,7 +41,10 @@ return [
 ];
 ```
 
-#### Options 
+#### Options
+* *enable_joblog*  
+Specify wether job progress should be loggged to the joblog table.
+
 * *pheal.cache_path*  
 Specify the path to use for the Pheal XML cache. This cache is used to write the downloaded XML files for later retrieval if the cached_until timers have not yet expired.
 

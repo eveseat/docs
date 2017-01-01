@@ -9,8 +9,8 @@ This list is supposed to give a very brief idea of *whats coming™*. It is the 
 - Wallet Ledger with reporting capabilities.
 - Export to CSV / Excel ability for datasets
 - RBAC Wiki Documentation
-- RBAC roles additions for; all characters; all corporations
-- RBAC roles exclusions for; NOT `character_id`; NOT `corporation_id`
+- ~~RBAC roles additions for; all characters; all corporations~~
+- ~~RBAC roles exclusions for; NOT `character_id`; NOT `corporation_id`~~
 - Integration: Teamspeak3
 - Integration: Mumble
 - Integration: Openfire
@@ -18,8 +18,7 @@ This list is supposed to give a very brief idea of *whats coming™*. It is the 
 - Integration: SMF
 - Character public views if key does not exist.
 - Read package schedules from a config file and seed them using the `ScheduleSeeder`
-- Add People groups to track mains and alts
-- Implement the Search functionality
+- ~~Implement the Search functionality~~
 
 # wishlist
 Many features are requested via the github issues page. This list is a collection of those feature requests. They are 'wishlist' items as the feeling is they need to be solved via a SeAT package
@@ -28,5 +27,5 @@ Many features are requested via the github issues page. This list is a collectio
 - Recruitment Page [ref](https://github.com/eveseat/seat/issues/30)
 - SRP [ref](https://github.com/eveseat/seat/issues/31)
 - NodeBB Integration [ref](https://github.com/eveseat/seat/issues/32)
-- Starbase Siphon Detection [ref](https://github.com/eveseat/seat/issues/47)
+- ~~Starbase Siphon Detection [ref](https://github.com/eveseat/seat/issues/47)~~
 - Starbase Timer Board [ref](https://github.com/eveseat/seat/issues/53)

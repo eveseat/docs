@@ -103,6 +103,7 @@ Sample Response:
 | Description   | Add an EVE API key to the database. |
 | Parameters    |  **key_id** - The keyID to add |
 |     |  **v_code** - The vCode to add |
+|     |  **user_id** - (optional) - The SeAT owner of the key. |
 
 Sample Request:
 ```bash

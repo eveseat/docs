@@ -1,6 +1,6 @@
 ![SeAT](http://i.imgur.com/aPPOxSK.png)
 
-This guide attempts to explain how to install SeAT onto a **CentOS 6.x** Server. A small amount of Linux experience is preferred when it comes to this guide, all though it is not entirely mandatory. This guide assumes you want all of the available SeAT components installed (which is the default).
+This guide attempts to explain how to manually install SeAT onto a **CentOS 6.x** Server. A small amount of Linux experience is preferred when it comes to this guide, all though it is not entirely mandatory. This guide assumes you want all of the available SeAT components installed (which is the default).
 
 ### getting started
 We are going to assume you have root access to a fresh CentOS 6.x Server. Typically access is gained via SSH. All of the below commands are to be entered in the SSH terminal session for the installation & configuration of SeAT. If the server you want to install SeAT on is being used for other things too (such as hosting MySQL databases and or websites), then please keep that in mind while following this guide.
@@ -9,8 +9,6 @@ Packages are installed using the `yum` package manager as the `root` user.
 
 ### table of contents
  1. [Repositories](#repositories)
-   i. [Epel](#epel)
-   ii. [Remi](#remi)
  2. [Database](#database)
  3. [PHP & Apache](#php--apache)
  4. [Redis](#redis)
@@ -25,26 +23,43 @@ Packages are installed using the `yum` package manager as the `root` user.
    i. [Virtual Host Setup](#virtual-host-setup)
 
 ### repositories
-Due to the nature of CentOS 6.x packaging and the limitations in getting 'bleeding edge' software with it, we need to add some extra software repositories in order to get SeAT running. These repositories are known as the [Fedora EPEL](https://fedoraproject.org/wiki/EPEL) and [Remi](http://rpms.famillecollet.com/) repositories. Adding these repositories will allow us to get access to PHP 5.5+ which is a requirement for SeAT.
+Due to the nature of CentOS 6.x packaging and the limitations in getting 'bleeding edge' software with it, we need to add some extra software repositories in order to get SeAT running. These repositories are known as the [Fedora EPEL](https://fedoraproject.org/wiki/EPEL), [Remi](http://rpms.famillecollet.com/) and [Ghettoforge](http://ghettoforge.org/) repositories. Adding these repositories will allow us to get access to PHP 7 and Supervisor 3 which is a requirement for SeAT.
 
 To install / configure the required repositories, run the following commands:
 
 #### epel
 ```
+# Download and install EPEL
 EPEL=epel-release-latest-6.noarch.rpm && curl -O https://dl.fedoraproject.org/pub/epel/$EPEL && yum localinstall -y $EPEL && rm -f $EPEL
+
+# Import EPEL signing keys
+rpm --import http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
 ```
 
 #### remi
 ```
+# Download and install Remi
 REMI=remi-release-6.rpm && curl -O http://rpms.remirepo.net/enterprise/$REMI && yum localinstall -y $REMI && rm -f $REMI
+
+# Import Remi signing keys
+rpm --import http://rpms.remirepo.net/RPM-GPG-KEY-remi
 ```
 
-Next, we will quickly install `yum-utils` and enable the `remi-php55` repository in order to gain access to PHP 5.5 (You can skip this if you want to manually enable `remi` and `remi-php55`). Do this with:
+### ghettoforge
+```
+# Download and install GhettoForge
+GF=gf-release-6-10.gf.el6.noarch.rpm && curl -O http://mirror.symnds.com/distributions/gf/el/6/gf/x86_64/$GF && yum localinstall -y $GF && rm -f $GF
+
+# Import the GhettoForge signing keys
+rpm --import http://mirror.symnds.com/distributions/gf/RPM-GPG-KEY-gf.el6
+```
+
+Next, we will quickly install `yum-utils` and enable the `remi-php70` and `gf-plus` repositories in order to gain access to PHP 7.0 and Supervisor 3
 ```
 yum install yum-utils -y
 ```
 ```
-yum-config-manager --enable remi,remi-php55
+yum-config-manager --enable remi,remi-php70,gf-plus
 ```
 
 ### database
@@ -54,38 +69,6 @@ Lets install the database server first:
 ```
 yum install mysql mysql-server -y
 ```
-You should see output similar to the following:
-```
-[root@seat ~]# yum install mysql mysql-server -y
-Loaded plugins: fastestmirror
-Setting up Install Process
-Loading mirror speeds from cached hostfile
- * base: mirror.nonstop.co.il
-
-[...]
-
-Resolving Dependencies
---> Running transaction check
----> Package mysql.x86_64 0:5.1.73-5.el6_6 will be installed
---> Processing Dependency: mysql-libs = 5.1.73-5.el6_6 for package: mysql-5.1.73-5.el6_6.x86_64
---> Processing Dependency: perl(Sys::Hostname) for package: mysql-5.1.73-5.el6_6.x86_64
---> Processing Dependency: perl(IPC::Open3) for package: mysql-5.1.73-5.el6_6.x86_64
---> Processing Dependency: perl(Getopt::Long) for package: mysql-5.1.73-5.el6_6.x86_64
---> Processing Dependency: perl(File::Temp) for package: mysql-5.1.73-5.el6_6.x86_64
---> Processing Dependency: perl(Fcntl) for package: mysql-5.1.73-5.el6_6.x86_64
-
-[...]
-
-Dependency Installed:
-  perl.x86_64 4:5.10.1-141.el6                perl-DBD-MySQL.x86_64 0:4.013-3.el6        perl-DBI.x86_64 0:1.609-4.el6          perl-Module-Pluggable.x86_64 1:3.90-141.el6
-  perl-Pod-Escapes.x86_64 1:1.04-141.el6      perl-Pod-Simple.x86_64 1:3.13-141.el6      perl-libs.x86_64 4:5.10.1-141.el6      perl-version.x86_64 3:0.77-141.el6
-
-Dependency Updated:
-  mysql-libs.x86_64 0:5.1.73-5.el6_6
-
-Complete!
-```
-
 With the database server installed, lets start it and configure it to automatically start up the next time out server boots up:
 
 ```
@@ -247,13 +230,18 @@ cd /var/www
 Next, we will download SeAT using `composer` and save it to the `seat` directory.
 **NOTE** This can take some time, Composer does a ton of magic here :+1: (like recursively resolving all dependencies :O)
 ```
-composer create-project eveseat/seat seat --keep-vcs --prefer-source --no-dev
+composer create-project eveseat/seat seat --no-dev
 ```
 Successful installation should end with something like:
 ```
-Do you want to remove the existing VCS (.git, .svn..) history? [Y,n]? y
+Writing lock file
+Generating autoload files
+> Illuminate\Foundation\ComposerScripts::postUpdate
+> php artisan optimize
+Generating optimized class loader
+Compiling common classes
 > php artisan key:generate
-Application key [mkzxy4ubHOPVQ05LwyFK2ii0vPxvVMMj] set successfully.
+Application key [base64:WFfzkuIpUGpkDNu0SRtwhPphpM66UvzuZpEML/6dEVQ=] set successfully.
 ```
 
 ### seat permissions
@@ -272,9 +260,10 @@ SeAT is now downloaded and almost ready for use!
 ### selinux
 Many people hate SELinux, primarily due to a misunderstanding of what it does and how it works. SeAT can run perfectly fine with SELinux enabled, and I actually encourage you to leave it enabled. There is however one small settings change required to make everything work as expected.
 
-First, we have to allow apache to make network connections. This is so that we may connect to the EVEAPI, as well as the MySQL database and Redis. Configure this with:
+First, we have to allow apache to make network connections. This is so that we may connect to the EVEAPI, as well as the MySQL database and Redis. We also have to allow Apache to write to disk. So, configure this with:
 ```
 setsebool -P httpd_can_network_connect 1
+setsebool -P httpd_unified 1
 ```
 Next, we have to ensure that the files and folders in `/var/www/seat` is correctly labelled in order to prevent SELinux from blocking perfectly normal behaviour. Check this with:
 ```
@@ -283,35 +272,46 @@ restorecon -Rv /var/www/seat
 Thats it. Pretty painless eh? :)
 
 ### seat setup
-**NOTE** The installer will automate this jazz, so just the commands for now.
+Next, we need to configure SeAT to know where the database server lives. Do this by editing `/var/www/seat/.env` and setting the appropriate values:
 
 ```
-Edit /var/www/seat/.env
-DB_HOST=localhost
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
 DB_DATABASE=seat
 DB_USERNAME=seat
 DB_PASSWORD=s_p3rs3c3r3tp455w0rd
-
-CACHE_DRIVER=redis
-SESSION_DRIVER=file
-QUEUE_DRIVER=redis
+DB_DEBUG=false
 ```
+
+Moving on, we should publish the internal databse migrations, css & javasript, and other goodies with:
 ```
 php artisan vendor:publish --force
 ```
+
+Next, run the database migrations to get the SeAT database ready for use:
 ```
 php artisan migrate
 ```
+
+Next, we need to run the seeders to populate som default data for SeAT to use:
 ```
+php artisan db:seed --class=Seat\\Notifications\\database\\seeds\\ScheduleSeeder
 php artisan db:seed --class=Seat\\Services\\database\\seeds\\NotificationTypesSeeder
 php artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder
 ```
+
+Next, the latest static data export must be downloaded and imported with:
 ```
 php artisan eve:update-sde -n
 ```
+
+And finally, the SeAT admin user needs to have a password set. There is no default SeAT admin password.
 ```
 php artisan seat:admin:reset
 ```
+
+One last thing, an email address is needed for the admin user too.
 ```
 php artisan seat:admin:email
 ```
@@ -329,31 +329,30 @@ yum install supervisor -y
 ```
 chkconfig supervisord on
 ```
-We now have to configure the actual workers that `supervisord` will manage. We do this by adding `program` configuration blocks to `/etc/supervisord.conf`. The sample below can simply be added to the bottom of the existing configuration file.
-**Note** The sample has the program defined as [program:seat1]. If you want to run 4 workers, you need to add this to the supervisord.conf 4 times. So you will have 4 blocks with incrementing numbers ie. [program:seat1], [program:seat2], [program:seat3] & [program:seat4]. You also have to keep in mind where the `artisan` file is located. If you followed this guide to the T, it will be at `/var/www/seat/artisan`.
-
-So, open up `/etc/supervisord.conf` and paste the below block in at the bottom of the file:
+We now have to configure the actual workers that supervisord will manage. We do this by adding a new configuration file to `/etc/supervisord.d/` called `seat.ini` Note that the number of workers that we want to start is set by the `numprocs` settings:
 ```
-[program:seat1]
-command=/usr/bin/php /var/www/seat/artisan queue:listen --queue=high,medium,low,default --tries 1 --timeout=3600
+[program:seat]
+command=/usr/bin/php /var/www/seat/artisan queue:work --queue=high,medium,low,default --tries 1 --timeout=86100
+process_name = %(program_name)s-80%(process_num)02d
+stdout_logfile = /var/log/seat-80%(process_num)02d.log
+stdout_logfile_maxbytes=100MB
+stdout_logfile_backups=10
+numprocs=4
 directory=/var/www/seat
 stopwaitsecs=600
 user=apache
-stdout_logfile=/var/log/seat_out.log
-stdout_logfile_maxbytes=100MB
-stdout_logfile_backups=10
-stderr_logfile=/var/log/seat_err.log
-stderr_logfile_maxbytes=100MB
-stderr_logfile_backups=5
 ```
 Save your file and reload `supervisord` so that it is aware of the changes that we have made:
 ```
-supervisorctl reload
+/etc/init.d/supervisord restart
 ```
 Lastly, check that everything is OK and the workers have started up:
 ```
 [root@seat seat]# supervisorctl status
-seat1          RUNNING    pid 2677, uptime 0:01:13
+seat:seat-8000                   RUNNING    pid 5083, uptime 0:00:28
+seat:seat-8001                   RUNNING    pid 5082, uptime 0:00:28
+seat:seat-8002                   RUNNING    pid 5085, uptime 0:00:28
+seat:seat-8003                   RUNNING    pid 5084, uptime 0:00:28
 ```
 If you do not have output such as in the above block, check the log files for any possible errors.
 
