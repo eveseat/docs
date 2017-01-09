@@ -158,6 +158,64 @@ Add the following line to the webserver users crontab (remember to check the pat
 ```
 
 ### webserver
-Lastly, configure a webserver to server the `public/` directory from the folder that was downloaded when the `composer create-project` command was run.
+Lastly, configure a webserver to serve the `public/` directory from the folder that was downloaded when the `composer create-project` command was run.
 
 Thats it! SeAT should now be available at http://your-domain-or-ip/
+
+#### install SeAT in a subfolder
+Instead using a domain or an alias (CNAME) in order to serve your SeAT application,
+you can use a subfolder (alias directory).
+
+ie : seat.goonswarmfederation.eve
+- seat is a CNAME, we want to use it in order to serve SeAT
+- goonswarmfederation.eve is our domain, we have our main website served from it
+
+ie : goonswarmfederation.eve/seat
+- seat is an alias directory, we want to redirect all related request to a specific path on our server (it can be named seat, but also something else)
+- goonswarmfederation.eve is our domain, we want to serve our forum from it
+
+##### Apache Setup
+In order to use alias directory, we have to change a bit the default SeAT virtual host config file.
+In fact, instead using the default vhost config file, we will alter our existing vhost and adding SeAT rules into it.
+
+```
+<VirtualHost *:80>
+    ServerName goonswarmfederation.eve # put any A/AAAA/CNAME entries here, this is for DNS records only (don't put subfolder here)
+    ServerAlias www.goonswarmfederation.eve # put any CNAME entries here, please, don't put any subfolder, this is DNS records ONLY
+    ServerAdmin postmaster@goonswarmfederation.net
+    DocumentRoot /var/www/goonswarmfederation.net
+
+    # this is our forum rules
+    <Directory "/var/www/goonswarmfederation.net">
+        AllowOverride All
+        Order allow, deny
+        Allow from all
+    </Directory>
+
+    Alias /seat /var/www/html/seat # all goonswarmfederation.eve/seat will be serve with content into /var/www/seat
+    # we're using /seat as directory alias which is routing to /var/www/html/seat
+    # but it could also work with /myapp /var/www/html/seat, in this case, we will redirect all goonswarmfederation.net/myapp to /var/www/html/seat
+    # the important things is that directory should match with bellow <Directory> rull
+    # and, the alias should match with RewriteBase rule
+
+    # this is SeAT rules
+    <Directory "/var/www/html/seat">
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+        
+        # this rule will only be applied if rewrite_mod has been enabled
+        <IfModule rewrite_module>
+        RewriteBase /seat # put here the alias you want to use, this will enforce url rewritting
+        </IfModule>
+    </Directory>
+
+    ErrorLog ${APAGE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+We've seen here http configuration file, but exactly same things apply to https (443).
+You just have to include certificate rules and replace *:80 by *:443.
+
+(And yes, one time, we will be able to use .eve domain - because it's cool !)
