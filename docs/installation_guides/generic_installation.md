@@ -216,6 +216,67 @@ In fact, instead using the default vhost config file, we will alter our existing
 ```
 
 We've seen here http configuration file, but exactly same things apply to https (443).
-You just have to include certificate rules and replace *:80 by *:443.
+You just have to include certificate rules and replace `*:80` by `*:443`.
 
-(And yes, one time, we will be able to use .eve domain - because it's cool !)
+(And yes, one time, we will be able to use `.eve` domain - because it's cool !)
+
+##### Nginx Setup
+In order to use alias directory, we have to change a bit the default SeAT virtual host config file.
+In fact, instead using the default vhost config file, we will alter our existing vhost and adding SeAT rules into it.
+
+```
+server {
+    listen 80 default_server; # default_server is only mandatory for the main vhost file, this is the one used for all non relevant cases (ie: using IP address or another domain without any configuration file)
+    server_name goonswarmfederation.eve www.goonswarmfederation.eve; # put any A, AAAA and CNAME entries here, but please, don't put subfolder, this is DNS records ONLY
+    root /var/www/goonswarmfederation.net;
+
+    # this is our forum rules
+    location / {
+        root /var/www/goonswarmfederation.eve;
+        index index.php;
+    }
+
+    # we're using /seat as directory alias which is routing to /var/www/seat/public
+    location /seat/ {
+        alias /var/www/seat/public; # all goonswarmfederation.eve/seat will be serve with content into /var/www/seat/public
+        
+        try_files $uri $uri/ /index.php?$query_string; # this will redirect all link to the index.php into seat/public subfolder
+        
+        error_log /var/log/nginx/seat/http-error.log; # this will log issue non related to php proxying (http 500, server issues)
+        custom_log /var/log/nginx/seat/access.log combined; # this will log common access attempt (ie http 200, 400, ...)
+        
+        # We will use this socket for all php file which are running from /seat path
+        # You can use the same as used for our forum, but I personnally prefer to split authorizations and process
+        # Take care of location which is based on alias rule
+        # Here, we will redirect all .php files into seat directory to this php socket
+        location ~ \.php$ {
+            try_files $uri =404;
+            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_pass unix:/var/bin/php7.0/seat.socket; # put here the php socket you want to use for SeAT.
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include fastcgi_params;
+            
+            error_log /var/log/nginx/seat/proxy-error.log; # this will only log proxy routing issue. Php log are handled in php pool file
+        }
+    }
+    
+    # This is our default php socket
+    # All request which don't match with the parent rules will be forward to this one
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/bin/php7.0/www.socket;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+        
+        error_log /var/log/nginx/php-error.log;
+    }
+}
+```
+
+We've seen here http configuration file, but exactly same things apply to https (443).
+You just have to include certificate rules and replace `listen 80` by `listen 443`.
+
+(And yes, one time, we will be able to use `.eve` domain - because it's cool !)
