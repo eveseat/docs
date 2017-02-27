@@ -1,5 +1,7 @@
 ![SeAT](http://i.imgur.com/aPPOxSK.png)
 
+## general
+
 So, you have a bug / feature / curiosity to test out. Hopefully this article will help you quickly get set up to do that!
 
 SeAT packages are developed as a standalone packages. The general idea being that you should be including them in the main `seat` projects `composer.json` like [here](https://github.com/eveseat/seat/blob/master/composer.json#L11). This of course will install all of the sources in the projects `vendor/` directory, though this is not always ideal from a development perspective.

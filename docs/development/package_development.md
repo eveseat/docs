@@ -5,25 +5,39 @@ So, you want to write a SeAT package? Hopefully this guide helps you along the w
 This guide was written while writing the API package for SeAT [here](https://github.com/eveseat/api). I figured it would be best to try and capture the process as I am going through it to help in case I miss any important details.
 
 ## toc
-1. [Getting Started](#getting-started)
-2. [Service Provider](#service-provider)
-3. [Package Structure](#package-structure)
-4. [Routes and Controllers](#routes-and-controllers)
-5. [Routes - Access Control](#routes---access-control)
-6. [Middleware](#middleware)
-7. [Views](#views)
-8. [Views - Sidebar Menu](#views---sidebar-menu)
-9. [Views - Character Menu](#views---character-submenus)
-10. [Views - Corporation Menu](#views---corporation-submenus)
-11. [Views - Bootstrapping Menu Items](#views---bootstrapping-menu-items)
-11. [Database](#database)
+1. [Good Practices](#good-practices)
+2. [Getting Started](#getting-started)
+3. [Service Provider](#service-provider)
+4. [Package Structure](#package-structure)
+5. [Routes and Controllers](#routes-and-controllers)
+6. [Routes - Access Control](#routes---access-control)
+7. [Middleware](#middleware)
+8. [Views](#views)
+9. [Views - Sidebar Menu](#views---sidebar-menu)
+10. [Views - Character Menu](#views---character-submenus)
+11. [Views - Corporation Menu](#views---corporation-submenus)
+12. [Views - Bootstrapping Menu Items](#views---bootstrapping-menu-items)
+13. [Database](#database)
 
 ## background notes
 I think its important to keep in mind a few things about how SeAT is put together. The most important being a brief description of what each core package offers, and how you can integrate with them. For a breakdown on what the core packages provide, please refer the to breakdown [here](Core-Package-Breakdown).
 
-SeAT 1.x is written on [Laravel 5.1 LTS](http://laravel.com/docs/5.1). A **very** good thing to do would be to actually read the documentation top->bottom and get an idea of what is possible with the framework. SeAT core packages make heavy use of many of the features, based directly of what has been interpreted by this very documentation.
+SeAT 2.x is written on [Laravel 5.3 LTS](http://laravel.com/docs/5.3). A **very** good thing to do would be to actually read the documentation top->bottom and get an idea of what is possible with the framework. SeAT core packages make heavy use of many of the features, based directly of what has been interpreted by this very documentation.
 
 If you really want to start contributing packages, but juts cant get your head around this whole Laravel thing, then I can suggest you have a look at this excellent free course material covering the basics of what you will encounter in the SeAT codebase. [https://laracasts.com/series/laravel-5-fundamentals](https://laracasts.com/series/laravel-5-fundamentals)
+
+## good practices
+In order to ensure SeAT core stability, we've introduced few good practices which
+should help everyone to develop package in a convenient way.
+In addition, it should allow to keep a track to every third party package issues as well as their existence.
+
+- prefix your repository with `seat` (`seat-teamspeak`)
+- use the following prebuilt namespace `Author\Seat\Package\Whatever-you-want-from-here` (`Warlof\Seat\Teamspeak\Http`)
+- prefix the name of your table with both author and package (`warlof_teamspeak_users`)
+- avoid as much as possible to overload core tables
+- prefix your settings with both author and package (`warlof.teamspeak.address`)
+- prefix redis records with both author and package (`warlof.teamspeak.channels`)
+- in your `composer.json` file, fill `type` with `seat-plugin`
 
 ## getting started
 The very first thing to do is prepare the empty git repository on say Github, as well as the composer package itself. Clone a clean repo, and run `composer init`, answering any questions. Once that is done, edit the resultant `composer.json` and prepare the `autoload` block. SeAT core follows the [PSR-4](http://www.php-fig.org/psr/psr-4/) autoloading standard. I will suggest you do the same. For some more detailed composer info, refer to the docs [here](https://getcomposer.org/doc/01-basic-usage.md). For the API package, I am going to autoload **Seat\Api** from the `src` directory using PSR-4.
