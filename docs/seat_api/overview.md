@@ -4,7 +4,7 @@ SeAT has a RESTful API. Endpoints are protected by a access token that is limite
 API Tokens have no concept of ACL's. The API should primarily be used for integration with other systems.
 
 ## definitions
-Currently, all API endpoints live at `<seat url>/api/<version>` where `<sear url>` is the full url to your SeAT instance and `<version>` is the API version you wish to interact with.
+Currently, all API endpoints live at `<seat url>/api/<version>` where `<seat url>` is the full url to your SeAT instance and `<version>` is the API version you wish to interact with.
 
 ## authentication
 Authentication to the SeAT API is done via a `X-Token` header. A token may be obtained by browsing to the API settings page in the SeAT WebUI and generating one. A sample request using `curl` with an authentication token can be seen below:

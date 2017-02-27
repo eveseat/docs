@@ -33,6 +33,7 @@ pages:
         - EVE Api Keys: seat_api/eve_api_keys.md
         - SeAT Users: seat_api/seat_users.md
         - SeAT Roles, Permissions and Authorization: seat_api/roles_permissions.md
+        - SeAT People Groups: seat_api/groups.md
         - Characters: seat_api/characters.md
         - Corporations: seat_api/corporations.md
     - Changelogs:
