@@ -119,6 +119,19 @@ Sample Response:
 ]
 ```
 
+Sample Error:
+```
+HTTP/1.1 400 Bad Request
+Date: Thu, 16 Mar 2017 22:14:00 GMT
+Status: 400 Bad Request
+Content-Type: application/json
+```
+```json
+{
+  "msg": "This key already exist"
+}
+```
+
 ***
 
 ### Edit an EVE API Key
