@@ -30,6 +30,10 @@ a slack SSO integration for seat 2.x
 - [eve-scout/eveseat-oauth2-server](https://github.com/eve-scout/eveseat-oauth2-server)  
 [![Latest Stable Version](https://poser.pugx.org/eve-scout/eveseat-oauth2-server/v/stable?format=flat-square)](https://packagist.org/packages/eve-scout/eveseat-oauth2-server)
 This EVE SeAT package enables an OAuth2 server for Single sign-on.
+- [BenHUET/eveseat-calendar](https://github.com/BenHUET/eveseat-calendar)  
+[![Latest Stable Version](https://poser.pugx.org/kassie/calendar/v/stable)](https://packagist.org/packages/kassie/calendar)
+Calendar plugin for SeAT 2.x !
+
 
 ### other SeAT related packages
 - [Betriebsrat/err-seat](https://github.com/Betriebsrat/err-seat)  
