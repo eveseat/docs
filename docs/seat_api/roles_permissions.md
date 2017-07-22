@@ -214,6 +214,56 @@ true
 
 ***
 
+### Affiliate Character with a Role
+
+| Type          | Detail  |
+| ------------- |--------|
+| HTTP Verb     | **POST** |
+| Endpoint      | `/api/v1/role/affiliation/character` |
+| Description   | Affiliate a character with a role. |
+| Parameters    |  **role_id** - The id for the Role. |
+|     |  **character_id** - The id from the Character. |
+|     |  **inverse** `(optional)` - true if the affiliation should be reversed. |
+
+Sample Request:
+```bash
+http get http://localhost:8000/api/v1/role/affiliation/character \
+    role_id=2 character_id=648798798\
+    Accept:application/json X-Token:123456
+```
+
+Sample Response:
+```json
+true
+```
+
+***
+
+### Affiliate Corporation with a Role
+
+| Type          | Detail  |
+| ------------- |--------|
+| HTTP Verb     | **POST** |
+| Endpoint      | `/api/v1/role/affiliation/corporation` |
+| Description   | Affiliate a corporation with a role. |
+| Parameters    |  **role_id** - The id for the Role. |
+|     |  **corporation_id** - The id from the Corporation. |
+|     |  **inverse** `(optional)` - true if the affiliation should be reversed. |
+
+Sample Request:
+```bash
+http get http://localhost:8000/api/v1/role/affiliation/corporation \
+    role_id=2 corporation_id=648798798\
+    Accept:application/json X-Token:123456
+```
+
+Sample Response:
+```json
+true
+```
+
+***
+
 ### Grant User a Role
 
 | Type          | Detail  |
