@@ -27,6 +27,9 @@ a slack bot that handles invites and kicks based on an api key addon for seat 1.
 - [warlof/seat-slack-sso](https://github.com/warlof/seat-slack-sso)  
 [![Latest Stable Version](https://poser.pugx.org/warlof/seat-slack-sso/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-slack-sso)
 a slack SSO integration for seat 2.x
+- [warlof/eveseat-mining-ledger](https://github.com/warlof/eveseat-mining-ledger)  
+[![Latest Stable Version](https://poser.pugx.org/warlof/eveseat-mining-ledger/v/stable?format=flat-square)](https://github.com/warlof/eveseat-mining-ledger)
+an ESI capability which is providing mining ledger to SeAT 2.x
 - [eve-scout/eveseat-oauth2-server](https://github.com/eve-scout/eveseat-oauth2-server)  
 [![Latest Stable Version](https://poser.pugx.org/eve-scout/eveseat-oauth2-server/v/stable?format=flat-square)](https://packagist.org/packages/eve-scout/eveseat-oauth2-server)
 This EVE SeAT package enables an OAuth2 server for Single sign-on.
