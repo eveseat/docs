@@ -1,4 +1,4 @@
-![SeAT](https://i.imgur.com/M5kW8wi.png)
+![SeAT](http://i.imgur.com/aPPOxSK.png)
 
 Getting a development installation up and running is now even easier than before. 
 SeAT 3.0 will be profit from the extensive functionality of `docker-compose`.
