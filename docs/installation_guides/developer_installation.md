@@ -1,23 +1,25 @@
 ![SeAT](http://i.imgur.com/aPPOxSK.png)
 
-Getting a development installation up and running is now even easier than before. Simply download the `seat` tool (if you havent already), and run `seat install:development`!
+Getting a development installation up and running is now even easier than before. 
+SeAT 3.0 will be profit from the extensive functionality of `docker-compose`.
+Simply download the latest dev-docker files, run `bash prepare-source.sh` and finally `docker-compose up -d`.
+
 
 ## installation
 
-1. `curl -fsSL https://git.io/vXb0u -o /usr/local/bin/seat`
-2. `chmod +x /usr/local/bin/seat`
-3. `seat install:development`
+1. ` git clone https://github.com/eveseat/scripts.git /var/seat`
+2. `cd /var/seat/docker-compose-dev`
+3. `bash prepare-source.sh`
+4. `docker-compose up -d`
 
-This command also accepts an optional path specification for the installation. For example:
+In order to have a running test-enviroment you must create an Application on 
+[CCP-Developers](https://developers.eveonline.com/). Select all esi-scopes and save `EVE_CLIENT_ID` and
+`EVE_CLIENT_SECRET` in `.env`.
 
-```
-$ seat install:development --destination ~/code/seat-dev
-Using /usr/bin/git for git
-Using /usr/bin/unzip for unzip
-Using /usr/local/bin/composer for composer
-Using /usr/local/bin/php for php
-Cloning Main SeAT repository to ~/code/seat-dev...
-```
+## usage
 
-## manual development setup
-If you dont want to use the `seat` tool to configure a development project for you, then you can refer to the following page for more information on a reccomended development environment setup for SeAT: [General Development](development/general/).
+you can now access your Dev-Enviroment via port 8080: `http://localhost:8080`.
+
+## helpful stuff
+
+1. If you need access to console (f.e. to run `php artisan`) you can access it via `docker exec -it eveseat-app sh`
