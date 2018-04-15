@@ -1,2 +1,5 @@
 venv/
 site/
+.vagrant
+docker
+Vagrantfile

@@ -1,41 +1,64 @@
-site_name: SeAT Documentation
-site_description: SeAT Documentation
-repo_url: https://github.com/eveseat/docs
+# Information
+site_name: 'SeAT Documentation'
+site_description: 'Simple EVE Api Tool Documentation'
+site_url: 'https://github.com/eveseat/docs'
+
+# Repository
+repo_name: 'eveseat/docs'
+repo_url: 'https://github.com/eveseat/docs'
+
+# Copyright
+copyright: 'Copyright &copy; 2015 - 2018 Leon Jacobs'
+
+# Documentation TOC
 pages:
     - Home: index.md
-    - General:
-        - Contact: contact.md
-        - Reporting Bugs : reporting_bugs.md
-        - Community Packages: community_packages.md
-    - Installation Guides:
-        - Getting Started: installation_guides/getting_started.md
-        - Quick Install: installation_guides/quick_install.md
-        - Generic Installation: installation_guides/generic_installation.md
-        - CentOS 6.x: installation_guides/centos6.md
-        - CentOS 7.x: installation_guides/centos7.md
-        - Ubuntu 16.x: installation_guides/ubuntu16x.md
-        - Development Project: installation_guides/developer_installation.md
-    - Upgrade Guides:
-        - General Upgrades: upgrade_guides/general_upgrades.md
-        - SeAT 1.x to SeAT 2.0: upgrade_guides/seat1_to_2.md
-    - Email:
-        - Mailgun Setup: email/mailgun.md
-        - Gmail Setup: email/gmail.md
+    - Hardware Requirements: general/hardware_requirements.md
+    - Basic Installation:
+        - SeAT Installation: guides/installation/basic_installation/installation.md
+        - Configure Eve Online ESI Scopes: guides/installation/basic_installation/esi.md
+        - Webserver: guides/installation/basic_installation/webserver.md
+        - Webservers:
+            - Traefik: guides/installation/basic_installation/traefik.md
+            - Nginx: guides/installation/basic_installation/nginx.md
+            - Apache: guides/installation/basic_installation/apache.md
+    - (Advanced) Installation:
+        - Getting Started: guides/installation/manual_installation/getting_started.md
+        - Manual Installation:
+            - Docker (recommended): guides/installation/manual_installation/docker.md
+            - Ubuntu: guides/installation/manual_installation/ubuntu.md
+            - CentOS 6.x: guides/installation/manual_installation/centos6.md
+            - CentOS 7.x: guides/installation/manual_installation/centos7.md
+            - Debian: guides/installation/manual_installation/debian.md
     - Admin Guides:
-        - Configuring Eve Online SSO: admin_guides/sso.md
-        - Scaled SeAT Deployments: admin_guides/scaling_seat.md
-        - Role Based Access Control: admin_guides/rbac.md
-        - Understanding Tracking: admin_guides/tracking.md
-        - SeAT & Supervisor Integration: admin_guides/seat_supervisor.md
-        - EVE Api Administrative Contact: admin_guides/eveapi_admin_contact.md
-    - SeAT API:
-        - Overview: seat_api/overview.md
-        - EVE Api Keys: seat_api/eve_api_keys.md
-        - SeAT Users: seat_api/seat_users.md
-        - SeAT Roles, Permissions and Authorization: seat_api/roles_permissions.md
-        - SeAT People Groups: seat_api/groups.md
-        - Characters: seat_api/characters.md
-        - Corporations: seat_api/corporations.md
+        - Docker Admin:  guides/admin/docker.md
+        - Email Setup:
+            - Using Mailgun: guides/admin/email/mailgun.md
+            - Using Gmail: guides/admin/email/gmail.md
+        - Job Queue Flow: guides/admin/job_queue_flow.md
+        - Scaled SeAT Deployments: guides/admin/scaling_seat.md
+        - Role Based Access Control: guides/admin/rbac.md
+        - Understanding Tracking: guides/admin/tracking.md
+        - EVE Api Administrative Contact: guides/admin/eveapi_admin_contact.md
+        - Package Configurations:
+            - Overview: guides/configuration/overview.md
+            - Api: guides/configuration/api.md
+            - Console: guides/configuration/console.md
+            - Eveapi: guides/configuration/eveapi.md
+            - Notifications: guides/configuration/notifications.md
+            - Service: guides/configuration/service.md
+            - Web: guides/configuration/web.md
+            - Other: guides/configuration/other.md
+        - Upgrade Guides:
+            - General Upgrades: guides/admin/upgrade/general_upgrades.md
+            - SeAT 1.0 to SeAT 2.0: guides/admin/upgrade/seat1_to_2.md
+            - SeAT 2.0 to SeAT 3.0: guides/admin/upgrade/seat2_to_3.md
+    - Developers Guides:
+        - Developer Installation: guides/development/developer_installation.md
+        - General Guide: guides/development/general.md
+        - Core Package Breakdown: guides/development/package_breakdown.md
+        - Package Development: guides/development/package_development.md
+        - SeAT API: seat_api.md
     - Changelogs:
         - Api: changelogs/api.md
         - Console: changelogs/console.md
@@ -43,20 +66,33 @@ pages:
         - Notifications: changelogs/notifications.md
         - Services: changelogs/services.md
         - Web: changelogs/web.md
-    - Package Configurations:
-        - Overview: configuration/overview.md
-        - Api: configuration/api.md
-        - Console: configuration/console.md
-        - Eveapi: configuration/eveapi.md
-        - Notifications: configuration/notifications.md
-        - Service: configuration/service.md
-        - Web: configuration/web.md
-        - Other: configuration/other.md
-    - Eve XML API Updater:
-        - Job Queue Flow: eve_xml_api_updater/job_queue_flow.md
-    - Developing For SeAT:
-        - General Guide: development/general.md
-        - Core Package Breakdown: development/package_breakdown.md
-        - Package Development: development/package_development.md
-    - TODO List: todo.md
-theme: readthedocs
+    - Community Packages: general/community_packages.md
+    - About:
+        - Contact: about/contact.md
+        - Reporting Bugs : about/reporting_bugs.md
+        - TODO List: about/todo.md
+
+# Theme Configuration
+theme:
+    name: 'material'
+    palette:
+        primary: 'grey'
+        accent: 'indigo'
+
+# Customization
+markdown_extensions:
+    - admonition
+    - codehilite
+    - toc:
+        permalink: true
+# Customization
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/eveseat/seat'
+# Tabs customisation
+extra_css:
+    - css/extra_typo.css
+    - css/extra_tabs.css
+extra_javascript:
+    - js/extra_tabs.js

@@ -1,4 +1,4 @@
-![SeAT](http://i.imgur.com/aPPOxSK.png)
+![SeAT](https://i.imgur.com/aPPOxSK.png)
 
 # eveapi change logs
 Generated with: `git log --pretty=format:"%h%>(12)%ad %<(7)%aN%d %s" --date=short`
