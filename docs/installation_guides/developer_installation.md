@@ -10,7 +10,7 @@ Simply download the latest dev-docker files, run `bash prepare-source.sh` and fi
 1. ` git clone https://github.com/eveseat/scripts.git /var/seat`
 2. `cd /var/seat/docker-compose-dev`
 3. `bash prepare-source.sh`
-4. `docker-compose up -d`
+4. `docker-compose --project-name seat-dev up -d`
 
 In order to have a running test-enviroment you must create an Application on 
 [CCP-Developers](https://developers.eveonline.com/). Select all esi-scopes and save `EVE_CLIENT_ID` and
@@ -22,4 +22,4 @@ you can now access your Dev-Enviroment via port 8080: `http://localhost:8080`.
 
 ## helpful stuff
 
-1. If you need access to console (f.e. to run `php artisan`) you can access it via `docker exec -it eveseat-app sh`
+1. If you need access to console (f.e. to run `php artisan`) you can access it via `docker exec -it seat-app sh`
