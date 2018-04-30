@@ -30,6 +30,9 @@ a slack SSO integration for seat 2.x
 - [warlof/eveseat-mining-ledger](https://github.com/warlof/eveseat-mining-ledger)  
 [![Latest Stable Version](https://poser.pugx.org/warlof/eveseat-mining-ledger/v/stable?format=flat-square)](https://github.com/warlof/eveseat-mining-ledger)
 an ESI capability which is providing mining ledger to SeAT 2.x
+- [warlof/seat-migrator](https://github.com/warlof/seat-migrator)  
+[![Latest Stable Version](https://poser.pugx.org/warlof/seat-migrator/v/stable)](https://packagist.org/packages/warlof/seat-migrator)
+provide migration script between SeAT 2.0.0 and SeAT 3.0.0
 - [eve-scout/eveseat-oauth2-server](https://github.com/eve-scout/eveseat-oauth2-server)  
 [![Latest Stable Version](https://poser.pugx.org/eve-scout/eveseat-oauth2-server/v/stable?format=flat-square)](https://packagist.org/packages/eve-scout/eveseat-oauth2-server)
 This EVE SeAT package enables an OAuth2 server for Single sign-on.
