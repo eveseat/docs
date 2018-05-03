@@ -1,6 +1,6 @@
 ![SeAT](http://i.imgur.com/aPPOxSK.png)
 
-This guide attempts to explain how to manually install SeAT onto an **Ubuntu** Server.
+This guide attempts to explain how to manually install SeAT onto an **Debian** Server.
 A small amount of Linux experience is preferred when it comes to this guide, all though it is not entirely mandatory.
 This guide assumes you want all of the available SeAT components installed (which is the default).
 
@@ -38,10 +38,11 @@ Take note of the `Client ID`, `Secret Key`, `Callback URL` fields which will be 
 ### Basics
 We will ensuring that your system is up to date before starting with package installation. So, let's start with basics :
 
- - `apt-get update` to refresh the repositories cache.
- - `apt-get full-upgrade` to update any installed packages.
- - `reboot` in order to ensure any updated software is the current running version.
- - `apt-get autoremove` (after the reboot) to cleanup any unneeded packages.
+- `apt-get update` to refresh the repositories cache.
+- `apt-get full-upgrade` to update any installed packages.
+- `reboot` in order to ensure any updated software is the current running version.
+- `apt-get autoremove` (after the reboot) to cleanup any unneeded packages.
+- `apt-get install sudo apt-transport-https` this will provide sudo and https support for packages repositories
 
 ### Database
 SeAT relies **heavily** on a database to function.
@@ -49,10 +50,40 @@ Everything it learns is stored here, along with things such as user accounts for
 
 This document describes using MariaDB, but you can use MySQL as well. Just double check the requirements.
 
-`curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash` this script provided by MariaDB team will setup your repositories properly
+Let's start by using an editor to create the file `/etc/apt/source.list.d/mariadb.list` (`nano` or `vi` works well for such things). Inside the newly created file, simply paste the block bellow :
 
-**NOTICE**
-> At the time when this document was written, MariaDB as not available on Ubuntu 18.04 Bionic. The package version available in main repository does not meet minimum requirement as SeAT 3.0 requires at least version 10.2.7 or higher whereas official repository only provides 10.1.29. In order to install SeAT, use MySQL instead.
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" data-target="#mariadbdpa_stretch">Stretch 9</a></li>
+<li class="active"><a data-toggle="tab" data-target="#mariadbdpa_stretch">Jessie 8</a></li>
+</ul>
+<div class="tab-content">
+<div id="mariadbdpa_stretch" class="tab-pane fade in active" markdown="1">
+
+```
+deb http://downloads.mariadb.com/MariaDB/mariadb-10.2/repo/debian stretch main
+```
+
+Once done, we will add the GPG key from MariaDB repository into our keychain using
+
+```
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
+```
+
+</div>
+<div id="mariadbdpa_jessie" class="tab-pane fade in active" markdown="1">
+
+```
+deb http://downloads.mariadb.com/MariaDB/mariadb-10.2/repo/debian jessie main
+```
+
+Once done, we will add the GPG key from MariaDB repository into our keychain using
+
+```
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
+```
+
+</div>
+</div>
 
 Lets install the database server:
 
@@ -62,7 +93,7 @@ apt-get install mariadb-server
 
 Next, we are going to secure the database server by removing anonymous access and setting a `root` password.
 
-**NOTICE**
+**NOTE**
 > The database `root` password should not be confused with the operating systems `root` passwords. They are both completely different. They should also not be the same password.
 
 To secure the database, run:
@@ -171,38 +202,29 @@ FLUSH PRIVILEGES;
 ### PHP
 Since SeAT is a PHP application, we will to install php packages.
 For now, we're relying on PHP 7.1 due to issues with Laravel on PHP 7.2 on some methods.
-We will add ondrej PPA which is very popular and caters for most php versions.
+We will add ondrej DPA which is very popular and caters for most php versions.
 
 Let's start by using an editor to create the file `/etc/apt/source.list.d/php.list` (`nano` or `vi` works well for such things).
 Inside the newly created file, simply paste the block bellow :
 
 <ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#phpppa_xenial">Xenial 16.04</a></li>
-<li><a data-toggle="tab" data-target="#phpppa_artful">Artful 17.10</a></li>
-<li><a data-toggle="tab" data-target="#phpppa_bionic">Bionic 18.04</a></li>
+<li class="active"><a data-toggle="tab" data-target="#phpdpa_stretch">Stretch 9</a></li>
+<li class="active"><a data-toggle="tab" data-target="#phpdpa_stretch">Jessie 8</a></li>
 </ul>
 <div class="tab-content">
-<div id="phpppa_xenial" class="tab-pane fade in active" markdown="1">
+<div id="phpdpa_stretch" class="tab-pane fade in active" markdown="1">
 
 ```
-deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main
-deb-src http://ppa.launchpad.net/ondrej/php/ubuntu xenial main
-```
-
-</div>
-<div id="phpppa_artful" class="tab-pane fade in active" markdown="1">
-
-```
-deb http://ppa.launchpad.net/ondrej/php/ubuntu artful main
-deb-src http://ppa.launchpad.net/ondrej/php/ubuntu artful main
+deb https://packages.sury.org/php/ stretch main
+deb-src https://packages.sury.org/php/ stretch main
 ```
 
 </div>
-<div id="phpppa_bionic" class="tab-pane fade in active" markdown="1">
+<div id="phpdpa_jessie" class="tab-pane fade in active" markdown="1">
 
 ```
-deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main
-deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main
+deb https://packages.sury.org/php/ jessie main
+deb-src https://packages.sury.org/php/ jessie main
 ```
 
 </div>
@@ -211,7 +233,7 @@ deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main
 Next, we will have to download the repository GPG key and add it into our keychain
 
 ```
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C
+apt-key adv --recv-keys --keyserver keyserver.ubuntu.com AC0E47584A7A714D
 ```
 
 Update our repository cache
@@ -243,7 +265,7 @@ apt-get install git
 curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && hash -r
 ```
 
-Move to the www directory with `cd /var/www` and download SeAT using `composer create-project eveseat/seat --no-dev --stability=beta`.
+Create the www directory using `mkdir /var/www`, then move into it with `cd /var/www` and download SeAT using `composer create-project eveseat/seat --no-dev --stability=beta`.
 
 Next, we will add a dedicated user for security reasons and in order to distinguish SeAT processes easier.
 
@@ -303,7 +325,7 @@ Next, we will create a dedicated configuration file which will ask supervisor to
 nano /etc/supervisor/conf.d/seat.conf
 ```
 
-Innside the newly created file, add the following configuration items:
+Inside the newly created file, add the following configuration items:
 
 ```
 [program:seat]
