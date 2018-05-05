@@ -1,0 +1,32 @@
+p {
+    text-align: justify;
+}
+
+ul.nav-tabs {
+    border-bottom: none;
+}
+
+div.tab-pane {
+    padding-bottom: 0;
+    border-top-left-radius: 0;
+}
+
+code.hljs.bash {
+    color: #eee;
+    background: #333;
+}
+
+table.table tbody tr td img {
+    background: none;
+    border: none;
+}
+
+table.table tbody tr td {
+    vertical-align: middle;
+}
+
+.bs-sidebar  {
+    overflow-y: auto;
+    max-height: 100%;
+    bottom: 7em;
+}
