@@ -11,6 +11,10 @@ div.tab-pane {
     border-top-left-radius: 0;
 }
 
+pre code {
+    padding: 5px;
+}
+
 code.hljs.bash {
     color: #eee;
     background: #333;
@@ -25,8 +29,68 @@ table.table tbody tr td {
     vertical-align: middle;
 }
 
-.bs-sidebar  {
+/* tweaking admonition block */
+
+.admonition .admonition-title::before {
+    font: normal normal normal 14px/1 FontAwesome;
+    margin-right: 5px;
+}
+
+.admonition.note .admonition-title::before {
+    content: "\f05a";
+}
+
+.admonition.warning .admonition-title::before {
+    content: "\f071";
+}
+
+/* fix toc sidebar */
+
+.bs-sidebar.well  {
     overflow-y: auto;
-    max-height: 100%;
+    max-height: 50%;
     bottom: 7em;
+}
+
+/* tweaking color palette from blue to dark */
+
+.navbar-default {
+    background-color: #343838;
+    border-bottom: solid 2px #ebf2f2;
+    background-image: none;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #fff;
+    background-color: #272727;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #272727;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #fff;
+    background-color: #272727;
+}
+
+.navbar-default .dropdown-menu {
+    background-color: #333;
+}
+
+.navbar-default .dropdown-menu > li > a, .navbar-default .dropdown-menu > li > a:focus {
+    color: #fff;
+}
+
+.navbar-default .dropdown-menu > li > a:hover, .navbar-default .dropdown-menu > .active > a, .navbar-default .dropdown-menu > .active > a:hover {
+    background-color: #272727;
+}
+
+a {
+    color: #008cba;
+}
+
+a:hover, a:focus {
+    color: #00526e;
 }
