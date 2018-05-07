@@ -290,7 +290,7 @@ Next, we will create a dedicated configuration file which will ask supervisor to
 nano /etc/supervisor/conf.d/seat.conf
 ```
 
-Innside the newly created file, add the following configuration items:
+Inside the newly created file, add the following configuration items:
 
 ```bash
 [program:seat]
