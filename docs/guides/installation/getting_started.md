@@ -6,7 +6,7 @@ Before you rush ahead and install SeAT, it would be a good idea to review what y
 head over to the [quick install](quick_install/) guide to start the actual installation.
 
 ## Summary
-SeAT is a self hosted web application. This means that you will need your own server (and optional domain) to host SeAT. SeAT needs [PHP7](http://php.net/), a [MySQL](https://www.mysql.com/) (or [MariaDB](https://mariadb.org/)) database, a [Redis](https://redis.io/) cache, [Supervisor](http://supervisord.org/) and an internet connection in order to be fully functional.
+SeAT is a self hosted web application. This means that you will need your own server (and optional domain) to host SeAT. SeAT needs [PHP7.1](http://php.net/), a [MariaDB](https://mariadb.org/) (or [MySQL](https://www.mysql.com/)) database, a [Redis](https://redis.io/) cache, [Supervisor](http://supervisord.org/) and an internet connection in order to be fully functional.
 
 All of these can be installed and configured separately, or, if you are running a supported operating system, you can use the `seat` tool to perform the installation for you.
 

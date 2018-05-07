@@ -285,10 +285,7 @@ apt-get install supervisor
 ```
 
 Next, we will create a dedicated configuration file which will ask supervisor to keep an eye on Horizon.
-
-```bash
-nano /etc/supervisor/conf.d/seat.conf
-```
+Use your favorite editor in order to spawn the file at the following path `/etc/supervisor/conf.d/seat.conf`
 
 Inside the newly created file, add the following configuration items:
 
