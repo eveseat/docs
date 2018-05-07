@@ -44,6 +44,10 @@ table.table tbody tr td {
     content: "\f071";
 }
 
+.admonition.danger .admonition-title::before {
+    content: "\f00d";
+}
+
 /* fix toc sidebar */
 
 .bs-sidebar.well  {
