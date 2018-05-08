@@ -55,22 +55,24 @@ This document describes using MariaDB, but you can use MySQL as well. Just doubl
 Let's start by using an editor to create the file `/etc/apt/source.list.d/mariadb.list` (`nano` or `vi` works well for
 such things). Inside the newly created file, simply paste the block bellow :
 
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#mariadbdpa_stretch">Stretch 9</a></li>
-<li><a data-toggle="tab" data-target="#mariadbdpa_jessie">Jessie 8</a></li>
+<section class="mdc-tabs">
+<ul class="mdc-tab-bar">
+  <li class="mdc-tab active"><a role="tab" data-toggle="tab">Stretch 9</a></li>
+  <li class="mdc-tab"><a role="tab" data-toggle="tab">Jessie 8</a></li>
 </ul>
-<div class="tab-content">
-<div id="mariadbdpa_stretch" class="tab-pane fade in active" markdown="1">
+<div class="mdc-panels">
+<div role="tabpanel" class="mdc-panel active">
 <pre><code class="bash hljs">deb http://downloads.mariadb.com/MariaDB/mariadb-10.2/repo/debian stretch main</code></pre>
-Once done, we will add the GPG key from MariaDB repository into our keychain using
+<p>Once done, we will add the GPG key from MariaDB repository into our keychain using</p>
 <pre><code class="bash hljs">apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8</code></pre>
 </div>
-<div id="mariadbdpa_jessie" class="tab-pane fade" markdown="1">
+<div role="tabpanel" class="mdc-panel">
 <pre><code class="bash hljs">deb http://downloads.mariadb.com/MariaDB/mariadb-10.2/repo/debian jessie main</code></pre>
-Once done, we will add the GPG key from MariaDB repository into our keychain using
+<p>Once done, we will add the GPG key from MariaDB repository into our keychain using</p>
 <pre><code class="bash hljs">apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xCBCB082A1BB943DB</code></pre>
 </div>
 </div>
+</section>
 
 Lets install the database server:
 
@@ -199,20 +201,22 @@ We will add ondrej DPA which is very popular and caters for most php versions.
 Let's start by using an editor to create the file `/etc/apt/source.list.d/php.list`.
 Inside the newly created file, simply paste the block bellow :
 
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#phpdpa_stretch">Stretch 9</a></li>
-<li><a data-toggle="tab" data-target="#phpdpa_jessie">Jessie 8</a></li>
+<section class="mdc-tabs">
+<ul class="mdc-tab-bar">
+<li class="mdc-tab active"><a role="tab" data-toggle="tab">Stretch 9</a></li>
+<li class="mdc-tab"><a role="tab" data-toggle="tab">Jessie 8</a></li>
 </ul>
-<div class="tab-content">
-<div id="phpdpa_stretch" class="tab-pane fade in active" markdown="1">
+<div class="mdc-panels">
+<div class="mdc-panel active">
 <pre><code class="bash hljs">deb https://packages.sury.org/php/ stretch main
 deb-src https://packages.sury.org/php/ stretch main</code></pre>
 </div>
-<div id="phpdpa_jessie" class="tab-pane fade" markdown="1">
+<div class="mdc-panel">
 <pre><code class="bash hljs">deb https://packages.sury.org/php/ jessie main
 deb-src https://packages.sury.org/php/ jessie main</code></pre>
 </div>
 </div>
+</section>
 
 Next, we will have to download the repository GPG key and add it into our keychain
 

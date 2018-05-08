@@ -174,25 +174,27 @@ We will add ondrej PPA which is very popular and caters for most php versions.
 Let's start by using an editor to create the file `/etc/apt/source.list.d/php.list` (`nano` or `vi` works well for such things).
 Inside the newly created file, simply paste the block bellow :
 
-<ul class="nav nav-tabs">
-<li class="active"><a data-toggle="tab" data-target="#phpppa_xenial">Xenial 16.04</a></li>
-<li><a data-toggle="tab" data-target="#phpppa_artful">Artful 17.10</a></li>
-<li><a data-toggle="tab" data-target="#phpppa_bionic">Bionic 18.04</a></li>
+<section class="mdc-tabs">
+<ul class="mdc-tab-bar">
+  <li class="mdc-tab active"><a role="tab" data-toggle="tab">Xenial 16.04</a></li>
+  <li class="mdc-tab"><a role="tab" data-toggle="tab">Artful 17.10</a></li>
+  <li class="mdc-tab"><a role="tab" data-toggle="tab">Bionic 18.04</a></li>
 </ul>
-<div class="tab-content">
-<div id="phpppa_xenial" class="tab-pane fade in active" markdown="1">
+<div class="mdc-panels">
+<div role="tabpanel" class="mdc-panel active">
 <pre><code class="bash hljs">deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main
 deb-src http://ppa.launchpad.net/ondrej/php/ubuntu xenial main</code></pre>
 </div>
-<div id="phpppa_artful" class="tab-pane" markdown="1">
+<div role="tabpanel" class="mdc-panel">
 <pre><code class="bash hljs">deb http://ppa.launchpad.net/ondrej/php/ubuntu artful main
 deb-src http://ppa.launchpad.net/ondrej/php/ubuntu artful main</code></pre>
 </div>
-<div id="phpppa_bionic" class="tab-pane fade" markdown="1">
+<div role="tabpanel" class="mdc-panel">
 <pre><code class="bash hljs">deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main
 deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main</code></pre>
 </div>
 </div>
+</section>
 
 Next, we will have to download the repository GPG key and add it into our keychain
 
