@@ -63,7 +63,7 @@ php artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder
 * Restart the supervisor workers to ensure they also pickup the latest code:
 
 ```bash
-supervisorctl restart
+supervisorctl restart all
 ```
 
 * Finally, we can simply bring our application back out of maintenance mode with:
