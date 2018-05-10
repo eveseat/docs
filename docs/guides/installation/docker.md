@@ -23,13 +23,18 @@ The previously mentioned compose file is really simple. A high level overview of
     - `seat-code`: This volume is seeded by the `seat-app` container and contains the actual SeAT source code. Any container that needs access to the SeAT sources (such as the app and worker containers) would mount this container to their respective, internal `/var/www/seat` directory.
     - `redis-data`: This volume is used purely to let redis periodically backup the cache.
     - `mariadb-data`: This is the *most important* volume as it contains all of the database data. This is the one volume that you should configure a backup solution for!
-- Six services (or containers) are used within the SeAT docker stack. Two of the services are pulled directly from [Dockerhub](https://hub.docker.com/). Four others are custom build and also hosted on Dockerhub. The containers are:
-    - `mariadb:10.3`: [https://hub.docker.com/_/mariadb/](https://hub.docker.com/_/mariadb/)
-    - `redis:3`: [https://hub.docker.com/_/redis/](https://hub.docker.com/_/redis/)
-    - `eveseat/eveseat-nginx`: [https://hub.docker.com/r/eveseat/eveseat-nginx/](https://hub.docker.com/r/eveseat/eveseat-nginx/)
-    - `eveseat/eveseat-app`: [https://hub.docker.com/r/eveseat/eveseat-app/](https://hub.docker.com/r/eveseat/eveseat-app/)
-    - `eveseat/eveseat-worker`: [https://hub.docker.com/r/eveseat/eveseat-worker/](https://hub.docker.com/r/eveseat/eveseat-worker/)
-    - `eveseat/eveseat-cron`: [https://hub.docker.com/r/eveseat/eveseat-cron/](https://hub.docker.com/r/eveseat/eveseat-cron/)
+- Six services (or containers) are used within the SeAT docker stack. Two of the services are pulled directly from [Dockerhub](https://hub.docker.com/).
+Four others are custom build and also hosted on DockerHub. Those containers are exposed in the table bellow :
+
+| Image Name | Image Repository |
+| ---------- | ---------------- |
+| `mariadb:10.3` | [https://hub.docker.com/_/mariadb/](https://hub.docker.com/_/mariadb/) |
+| `redis:3` | [https://hub.docker.com/_/redis/](https://hub.docker.com/_/redis/) |
+| `eveseat/eveseat-nginx` | [https://hub.docker.com/r/eveseat/eveseat-nginx/](https://hub.docker.com/r/eveseat/eveseat-nginx/) |
+| `eveseat/eveseat-app` | [https://hub.docker.com/r/eveseat/eveseat-app/](https://hub.docker.com/r/eveseat/eveseat-app/) |
+| `eveseat/eveseat-worker` | [https://hub.docker.com/r/eveseat/eveseat-worker/](https://hub.docker.com/r/eveseat/eveseat-worker/) |
+| `eveseat/eveseat-cron` | [https://hub.docker.com/r/eveseat/eveseat-cron/](https://hub.docker.com/r/eveseat/eveseat-cron/) |
+
 - The environment is configured using a top level `.env` file (not to be confused with the SeAT specific `.env` file (which should be transparent to a docker user anyways.))
 - Only two ports are exposed by default. Those are `tcp/8080` and `tcp/8443`. These can be connected to in order to access the SeAT web interface.
 - All containers are configured to restart on failure, so if your server reboots or a container dies for whatever reason it should automatically start up again.
