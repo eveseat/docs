@@ -296,7 +296,7 @@ php artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder
 
 Next, the latest static data export must be downloaded and imported with:
 ```
-php artisan eve:update-sde -n
+php artisan eve:update:sde -n
 ```
 
 And finally, the SeAT admin user needs to have a password set. There is no default SeAT admin password.
