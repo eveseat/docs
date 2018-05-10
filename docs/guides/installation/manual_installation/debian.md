@@ -301,7 +301,7 @@ Next, we will publish assets and seed the SeAT database. Let's do this with the 
  - `sudo -H -u seat bash -c 'php /var/www/seat/artisan vendor:publish --force --all'` this will publish all package assets, including horizon
  - `sudo -H -u seat bash -c 'php /var/www/seat/artisan migrate'` it will generate SeAT database structure
  - `sudo -H -u seat bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder'` this will seed the scheduling table used for jobs
- - `sudo -H -u seat bash -c 'php /var/www/seat/artisan eve:update-sde'` it will download latest SDE data
+ - `sudo -H -u seat bash -c 'php /var/www/seat/artisan eve:update:sde'` it will download latest SDE data
 
 ### Supervisor
 SeAT relies on supervisor in order to keep the Horizon process up. Horizon is the new queue backend in SeAT 3.0.

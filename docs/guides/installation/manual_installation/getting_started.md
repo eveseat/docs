@@ -42,7 +42,7 @@ Finally, you can always install SeAT manually. You will need to get PHP 7.1, Mar
 - If you want the Swagger API documentation, run `php artisan l5-swagger:generate`.
 - Update the `.env` file with your database settings. Ideally SeAT should have full control over only its own database (not the entire database server);
 - Run the database migrations with `php artisan migrate`.
-- Update the EVE Static Data tables with `php artisan eve:update-sde -n`.
+- Update the EVE Static Data tables with `php artisan eve:update:sde -n`.
 - Run the SeAT schedule seeder with `php artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder`.
 - Configure a web server to serve the `public/` directory to the world.
 - Download supervisord and have it keep the `php artisan horizon` command alive. This will allow you to process jobs.
