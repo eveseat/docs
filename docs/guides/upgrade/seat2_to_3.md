@@ -12,7 +12,7 @@ The process described bellow handles data conversion between the SeAT 2.x struct
 
 ## Requirements
 
-- SeAT 3.0 requires PHP 7.2.
+- SeAT 3.0 requires PHP 7.1.
 - If you're using MySQL - it must be 5.7 or greater.
 - If you're using MariaDB - it must be 10.2.7.
 - A database backup is an absolute **must**. Everything in SeAT can be recovered is some way or
