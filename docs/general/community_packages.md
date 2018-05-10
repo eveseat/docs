@@ -37,7 +37,7 @@ Installing packages like this will ensure that none of the core SeAT packages ar
 | ------- | ------- | ----------- |
 | [warlof/slackbot](https://github.com/warlof/slackbot) | [![Latest Stable Version](https://poser.pugx.org/warlof/slackbot/v/stable?format=flat-square)](https://packagist.org/packages/warlof/slackbot) | A slack bot that handles invites and kicks based on an api key addon for seat 1.x, 2.x and 3.x |
 | [warlof/seat-migrator](https://github.com/warlof/seat-migrator) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-migrator/v/stable)](https://packagist.org/packages/warlof/seat-migrator) | A migration script between SeAT 2 and SeAT 3 |
-| [BenHUET/eveseat-calendar](https://github.com/BenHUET/eveseat-calendar) | [![Latest Stable Version](https://poser.pugx.org/kassie/calendar/v/stable)](https://packagist.org/packages/kassie/calendar) | Calendar plugin for SeAT 2.x and 3.x |
+| [kassie/calendar](https://github.com/BenHUET/eveseat-calendar) | [![Latest Stable Version](https://poser.pugx.org/kassie/calendar/v/stable)](https://packagist.org/packages/kassie/calendar) | Calendar plugin for SeAT 2.x and 3.x |
 
 #### Deprecated packages
 
