@@ -12,6 +12,18 @@ As mentioned in numerous other places, docker is ideally the installation route 
 
 In terms of performance, the same hardware requirements apply to docker installations as those that choose otherwise. For information about the requirements for SeAT, please see [this](/guides/installation/getting_started/#hardware-requirements) page. The only major difference between docker and other installation options is that the containers themselves may take up a few hundred MB's of extra space. In most cases this should be a non-issue.
 
+!!! warning
+
+    In case you plan to purchase a virtualised server (also call VPS), ensure the provider is working with **KVM** and **not**
+    **OpenVZ**. This is related to virtualization technology.
+    
+    On **OpenVZ** environment, you're using the server host kernel
+    and not able to update it yourself. Most of the time, those kernel are outdated and this will prevent you to install Docker.
+    Furthermore, that can lead to security issue like recent [Meltdown and Spectre fail](https://meltdownattack.com/).
+    
+    With **KVM** technology, you have hand on your VPS kernel without depending on the host one and are able to update it
+    if needed.
+
 ## Internal Container Setup Overview
 
 The setup for SeAT's docker installation is built on top of [docker-compose](https://docs.docker.com/compose/). With docker-compose, we can use a single `docker-compose.yml` file to define the entire stack complete with dependencies required to run SeAT. A pre-built and recommended compose file (which is also used by the bootstrapping script) is hosted in the scripts repository [here](https://github.com/eveseat/scripts/tree/master/docker-compose).
