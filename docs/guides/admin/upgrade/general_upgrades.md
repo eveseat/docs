@@ -1,5 +1,10 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
+!!! info "Docker Documentation needed"
+
+    This page needs a rework for Docker. Advice with database backup is very valid but done differently
+    generally to update your docker seat instance you use `docker-compose build`
+
 # General Upgrades
 
 This guide attempts to document the SeAT upgrade procedure. As with anything, it is a **very** good idea to have backups ready before attempting any upgrades. In the case of SeAT, the most important component that needs to be backed up is the SeAT database. In short, something as simple as `mysqldump -uroot -p seat > backup.sql` should be perfectly fine. Should something go wrong, then you can simply re-install SeAT, restore the database and you should be good to go.
@@ -10,7 +15,7 @@ There are 2 ways to upgrade seat. The recommended way being using the `seat` too
 ### Upgrading using the seat tool
 The `seat` tool is by far the best way for quick and painless upgrades. All you need to do is run the upgrade command and all will be done for you. Follow the next steps to get this done:
 
-- First, if you havent downloaded the `seat` tool yet, do so now by following [this guide](/installation_guides/getting_started/#seat-tool).
+- First, if you havent downloaded the `seat` tool yet, do so now by running `bash <(curl -fsSL https://git.io/seat-installer)`.
 - If you already have the `seat` tool downloaded, make sure the tool itself is at its latest version. Do this by running: `seat update:self`.
 - If you have not yet backed up your database, do so now! This is the only part that **can not** be recovered in case something goes wrong!
 - Ensure that the job queue is empty.
@@ -63,7 +68,7 @@ php artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder
 * Restart the supervisor workers to ensure they also pickup the latest code:
 
 ```bash
-supervisorctl restart
+supervisorctl restart all
 ```
 
 * Finally, we can simply bring our application back out of maintenance mode with:
