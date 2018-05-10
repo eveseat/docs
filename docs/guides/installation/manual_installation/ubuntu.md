@@ -325,70 +325,15 @@ And seed the tab with the following :
 ### Web Service
 The SeAT web interface requires a web server to serve the HTML goodies it has. We highly encourage you to use nginx and will be covered in this document. You don't **have** to use it, so if you prefer something else, feel free.
 
-Let's install nginx :
+The SeAT web interface requires a web server to serve the HTML goodies it has. We highly encourage you to use 
+[nginx](/guides/installation/basic_installation/nginx) or [traefik](/guides/installation/basic_installation/traefik)
+and these we will covered in the next few pages. You don't have to use it, so if you prefer something else, feel free.
 
-```bash
-apt-get install nginx php7.1-fpm
-```
+#### Guides
 
-Duplicate the standard www pool configuration file from PHP-Fpm to a dedicated SeAT pool :
-
-```bash
-cp /etc/php/7.1/fpm/pool.d/www.conf /etc/php/7.1/fpm/pool.d/seat.conf
-```
-
-Next, update the newly created pool file at `/etc/php/7.1/fpm/pool.d/seat.conf` with some adequate values :
-
-| initial value | new value |
-|-----------------------------------|-----------------------------|
-| [www] | [seat] |
-| user = www-data | user = seat |
-| group = www-data | group = seat |
-| listen = /run/php/php7.1-fpm.sock | listen = /run/php/seat.sock |
-
-Once done, you can create a new configuration file into nginx to server SeAT called `/etc/nginx/site-availables/seat` 
-
-And put the content bellow inside
-
-```bash
-server {
-    listen 80;
-    listen [::]:80;
-
-    root /var/www/seat/public;
-
-    index index.htm index.html index.php;
-
-    location / {
-       try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location ~ \.php$ {
-       try_files $uri =404;
-       fastcgi_pass unix:/run/php/seat.sock;
-       fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-       include fastcgi_params;
-    }
-
-    location ~ /\.ht {
-       deny all;
-    }
-}
-```
-
-Let's symlink to the active config and drop the default one :
-
-```bash
-ln -s /etc/nginx/sites-availabe/seat /etc/nginx/sites-enabled/seat
-rm /etc/nginx/sites-enabled/default
-```
-
-Finally, reload services :
-
-```bash
-service php7.1-fpm reload
-service nginx reload
-```
+- [traefik](/guides/installation/basic_installation/traefik)
+- [nginx](/guides/installation/basic_installation/nginx)
+- [apache](/guides/installation/basic_installation/apache)
 
 ### Admin Login
 Since SeAT 3.0, an admin user is a real dedicated user and you will no longer be able to link characters or corporations to it. Using the admin user, you will probably and most typically just add your main character to the Superuser group and never login as an admin again.

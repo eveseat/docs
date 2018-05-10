@@ -1,18 +1,18 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
-# Centos 6
+# Centos 7
 
-This guide attempts to explain how to manually install SeAT onto a **CentOS 6.x** Server. A small amount of Linux experience is preferred when it comes to this guide, all though it is not entirely mandatory. This guide assumes you want all of the available SeAT components installed (which is the default).
+This guide attempts to explain how to manually install SeAT onto a **CentOS 7.x** Server. A small amount of Linux experience is preferred when it comes to this guide, all though it is not entirely mandatory. This guide assumes you want all of the available SeAT components installed (which is the default).
 
 ### getting started
-We are going to assume you have root access to a fresh CentOS 6.x Server. Typically access is gained via SSH. All of the below commands are to be entered in the SSH terminal session for the installation & configuration of SeAT. If the server you want to install SeAT on is being used for other things too (such as hosting MySQL databases and or websites), then please keep that in mind while following this guide.
+We are going to assume you have root access to a fresh CentOS 7.x Server. Typically access is gained via SSH. All of the below commands are to be entered in the SSH terminal session for the installation & configuration of SeAT. If the server you want to install SeAT on is being used for other things too (such as hosting MariaDB databases and or websites), then please keep that in mind while following this guide.
 
 Packages are installed using the `yum` package manager as the `root` user.
 
 ### table of contents
  1. [Repositories](#repositories)
  2. [Database](#database)
- 3. [PHP & Apache](#php--apache)
+ 3. [PHP & Apache](#php-apache)
  4. [Redis](#redis)
  5. [Composer and Git](#composer-and-git)
  6. [SeAT - Download](#seat-download)
@@ -25,43 +25,34 @@ Packages are installed using the `yum` package manager as the `root` user.
    i. [Virtual Host Setup](#virtual-host-setup)
 
 ### repositories
-Due to the nature of CentOS 6.x packaging and the limitations in getting 'bleeding edge' software with it, we need to add some extra software repositories in order to get SeAT running. These repositories are known as the [Fedora EPEL](https://fedoraproject.org/wiki/EPEL), [Remi](http://rpms.famillecollet.com/) and [Ghettoforge](http://ghettoforge.org/) repositories. Adding these repositories will allow us to get access to PHP 7 and Supervisor 3 which is a requirement for SeAT.
+Due to the nature of CentOS 7.x packaging and the limitations in getting 'bleeding edge' software with it, we need to add some extra software repositories in order to get SeAT running. These repositories are known as the [Fedora EPEL](https://fedoraproject.org/wiki/EPEL) and [Remi](http://rpms.famillecollet.com/) repositories. Adding these repositories will allow us to get access to PHP 7 which is a requirement for SeAT.
 
 To install / configure the required repositories, run the following commands:
 
 #### epel
 ```
-# Download and install EPEL
-EPEL=epel-release-latest-6.noarch.rpm && curl -O https://dl.fedoraproject.org/pub/epel/$EPEL && yum localinstall -y $EPEL && rm -f $EPEL
+# Download and install Epel
+EPEL=epel-release-latest-7.noarch.rpm && curl -O https://dl.fedoraproject.org/pub/epel/$EPEL && yum localinstall -y $EPEL && rm -f $EPEL
 
-# Import EPEL signing keys
-rpm --import http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
+# Import signing key
+rpm --import "http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7"
 ```
 
 #### remi
 ```
-# Download and install Remi
-REMI=remi-release-6.rpm && curl -O http://rpms.remirepo.net/enterprise/$REMI && yum localinstall -y $REMI && rm -f $REMI
+# Download and install Epel
+REMI=remi-release-7.rpm && curl -O http://rpms.remirepo.net/enterprise/$REMI && yum localinstall -y $REMI && rm -f $REMI
 
-# Import Remi signing keys
+# Import signing key
 rpm --import http://rpms.remirepo.net/RPM-GPG-KEY-remi
 ```
 
-### ghettoforge
-```
-# Download and install GhettoForge
-GF=gf-release-6-10.gf.el6.noarch.rpm && curl -O http://mirror.symnds.com/distributions/gf/el/6/gf/x86_64/$GF && yum localinstall -y $GF && rm -f $GF
-
-# Import the GhettoForge signing keys
-rpm --import http://mirror.symnds.com/distributions/gf/RPM-GPG-KEY-gf.el6
-```
-
-Next, we will quickly install `yum-utils` and enable the `remi-php70` and `gf-plus` repositories in order to gain access to PHP 7.0 and Supervisor 3
+Next, we will quickly install `yum-utils` and enable the `remi-php70` repository in order to gain access to PHP 7.0.
 ```
 yum install yum-utils -y
 ```
 ```
-yum-config-manager --enable remi,remi-php70,gf-plus
+yum-config-manager --enable remi,remi-php70
 ```
 
 ### database
@@ -69,15 +60,24 @@ SeAT relies **heavily** on a database to function. Everything it learns is store
 
 Lets install the database server first:
 ```
-yum install mysql mysql-server -y
+yum install -y mariadb-server
 ```
+You should see output similar to the following:
+```
+[... snip ...]
+Installed:
+  mariadb-server.x86_64 1:5.5.44-1.el7_1
+[... snip ...]
+```
+
 With the database server installed, lets start it and configure it to automatically start up the next time out server boots up:
 
 ```
-/etc/init.d/mysqld start
+systemctl enable mariadb.service
 ```
+Next, start the DB server with
 ```
-chkconfig mysqld on
+systemctl start mariadb.service
 ```
 
 Next, we are going to secure the database server by removing anonymous access and setting a `root` password.
@@ -139,7 +139,7 @@ mysql -uroot -p
 This will prompt you for a password. Use the password you configured for the `root` account when we ran `mysql_secure_installation`. This will most probably be the last time you need to use this password :) If the password was correct, you should see a prompt similar to the one below:
 ```
 [...]
-mysql>
+MariaDB [(none)]>
 ```
 Lets run the command to create the SeAT database:
 ```
@@ -147,7 +147,7 @@ create database seat;
 ```
 The output should be similar to the below:
 ```
-mysql> create database seat;
+MariaDB [(none)]> create database seat;
 Query OK, 1 row affected (0.00 sec)
 ```
 Next, we create the user that SeAT itself will use to connect and use the `seat` database:
@@ -156,7 +156,7 @@ GRANT ALL ON seat.* to seat@localhost IDENTIFIED BY 's_p3rs3c3r3tp455w0rd';
 ```
 Of course, you need to replace `s_p3rs3c3r3tp455w0rd` with your own. Successfully running this should present you with output similar to the below:
 ```
-mysql> GRANT ALL ON seat.* to seat@localhost IDENTIFIED BY 's_p3rs3c3r3tp455w0rd';
+MariaDB [(none)]> GRANT ALL ON seat.* to seat@localhost IDENTIFIED BY 's_p3rs3c3r3tp455w0rd';
 Query OK, 0 rows affected (0.00 sec)
 ```
 In the example above, we have effectively declared that SeAT will be using the database as `seat:s_p3rs3c3r3tp455w0rd@localhost/seat`.
@@ -171,24 +171,15 @@ So, install the required packages with:
 ```
 yum install -y httpd php php-mysql php-cli php-mcrypt php-process php-mbstring php-intl php-dom php-gd
 ```
-You may be asked if you want to accept some GPG keys for package verification here. Just say [Y]. Successful installation should end with something like the below:
-```
-Installed:
-  httpd.x86_64 0:2.2.15-47.el6.centos          php.x86_64 0:5.5.30-1.el6.remi             php-cli.x86_64 0:5.5.30-1.el6.remi          php-intl.x86_64 0:5.5.30-1.el6.remi
-  php-mbstring.x86_64 0:5.5.30-1.el6.remi      php-mcrypt.x86_64 0:5.5.30-1.el6.remi      php-mysqlnd.x86_64 0:5.5.30-1.el6.remi      php-process.x86_64 0:5.5.30-1.el6.remi
+You may be asked if you want to accept some GPG keys for package verification here. Just say [Y].
 
-Dependency Installed:
-  apr.x86_64 0:1.3.9-5.el6_2                    apr-util.x86_64 0:1.3.9-3.el6_0.1       apr-util-ldap.x86_64 0:1.3.9-3.el6_0.1   httpd-tools.x86_64 0:2.2.15-47.el6.centos
-  libicu-last.x86_64 0:50.1.2-11.el6.remi       libmcrypt.x86_64 0:2.5.8-9.el6          libtool-ltdl.x86_64 0:2.2.6-15.5.el6     libzip-last.x86_64 0:1.0.1-1.el6.remi
-  mailcap.noarch 0:2.1.31-2.el6                 php-common.x86_64 0:5.5.30-1.el6.remi   php-pdo.x86_64 0:5.5.30-1.el6.remi       php-pecl-jsonc.x86_64 0:1.3.9-1.el6.remi.5.5
-  php-pecl-zip.x86_64 0:1.13.1-1.el6.remi.5.5
+Next, we can start apache and configure it automatically start the next time the server boots up:
 ```
-Now, we can start apache and configure it automatically start the next time the server boots up:
+systemctl enable httpd.service
 ```
-/etc/init.d/httpd start
+Next, we start Apache
 ```
-```
-chkconfig httpd on
+systemctl start httpd.service
 ```
 
 ### redis
@@ -198,10 +189,10 @@ yum install -y redis
 ```
 Next, start it and configure it to autostart next time the server boots up:
 ```
-/etc/init.d/redis start
+systemctl enable redis.service
 ```
 ```
-chkconfig redis on
+systemctl start redis.service
 ```
 
 ### composer and git
@@ -221,7 +212,7 @@ Use it: php /usr/local/bin/composer
 ```
 As all of the source code is hosted on Github which is a Git based source control system, we need to install `git` itself. Do this with:
 ```
-yum install git -y
+yum install -y git
 ```
 
 ### seat download
@@ -326,11 +317,9 @@ Lets install supervisor, start it and configure it to start automatically the ne
 yum install supervisor -y
 ```
 ```
-/etc/init.d/supervisord start
+systemctl enable supervisord.service
 ```
-```
-chkconfig supervisord on
-```
+
 We now have to configure the actual workers that supervisord will manage. We do this by adding a new configuration file to `/etc/supervisord.d/` called `seat.ini` Note that the number of workers that we want to start is set by the `numprocs` settings:
 ```
 [program:seat]
@@ -344,9 +333,9 @@ directory=/var/www/seat
 stopwaitsecs=600
 user=apache
 ```
-Save your file and reload `supervisord` so that it is aware of the changes that we have made:
+Save your file and start `supervisord` so that it is aware of the changes that we have made:
 ```
-/etc/init.d/supervisord restart
+systemctl start supervisord.service
 ```
 Lastly, check that everything is OK and the workers have started up:
 ```
@@ -380,13 +369,9 @@ If you are not going to use virtual hosting, the easiest to get going will proba
 #### virtual host setup
 Getting the virtual host setup is as simple as creating a new configuration file (I usually call it the `sites-domain.conf`), and modifying it to match your setup. Everywhere you see `seat.local` as the hostname in the below examples it needs to be substituted to your actual domain.
 
-Lets prepare some directories. We create the directory `/var/www/html/seat.local` with:
+We symlink the SeAT public directory with:
 ```
-mkdir /var/www/html/seat.local
-```
-Next we symlink the SeAT public directory there with:
-```
-ln -s /var/www/seat/public /var/www/html/seat.local/seat
+ln -s /var/www/seat/public /var/www/html/seat.local
 ```
 
 Next, we have to configure Apache itself to know about the directories and stuff SeAT needs. We need to create that `sites-domain.conf` file I mentioned. This file should live in `/etc/httpd/conf.d`, so lets change directories there:
@@ -414,13 +399,5 @@ With our config file created, we need to restart apache to read the new file:
 apachectl restart
 ```
 That should be it from a configuration perspective. We can confirm that everything is configured correctly by running:
-```
-[root@seat conf.d]# apachectl -t -D DUMP_VHOSTS
-httpd: Could not reliably determine the server's fully qualified domain name, using seat.localdomain for ServerName
-VirtualHost configuration:
-wildcard NameVirtualHosts and _default_ servers:
-*:80                   seat.local (/etc/httpd/conf.d/seat.local.conf:1)
-Syntax OK
-```
 
-Thats it! SeAT should now be available at http://your-domain-or-ip/seat
+Thats it! SeAT should now be available at http://your-domain-or-ip/

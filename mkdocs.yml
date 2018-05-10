@@ -13,25 +13,27 @@ copyright: 'Copyright &copy; 2015 - 2018 Leon Jacobs'
 # Documentation TOC
 pages:
     - Home: index.md
-    - Contact: general/contact.md
-    - Installation Guides:
-        - Getting Started: guides/installation/getting_started.md
-        - Installation: guides/installation/installation.md
-        - Docker: guides/installation/docker.md
-        - CentOS 6.x: guides/installation/centos6.md
-        - CentOS 7.x: guides/installation/centos7.md
-        - Ubuntu: guides/installation/ubuntu.md
-        - Debian: guides/installation/debian.md
-        - Developer Installation: guides/installation/developer_installation.md
-    - Upgrade Guides:
-        - General Upgrades: guides/upgrade/general_upgrades.md
-        - SeAT 1.0 to SeAT 2.0: guides/upgrade/seat1_to_2.md
-        - SeAT 2.0 to SeAT 3.0: guides/upgrade/seat2_to_3.md
+    - Hardware Requirements: general/hardware_requirements.md
+    - Basic Installation:
+        - SeAT Installation: guides/installation/basic_installation/installation.md
+        - Configure Eve Online ESI Scopes: guides/installation/basic_installation/esi.md
+        - Webserver: guides/installation/basic_installation/webserver.md
+        - Webservers:
+            - Traefik: guides/installation/basic_installation/traefik.md
+            - Nginx: guides/installation/basic_installation/nginx.md
+            - Apache: guides/installation/basic_installation/apache.md
+    - (Advanced) Installation:
+        - Getting Started: guides/installation/manual_installation/getting_started.md
+        - Manual Installation:
+            - Docker (recommended): guides/installation/manual_installation/docker.md
+            - Ubuntu: guides/installation/manual_installation/ubuntu.md
+            - CentOS 6.x: guides/installation/manual_installation/centos6.md
+            - CentOS 7.x: guides/installation/manual_installation/centos7.md
+            - Debian: guides/installation/manual_installation/debian.md
     - Admin Guides:
         - Email Setup:
             - Using Mailgun: guides/admin/email/mailgun.md
             - Using Gmail: guides/admin/email/gmail.md
-        - Configuring Eve Online SSO: guides/admin/sso.md
         - Job Queue Flow: guides/admin/job_queue_flow.md
         - Scaled SeAT Deployments: guides/admin/scaling_seat.md
         - Role Based Access Control: guides/admin/rbac.md
@@ -46,11 +48,16 @@ pages:
             - Service: guides/configuration/service.md
             - Web: guides/configuration/web.md
             - Other: guides/configuration/other.md
+        - Upgrade Guides:
+            - General Upgrades: guides/admin/upgrade/general_upgrades.md
+            - SeAT 1.0 to SeAT 2.0: guides/admin/upgrade/seat1_to_2.md
+            - SeAT 2.0 to SeAT 3.0: guides/admin/upgrade/seat2_to_3.md
     - Developers Guides:
+        - Developer Installation: guides/development/developer_installation.md
         - General Guide: guides/development/general.md
         - Core Package Breakdown: guides/development/package_breakdown.md
         - Package Development: guides/development/package_development.md
-    - SeAT API: seat_api.md
+        - SeAT API: seat_api.md
     - Changelogs:
         - Api: changelogs/api.md
         - Console: changelogs/console.md
@@ -58,15 +65,18 @@ pages:
         - Notifications: changelogs/notifications.md
         - Services: changelogs/services.md
         - Web: changelogs/web.md
-    - Reporting Bugs : general/reporting_bugs.md
     - Community Packages: general/community_packages.md
-    - TODO List: general/todo.md
+    - About:
+        - Contact: about/contact.md
+        - Reporting Bugs : about/reporting_bugs.md
+        - TODO List: about/todo.md
 
 # Theme Configuration
 theme:
     name: 'material'
     palette:
         primary: 'grey'
+        accent: 'indigo'
 
 # Customization
 markdown_extensions:

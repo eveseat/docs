@@ -154,4 +154,4 @@ user=www-data
 
 With all of that done, bring your application back up with `php artisan up` and start the supervisor workers again.
 Watch the logs for any errors in case things have not gone as expected.
-If you need any help, feel free to join the Slack channel details in the [Contact](/contact) page on the left.
+If you need any help, feel free to join the Slack channel details in the [Contact](/about/contact) page on the left.
