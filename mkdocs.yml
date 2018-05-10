@@ -67,6 +67,7 @@ theme:
     name: 'material'
     palette:
         primary: 'grey'
+        accent: 'indigo'
 
 # Customization
 markdown_extensions:

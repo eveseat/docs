@@ -2,6 +2,10 @@
     vertical-align: middle;
 }
 
+[data-md-color-primary="grey"] .md-typeset a {
+    color: #3f51b5;
+}
+
 div.md-content li, div.md-content p {
     text-align: justify;
 }
