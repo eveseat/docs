@@ -42,7 +42,13 @@ requirements.
     
     <p>Once the docker installation is complete, you should have SeAT available on the server, listening on port 8080. 
     For more detailed docker related information, please refer to the 
-    <a href="/guides/installation/manual_installation/docker">Manual Installation: Docker</a> section.</p>   
+    <a href="/guides/installation/manual_installation/docker">Manual Installation: Docker</a> section.</p> 
+    
+    <div class="admonition note">
+                    <p class="admonition-title"> Note</p>
+                    <p>Please have a look at 
+                    <a href="/guides/admin/docker">Docker Admin</a> Page for commands for Docker.</p> 
+            </div>
 
 </div>
 <div role="tabpanel" class="mdc-panel">

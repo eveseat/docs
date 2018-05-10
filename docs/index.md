@@ -25,11 +25,11 @@ There are many ways to install SeAT. In all cases you will need a dedicated Linu
 
 Ignoring the details, to get SeAT installed quickly you have a few options. All of them will get you SeAT installed, but you still have to manually configure an SSO application on the EVE Online Developers portal.
 
-Method | command | comments
------------- | ------------- | ------------
-via Docker (recommended) | `bash <(curl -fsSL https://git.io/seat-docker)`  | This will download and run a [helper script](https://github.com/eveseat/scripts/blob/master/docker-compose/bootstrap.sh) that will ensure `docker` and `docker-compose` is available and start up SeAT in containers.
-SeAT Tool | `bash <(curl -fsSL https://git.io/seat-installer)`  | This will download and run a helper script to start the installation process. Once done, the SeAT Tool will be available to use and provide semi automated installation option for Debian 8 / 9, Ubuntu LTS versions and CentOS 7. To get started with this method, a helper script should be downloaded and run.
-Manually | see instructions in (Advanced) Installations | You can always install SeAT using one of the detailed manual guides available. All you need is PHP, MariaDB, Redis and a web server and some Linux experience.
+Method | command + comments
+------------ |  ------------
+via Docker (recommended) | `bash <(curl -fsSL https://git.io/seat-docker)` <br> This will download and run a [helper script](https://github.com/eveseat/scripts/blob/master/docker-compose/bootstrap.sh) that will ensure `docker` and `docker-compose` is available and start up SeAT in containers.
+SeAT Tool | `bash <(curl -fsSL https://git.io/seat-installer)`  <br> This will download and run a helper script to start the installation process. Once done, the SeAT Tool will be available to use and provide semi automated installation option for _Debian 8 / 9_, _Ubuntu LTS versions_ and _CentOS 7_. To get started with this method, a helper script should be downloaded and run.
+Manually | see instructions in (Advanced) Installations. You can always install SeAT using one of the detailed manual guides available. All you need is PHP, MariaDB, Redis and a web server and some Linux experience.
 
 Best way to start your SeAT installation would be [Basic Installation](/guides/installation/basic_installation/installation)
 if you know what you are doing head to: [(Advanced) Installation](/guides/installation/manual_installation/getting_started)

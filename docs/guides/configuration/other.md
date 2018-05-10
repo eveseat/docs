@@ -12,7 +12,7 @@ SDE_VERSION=frostline-1.0-116241
 When running the SDE updater, specify the `--local` parameter to source the version string from the configuration file:
 
 ```bash
-$ php artisan eve:update-sde --local
+$ php artisan eve:update:sde --local
 ```
 
 ### notes

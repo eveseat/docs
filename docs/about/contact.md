@@ -2,15 +2,8 @@
 
 # Contact
 
-Active Developers:
-
-- [qu1ckkk](https://github.com/leonjza)
-- [warlof](https://github.com/warlof)
-
-Beta Testers / Bug Fixers:
-
-- [Herpaderp Aldent](https://github.com/herpaderpaldent)
-
+If you have a question, wanted to say thank you or express your opinion on SeAT. Please don't hesitate to contact
+us.
 
 ## Slack
 

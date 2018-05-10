@@ -31,6 +31,7 @@ pages:
             - CentOS 7.x: guides/installation/manual_installation/centos7.md
             - Debian: guides/installation/manual_installation/debian.md
     - Admin Guides:
+        - Docker Admin:  guides/admin/docker.md
         - Email Setup:
             - Using Mailgun: guides/admin/email/mailgun.md
             - Using Gmail: guides/admin/email/gmail.md
