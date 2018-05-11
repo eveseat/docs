@@ -379,7 +379,7 @@ server {
 Let's symlink to the active config and drop the default one :
 
 ```bash
-ln -s /etc/nginx/sites-availabe/seat /etc/nginx/sites-enabled/seat
+ln -s /etc/nginx/sites-available/seat /etc/nginx/sites-enabled/seat
 rm /etc/nginx/sites-enabled/default
 ```
 
