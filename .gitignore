@@ -1,9 +1,2 @@
 venv/
 site/
-.vagrant
-docker
-Vagrantfile
-.idea/workspace.xml
-.idea/vcs.xml
-.idea/modules.xml
-.idea/deployment.xml
