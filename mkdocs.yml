@@ -13,7 +13,7 @@ copyright: 'Copyright &copy; 2015 - 2018 Leon Jacobs'
 # Documentation TOC
 pages:
     - Home: index.md
-    - Hardware / Software Requirements: general/requirements.md
+    - Requirements: general/requirements.md
     - Basic Installation:
         - SeAT Installation: guides/installation/basic_installation/installation.md
         - Configure Eve Online ESI Scopes: guides/installation/basic_installation/esi.md
