@@ -340,7 +340,7 @@ Next, update the newly created pool file at `/etc/php/7.1/fpm/pool.d/seat.conf` 
 | group = www-data | group = seat |
 | listen = /run/php/php7.1-fpm.sock | listen = /run/php/seat.sock |
 
-Once done, you can create a new configuration file into nginx to server SeAT called `/etc/nginx/site-available/seat`
+Once done, you can create a new configuration file into nginx to server SeAT called `/etc/nginx/sites-available/seat`
 
 And put the content bellow inside
 
@@ -373,7 +373,7 @@ server {
 Let's symlink to the active config and drop the default one :
 
 ```bash
-ln -s /etc/nginx/sites-availabe/seat /etc/nginx/sites-enabled/seat
+ln -s /etc/nginx/sites-available/seat /etc/nginx/sites-enabled/seat
 rm /etc/nginx/sites-enabled/default
 ```
 
