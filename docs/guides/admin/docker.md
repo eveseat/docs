@@ -59,7 +59,7 @@ docker-compose logs --tail 10 -f seat-app
 To view all containers logs at once, run:
 
 ```bash
-docker-compose logs --tail 10 -f seat-app
+docker-compose logs --tail 10 -f 
 ```
 
 Once you are done viewing the output, simply pressing ^C will exit the log viewer.
