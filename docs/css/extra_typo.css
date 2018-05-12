@@ -1,3 +1,9 @@
+.md-typeset img, .md-typeset svg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .md-typeset table:not([class]) td {
     vertical-align: middle;
 }
