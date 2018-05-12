@@ -20,7 +20,7 @@ This guide aims to provide most users a simple step-by-step guide to having a ru
     <br><br>
     Regardless if you have <code>docker</code> & <code>docker-compose</code> installed on your Linux server, the following script will install them if needed and then download the SeAT <code>docker-compose.yml</code> and <code>.env</code> files to <code>/opt/seat-docker</code> on your server:</p>
 
-    <pre><code class="bash hljs">bash <(curl -fsSL https://git.io/seat-docker</code></pre>
+    <pre><code class="bash hljs">bash <(curl -fsSL https://git.io/seat-docker)</code></pre>
 
     <p>Once downloaded, <code>docker-compose up -d</code> is run from that folder to start the SeAT stack. To see this script in action on a fresh Digital Ocean VPS, check out the following asciinema:</p> <script src="https://asciinema.org/a/c0EM0kQnj86JkNX40TBdhA4Ua.js" id="asciicast-c0EM0kQnj86JkNX40TBdhA4Ua" async></script>
 
