@@ -32,7 +32,7 @@ SeAT Tool | `bash <(curl -fsSL https://git.io/seat-installer)`  <br> This will d
 Manually | see instructions in (Advanced) Installations. You can always install SeAT using one of the detailed manual guides available. All you need is PHP, MariaDB, Redis and a web server and some Linux experience.
 
 Best way to start your SeAT installation would be [Basic Installation](/guides/installation/basic_installation/installation)
-if you know what you are doing head to: [(Advanced) Installation](/guides/installation/manual_installation/getting_started)
+if you know what you are doing head to: [Advanced Installation](/guides/installation/manual_installation/getting_started)
 
 ## Upgrades / Updates
 
