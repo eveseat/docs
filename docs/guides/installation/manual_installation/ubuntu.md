@@ -384,7 +384,7 @@ service php7.1-fpm reload
 service nginx reload
 ```
 
-#### apache
+#### Apache
 
 The SeAT web interface requires a web server to serve the HTML goodies it has. Apache is an alternative of nginx. You don't **have** to use it, so if you prefer something else, feel free.
 

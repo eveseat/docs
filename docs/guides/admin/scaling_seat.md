@@ -14,7 +14,7 @@ A *server* is defined as any VPS, hardware, docker container, or other form of v
 When talking performance though, keep in mind that there will probably be very little performance gains when everything 
 runs on the same physical hardware instance.
 
-### seat component
+### SeAT component
 A *SeAT Component* is a collection of SeAT packages and configurations that is responsible for performing a specific task.
 Tasks include the SeAT Web Interface, the job workers or dispatchers.
 
@@ -55,7 +55,7 @@ Lets start by taking a look at a diagram, showing the extra *queue worker* compo
 Installing a new [server](#server) with only the queue worker component setup can bring a significant speed boost into the environment.
 A new queue worker could be configured to run an extra 4-6 jobs. This queue worker must be configured to make use of the [immutable resources](#immutable-resources).
 
-## more complicated scaled setup
+## More complicated scaled setup
 Of course, one can totally go full nelson and explode all of the components in use.
 Below is an example deployment (with data flow links, red for redis, blue for MariaDB) that shows how each SeAT component can live on its own server.
 
