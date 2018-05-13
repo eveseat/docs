@@ -91,4 +91,4 @@ docker-compose up -d
 ```
 
 !!! info "Better safe then sorry"
-    **Always** perform a [backup](#database-backups-and-restore) if your database before doing an update. Always.
+    **Always** perform a [backup](#database-backups-and-restore) of your database before doing an update. Always.

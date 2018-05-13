@@ -54,7 +54,7 @@ Look for the following section of the file and populate the values with those yo
 ```bash
 EVE_CLIENT_ID=null
 EVE_CLIENT_SECRET=null
-EVE_CALLBACK_URL=http://seat.local/auth/eve/callback
+EVE_CALLBACK_URL=http://seat.test/auth/eve/callback
 ```
 
 !!! warning "Docker Installations"
