@@ -17,11 +17,6 @@ pages:
     - Basic Installation:
         - SeAT Installation: guides/installation/basic_installation/installation.md
         - Configure Eve Online ESI Scopes: guides/installation/basic_installation/esi.md
-        - Webserver: guides/installation/basic_installation/webserver.md
-        - Webservers:
-            - Traefik: guides/installation/basic_installation/traefik.md
-            - Nginx: guides/installation/basic_installation/nginx.md
-            - Apache: guides/installation/basic_installation/apache.md
     - Advanced Installation:
         - Getting Started: guides/installation/manual_installation/getting_started.md
         - Docker (recommended): guides/installation/manual_installation/docker.md
@@ -52,6 +47,12 @@ pages:
             - General Upgrades: guides/admin/upgrade/general_upgrades.md
             - SeAT 1.0 to SeAT 2.0: guides/admin/upgrade/seat1_to_2.md
             - SeAT 2.0 to SeAT 3.0: guides/admin/upgrade/seat2_to_3.md
+    - Extra:
+        - Webservers:
+            - General: guides/installation/basic_installation/webserver.md
+            - Traefik: guides/installation/basic_installation/traefik.md
+            - Nginx: guides/installation/basic_installation/nginx.md
+            - Apache: guides/installation/basic_installation/apache.md
     - Developers Guides:
         - Developer Installation: guides/development/developer_installation.md
         - General Guide: guides/development/general.md
