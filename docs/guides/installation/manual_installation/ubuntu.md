@@ -161,7 +161,7 @@ FLUSH PRIVILEGES;
 
 Since SeAT is a PHP application, we will to install php packages. For now, we're relying on PHP 7.1 due to issues with Laravel on PHP 7.2 on some methods. We will add ondrej PPA which is very popular and caters for most php versions.
 
-Let's start by using an editor to create the file `/etc/apt/source.list.d/php.list` (`nano` or `vi` works well for such things).
+Let's start by using an editor to create the file `/etc/apt/sources.list.d/php.list` (`nano` or `vi` works well for such things).
 Inside the newly created file, simply paste the block bellow :
 
 <section class="mdc-tabs">
