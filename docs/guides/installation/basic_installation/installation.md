@@ -33,7 +33,7 @@ This guide aims to provide most users a simple step-by-step guide to having a ru
 
 </div>
 <div role="tabpanel" class="mdc-panel">
-    <p>A semi automated installation option for Debian 8 / 9, Ubuntu LTS versions and CentOS 7 is available. To get started with this method, a helper script should be downloaded and run.</p>
+    <p>A semi automated installation option for Debian 8 / 9, Ubuntu 16.04 / 18.04 LTS and CentOS 6 / 7 is available. To get started with this method, a helper script should be downloaded and run.</p>
 
     <pre><code class="bash hljs">bash <(curl -fsSL https://git.io/seat-installer)</code></pre>
 
@@ -47,8 +47,8 @@ This guide aims to provide most users a simple step-by-step guide to having a ru
 
     <pre><code class="bash hljs">$ bash <(curl -fsSL https://git.io/seat-installer)
     * SeAT Installer Operating System Selection
-    1) CentOS 6    3) Ubuntu 16x  5) Debian 9x
-    2) CentOS 7    4) Debian 8x   6) Quit
+    1) CentOS 6    3) Ubuntu 16x  5) Debian 8x   7) Quit
+    2) CentOS 7    4) Ubuntu 18x  6) Debian 9x
     * Please select the target operating system:
     </code></pre>
 
