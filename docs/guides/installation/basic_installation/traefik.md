@@ -1,5 +1,8 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
+!!! info "A records for (sub)domain"
+    this guy assumes that you have create A records for any (sub)domain you want to manage via Træfik
+
 # Træfik 
 
 Træfik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy. Most of the time SeAT is not going to be the only web application running on your Webserver. Therefore you need an orchestrator or proxy-server which handels subdomains, ports, certificates etc. Here Træfik makes managing your webserver very easy, especially because it is very docker aware, configures itself automatically, dynamically and it makes managing SeAT very easy.
@@ -40,7 +43,12 @@ services:
     ports:
       - 80:80
       - 443:443
-      - 8080:8080
+      # Uncomment Port 8080 if you plan to use Træfik's Dashboard
+      #- 8080:8080
+    #labels:
+      #- traefik.frontend.rule=Host:{monitor.your.server}
+      #- traefik.port=8080
+
     networks:
       - web
 networks:
@@ -57,6 +65,7 @@ Next you need to a edit the `traefik.toml`-file.
 defaultEntryPoints = ["http", "https"]
 
 [api]
+#entrypoint="monitor"
 
 [docker]
 domain = "{your.domain}"
@@ -70,6 +79,12 @@ watch = true
  [entryPoints.https]
  address = ":443"
   [entryPoints.https.tls]
+ #[entryPoints.monitor] # Uncomment if you use the web dashboard
+   #address=":8080"
+   #[entryPoints.monitor.auth]
+     #[entryPoints.monitor.auth.basic]
+       #users = ["admin:{your_MD5_encrypted_PW}"] #replace the curly paranthesis with your MD5 encrypted PW
+
 
 [acme]
  email = "{your.em@il.net}"
@@ -175,15 +190,28 @@ Now you have a HTTPS-Secured SeAT-Application and a very state-of-the-art proxy 
 
 ## Montior Træfik Health
 
-Træfik ships with nice montitoring capabilites as well as metrics integration with prometheus. With these Settings above you are able to montior your Træfik at `{your.servers.ip:8080}`
+Træfik ships with nice man monitoring functions as well as a metrics integration with prometheus. If you wish to take advantage of the web dashboard you need to uncomment the marked sections in the `.toml` and `docker-compose.yml` of Træfik and replace the password for the dashboard login.
+
+!!!! info "Have you set a subdomain?"
+    Remember to create an A record entry for f.e. monitor.{yourdomain.com}
 
 ![monitor](https://i.imgur.com/AS17Kqk.png)
 
-to turn this off: comment inside the Træfik's `docker-compose` file the port 8080:
 
-````yaml
-    ports:
-      - 80:80
-      - 443:443
-      #- 8080:8080
+to create a MD5 encrypted password you can use `htpasswd`
+
+````bash
+sudo apt-get install apache2-utils
+````
+
+Then generate the password with `htpasswd`. Substitute `secure_password` with the password you'd like to use for the Træfik admin user:
+
+````bash
+htpasswd -nb admin secure_password
+````
+
+this will output the following, which you can use to exchange `users = [admin:MD5Password]` in the `.toml`.
+
+````bash
+admin:$apr1$ruca84Hq$mbjdMZBAG.KWn7vfN/SNK/
 ````
