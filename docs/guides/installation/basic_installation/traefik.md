@@ -35,7 +35,7 @@ touch /opt/traefik/traefik.toml
 chmod 600 /opt/traefik/acme.json
 ```
 
-Since we are going to run Træfik inside of a docker container, we need to create a `docker-compose.yml` inside the traefik directory. This file describes the configuration in a way traefik understands and lets us easily reconfigure it in the future: Open `/opt/traefik/traefik.toml` and add the following contents:
+Since we are going to run Træfik inside of a docker container, we need to create a `docker-compose.yml` inside the traefik directory. This file describes the configuration in a way traefik understands and lets us easily reconfigure it in the future: Open `/opt/traefik/docker-compose.yml` and add the following contents:
 
 ```yaml
 version: "3.2"
