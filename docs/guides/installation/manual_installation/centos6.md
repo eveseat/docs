@@ -1,5 +1,8 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
+!!! warning "v2 Instructions"
+    Please note that these instructions have not yet been updated for SeAT v3 Beta, as such they are likely to wrong/outdated in places.
+
 # Centos 6
 
 This guide attempts to explain how to manually install SeAT onto a **CentOS 6.x** Server. A small amount of Linux experience is preferred when it comes to this guide, all though it is not entirely mandatory. This guide assumes you want all of the available SeAT components installed (which is the default).
