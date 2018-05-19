@@ -40,11 +40,6 @@ This document describes using MariaDB, but you can use MySQL as well. Just doubl
 
 `curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | sudo bash` this script provided by MariaDB team will setup your repositories properly
 
-!!! warning
-
-    At the time when this document was written, MariaDB as not available on Ubuntu 18.04 Bionic.
-    The package version available in main repository does not meet minimum requirement as SeAT 3.0 requires at least version 10.2.7 or higher whereas official repository only provides 10.1.29. In order to install SeAT, use MySQL instead.
-
 Lets install the database server:
 
 ```bash
