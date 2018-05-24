@@ -446,7 +446,7 @@ Your configuration file should look similar to this:
         ServerNAme yourdomain.com
         DocumentRoot /var/www/seat/
 
-        <Directory /var/www/seat/>
+        <Directory /var/www/seat/public>
                 Options Indexes FollowSymLinks
                 AllowOverride All
                 Require all granted
