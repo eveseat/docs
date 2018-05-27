@@ -16,7 +16,12 @@ There are 2 ways to upgrade SeAT. The recommended way being the `seat` tool and 
 
 All you need to do is run the upgrade command and all will be done for you. Follow the next steps to get this done:
 
-- If you haven't downloaded the `seat` tool yet, do so now by running `bash <(curl -fsSL https://git.io/seat-installer)`.
+- If you haven't downloaded the `seat` tool yet, do so now by running:
+
+```bash
+curl -fsSL https://git.io/seat-tool -o /usr/local/bin/seat && chmod +x /usr/local/bin/seat
+```
+
 - If you already have the `seat` tool downloaded, make sure the tool itself is at its latest version. Do this by running: `seat update:self`.
 - If you have not yet backed up your database, do so now! This is the only part that **can not** be recovered in case something goes wrong!
 - Ensure that the job queue is empty.

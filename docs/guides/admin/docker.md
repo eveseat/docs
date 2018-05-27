@@ -59,10 +59,32 @@ docker-compose logs --tail 10 -f seat-app
 To view all containers logs at once, run:
 
 ```bash
-docker-compose logs --tail 10 -f 
+docker-compose logs --tail 10 -f
 ```
 
 Once you are done viewing the output, simply pressing ^C will exit the log viewer.
+
+## Installing Plugins
+
+SeAT provides the ability for third party developers to integrate with the core environment to extend its features and functionality. It is possible to install those plugins in a docker environment. Installing a plugin is relatively easy too. All you need to do is add the plugin name to your `SEAT_PLUGINS` variable in the `.env` file and run `docker-compose up -d` again. The plugin will be read from the `.env` file and installed as the application container starts.
+
+For example. Open the `.env` file (which is most probably at `/opt/seat-docker/.env`) and edit the `SEAT_PLUGINS` variable to include the package you want to install. In our example we use the pseudo package called user/seat-plugin:
+
+```yaml
+# SeAT Plugins
+# This is a list of the all of the third party plugins that you
+# would like to install as part of SeAT. Package names should be
+# comma separated if multiple packages should be installed.
+SEAT_PLUGINS=user/seat-plugin
+```
+
+Save your `.env` file and run `docker-compose up -d` to restart the stack with the new plugins as part of it. Depending on how big the plugin itself may be, this could take a few moments to complete.
+
+You can monitor the installation process by running:
+
+```bash
+docker-compose logs --tail 5 -f seat-app
+```
 
 ## Database Backups and Restore
 
@@ -75,7 +97,7 @@ docker-compose exec mariadb sh -c 'exec mysqldump "$MYSQL_DATABASE" -u"$MYSQL_US
 To restore a backup to a new dockerized instance of SeAT, run:
 
 ```bash
-cat seat_backup.sql | docker-compose exec mariadb sh -c 'exec mysql "$MYSQL_DATABASE" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD"'
+cat seat_backup.sql | docker-compose exec -T mariadb sh -c 'exec mysql "$MYSQL_DATABASE" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD"'
 ```
 
 ## Performing Updates
@@ -88,6 +110,9 @@ docker-compose pull
 
 # Apply the updates to your instllation
 docker-compose up -d
+
+# Cleanup any dangling images
+docker image prune -f
 ```
 
 !!! info "Better safe then sorry"

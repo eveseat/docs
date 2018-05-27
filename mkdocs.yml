@@ -14,26 +14,21 @@ copyright: 'Copyright &copy; 2015 - 2018 Leon Jacobs'
 pages:
     - Home: index.md
     - Requirements: general/requirements.md
-    - Basic Installation:
-        - SeAT Installation: guides/installation/basic_installation/installation.md
-        - Configure Eve Online ESI Scopes: guides/installation/basic_installation/esi.md
-        - Webserver: guides/installation/basic_installation/webserver.md
-        - Webservers:
-            - Traefik: guides/installation/basic_installation/traefik.md
-            - Nginx: guides/installation/basic_installation/nginx.md
-            - Apache: guides/installation/basic_installation/apache.md
+    - Basic Installation: guides/installation/basic_installation/installation.md
     - Advanced Installation:
         - Getting Started: guides/installation/manual_installation/getting_started.md
-        - Docker (recommended): guides/installation/manual_installation/docker.md
-        - Ubuntu: guides/installation/manual_installation/ubuntu.md
-        - CentOS 6.x: guides/installation/manual_installation/centos6.md
-        - CentOS 7.x: guides/installation/manual_installation/centos7.md
+        - CentOS: guides/installation/manual_installation/centos.md
         - Debian: guides/installation/manual_installation/debian.md
+        - Docker: guides/installation/manual_installation/docker.md
+        - Manual: guides/installation/manual_installation/manual.md
+        - Ubuntu: guides/installation/manual_installation/ubuntu.md
     - Admin Guides:
         - Docker Admin:  guides/admin/docker.md
+        - Configuring ESI: guides/installation/basic_installation/esi.md
         - Email Setup:
             - Using Mailgun: guides/admin/email/mailgun.md
             - Using Gmail: guides/admin/email/gmail.md
+        - Env File Reference: guides/admin/env_reference.md
         - Job Queue Flow: guides/admin/job_queue_flow.md
         - Scaled SeAT Deployments: guides/admin/scaling_seat.md
         - Role Based Access Control: guides/admin/rbac.md
@@ -52,6 +47,11 @@ pages:
             - General Upgrades: guides/admin/upgrade/general_upgrades.md
             - SeAT 1.0 to SeAT 2.0: guides/admin/upgrade/seat1_to_2.md
             - SeAT 2.0 to SeAT 3.0: guides/admin/upgrade/seat2_to_3.md
+    - Webservers:
+        - General: guides/installation/basic_installation/webserver.md
+        - Traefik: guides/installation/basic_installation/traefik.md
+        - Nginx: guides/installation/basic_installation/nginx.md
+        - Apache: guides/installation/basic_installation/apache.md
     - Developers Guides:
         - Developer Installation: guides/development/developer_installation.md
         - General Guide: guides/development/general.md
@@ -78,13 +78,16 @@ theme:
         primary: 'grey'
         accent: 'indigo'
 
+google_analytics:
+  - 'UA-119530306-1'
+  - 'auto'
+
 # Customization
 markdown_extensions:
     - admonition
     - codehilite
     - toc:
         permalink: true
-# Customization
 extra:
   social:
     - type: 'github'

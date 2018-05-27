@@ -28,3 +28,10 @@ Software version requirements are based on a *minimum* requirement (Dockerized i
 | Caching Service | [Redis](https://redis.io/)  |
 | Service Supervisor | [Supervisor : 3.x.x](http://supervisord.org/) |
 | Web Server | nginx, Apache |
+
+For docker based installations, all you need is `docker` and `docker-compose`. If you already have it installed, check your current version with `docker version` and `docker-compose version` respectively:
+
+| Type | Requirement |
+| ------------ | ------------- |
+| Docker | [Docker: 18.0+](https://www.docker.com/) |
+| Docker Compose | [Docker compose: 1.20+](https://docs.docker.com/compose/)|

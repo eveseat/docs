@@ -1,36 +1,43 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
 !!! info "A records for (sub)domain"
-    this guy assumes that you have create A records for any (sub)domain you want to manage via Træfik
+    This guide assumes that you have created an A record on the DNS zone you want to manage via Træfik.
 
-# Træfik 
+# Træfik
 
-Træfik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy. Most of the time SeAT is not going to be the only web application running on your Webserver. Therefore you need an orchestrator or proxy-server which handels subdomains, ports, certificates etc. Here Træfik makes managing your webserver very easy, especially because it is very docker aware, configures itself automatically, dynamically and it makes managing SeAT very easy.
+Træfik is a modern HTTP reverse proxy and load balancer that makes deploying microservices easy. Most of the time SeAT is not going to be the only web application running on your Webserver. Therefore you need an orchestrator or proxy-server which handles sub-domains, ports, certificates etc. Here Træfik makes managing your webserver very easy, especially because it is docker aware and configures itself.
 
 !!! note "Let's encrypt by default"
-    This guide will automatically enables HTTPS via Let's encrypt (Free SSL-Certificates \o/).
-
+    This guide will automatically enable HTTPS via Let's encrypt (Free SSL-Certificates \o/).
 
 ![Traefik](https://docs.traefik.io/img/architecture.png)
 
 ## Installation
 
-First create a docker network:
+First create a new docker network:
 
-````bash
+```bash
 docker network create web
-````
-Then we are creating a directory on the server from where we configure Træfik.
+```
 
-````bash
+Next, we need to create a directory on the server where we will store the Træfik configuration files. Once weh ave the directory ready we will also prepare the files Træfik will use.
+
+```bash
+# Create the directory
+mkdir -p /opt/traefik
+
+# Prepare the configuration files
 touch /opt/traefik/docker-compose.yml
-touch /opt/traefik/acme.json && chmod 600 /opt/traefik/acme.json
+touch /opt/traefik/acme.json
 touch /opt/traefik/traefik.toml
-````
 
-We are going to run Træfik inside of a docker container, for this you need to create a `docker-compose.yml` inside the directory, with a text tool such as `nano`, `vi` and such.
+# Ensure the permissions on acme.json is secure
+chmod 600 /opt/traefik/acme.json
+```
 
-````yaml
+Since we are going to run Træfik inside of a docker container, we need to create a `docker-compose.yml` inside the traefik directory. This file describes the configuration in a way traefik understands and lets us easily reconfigure it in the future: Open `/opt/traefik/docker-compose.yml` and add the following contents:
+
+```yaml
 version: "3.2"
 services:
   traefik:
@@ -54,14 +61,14 @@ services:
 networks:
   web:
     external: true
-````
+```
 
-Next you need to a edit the `traefik.toml`-file. 
+Next you need to a edit the `traefik.toml`-file.
 
 !!! info "Enter domain and your email-address"
-    in order to maintain your domain Træfik needs to know your domain-address. Let's encrypt needs your email to provide fresh SSL certificates.
+    In order to automatically maintain your SSL certificate, Træfik needs to know your domain and email address. Let's encrypt needs your email to provide fresh SSL certificates.
 
-````toml
+```toml
 defaultEntryPoints = ["http", "https"]
 
 [api]
@@ -94,9 +101,9 @@ watch = true
  onDemand = false
   [acme.httpChallenge]
    entryPoint = "http"
-````
+```
 
-After configuring these `docker-compose.yml`, `traefik.toml` files and having a (hopefully) empty `acme.json` file, you are now able to start Træfik:
+After configuring both the `docker-compose.yml` and `traefik.toml` files (leaving the `acme.json` file empty), you should now ne able to start Træfik:
 
 ````bash
 docker-compose up -d
@@ -104,9 +111,9 @@ docker-compose up -d
 
 ## Adapt SeAT's `docker-compose.yml` file to serve Træfik
 
-Since SeAT is being shipped with `ngnix` natively, which exposes two ports to the web. We need to adapt the `docker-compose.yml` file inside SeAT's installation folder. Inside `/opt/seat-docker` comment the `ngnix` part alike
+By default, SeAT ships with `ngnix` as a web server. This web server exposes two ports to the web. We need to adapt the `docker-compose.yml` file inside SeAT's installation folder. Inside `/opt/seat-docker` add the comment character `#` to the `ngnix` sections like:
 
-````yaml
+```yaml
   nginx:
     image: eveseat/eveseat-nginx
     depends_on:
@@ -130,21 +137,22 @@ Since SeAT is being shipped with `ngnix` natively, which exposes two ports to th
     networks:
       - seat-network
       - web
-````
+```
 
-and at `networks` at the end of the file:
-````yaml
+Next, add a new section to the existing `networks` section as follows:
+
+```yaml
 networks:
     seat-network:
     web:
        external: true
-````
+```
 
-To take effect of the changes, restart docker: 
+For these changes to take affect, restart the stack with:
 
-````bash
+```bash
 docker-compose up -d
-````
+```
 
 ## Adapt Callback-URL to support `https`
 
@@ -164,54 +172,55 @@ Change the `callback url` (3) to use `https` and confirm the changes and update 
 
 ![Application](https://i.imgur.com/m6Qb7da.png)
 
-### Change `.env` in Seat-Docker-Folder
+### Update `.env` in Seat-Docker-Folder
 
-Change to `seat-docker`:
+Change directories to `seat-docker`:
 
-````bash
+```bash
 cd /opt/seat-docker
-````
+```
 
-adapt `.env`'s parameters for `callback-url`
+Update the `.env` files parameters with the new `callback-url`:
 
-````nano
+```txt
 EVE_CALLBACK_URL=https://seat.test/auth/eve/callback
-````
+```
 
-To take effect of the changes, restart docker: 
+For these changes to take affect, restart the stack with:
 
-````bash
+```bash
 docker-compose up -d
-````
+```
 
-Now you have a HTTPS-Secured SeAT-Application and a very state-of-the-art proxy server, which you can use to manage other applications like discourse (the forum), tripwire or pathfinder.
+Now you have a HTTPS only SeAT instance and a very state-of-the-art proxy server which you can also use to manage other applications such as discourse (the forum), tripwire or pathfinder.
 
 ![SafeSeAT](https://i.imgur.com/rgAskUE.png)
 
-## Montior Træfik Health
+## Monitor Træfik Health
 
-Træfik ships with nice man monitoring functions as well as a metrics integration with prometheus. If you wish to take advantage of the web dashboard you need to uncomment the marked sections in the `.toml` and `docker-compose.yml` of Træfik and replace the password for the dashboard login.
+Træfik ships with a monitoring dashboard that includes metrics integration with prometheus. If you wish to take advantage of the web dashboard you need to uncomment the marked sections in the `.toml` and `docker-compose.yml` files for Træfik and set the password for the dashboard login.
 
 !!!! info "Have you set a subdomain?"
-    Remember to create an A record entry for f.e. monitor.{yourdomain.com}
+    Remember to create an A record entry for the dashboard. For eg: monitor.{yourdomain.com}
 
 ![monitor](https://i.imgur.com/AS17Kqk.png)
 
+The password hash format used by the dashboard is a 1000 thousand iteration MD5 sum. To generate such a password hash you need to install a helper utility first. On Ubuntu, this can be done with:
 
-to create a MD5 encrypted password you can use `htpasswd`
-
-````bash
+```bash
 sudo apt-get install apache2-utils
-````
+```
 
-Then generate the password with `htpasswd`. Substitute `secure_password` with the password you'd like to use for the Træfik admin user:
+Next, generate the password hash with `htpasswd`. Substitute `secure_password` with the password you'd like to use for the Træfik admin user:
 
 ````bash
 htpasswd -nb admin secure_password
 ````
 
-this will output the following, which you can use to exchange `users = [admin:MD5Password]` in the `.toml`.
+This command will output a hash similar to the below format:
 
 ````bash
 admin:$apr1$ruca84Hq$mbjdMZBAG.KWn7vfN/SNK/
 ````
+
+Take this output and replace the `users = [admin:MD5Password]` section in the Traefik `.toml`.

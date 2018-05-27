@@ -1,14 +1,17 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
-# Ubuntu
+!!! warning "CentOS Version"
+    This guide only caters for CentOS 7. If you _really_ want to run CentOS 6, you would either need to adapt this installation guide with the appropriate init scripts, or use the SeAT tool for installation.
 
-This guide attempts to explain how to manually install SeAT onto an **Ubuntu** Server. A small amount of Linux experience is preferred when it comes to this guide, although it is not entirely mandatory.
+# Centos 7
+
+This guide attempts to explain how to manually install SeAT onto a **CentOS** Server. A small amount of Linux experience is preferred when it comes to this guide, although it is not entirely mandatory.
 
 ## Getting started
 
-We are going to assume you have root access to a fresh Ubuntu Server. Typically access is gained via SSH. All of the below commands are to be entered in the SSH terminal session for the installation & configuration of SeAT. If the server you want to install SeAT on is being used for other things too (such as hosting MySQL databases and or websites), then please keep that in mind while following this guide.
+We are going to assume you have root access to a fresh CentOS Server. Typically access is gained via SSH. All of the below commands are to be entered in the SSH terminal session for the installation & configuration of SeAT. If the server you want to install SeAT on is being used for other things too (such as hosting MySQL databases and or websites), then please keep that in mind while following this guide.
 
-Packages are installed using the `aptitude` package manager as the `root` user.
+Packages are installed using the `yum` package manager as the `root` user.
 
 !!! note "Eve Application and ESI"
 
@@ -20,10 +23,49 @@ Packages are installed using the `aptitude` package manager as the `root` user.
 
 Before we get to installing SeAT, lets ensure that your operating system is up to date. We can do that with basics :
 
-- `apt-get update` to refresh the repositories cache.
-- `apt-get full-upgrade` to update any installed packages.
+- `yum update` to update any installed packages.
 - `reboot` in order to ensure any updated software is the current running version.
-- `apt-get autoremove` (after the reboot) to cleanup any unneeded packages.
+
+### Repositories
+
+Due to the nature of CentOS's packaging and the limitations in getting 'bleeding edge' software with it, we need to add some extra software repositories in order to get SeAT running. The repositories used are the [Fedora EPEL](https://fedoraproject.org/wiki/EPEL) repository, [Remi](http://rpms.famillecollet.com/) repository as well as the MariaDB repository.
+
+Install and configure the required repositories with the following commands:
+
+#### EPEL
+
+```bash
+# Download and install EPEL
+EPEL=epel-release-latest-7.noarch.rpm && curl -O https://dl.fedoraproject.org/pub/epel/$EPEL && yum localinstall -y $EPEL && rm -f $EPEL
+
+# Import signing key
+rpm --import "http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7"
+```
+
+#### Remi
+
+```bash
+# Download and install Epel
+REMI=remi-release-7.rpm && curl -O http://rpms.remirepo.net/enterprise/$REMI && yum localinstall -y $REMI && rm -f $REMI
+
+# Import signing key
+rpm --import http://rpms.remirepo.net/RPM-GPG-KEY-remi
+```
+
+#### MariaDB
+
+```bash
+# Configure the MariaDB repository
+curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
+```
+
+#### Repository Configurations
+
+Only a small amount of configuration is needed after installing these repositories. Basically, we just want to enable PHP 7.1 for use with SeAT. So, do that with:
+
+```bash
+yum install yum-utils -y && yum-config-manager --enable remi,remi-php71
+```
 
 ### Database
 
@@ -31,22 +73,19 @@ SeAT relies **heavily** on a database to function. Everything it learns is store
 
 This document describes using MariaDB, but you can use MySQL as well. Just double check the requirements.
 
-We need to ensure that we have the latest MariaDB installed. To help with this, MariaDB provides an official repository to get the latest versions. Lets add this repository with:
+Lets install the database server:
 
 ```bash
-curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
+yum install mariadb-server
 ```
 
-With the repository now setup, lets install the database server:
-
-!!! warning
-        During the installation, you may be asked to set a password for the `root` MariaDB user account. Make sure you set a long, strong password and remember it. It will be needed for the next step.
+With the database server installed, lets start it and configure it to automatically start up the next time our server boots up:
 
 ```bash
-apt-get install mariadb-server
+systemctl enable mariadb.service && systemctl start mariadb.service
 ```
 
-Next, we are going to secure the database server by removing anonymous access and setting a `root` password (if you have not been prompted for it yet).
+Next, we are going to secure the database server by removing anonymous access and setting a `root` password.
 
 !!! note
 
@@ -58,12 +97,12 @@ To secure the database, run:
 mysql_secure_installation
 ```
 
-This will ask you a series of questions where you should generally just answer yes to. If you already set a `root` password in the previous step then you dont have to set it again, otherwise, make sure you choose a long, strong password for the `root` account. An example run is shown below:
+This will ask you a series of questions where you should generally just answer yes to. An example run is shown below:
 
 ```bash
 [...]
 
-Enter current password for root (enter for none):  IF ONE WAS SET, IGNORE THIS
+Enter current password for root (enter for none):  BY DEFAULT IT IS NONE, PRESS ENTER
 OK, successfully used password, moving on...
 
 [...]
@@ -166,48 +205,12 @@ That concludes the database server setup. You can exit the prompt with `exit`;
 
 ### PHP
 
-Since SeAT is written primarily in PHP, we will need to install PHP packages. Currently only PHP 7.1 is supported due to issues with Laravel (the framework SeAT is built on) and PHP 7.2. This should change in the very near future. Ubuntu based systems can make use of the [ondrej PPA](https://launchpad.net/~ondrej/+archive/ubuntu/php) which is a very popular repository used for specific PHP versions.
+Since SeAT is written primarily in PHP, we will need to install PHP packages. Currently only PHP 7.1 is supported (and is already enabled via the Remi repository earlier in this guide) due to issues with Laravel (the framework SeAT is built on) and PHP 7.2. This should change in the very near future.
 
-Depending on the version of Ubuntu you are using, a release specific repository URL should be used for the PPA. Select the tab applicable to your Ubuntu version and run the commands within.
-
-<section class="mdc-tabs">
-<ul class="mdc-tab-bar">
-  <li class="mdc-tab active"><a role="tab" data-toggle="tab">Xenial 16.04</a></li>
-  <li class="mdc-tab"><a role="tab" data-toggle="tab">Artful 17.10</a></li>
-  <li class="mdc-tab"><a role="tab" data-toggle="tab">Bionic 18.04</a></li>
-</ul>
-<div class="mdc-panels">
-<div role="tabpanel" class="mdc-panel active">
-<pre><code class="bash hljs">echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" >> /etc/apt/sources.list.d/php.list
-echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" >> /etc/apt/sources.list.d/php.list</code></pre>
-</div>
-<div role="tabpanel" class="mdc-panel">
-<pre><code class="bash hljs">echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu artful main" >> /etc/apt/sources.list.d/php.list
-echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu artful main" >> /etc/apt/sources.list.d/php.list</code></pre>
-</div>
-<div role="tabpanel" class="mdc-panel">
-<pre><code class="bash hljs">echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
-echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list</code></pre>
-</div>
-</div>
-</section>
-
-Next, we will have to download the new repositories GPG signing key and add it into our keychain
+Install the required PHP packages now with:
 
 ```bash
-apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 4F4EA0AAE5267A6C
-```
-
-With the new repository configured, update the package lists with:
-
-```bash
-apt-get update
-```
-
-Finally, install the required PHP packages with:
-
-```bash
-apt-get install curl zip php7.1-cli php7.1-mysql php7.1-mcrypt php7.1-intl php7.1-curl php7.1-gd php7.1-mbstring php7.1-bz2 php7.1-dom php7.1-zip
+yum install -y php php-cli php-mysqlnd php-posix php-mcrypt php-process php-mbstring php-intl php-dom php-gd unzip
 ```
 
 ### Redis
@@ -215,7 +218,13 @@ apt-get install curl zip php7.1-cli php7.1-mysql php7.1-mcrypt php7.1-intl php7.
 SeAT makes use of [Redis](http://redis.io/) as a cache and message broker for the Queue back end. Installing it is really easy. Do it with:
 
 ```bash
-apt-get install redis-server
+yum install -y redis
+```
+
+Next, start it and configure it to auto start next time the server boots up:
+
+```bash
+systemctl enable redis.service && systemctl start redis.service
 ```
 
 ## SeAT Installation
@@ -229,7 +238,7 @@ Excellent progress! All of the operating system level requirements are now met a
 Install `git` with:
 
 ```bash
-apt-get install git
+yum -y install git
 ```
 
 #### Composer
@@ -286,11 +295,30 @@ Application key [base64:CmhqYNkaIcHo8nYC8LiEWa3U5/+BiTLih5dZftxlV2k=] set succes
 You may have noticed a warning about `composer` running as `root`. For now this can be safely ignored. Post the installation of the SeAT source code, we need to fix up the permissions of the downloaded files. Do that with:
 
 ```bash
-chown -R www-data:www-data /var/www/seat
+chown -R nginx:nginx /var/www/seat
 chmod -R guo+w /var/www/seat/storage/
 ```
 
 This will ensure that the web server, cron jobs and workers have access to the source code as well as logs.
+
+### SELinux
+
+Many people hate SELinux, primarily due to a misunderstanding of what it does and how it works. SeAT will run perfectly fine with SELinux enabled, and I actually encourage you to leave it enabled. There is however one small settings change required to make everything work as expected.
+
+First, we have to allow web servers to make network connections. This is so that we may connect to ESI, as well as the MariaDB database and Redis. We also have to allow nginx to write to disk. So, configure this with:
+
+```bash
+setsebool -P httpd_can_network_connect 1
+setsebool -P httpd_unified 1
+```
+
+Next, we have to ensure that the files and folders in `/var/www/seat` is correctly labelled in order to prevent SELinux from blocking perfectly normal behaviour. Do this with:
+
+```bash
+restorecon -Rv /var/www/seat
+```
+
+That is really it. Pretty painless eh?
 
 ### SeAT Setup
 
@@ -317,19 +345,19 @@ Next we need to publish the database migrations and web assets (such as JavaScri
 Publish the assets and database migrations with:
 
 ```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan vendor:publish --force --all'
+sudo -H -u nginx bash -c 'php /var/www/seat/artisan vendor:publish --force --all'
 ```
 
 Run the database migrations with:
 
 ```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan migrate'
+sudo -H -u nginx bash -c 'php /var/www/seat/artisan migrate'
 ```
 
 Seed the SeAT schedule with:
 
 ```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder'
+sudo -H -u nginx bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder'
 ```
 
 #### EVE Sde Update
@@ -339,7 +367,7 @@ SeAT makes use of a number of tables from the EVE [Static Data Exports](https://
 To update to the [latest SDE](https://github.com/eveseat/resources/blob/master/tools/generate_sde_json.php#L22) within SeAT, run:
 
 ```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan eve:update:sde'
+sudo -H -u nginx bash -c 'php /var/www/seat/artisan eve:update:sde'
 ```
 
 ### Supervisor
@@ -349,13 +377,13 @@ The jobs ecosystem within SeAT requires a process supervisor to ensure that the 
 To configure the Horizon process monitor, first install `supervisor`:
 
 ```bash
-apt-get install supervisor
+yum install -y supervisor
 ```
 
-Next, we will create a dedicated configuration file which will ask supervisor to keep an eye on Horizon. This file will live in `/etc/supervisor/conf.d/seat.conf`. Create this file with its recommended configuration with:
+Next, we will create a dedicated configuration file which will ask supervisor to keep an eye on Horizon. This file will live in `/etc/supervisord.d/seat.ini`. Create this file with its recommended configuration with:
 
 ```bash
-cat > /etc/supervisor/conf.d/seat.conf << EOL
+cat > /etc/supervisord.d/seat.ini << EOL
 [program:seat]
 command=/usr/bin/php /var/www/seat/artisan horizon
 process_name = %(program_name)s-80%(process_num)02d
@@ -365,14 +393,14 @@ stdout_logfile_backups=10
 numprocs=1
 directory=/var/www/seat
 stopwaitsecs=600
-user=www-data
+user=nginx
 EOL
 ```
 
-Finally, reload supervisor to apply the new configuration with the following command:
+Finally, start `supervisord` and make sure it will auto start next time the server boots up with: 
 
 ```bash
-systemctl restart supervisor.service
+systemctl enable supervisord && systemctl restart supervisord
 ```
 
 ### Crontab
@@ -385,13 +413,13 @@ To configure the crontab entry required for SeAT, run the following commands:
 echo '* * * * * php /var/www/seat/artisan schedule:run >> /dev/null 2>&1' > /tmp/seat-crontab.tmp
 ```
 
-Next, add this crontab for the `www-data` user with:
+Next, add this crontab for the `nginx` user with:
 
 ```bash
-crontab -u www-data /tmp/seat-crontab.tmp
+crontab -u nginx /tmp/seat-crontab.tmp
 ```
 
-If you want to confirm that the crontab successfully installed, you can check it with `crontab -u www-data -l`.
+If you want to confirm that the crontab successfully installed, you can check it with `crontab -u nginx -l`.
 
 ### Web Server
 
@@ -405,75 +433,105 @@ The SeAT web interface requires a web server to serve the HTML goodies it has. W
 Together with an `nginx` installation we also need to install `php-fpm` to handle the PHP execution for us. Let's install `nginx` and `php-fpm` with:
 
 ```bash
-apt-get install nginx php7.1-fpm
+yum install -y nginx php-fpm
 ```
 
 #### Nginx Configuration
 
 With the webserver installed, we need to configure `nginx` to serve SeAT. For that, a configuration file needs to be created that will tell `nginx` where to find `php-fpm` as well as where the assets are for SeAT.
 
-The configuration file will live at `/etc/nginx/sites-available/seat`. It can be created with the following command:
+The configuration file will live at `/etc/nginx/nginx.conf`. It can be created with the following command:
 
 ```bash
-cat > /etc/nginx/sites-available/seat << EOL
-server {
+cat > /etc/nginx/nginx.conf << EOL
+# For more information on configuration, see:
+#   * Official English Documentation: http://nginx.org/en/docs/
+#   * Official Russian Documentation: http://nginx.org/ru/docs/
 
-    listen 80;
-    listen [::]:80;
+user nginx;
+worker_processes auto;
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid;
 
-    # If you are hosting this instance on a domain, set that
-    # name here.
-    #server_name  seat.yourdomain.com;
+# Load dynamic modules. See /usr/share/nginx/README.dynamic.
+include /usr/share/nginx/modules/*.conf;
 
-    # SeAT public directory. This is the only directory that
-    # should be exposed by the webserver. If one has to expose
-    # the parent directory then things like the .env file will
-    # be available for anyone to download.
-    root /var/www/seat/public;
+events {
+    worker_connections 1024;
+}
 
-    index index.php;
+http {
+    log_format  main  '\$remote_addr - \$remote_user [\$time_local] "\$request" '
+                      '\$status \$body_bytes_sent "\$http_referer" '
+                      '"\$http_user_agent" "\$http_x_forwarded_for"';
 
-    location / {
-       try_files \$uri \$uri/ /index.php?\$query_string;
-    }
+    access_log  /var/log/nginx/access.log  main;
 
-    # PHP-FPM configuration.
-    location ~ \.php\$ {
-       try_files \$uri /index.php =404;
-       fastcgi_pass unix:/run/php/php7.1-fpm.sock;
-       fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-       include fastcgi_params;
-    }
+    sendfile            on;
+    tcp_nopush          on;
+    tcp_nodelay         on;
+    keepalive_timeout   65;
+    types_hash_max_size 2048;
 
-    # Even though .htaccess rules mean nothing in the nginx
-    # world, prevent those from being downloaded anyways.
-    location ~ /\.ht {
-       deny all;
-    }
+    include             /etc/nginx/mime.types;
+    default_type        application/octet-stream;
 
-    # In case someone messes up, prevent .env files from
-    # being downloaded as well.
-    location ~ /\.env {
-       deny all;
+    # Load modular configuration files from the /etc/nginx/conf.d directory.
+    # See http://nginx.org/en/docs/ngx_core_module.html#include
+    # for more information.
+    include /etc/nginx/conf.d/*.conf;
+
+    server {
+
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        # If you are hosting this instance on a domain, set that
+        # name here.
+        #server_name  seat.yourdomain.com;
+        server_name _;
+
+        # SeAT public directory. This is the only directory that
+        # should be exposed by the webserver. If one has to expose
+        # the parent directory then things like the .env file will
+        # be available for anyone to download.
+        root /var/www/seat/public;
+
+        index index.php;
+
+        location / {
+        try_files \$uri \$uri/ /index.php?\$query_string;
+        }
+
+        # PHP-FPM configuration.
+        location ~ \.php\$ {
+        try_files \$uri /index.php =404;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        include fastcgi_params;
+        }
+
+        # Even though .htaccess rules mean nothing in the nginx
+        # world, prevent those from being downloaded anyways.
+        location ~ /\.ht {
+        deny all;
+        }
+
+        # In case someone messes up, prevent .env files from
+        # being downloaded as well.
+        location ~ /\.env {
+        deny all;
+        }
     }
 }
 EOL
 ```
 
-The configuration file as is at `/etc/nginx/sites-available/seat` itself won't be loaded by `nginx` yet. Storing configuration files in a `*sites-available*` directory is simply a convention used to allow administrators to quickly add & remove sites if needed. To *apply* the changes made by the new configuration file it needs to be symlinked to a `*sites-enabled*` directory.
-
-Let's symlink to the new configuration and drop the default one as a hardening exercise at the same time:
-
-```bash
-ln -s /etc/nginx/sites-available/seat /etc/nginx/sites-enabled/seat
-rm /etc/nginx/sites-enabled/default
-```
-
-Finally, reload `nginx` and `php-fpm` for the new changes to take affect:
+Next, reload `nginx` and `php-fpm` for the new changes to take affect:
 
 ```bash
 systemctl restart nginx.service
-systemctl restart php7.1-fpm.service
+systemctl restart php-fpm.service
 ```
 
 ### Admin Login
@@ -483,13 +541,13 @@ Since SeAT 3.0, an admin user is a special user and can no longer link character
 To login as an administrator, simply run the following command :
 
 ```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan seat:admin:login'
+sudo -H -u nginx bash -c 'php /var/www/seat/artisan seat:admin:login'
 ```
 
 You'll get a link after the command has finished running which looks similar to the one bellow:
 
 ```txt
-root@ubuntu:/var/www/seat# sudo -H -u www-data bash -c 'php /var/www/seat/artisan seat:admin:login'
+[root@localhost nginx]# sudo -H -u nginx bash -c 'php /var/www/seat/artisan seat:admin:login'
 SeAT Admin Login URL Generator
 User 'admin' does not exist. It will be created.
 Searching for the 'Superuser' role

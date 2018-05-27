@@ -2,7 +2,9 @@
 
 # Nginx
 
-This page is still a work in progress and not in its final state. To get you going though, install nginx according for your host OS based on the guides here:
+!!! warning
+
+    This page is still a work in progress and not in its final state. To get you going though, install nginx according for your host OS based on the guides here:
 
 - [Ubuntu](/guides/installation/manual_installation/ubuntu/#nginx)
 - [Debian](/guides/installation/manual_installation/debian/#web-service)
