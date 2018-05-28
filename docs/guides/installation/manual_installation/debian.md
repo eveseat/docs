@@ -339,7 +339,7 @@ Seed the SeAT schedule with:
 sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder'
 ```
 
-#### EVE Sde Update
+#### EVE SDE Update
 
 SeAT makes use of a number of tables from the EVE [Static Data Exports](https://developers.eveonline.com/resource/resources). MySQL conversions of this data is available at [https://www.fuzzwork.co.uk/dump/](https://www.fuzzwork.co.uk/dump/) and used in SeAT.
 
