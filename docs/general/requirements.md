@@ -33,5 +33,5 @@ For docker based installations, all you need is `docker` and `docker-compose`. I
 
 | Type | Requirement |
 | ------------ | ------------- |
-| Docker | [Docker: 18.0+](https://www.docker.com/) |
-| Docker Compose | [Docker compose: 1.20+](https://docs.docker.com/compose/)|
+| Docker | [Docker: ^18.0](https://www.docker.com/) |
+| Docker Compose | [Docker compose: ^1.20](https://docs.docker.com/compose/)|
