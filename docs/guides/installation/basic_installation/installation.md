@@ -26,7 +26,7 @@ If you would prefer less automation, or you  already have existing services on y
 
     <p>Once downloaded, <code>docker-compose up -d</code> is run from that folder to start the SeAT stack. To see this script in action on a fresh Digital Ocean VPS, check out the following asciinema:</p> <script src="https://asciinema.org/a/c0EM0kQnj86JkNX40TBdhA4Ua.js" id="asciicast-c0EM0kQnj86JkNX40TBdhA4Ua" async></script>
 
-    <p>Once the docker installation is complete, you should have SeAT available on the server, listening on port 8080. For more detailed docker related information as well as next steps to configure a web server, please refer to the <a href="/guides/installation/manual_installation/docker">Manual Installation: Docker</a> section.</p>
+    <p>Once the docker installation is complete, you should have SeAT available on the server, listening on port 8080. For more detailed docker related information as well as next steps to configure a web server, please refer to the <a href="/docs/guides/installation/manual_installation/docker/">Manual Installation: Docker</a> section.</p>
 
     <p>To configure ESI for SSO and API pulls, please refer to the <a href="/guides/installation/basic_installation/esi/">Configuring ESI</a> documentation page</p>
 
