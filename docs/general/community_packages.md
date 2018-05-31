@@ -40,6 +40,7 @@ Installing packages like this will ensure that none of the core SeAT packages ar
 | [kassie/calendar](https://github.com/BenHUET/eveseat-calendar) | [![Latest Stable Version](https://poser.pugx.org/kassie/calendar/v/stable)](https://packagist.org/packages/kassie/calendar) | Calendar plugin for SeAT 2.x and 3.x |
 | [denngarr/seat-srp](https://github.com/dysath/seat-srp) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-srp/v/stable)](https://packagist.org/packages/denngarr/seat-srp) | A module for SeAT that tracks SRP requests |
 | [denngarr/seat-fitting](https://github.com/dysath/seat-fitting) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-fitting/v/stable)](https://packagist.org/packages/denngarr/seat-fitting) | Module to check fittings per character |
+| [herpaderpaldent/seat-groups](https://github.com/herpaderpaldent/seat-groups) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-groups/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-groups) | Module providing auto, opt-in and managed groups correlating to SeAT Roles |
 
 #### Deprecated packages
 
