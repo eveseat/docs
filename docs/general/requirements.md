@@ -22,6 +22,7 @@ Software version requirements are based on a *minimum* requirement.
 | Type | Requirement | Version Check |
 | ------------ | ------------- | ------------- |
 | Operating System | Linux, preferably Ubuntu, Debian or CentOS. For Windows, you will need [Docker for Windows](https://docs.docker.com/docker-for-windows/). | Usually, running `cat /etc/issue` should give you a good idea. |
+| Architecture | 64 bits only | Checking kernel is providing good intel `uname -a` |
 | PHP | [PHP: 7.1](http://php.net/)| `php -v` |
 | Database | [MariaDB: ^10.2.7](https://mariadb.org/) or [MySQL: ^5.7](https://www.mysql.com/) | `mysql -V` |
 | Caching Service | [Redis](https://redis.io/)  | `redis-server -v` |
