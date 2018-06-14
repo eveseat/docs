@@ -59,7 +59,7 @@ If you would prefer less automation, or you  already have existing services on y
     <p>Once the preparations are done, the installer will prompt you to run <code>seat install:production</code>. </p>
 
     <p>To configure ESI for SSO and API pulls, please refer to the <a href="/docs/guides/installation/basic_installation/esi/">Configuring ESI</a> documentation page</p>
-
+    
     <div class="admonition note">
         <p class="admonition-title"> Note</p>
         <p>During the beta of SeAT 3x, please run <code>seat install:production --minimum-stability beta</code> instead. This will tell the installer that versions that are marked as non-stable is ok to use.</p>
