@@ -8,7 +8,7 @@ If you would prefer less automation, or you  already have existing services on y
 
 !!! note
 
-    Make sure you review the [hardware](/general/requirements/#hardware-requirements) requirements before installing anything intended for production use!
+    Make sure you review the [hardware](/docs/general/requirements/#hardware-requirements) requirements before installing anything intended for production use!
 
 <section class="mdc-tabs">
 <ul class="mdc-tab-bar">
@@ -28,11 +28,11 @@ If you would prefer less automation, or you  already have existing services on y
 
     <p>Once the docker installation is complete, you should have SeAT available on the server, listening on port 8080. For more detailed docker related information as well as next steps to configure a web server, please refer to the <a href="/docs/guides/installation/manual_installation/docker/">Manual Installation: Docker</a> section.</p>
 
-    <p>To configure ESI for SSO and API pulls, please refer to the <a href="/guides/installation/basic_installation/esi/">Configuring ESI</a> documentation page</p>
+    <p>To configure ESI for SSO and API pulls, please refer to the <a href="/docs/guides/installation/basic_installation/esi/">Configuring ESI</a> documentation page</p>
 
     <div class="admonition note">
         <p class="admonition-title"> Note</p>
-        <p>Please have a look at <a href="/guides/admin/docker/">Docker Admin</a> Page for commands for Docker.</p>
+        <p>Please have a look at <a href="/docs/guides/admin/docker/">Docker Admin</a> Page for commands for Docker.</p>
     </div>
 
 </div>
@@ -58,7 +58,7 @@ If you would prefer less automation, or you  already have existing services on y
 
     <p>Once the preparations are done, the installer will prompt you to run <code>seat install:production</code>. </p>
 
-    <p>To configure ESI for SSO and API pulls, please refer to the <a href="/guides/installation/basic_installation/esi/">Configuring ESI</a> documentation page</p>
+    <p>To configure ESI for SSO and API pulls, please refer to the <a href="/docs/guides/installation/basic_installation/esi/">Configuring ESI</a> documentation page</p>
 
     <div class="admonition note">
         <p class="admonition-title"> Note</p>
