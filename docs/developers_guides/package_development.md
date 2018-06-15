@@ -6,11 +6,11 @@
 
 So, you want to write a SeAT package? Hopefully this guide helps you along the way! This guide was written while writing the API package for SeAT [here](https://github.com/eveseat/api). I figured it would be best to try and capture the process to help in case I miss any important details.
 
-Be sure to also have a look at the [Development Tips](/guides/development/tips/) page!
+Be sure to also have a look at the [Development Tips](/developers_guides/development_tips/) page!
 
 ## Background notes
 
-I think its important to keep in mind a few things about how SeAT is put together. The most important being a brief description of what each core package offers, and how you can integrate with them. For a breakdown on what the core packages provide, please refer the to breakdown [here](/guides/development/package_breakdown/).
+I think its important to keep in mind a few things about how SeAT is put together. The most important being a brief description of what each core package offers, and how you can integrate with them. For a breakdown on what the core packages provide, please refer the to breakdown [here](/developers_guides/core_package_breakdown/).
 
 SeAT 3 is written on [Laravel 5.5](http://laravel.com/docs/5.5). A **very** good thing to do would be to actually read the documentation top->bottom and get an idea of what is possible with the framework. SeAT core packages make heavy use of many of the features, based directly of what has been interpreted by this very documentation.
 
@@ -22,7 +22,7 @@ The very first thing to do is prepare the empty git repository on say Github, as
 
 ## Service provider
 
-As mentioned in the package breakdowns [here](/guides/development/package_breakdown/), the *eveseat/seat* repository bootstraps packages via service providers or package discovery. This is actually a Laravel convention that SeAT just follows. To get our package ready, we need to create a service provider. Thankfully there is a command to stub a new one for us. For the API package, I just ran `php artisan make:provider ApiServiceProvider` and copied the resultant file from `app/Providers` to my packages `src/` directory. Our packages file structure now looks as follows:
+As mentioned in the package breakdowns [here](/developers_guides/core_package_breakdown/), the *eveseat/seat* repository bootstraps packages via service providers or package discovery. This is actually a Laravel convention that SeAT just follows. To get our package ready, we need to create a service provider. Thankfully there is a command to stub a new one for us. For the API package, I just ran `php artisan make:provider ApiServiceProvider` and copied the resultant file from `app/Providers` to my packages `src/` directory. Our packages file structure now looks as follows:
 
 ```text
 ├── composer.json

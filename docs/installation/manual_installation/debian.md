@@ -518,7 +518,7 @@ Copy it and paste it inside your browser and you will be authenticated as the ad
 
 ## ESI Configuration
 
-As mentioned at the start of the guide, it is necessary for you to configure ESI. FOr instructions now how to do this, please refer to the [ESI Setup Guide](/guides/installation/basic_installation/esi/).
+As mentioned at the start of the guide, it is necessary for you to configure ESI. For instructions now how to do this, please refer to the [ESI Setup Guide](/configuration/esi_configuration/).
 
 !!! success
         You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!

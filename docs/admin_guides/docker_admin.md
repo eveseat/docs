@@ -38,7 +38,7 @@ This will generate an admin user with the necessary roles as well as produce a U
 
 A dockerized installation of SeAT is primarily configured via a configuration file located at `.env`. Configuration options such as your applications SSO secrets, SeAT's web server ports are amongst the many configuration options available in this file.
 
-Making changes to this file requires the docker stack to be restarted so that the configuration may be applies. An example case would be when you [configure SSO](/guides/installation/basic_installation/esi) for your instance.
+Making changes to this file requires the docker stack to be restarted so that the configuration may be applies. An example case would be when you [configure SSO](/configuration/esi_configuration/) for your instance.
 
 Once you have made a configuration change, save the `.env` file and restart the stack by simply running the following command from the path where the `docker-compose.yml` lives:
 

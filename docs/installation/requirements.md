@@ -35,3 +35,7 @@ For docker based installations, all you need is `docker` and `docker-compose`. I
 | ------------ | ------------- | ------------- |
 | Docker | [Docker: ^18.0](https://www.docker.com/) | `docker -v` |
 | Docker Compose | [Docker compose: ^1.20](https://docs.docker.com/compose/)| `docker-compose version` |
+
+!!! warning
+
+    Do not install Docker directly from your distribution repository as provided package are out-dated. Follow [Docker official Documentation](https://docs.docker.com/install/)

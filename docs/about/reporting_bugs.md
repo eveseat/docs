@@ -2,7 +2,7 @@
 
 # Reporting Bugs
 
-So, you think its time to report an issue. Awesome! However, before you do this, *please* go through the [troubleshooting](/guides/admin/troubleshooting/) steps first to identify any common errors that you might be able to to fix yourself.
+So, you think its time to report an issue. Awesome! However, before you do this, *please* go through the [troubleshooting](/troubleshooting/) steps first to identify any common errors that you might be able to to fix yourself.
 
 ## The more info, the better
 

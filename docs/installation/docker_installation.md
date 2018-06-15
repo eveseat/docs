@@ -10,7 +10,7 @@ As mentioned in numerous other places, docker is ideally the installation route 
 
 ## Docker Requirements
 
-In terms of performance, the same hardware requirements apply to docker installations as others. For information about the hardware requirements for SeAT, please see [this](/general/hardware_requirements/) page. The only major difference between docker and other installation options is that the containers themselves may take up a few hundred MB's of extra space. In most cases this should be a non-issue.
+In terms of performance, the same hardware requirements apply to docker installations as others. For information about the hardware requirements for SeAT, please see [this](/installation/requirements/#hardware-requirements) page. The only major difference between docker and other installation options is that the containers themselves may take up a few hundred MB's of extra space. In most cases this should be a non-issue.
 
 !!! warning
 
