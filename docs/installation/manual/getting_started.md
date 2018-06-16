@@ -6,8 +6,8 @@ So you have decided to install SeAT, but without the [Docker](/installation/basi
 
 With the requirements out of the way, you need to choose which guide you want to follow. We have a number of detailed walkthroughs for popular Linux distributions such as CentOS, Ubuntu and Debian. Those can be found below, or linked in the sidebar:
 
-- [CentOS](/installation/manual_installation/centos/)
-- [Debian](/installation/manual_installation/debian/)
-- [Ubuntu](/installation/manual_installation/ubuntu/)
+- [CentOS](/installation/manual/centos/)
+- [Debian](/installation/manual/debian/)
+- [Ubuntu](/installation/manual/ubuntu/)
 
-Finally, if you have done this type of thing before or want to go completely solo, there is always the [manual](/installation/manual_installation/generic/) installation guide.
+Finally, if you have done this type of thing before or want to go completely solo, there is always the [manual](/installation/manual/generic/) installation guide.

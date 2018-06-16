@@ -6,8 +6,8 @@
 
     This page is still a work in progress and not in its final state. To get you going though, install nginx according for your host OS based on the guides here:
 
-- [Ubuntu](/installation/manual_installation/ubuntu/#web-server)
-- [Debian](/installation/manual_installation/debian/#web-server)
+- [Ubuntu](/installation/manual/ubuntu/#web-server)
+- [Debian](/installation/manual/debian/#web-server)
 
 ## Docker SSL-Support
 

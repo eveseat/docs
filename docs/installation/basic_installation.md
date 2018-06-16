@@ -4,7 +4,7 @@
 
 This guide provides information about the automated options available to install SeAT. Generally, these are the best ways to getting started with SeAT. There are two options for you to choose from, which include a Docker setup or a host-based setup.
 
-If you would prefer less automation, or you  already have existing services on your server which may interfere with SeAT, check out some of the [advanced installation](/installation/manual_installation/getting_started/) guides.
+If you would prefer less automation, or you  already have existing services on your server which may interfere with SeAT, check out some of the [advanced installation](/installation/manual/getting_started/) guides.
 
 !!! note
 

@@ -13,21 +13,20 @@ copyright: 'Copyright &copy; 2015 - 2018 Leon Jacobs'
 # Documentation TOC
 pages:
     - Home: index.md
-    - Community Packages: community_packages.md
     - Installation:
       - Requirements: installation/requirements.md
       - Basic Installation: installation/basic_installation.md
       - Docker Installation: installation/docker_installation.md
       - Manual Installation:
-        - Getting Started: installation/manual_installation/getting_started.md
-        - CentOS: installation/manual_installation/centos.md
-        - Debian: installation/manual_installation/debian.md
-        - Ubuntu: installation/manual_installation/ubuntu.md
-        - Generic: installation/manual_installation/generic.md
-      - Webserver Extra:
-        - General: installation/webserver_extra/general.md
-        - Nginx: installation/webserver_extra/nginx.md
-        - Traefik: installation/webserver_extra/traefik.md
+        - Getting Started: installation/manual/getting_started.md
+        - CentOS: installation/manual/centos.md
+        - Debian: installation/manual/debian.md
+        - Ubuntu: installation/manual/ubuntu.md
+        - Generic: installation/manual/generic.md
+      - Webservers:
+        - General: installation/webservers/general.md
+        - Nginx: installation/webservers/nginx.md
+        - Traefik: installation/webservers/traefik.md
     - Upgrading:
       - General: upgrading/general.md
       - From SeAT 2.0: upgrading/from_seat_2_0.md
@@ -43,13 +42,14 @@ pages:
       - Docker Admin: admin_guides/docker_admin.md
       - Role Based Access Control: admin_guides/role_based_access_control.md
       - Understanding Tracking: admin_guides/understanding_tracking.md
-    - Developers Guides:
-      - Developer Installation: developers_guides/developer_installation.md
-      - General Guide: developers_guides/general_guide.md
-      - Development Tips: developers_guides/development_tips.md
-      - Core Package Breakdown: developers_guides/core_package_breakdown.md
-      - Package Development: developers_guides/package_development.md
-      - SeAT API: developers_guides/seat_api.md
+    - Developer Guides:
+      - Developer Installation: developer_guides/developer_installation.md
+      - General Guide: developer_guides/general_guide.md
+      - Development Tips: developer_guides/development_tips.md
+      - Core Package Breakdown: developer_guides/core_package_breakdown.md
+      - Package Development: developer_guides/package_development.md
+      - SeAT API: developers_guide/seat_api.md
+    - Community Packages: community_packages.md
     - Troubleshooting: troubleshooting.md
     - About:
       - Contact: about/contact.md

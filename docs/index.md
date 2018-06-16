@@ -21,9 +21,9 @@ Ignoring the details, to get SeAT installed quickly you have a few options. All 
 | ------------ |  ------------ |
 | Docker | `bash <(curl -fsSL https://git.io/seat-docker)` <br> This will download and run a [helper script](https://github.com/eveseat/scripts/blob/master/docker-compose/bootstrap.sh) that will ensure `docker` and `docker-compose` is available and start SeAT in containers. |
 | SeAT Tool | `bash <(curl -fsSL https://git.io/seat-installer)` <br> This will download and run a [helper script](https://github.com/eveseat/scripts/blob/master/install/installer.sh) to start the installation process. Once done, the SeAT Tool will be available to use and provide semi automated installation option for _Debian 8 / 9_, _Ubuntu LTS versions_ and _CentOS 7_. |
-| Manually | You can always install SeAT using one of the detailed manual guides available. All you need is PHP, MariaDB, Redis and a web server and some Linux experience. Refer to the [manual guides](/installation/manual_installation/getting_started/) for more information. |
+| Manually | You can always install SeAT using one of the detailed manual guides available. All you need is PHP, MariaDB, Redis and a web server and some Linux experience. Refer to the [manual guides](/installation/manual/getting_started/) for more information. |
 
-Best way to start your SeAT installation would be [Basic Installation](/installation/basic_installation/). However, if you know what you are doing or need more options, head over to [Advanced Installation](/installation/manual_installation/getting_started/)
+Best way to start your SeAT installation would be [Basic Installation](/installation/basic_installation/). However, if you know what you are doing or need more options, head over to [Advanced Installation](/installation/manual/getting_started/)
 
 ## Upgrades / Updates
 
