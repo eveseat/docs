@@ -17,6 +17,7 @@ pages:
       - Requirements: installation/requirements.md
       - Basic Installation: installation/basic_installation.md
       - Docker Installation: installation/docker_installation.md
+      - Scaled Deployments: installation/scaled_deployments.md
       - Manual Installation:
         - Getting Started: installation/manual/getting_started.md
         - CentOS: installation/manual/centos.md
@@ -38,6 +39,8 @@ pages:
         - GMail: configuration/email_setup/gmail.md
       - Env File Reference: configuration/env_file_reference.md
       - EVE Administrative Contact: configuration/eve_administrative_contact.md
+      - Configuration Overload: configuration/configuration_overload.md
+      - SDE Overload: configuration/sde_overload.md
     - Admin Guides:
       - Docker Admin: admin_guides/docker_admin.md
       - Role Based Access Control: admin_guides/role_based_access_control.md
@@ -45,6 +48,7 @@ pages:
     - Developer Guides:
       - Developer Installation: developer_guides/developer_installation.md
       - General Guide: developer_guides/general_guide.md
+      - Job Queue Flow: developer_guides/job_queue_flow.md
       - Development Tips: developer_guides/development_tips.md
       - Core Package Breakdown: developer_guides/core_package_breakdown.md
       - Package Development: developer_guides/package_development.md

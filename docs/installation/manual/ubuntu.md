@@ -507,6 +507,7 @@ http://localhost/auth/login/admin/9G3sb8hjMvrbIJrIf10KKtIj1c8e9mL5
 Copy it and paste it inside your browser and you will be authenticated as the admin user.
 
 !!! warning
+
         If you have not configured the `APP_URL` setting in the `.env` file, then the admin url will be generated for `localhost`. This is most likely incorrect and you can simply replace `localhost` with your IP address or domain name.
 
 ## ESI Configuration
@@ -514,4 +515,5 @@ Copy it and paste it inside your browser and you will be authenticated as the ad
 As mentioned at the start of the guide, it is necessary for you to configure ESI. For instructions now how to do this, please refer to the [ESI Setup Guide](/configuration/esi_configuration/).
 
 !!! success
+
         You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!
