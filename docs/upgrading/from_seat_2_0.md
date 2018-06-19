@@ -12,7 +12,7 @@ The process described bellow handles data conversion between the SeAT 2.x struct
 
 ## Requirements
 
-- Check [SeAT 3.0 Requirements](installation/requirements)
+- Check [SeAT 3.0 Requirements](/installation/requirements)
 - A database backup is an absolute **must**. Everything in SeAT can be recovered is some way or
   form *except for your database*. Make 100% sure you backed this up before proceeding with the upgrade!
 - Enough storage space to contains SeAT 2, SeAT 3, a backup of SeAT 2 database and a backup of SeAT 3 database.
