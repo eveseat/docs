@@ -27,6 +27,7 @@ pages:
         - General: installation/webservers/general.md
         - Nginx: installation/webservers/nginx.md
         - Traefik: installation/webservers/traefik.md
+        - Apache: installation/webservers/apache.md
     - Upgrading:
       - General: upgrading/general.md
       - From SeAT 2.0: upgrading/from_seat_2_0.md
