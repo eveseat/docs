@@ -16,6 +16,16 @@ This part is about how to setup apache to serve your seat-docker installation:
 !!! info "Docker-Setup"
 
     This part is still under construction.
+    
+A minimal Apache config might look like this
+
+````
+<VirtualHost *:80>
+    ServerName discourse.example.com
+    ProxyPass / http://0.0.0.0:8080/
+    ProxyPassReverse / http://0.0.0.0:8080/
+</VirtualHost>
+````
 
 ---
 
@@ -24,10 +34,8 @@ In order to get the SeAT fronted running, we need to configure Apache to serve o
 The Apache configuration itself will depend on how your server is set up. Generally, virtual hosting is the way to go, and this is what this guide will be showing here.
 
 
-### virtual host setup
+### Unbuntu Installation
 
-!!! warning "Ubuntu 16.x Guide"
-    This Guide ist still work in progress. Guides for CentOS will be added to a later moment
 
 Let's install Apache & PHP7.2 mod:
 
@@ -123,3 +131,67 @@ sudo service apache2 reload
 ```
 
 That's it! SeAT should now be available at http://your-domain-or-ip/
+
+### CentOS Installation
+
+If you are not going to use virtual hosting, the easiest to get going will probably to symlink `/var/www/seat/public/` to `/var/www/html/seat` and configuring apache to `AllowOverride All` in the `<Directory "/var/www/html">` section. This should have SeAT available at http://your-host-name-or-ip/seat after you restart apache.
+
+Getting the virtual host setup is as simple as creating a new configuration file (I usually call it the `sites-domain.conf`), and modifying it to match your setup. Everywhere you see `seat.local` as the hostname in the below examples it needs to be substituted to your actual domain.
+
+Lets prepare some directories. We create the directory `/var/www/html/seat.local` with:
+````bash
+mkdir /var/www/html/seat.local
+````
+
+We symlink the SeAT public directory with:
+
+````bash
+ln -s /var/www/seat/public /var/www/html/seat.local
+````
+
+Next, we have to configure Apache itself to know about the directories and stuff SeAT needs. We need to create that `sites-domain.conf` file I mentioned. This file should live in `/etc/httpd/conf.d`, so lets change directories there:
+
+````bash
+cd /etc/httpd/conf.d
+````
+
+Now, create the conf file. In my case, the domain is `seat.local`, so I will call it `seat.local.conf`. Add the following contents to that file:
+
+````bash
+<VirtualHost *:80>
+    ServerAdmin webmaster@your.domain
+    DocumentRoot "/var/www/html/seat.local"
+    ServerName seat.local
+    ServerAlias www.seat.local
+    ErrorLog "logs/seat.local-error_log"
+    CustomLog "logs/seat.local-access_log" common
+    <Directory "/var/www/html/seat.local">
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
+````
+
+With our config file created, we need to restart apache to read the new file:
+
+````bash
+apachectl restart
+````
+
+That should be it from a configuration perspective. We can confirm that everything is configured correctly by running:
+
+````bash
+[root@seat conf.d]# apachectl -t -D DUMP_VHOSTS
+httpd: Could not reliably determine the server&#39;s fully qualified domain name, using seat.localdomain for ServerName
+VirtualHost configuration:
+wildcard NameVirtualHosts and _default_ servers:
+*:80                   seat.local (/etc/httpd/conf.d/seat.local.conf:1)
+Syntax OK
+````
+
+
+Thats it! SeAT should now be available at http://your-domain-or-ip/
+
+
+
