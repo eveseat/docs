@@ -2,7 +2,7 @@
 
 # webserver - apache
 
-The SeAT web interface requires a web server to serve the HTML goodies it has. Apache is an alternative of nginx. You don't **have** to use it, so if you prefer something else, feel free.
+The SeAT web interface requires a web server to serve the HTML goodies it has. Apache is an alternative to nginx. You don't **have** to use it, so if you prefer something else, feel free.
 
 This guide contains two sections:
 
@@ -21,7 +21,7 @@ A minimal Apache config might look like this
 
 ````
 <VirtualHost *:80>
-    ServerName discourse.example.com
+    ServerName seat.example.com
     ProxyPass / http://0.0.0.0:8080/
     ProxyPassReverse / http://0.0.0.0:8080/
 </VirtualHost>
@@ -37,21 +37,22 @@ The Apache configuration itself will depend on how your server is set up. Genera
 ### Unbuntu Installation
 
 
-Let's install Apache & PHP7.2 mod:
+Let's install Apache & PHP7.2 mod. 
 
 ```
-sudo apt-get install apache2 libapache2-mod-php7.2
+apt-get install apache2 libapache2-mod-php7.2
 ```
+If you are using PHP 7.1, just update the version number to reflect this for `libapache2-mod-php7.1`
 
 Duplicate the standard www configuration file:
 ```
-sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/seat.conf
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/seat.conf
 ``` 
 
 Next, update the configuration file at `/etc/apache2/sites-available/seat.conf` with some adequate values :
 
 ```
-sudo vim /etc/apache2/sites-available/seat.conf
+vim /etc/apache2/sites-available/seat.conf
 ```
 
 
@@ -64,16 +65,15 @@ sudo vim /etc/apache2/sites-available/seat.conf
 | ErrorLog | ${APACHE_LOG_DIR}/error.log  | ${APACHE_LOG_DIR}/seat-error.log |
 | CustomLog | ${APACHE_LOG_DIR}/access.log combined  | ${APACHE_LOG_DIR}/seat-access.log combined |
 
-Since SeAT is running under a different user other than Apache's `www-data` you might run into some permission issue. Hence using `mpm_itk` module can let Apache run as seat user to avoid permission problem. You don't **have** to use it.
 
 ```
-sudo apt-get install libapache2-mpm-itk
+apt-get install libapache2-mpm-itk
 ```
 
 then
 
 ```
-sudo a2enmod mpm_itk
+a2enmod mpm_itk
 ```
 You should see something like this in console:
 
@@ -92,7 +92,7 @@ root@Server:~#
 
 Then modify the configuration file:
 ```
-sudo vim /etc/apache2/sites-available/seat.conf
+vim /etc/apache2/sites-available/seat.conf
 ```
 
 
@@ -126,8 +126,8 @@ Your configuration file should look similar to this:
 
 Finally, enable the site &amp; reload services:
 ```
-sudo a2ensite seat.conf
-sudo service apache2 reload 
+a2ensite seat.conf
+service apache2 reload 
 ```
 
 That's it! SeAT should now be available at http://your-domain-or-ip/
