@@ -27,7 +27,7 @@ Software version requirements are based on a *minimum* requirement.
 | Database | [MariaDB: ^10.2.7](https://mariadb.org/) or [MySQL: ^5.7](https://www.mysql.com/) | `mysql -V` |
 | Caching Service | [Redis](https://redis.io/)  | `redis-server -v` |
 | Service Supervisor | [Supervisor : 3](http://supervisord.org/) | `supervisord -v` |
-| Web Server | nginx, Apache | `nginx -v` |
+| Web Server | any f.e. trafik or Apache | `nginx -v` |
 
 For docker based installations, all you need is `docker` and `docker-compose`. If you already have it installed, check your current version with `docker version` and `docker-compose version` respectively:
 
