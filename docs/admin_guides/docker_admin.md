@@ -131,27 +131,6 @@ docker-compose logs --tail 5 -f seat-app
 ## Database Backups and Restore
 
 Backups. They are important and really simple to do.
-Before you are doing the backup you should do a modification to your 
-`docker-compose.yml` this will prevent errors you will get while 
-backuping.
-
-Open up the `docker-compose.yml` look for volumes and add this line:
-```bash
- mariadb:
- volumes:
-      - "mariadb-data:/var/lib/mysql"
-      - "./my.cnf:/etc/mysql/my.cnf" # <- add this
-```
-Now you need to create a `my.cnf` file in the docker directory.
-```bash
-#my.cnf increase the values if you get a timeout error
-[mysqld]
-max_allowed_packet      = 1300M
-net_read_timeout        = 7200
-net_write_timeout       = 7200
-[mysqldump]
-max_allowed_packet      = 1300M
-```
 
 To perform a backup of the current database used within the docker stack, 
 compressing and saving it to a file called `seat_backup.sql.gz`, run:
@@ -162,11 +141,8 @@ docker-compose exec mariadb sh -c 'exec mysqldump "$MYSQL_DATABASE"
 seat_backup.sql.gz
 ```
 
-Before restoring you should do the same modifications if you are on a new 
-server. (Modifying the `docker-compose.yml` and adding the `my.cnf`)
 
-Additionally you should create two sql files which will save you time 
-restoring your backup they should be called `start.sql` and `end.sql`.
+Before you are planning to restore your database you should create two sql files which will save you time  these files should be called `start.sql` and `end.sql`.
 
 `start.sql:`
 ```sql

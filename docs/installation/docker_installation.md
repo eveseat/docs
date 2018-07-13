@@ -100,9 +100,14 @@ Next, download the docker `.env` file with:
 curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/.env -o .env 
 ```
 
+Next, download the docker `my.cnf`  file with:
+```bash
+curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/my.cnf -o  my.cnf
+```
+
 !!! warning
 
-    The location of the `docker-compose.yml` and `.env` files are important. You need to `cd` back to the directory where these are stored in order to be able to execute commands for this stack at a later stage.
+    The location of the `docker-compose.yml`,` my.cnf`  and `.env` files are important. You need to `cd` back to the directory where these are stored in order to be able to execute commands for this stack at a later stage.
 
 With the configuration files ready, start up the stack with:
 
