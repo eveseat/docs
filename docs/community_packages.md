@@ -66,5 +66,5 @@ Seat Api Interface for errbot
 Passport strategy for authenticating with EVE SeAT using the OAuth 2.0 API.
 - [eve-scout/nodebb-plugin-sso-eveseat](https://github.com/eve-scout/nodebb-plugin-sso-eveseat)  
 This NodeBB plugin allows users login/register via their EVE SeAT account.
-- [Kubernetes Helm Chart](https://github.com/tarioch/helm/tree/master/charts/eveseat)
+- [tarioch/helm](https://github.com/tarioch/helm/tree/master/charts/eveseat)
 Allows to install EVE SeAT on a Kubernetes Cluster
