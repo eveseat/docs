@@ -70,8 +70,8 @@ If you would prefer less automation, or you  already have existing services on y
 
 1. [Configure ESI](/configuration/esi_configuration/) for SSO and API pulls
 2. Create a SeAT account with a character of yours
-3. log off or use new browser
-4. create admin link
+3. Log off or use new browser
+4. Create admin link
 
 <section class="mdc-tabs">
 <ul class="mdc-tab-bar">
@@ -91,5 +91,5 @@ If you would prefer less automation, or you  already have existing services on y
 </div>
 </section>
 
-5. assign `Superadmin` to your character/user you created in step 2
-6. Log off with admin (and never use it again)
+5. assign `Superuser` to your character/user you created in step 2
+6. Log off with admin (You won't be needing to login again with this account in the future, unless in an emergency)
