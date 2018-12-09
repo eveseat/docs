@@ -59,6 +59,13 @@ pages:
     - About:
       - Contact: about/contact.md
       - Reporting Bugs: about/reporting_bugs.md
+    - Changelogs:
+      - Api: changelogs/api.md
+      - Console: changelogs/console.md
+      - EveAPI: changelogs/eveapi.md
+      - Notifications: changelogs/notifications.md
+      - Services: changelogs/services.md
+      - Web: changelogs/web.md
 
 # Theme Configuration
 theme:
