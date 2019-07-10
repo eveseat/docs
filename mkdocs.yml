@@ -27,6 +27,7 @@ nav:
         - General: installation/webservers/general.md
         - Nginx: installation/webservers/nginx.md
         - Traefik: installation/webservers/traefik.md
+        - Caddy: installation/webservers/caddy.md
         - Apache: installation/webservers/apache.md
     - Upgrading:
       - General: upgrading/general.md
