@@ -2,13 +2,13 @@
 
 # Styling
 
-By default, SeAT is shipped using Bootstrap 3 and the template Admin LTE.
+By default, SeAT uses Bootstrap 3 and the Admin LTE template.
 
-You may want to customise a bit your own SeAT design to either your corporation or alliance colors.
+You may want to customise SeAT design to match either your corporation or alliance colours.
 
-To doing so, you can use two available css hooks :
- - `custom-layout-mini.css` which is used by the sign-in page
- - `custom-layout.css` which is used for all the application
+To do so, you can use two available css hooks :
+ - `custom-layout-mini.css` used by the sign-in page
+ - `custom-layout.css` used bu all the entier application, globally
 
 Both of them must be located into your `public` directory.
 
@@ -17,4 +17,4 @@ Both of them must be located into your `public` directory.
     - `/var/www/seat/public/custom-layout-mini.css`
     - `/var/www/seat/public/custom-layout.css`
 
-Those file are loaded automatically by the core if detected - you have nothing else to do to enable them.
+These files are loaded automatically if they are detected - you have nothing else to do to enable them.
