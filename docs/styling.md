@@ -2,7 +2,7 @@
 
 # Styling
 
-By default, SeAT uses Bootstrap 3 and the Admin LTE template.
+By default, SeAT uses [Bootstrap 3](https://getbootstrap.com/docs/3.4/) and the [Admin LTE](https://adminlte.io/) template.
 
 You may want to customise SeAT design to match either your corporation or alliance colours.
 
