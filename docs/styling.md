@@ -12,7 +12,7 @@ To do so, you can use two available css hooks :
 
 Both of them must be located into your `public` directory.
 
-!!! exemple
+!!! example
     Using the default base directory, you'll get the following path :
     - `/var/www/seat/public/custom-layout-mini.css`
     - `/var/www/seat/public/custom-layout.css`
