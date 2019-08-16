@@ -1,12 +1,12 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
-# Role Based Access Control
+# Role-Based Access Control
 
 ## Introduction
-SeAT supports configuring user access control by means of [Role-based Access Control]. This allows for SeAT administrators to granularly control who has access to what based on which roles a SeAT user has.
+SeAT supports configuring user access control by means of [role-based access control] (RBAC). This allows for SeAT administrators to granularly control who has access to what based on which roles a SeAT user has.
 
 ## Definitions
-This section aims to clear up the definitions used in the SeAT RBAC (Role-based Access Control) implementation.
+This section aims to clear up the definitions used in the SeAT RBAC implementation.
 
 * **User**  
 A SeAT user account. This can be either a user account that was created in SeAT itself, or an automatically created account based on SSO. The only difference between the accounts is that with an SSO account, SeAT has no idea what the accounts password is. Otherwise, everything else is exactly the same.
@@ -18,14 +18,12 @@ A Permission is an attribute that is assigned to a *Role*. It grants access base
 A Role is simply a collection of permissions. Users get assigned a roles and inherit the permissions granted by that role. A user can not be given a raw permission. Permissions can only be granted my creating a Role, assigning permissions to the Role and granting the role to a user.
 
 * **Affiliation**  
-Affiliations allow administrators to set permissions bound to a specific entity. When configuring a role, permissions are granted to the role. When the an affiliation is set, the role effectively gives the permissions to the specified entities in the affiliation list. Not all roles are affected by affiliations. By default, only Corporation and Character roles are affected by affiliations.  
+Affiliations allow administrators to set permissions bound to a specific entity. When configuring a role, permissions are granted to the role. When the an affiliation is set, the role effectively gives the permissions to the specified entities in the affiliation list. Not all roles are affected by affiliations. By default, only Corporation and Character roles are affected by affiliations.
 
 * **Entity**  
 An entity is either a Character or a Corporation identified by its unique ID.
 
-## Examples
-
-### Corporation accountant
+## Example: Corporation accountant
 Lets assume you wanted to create a role for a corporation accountant. To acheive this, you would do the following:
 
 - Create a new role. Name it something like *Corporation Accountant*.
@@ -33,9 +31,14 @@ Lets assume you wanted to create a role for a corporation accountant. To acheive
 - Next, affiliate the role with the corporation(s) for whom this role should act as an accountant.
 - Optionally, assign some users to the role. You can assign users at a later stage too.
 
+!!! info "Roles and assigning corporation members"
+    Automatically assigning users to a role based on ingame role, title or corporation/alliance membership is not part of the core SeAT packages and to do this you would need a SeAT plugin like [herpaderpaldent/seat-groups]. Affiliation **does not give permissions** to users, but restricts access to use given permissions only on specified entities.
+
 Your configured role from the above example may now look as follows:
 
 ![corp accountant role](https://i.imgur.com/fF1IUqT.png)
+
+Users assigned this role would be able to see corporation ledger, corporation wallet journal, corporation transactions and corporation summary pages of the affiliated corp 'The Warp Core Stabilizers'.
 
 ## Permissions
 The next list is a short definition of what the currently available permissions are and which sections of SeAT they grant access to. For the latest list of available permissions, please refer to the definitions file in the `eveseat/web` package [here].
@@ -103,3 +106,4 @@ The next list is a short definition of what the currently available permissions 
 
 [Role-based Access Control]: https://en.wikipedia.org/wiki/Role-based_access_control
 [here]: https://github.com/eveseat/web/blob/master/src/Config/web.permissions.php
+[herpaderpaldent/seat-groups]: https://github.com/herpaderpaldent/seat-groups

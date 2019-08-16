@@ -23,15 +23,15 @@ Ignoring the details, to get SeAT installed quickly you have a few options. All 
 | SeAT Tool | `bash <(curl -fsSL https://git.io/seat-installer)` <br> This will download and run a [helper script](https://github.com/eveseat/scripts/blob/master/install/installer.sh) to start the installation process. Once done, the SeAT Tool will be available to use and provide semi automated installation option for _Debian 8 / 9_, _Ubuntu LTS versions_ and _CentOS 7_. |
 | Manually | You can always install SeAT using one of the detailed manual guides available. All you need is PHP, MariaDB, Redis and a web server and some Linux experience. Refer to the [manual guides] for more information. |
 
-Best way to start your SeAT installation would be [Basic Installation]. However, if you know what you are doing or need more options, head over to [Advanced Installation]
+Best way to start your SeAT installation is usually by [Basic Installation]. If you know what you are doing or need more options, head over to [Advanced Installation].
 
 ## Upgrades / Updates
 
-SeAT is being worked on continuously. New features are added, performance improvements are made and bug fixed are done too. If you wish to upgrade to the latest version of SeAT refer to the [upgrade-section].
+SeAT is being worked on continuously. New features are added, performance improvements are made and bugs are fixed. If you wish to upgrade to the latest version of SeAT refer to the [upgrade-section].
 
 ## Contact
 
-Want to get in touch with developers, or just other users of SeAT? Refer to the [contact] details page to find out how!
+Want to get in touch with developers, or just other users of SeAT? Refer to the [contact] section to find out how!
 
 [Basic Installation]: installation/basic_installation.md
 [Advanced Installation]: installation/manual/getting_started.md

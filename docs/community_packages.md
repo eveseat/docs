@@ -7,6 +7,15 @@ Below is a list of packages contributed by the community. These packages normall
 ## Generic package installation
 Packages will normally come in the form of a composer package that you need to include in your SeAT install, as well as a Service Provider that you need to bootstrap. So, generically speaking, installing a package will mean that you:
 
+- Ensure that you are in the *path* where you installed. By default this should be 
+`/var/www/seat`.
+
+- Put your application into *maintenance mode*. This will ensure that no request from the outside will hit your applications logic, and also help you perform an upgrade uninterrupted. Do this with:
+
+```bash
+php artisan down
+```
+
 - *Require* the package via composer:
 
 ```bash
@@ -25,6 +34,17 @@ php artisan vendor:publish --force --all
 php artisan migrate
 ```
 
+- *Clear SeAT cache* after installation:
+
+```bash
+php artisan seat:cache:clear
+```
+- Bring your application *live* and back out of maintenance mode:
+
+```bash
+php artisan up
+```
+
 Installing packages like this will ensure that none of the core SeAT packages are affected and you should be free to upgrade SeAT core at anytime.
 
 ## Package list
@@ -35,11 +55,11 @@ Installing packages like this will ensure that none of the core SeAT packages ar
 
 | Package | Version | Description |
 | ------- | ------- | ----------- |
-| [denngarr/seat-fitting](https://github.com/dysath/seat-fitting) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-fitting/v/stable)](https://packagist.org/packages/denngarr/seat-fitting) | Module to check fittings per character |
-| [denngarr/seat-srp](https://github.com/dysath/seat-srp) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-srp/v/stable)](https://packagist.org/packages/denngarr/seat-srp) | A module for SeAT that tracks SRP requests |
-| [herpaderpaldent/seat-discourse](https://github.com/herpaderpaldent/seat-discourse) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-discourse/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-discourse) | SeAT Discourse enables SeAT to act as SSO provider for your Discourse-Forum instance. Groups and Categories do respect roles of members. With this package you can create hidden sections for your member and public sections for potential recruits to which members get automatically access to. **Important:** Check installation instructions on github.|
-| [herpaderpaldent/seat-groups](https://github.com/herpaderpaldent/seat-groups) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-groups/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-groups) | Module to create auto, open and managed role groups to which user can be automatically be assigned, user can opt-in or user can apply to.|
-| [herpaderpaldent/seat-notifications](https://github.com/herpaderpaldent/seat-notifications) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-notifications/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-notifications) | This is a fully functional notification package for discord and slack notifications. This package is very easily extendable by other packages and should replace core notifications at some point. Currently seat-groups provide many useful notifications. Notifications are send out by slack or discord bot and uses twice a full oAuth2 authentication of the user.|
+| [denngarr/seat-fitting](https://github.com/dysath/seat-fitting) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-fitting/v/stable)](https://packagist.org/packages/denngarr/seat-fitting) | Module to check fittings per character|
+| [denngarr/seat-srp](https://github.com/dysath/seat-srp) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-srp/v/stable)](https://packagist.org/packages/denngarr/seat-srp) | A module for SeAT that tracks SRP requests|
+| [herpaderpaldent/seat-discourse](https://github.com/herpaderpaldent/seat-discourse) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-discourse/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-discourse) | SeAT Discourse enables SeAT to act as SSO provider for your Discourse-Forum instance. Groups and Categories do respect roles of members. With this package you can create hidden sections for your member and public sections for potential recruits to which members get automatically access to. **Important:** Check installation instructions on Github. |
+| [herpaderpaldent/seat-groups](https://github.com/herpaderpaldent/seat-groups) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-groups/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-groups) | Module to create auto, open and managed role groups to which user can be automatically be assigned, user can opt-in or user can apply to. |
+| [herpaderpaldent/seat-notifications](https://github.com/herpaderpaldent/seat-notifications) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-notifications/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-notifications) | This is a fully functional notification package for discord and slack notifications. This package is very easily extendable by other packages and should replace core notifications at some point. Currently seat-groups provide many useful notifications. Notifications are send out by slack or discord bot and uses twice a full oAuth2 authentication of the user. |
 | [kassie/calendar](https://github.com/BenHUET/eveseat-calendar) | [![Latest Stable Version](https://poser.pugx.org/kassie/calendar/v/stable)](https://packagist.org/packages/kassie/calendar) | Calendar plugin for SeAT 2.x and 3.x |
 | [warlof/seat-discord-connector](https://github.com/warlof/seat-discord-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-discord-connector/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-discord-connector) | A connector that handles invites and roles management in a Discord Guild addon for seat 3.x |
 | [warlof/seat-migrator](https://github.com/warlof/seat-migrator) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-migrator/v/stable)](https://packagist.org/packages/warlof/seat-migrator) | A migration script between SeAT 2 and SeAT 3 |
@@ -57,8 +77,7 @@ Installing packages like this will ensure that none of the core SeAT packages ar
 
 !!! danger
 
-    The package in this section are provided as history and idea database. They will not work on the stable version
-    since they are non longer maintained by their author or have been integrated in core.
+    The package in this section are provided as history and idea database. They will not work on the stable version since they are non longer maintained by their author or have been integrated in core.
 
 ### Other SeAT related packages
 

@@ -2,7 +2,7 @@
 
 # Troubleshooting
 
-So, the inevitable happened. Something broke or simply isn't working as expected! Thats ok. Usually, its possible to recover from almost any type of error. The *only* thing that you can't recover from is not making database backups.
+So the inevitable happened. Something broke or simply isn't working as expected! That's OK. Usually its possible to recover from almost any type of error. The *only* thing that you can't recover from is not making database backups!
 
 There are a few things you can do to perform general troubleshooting. These range from flipping SeAT into debug mode to simply running a self diagnostics command. Lets take a look at a few steps you can take:
 
