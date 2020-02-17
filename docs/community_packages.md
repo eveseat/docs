@@ -65,6 +65,7 @@ Installing packages like this will ensure that none of the core SeAT packages ar
 | [warlof/seat-migrator](https://github.com/warlof/seat-migrator) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-migrator/v/stable)](https://packagist.org/packages/warlof/seat-migrator) | A migration script between SeAT 2 and SeAT 3 |
 | [warlof/slackbot](https://github.com/warlof/slackbot) | [![Latest Stable Version](https://poser.pugx.org/warlof/slackbot/v/stable?format=flat-square)](https://packagist.org/packages/warlof/slackbot) | A slack bot that handles invites and kicks based on an api key addon for seat 1.x, 2.x and 3.x |
 | [warlof/seat-teamspeak](https://github.com/warlof/seat-teamspeak) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-teamspeak/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-teamspeak) | A connector that handles invites and roles management in a Teamspeak Server addon for seat 2.x and 3.x |
+| [flyingferret/seat-whtools](https://github.com/flyingferret/seat-whtools) | [![Latest Stable Version](https://poser.pugx.org/flyingferret/seat-whtools/v/stable?format=flat-square)](https://packagist.org/packages/flyingferret/seat-whtools) | A small collection of tools for helping with Wh-Life corporation management, including calculating doctrine stocking levels (based on contracts and denngarr/seat-fitting plugin), a blue loot tax calculator, and a skill base certificate management.  Currently very much a  work in porgress. |
 
 #### Deprecated packages
 
