@@ -13,7 +13,7 @@ Simply download the latest files from [github](https://github.com/eveseat/script
 1. `git clone https://github.com/eveseat/scripts.git /var/seat`
 2. `cd /var/seat/docker-compose-dev`
 3. `bash prepare-source.sh` (Or, if you have an existing repository update the `.env` file)
-4. `docker-compose --project-name seat-dev up -d`
+4. `docker-compose --project-name seat-dev up -d --build`
 
 In order to login using SSO you must create an Application on the [CCP Developers Portal](https://developers.eveonline.com/). Select all esi-scopes and save the `EVE_CLIENT_ID` and `EVE_CLIENT_SECRET` in `.env`.
 
