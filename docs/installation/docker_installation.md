@@ -61,7 +61,9 @@ Once the script is finished, you can skip to the [monitoring the stack](#monitor
 
 If you don't want to run this script, follow along in the next section of this guide.
 
-### Docker Download
+### Manual Deployment
+
+#### Docker Download
 
 If you do not have `docker`, install it now with the following command as `root`:
 
@@ -70,7 +72,7 @@ If you do not have `docker`, install it now with the following command as `root`
 sh <(curl -fsSL get.docker.com)
 ```
 
-### Docker-compose Download
+#### Docker-compose Download
 
 If you do not have `docker-compose`, install it now with the following command as `root`:
 
@@ -82,11 +84,11 @@ curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compos
 chmod +x /usr/local/bin/docker-compose
 ```
 
-### Docker compose working directory
+#### Docker compose working directory
 
 With `docker` and `docker-compose` ready, create yourself a directory in `/opt` with `mkdir -p /opt/seat-docker` and `cd` to it. Remember this directory as you will need to come back to it often.
 
-### SeAT Docker-compose.yml and .env File
+#### SeAT Docker-compose.yml and .env File
 
 Then, download the `docker-compose.yml` file with:
 
@@ -104,6 +106,12 @@ Finally, download the mysql configuration file `my.cnf` with:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/my.cnf -o my.cnf
+```
+
+Now, we will generate a unique application key - this is used to encrypt stuff:
+
+```bash
+sed -i -- 's/APP_KEY=insecure/APP_KEY='$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c32 ; echo '')'/g' .env
 ```
 
 !!! warning
