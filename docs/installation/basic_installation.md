@@ -72,6 +72,8 @@ Once the preparations are done, the installer will prompt you to run `seat insta
 3. Log off or use new browser
 4. Create admin link: `php artisan seat:admin:login`
 5. assign `Superuser` to your character/user you created in step 2
+   (you can find this under "Settings->Access Management" Edit Superuser,
+   then add your toon(s) to the "Available Groups).
 6. Log off with admin (You won't be needing to login again with this account in the future, unless in an emergency)
 
 !!! hint
