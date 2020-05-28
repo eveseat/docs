@@ -44,7 +44,7 @@ nav:
       - SDE Overload: configuration/sde_overload.md
     - Admin Guides:
       - Docker Admin: admin_guides/docker_admin.md
-      - Role Based Access Control: admin_guides/role_based_access_control.md
+      - Authorizations: admin_guides/authorizations.md
       - Squads: admin_guides/squads.md
       - Understanding Tracking: admin_guides/understanding_tracking.md
       - Scaled Deployments: admin_guides/scaled_deployments.md
