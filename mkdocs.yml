@@ -45,6 +45,7 @@ nav:
     - Admin Guides:
       - Docker Admin: admin_guides/docker_admin.md
       - Role Based Access Control: admin_guides/role_based_access_control.md
+      - Squads: admin_guides/squads.md
       - Understanding Tracking: admin_guides/understanding_tracking.md
       - Scaled Deployments: admin_guides/scaled_deployments.md
     - User Guides:
