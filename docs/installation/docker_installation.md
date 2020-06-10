@@ -8,6 +8,8 @@ As mentioned in numerous other places, docker is ideally the installation route 
 
     If you feel like docker might not be your cup of tea, checkout some of the [getting started](https://docs.docker.com/get-started/) guides that are available.
 
+If you are using Docker on Windows, you will need to use the Manual Deployment option below.
+	
 ## Docker Requirements
 
 In terms of performance, the same hardware requirements apply to docker installations as others. For information about the hardware requirements for SeAT, please see [this] page. The only major difference between docker and other installation options is that the containers themselves may take up a few hundred MB's of extra space. In most cases this should be a non-issue.
@@ -17,6 +19,10 @@ In terms of performance, the same hardware requirements apply to docker installa
     When considering a VPS provider, make sure you choose one that does not make use of OpenVZ or similar operating-system level virtualization technologies. These virtualization technologies limit you in terms of kernel access as they purely containerize an existing Linux installation.
 
     For a successful docker installation, choose a provider that uses para-virtualized technologies such as KVM, VMWare or XEN allowing you full control to the instance (and therefor the kernel itself). Examples of such providers are [Digital Ocean](https://www.digitalocean.com/), [Linode](https://www.linode.com/) and [Vultr](https://www.vultr.com/).
+	
+!!! info
+
+	If you plan to run Docker on Windows, for the best performance it is suggested you run Docker using the Windows Subsystem for Linux 2 (WSL2) backend, available starting in Windows 10/Windows Server 20H1 (build 2004) releases.
 
 ## Internal Container Setup Overview
 
@@ -72,9 +78,11 @@ If you do not have `docker`, install it now with the following command as `root`
 sh <(curl -fsSL get.docker.com)
 ```
 
+If you are on Windows, download and install Docker Desktop from https://www.docker.com/products/docker-desktop.
+
 #### Docker-compose Download
 
-If you do not have `docker-compose`, install it now with the following command as `root`:
+If you do not have `docker-compose`, install it now with the following command as `root` (Docker Compose is included with Docker Desktop on Windows):
 
 ```bash
 # Downloads docker-compose
@@ -88,30 +96,56 @@ chmod +x /usr/local/bin/docker-compose
 
 With `docker` and `docker-compose` ready, create yourself a directory in `/opt` with `mkdir -p /opt/seat-docker` and `cd` to it. Remember this directory as you will need to come back to it often.
 
+On Windows, create the directory `C:\seat-docker` with `mkdir C:\seat-docker` and `cd` to it. 
+
 #### SeAT Docker-compose.yml and .env File
 
 Then, download the `docker-compose.yml` file with:
 
+Linux:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/docker-compose.yml -o docker-compose.yml
 ```
 
+Windows:
+```powershell
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/docker-compose.yml -OutFile docker-compose.yml
+```
+
 Next, download the docker `.env` file with:
 
+Linux:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/.env -o .env 
 ```
 
+Windows:
+```powershell
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/.env -OutFile .env 
+```
+
 Finally, download the mysql configuration file `my.cnf` with:
 
+Linux:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/my.cnf -o my.cnf
 ```
 
+Windows:
+```powershell
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/my.cnf -OutFile my.cnf
+```
+
 Now, we will generate a unique application key - this is used to encrypt stuff:
 
+Linux:
 ```bash
 sed -i -- 's/APP_KEY=insecure/APP_KEY='$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c32 ; echo '')'/g' .env
+```
+
+Windows:
+```powershell
+$appkey = (-join ((65..90) + (97..122) | Get-Random -Count 32 | % {[char]$_})); (Get-Content .env -Raw) -replace "APP_KEY=insecure", "APP_KEY=$appkey" | Set-Content .env
 ```
 
 !!! warning
