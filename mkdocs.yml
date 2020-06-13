@@ -88,6 +88,7 @@ extra:
       link: 'https://github.com/eveseat/seat'
 # Tabs customisation
 extra_css:
+    - css/extra_footer.css
     - css/extra_typo.css
     - css/extra_tabs.css
 extra_javascript:
