@@ -15,20 +15,8 @@ nav:
     - Home: index.md
     - Installation:
       - Requirements: installation/requirements.md
-      - Basic Installation: installation/basic_installation.md
       - Docker Installation: installation/docker_installation.md
-      - Manual Installation:
-        - Getting Started: installation/manual/getting_started.md
-        - CentOS: installation/manual/centos.md
-        - Debian: installation/manual/debian.md
-        - Ubuntu: installation/manual/ubuntu.md
-        - Generic: installation/manual/generic.md
-      - Webservers:
-        - General: installation/webservers/general.md
-        - Nginx: installation/webservers/nginx.md
-        - Traefik: installation/webservers/traefik.md
-        - Caddy: installation/webservers/caddy.md
-        - Apache: installation/webservers/apache.md
+      - Manual Installation: installation/manual_installation.md
     - Upgrading:
       - General: upgrading/general.md
       - From SeAT 2.0: upgrading/from_seat_2_0.md
@@ -86,6 +74,7 @@ extra:
   social:
     - icon: fontawesome/brands/github-alt
       link: 'https://github.com/eveseat/seat'
+
 # Tabs customisation
 extra_css:
     - css/extra_footer.css
