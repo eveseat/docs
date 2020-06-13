@@ -68,6 +68,8 @@ google_analytics:
 markdown_extensions:
     - admonition
     - codehilite
+    - pymdownx.superfences
+    - pymdownx.tabbed
     - toc:
         permalink: true
 extra:
@@ -79,6 +81,3 @@ extra:
 extra_css:
     - css/extra_footer.css
     - css/extra_typo.css
-    - css/extra_tabs.css
-extra_javascript:
-    - js/extra_tabs.js

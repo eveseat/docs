@@ -1,18 +1,34 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
-# Ubuntu
+# Manual Installation
 
-This guide attempts to explain how to manually install SeAT onto an **Ubuntu** Server. A small amount of Linux experience is preferred when it comes to this guide, although it is not entirely mandatory.
+This guide attempts to explain how to manually install SeAT onto an **Ubuntu** Server.
+A small amount of Linux experience is preferred when it comes to this guide, although it is not entirely mandatory.
+
+!!! info
+
+    This guide has been written targetting Ubuntu. However, you can use it to deploy SeAT on any linux distribution.
+    Just be sure you adapt commands to targetted distribution (mostly those related to the package manager).
+
+!!! hint
+
+    Before starting to do anything, be sure you read the complete workflow once.
+    It will help you to understand all steps from the installation process.
 
 ## Getting started
 
-We are going to assume you have root access to a fresh Ubuntu Server. Typically access is gained via SSH. All of the below commands are to be entered in the SSH terminal session for the installation & configuration of SeAT. If the server you want to install SeAT on is being used for other things too (such as hosting MySQL databases and or websites), then please keep that in mind while following this guide.
+We are going to assume you have root access to a fresh Ubuntu Server.
+Typically access is gained via SSH.
+All of the below commands are to be entered in the SSH terminal session for the installation & configuration of SeAT.
+If the server you want to install SeAT on is being used for other things too (such as hosting MySQL databases and or websites), then please keep that in mind while following this guide.
 
 Packages are installed using the `aptitude` package manager as the `root` user.
 
 !!! note "Eve Application and ESI"
 
-        SeAT 3.0 consumes CCP's [ESI](https://esi.evetech.net/) service in order to retrieve EVE Online related information. Before you can make any authenticated calls to ESI, you have to register a third party EVE application on the developers portal. This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.
+    SeAT consumes CCP's [ESI](https://esi.evetech.net/) service in order to retrieve EVE Online related information.
+    Before you can make any authenticated calls to ESI, you have to register a third party EVE application on the [developers portal](developers.eveonline.com/).
+    This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.
 
 ## OS Installation
 
@@ -27,11 +43,13 @@ Before we get to installing SeAT, lets ensure that your operating system is up t
 
 ### Database
 
-SeAT relies **heavily** on a database to function. Everything it learns is stored here, along with things such as user accounts for your users. It comes without saying that database security is a very important aspect too. So, ensure that you choose very strong passwords for your installation where required.
+SeAT relies **heavily** on a database to function. Everything it learns is stored here, along with things such as user accounts for your users.
+It comes without saying that database security is a very important aspect too. So, ensure that you choose very strong passwords for your installation where required.
 
-This document describes using MariaDB, but you can use MySQL as well. Just double check the requirements.
+This document describes using MariaDB, but you can use MySQL as well. Just double check the [requirements](requirements.md).
 
-We need to ensure that we have the latest MariaDB installed. To help with this, MariaDB provides an official repository to get the latest versions. Lets add this repository with:
+We need to ensure that we have the latest MariaDB installed. To help with this, MariaDB provides an official repository to get the latest versions.
+Let's add this repository with:
 
 ```bash
 curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
@@ -40,7 +58,9 @@ curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash
 With the repository now setup, lets install the database server:
 
 !!! warning
-        During the installation, you may be asked to set a password for the `root` MariaDB user account. Make sure you set a long, strong password and remember it. It will be needed for the next step.
+
+        During the installation, you may be asked to set a password for the `root` MariaDB user account.
+        Make sure you set a long, strong password and remember it. It will be needed for the next step.
 
 ```bash
 apt-get install mariadb-server
@@ -50,7 +70,8 @@ Next, we are going to secure the database server by removing anonymous access an
 
 !!! note
 
-    The database `root` password should not be confused with the operating systems `root` passwords. They are both completely different. They should also not have the same password.
+    The database `root` password should not be confused with the operating systems `root` passwords. They are both completely different.
+    They should also not have the same password.
 
 To secure the database, run:
 
@@ -170,27 +191,17 @@ Since SeAT is written primarily in PHP, we will need to install PHP packages. Ub
 
 Depending on the version of Ubuntu you are using, a release specific repository URL should be used for the PPA. Select the tab applicable to your Ubuntu version and run the commands within.
 
-<section class="mdc-tabs">
-<ul class="mdc-tab-bar">
-  <li class="mdc-tab active"><a role="tab" data-toggle="tab">Xenial 16.04</a></li>
-  <li class="mdc-tab"><a role="tab" data-toggle="tab">Artful 17.10</a></li>
-  <li class="mdc-tab"><a role="tab" data-toggle="tab">Bionic 18.04</a></li>
-</ul>
-<div class="mdc-panels">
-<div role="tabpanel" class="mdc-panel active">
-<pre><code class="bash hljs">echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" >> /etc/apt/sources.list.d/php.list
-echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" >> /etc/apt/sources.list.d/php.list</code></pre>
-</div>
-<div role="tabpanel" class="mdc-panel">
-<pre><code class="bash hljs">echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu artful main" >> /etc/apt/sources.list.d/php.list
-echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu artful main" >> /etc/apt/sources.list.d/php.list</code></pre>
-</div>
-<div role="tabpanel" class="mdc-panel">
-<pre><code class="bash hljs">echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
-echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list</code></pre>
-</div>
-</div>
-</section>
+=== "Bionic 18.04"
+    ```bash
+    echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
+    echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
+    ```
+
+=== "Focal 20.04"
+    ```bash
+    echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" >> /etc/apt/sources.list.d/php.list
+    echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu focal main" >> /etc/apt/sources.list.d/php.list
+    ```
 
 Next, we will have to download the new repositories GPG signing key and add it into our keychain
 
@@ -207,7 +218,8 @@ apt-get update
 Finally, install the required PHP packages with:
 
 ```bash
-apt-get install curl zip php7.1-cli php7.1-mysql php7.1-mcrypt php7.1-intl php7.1-curl php7.1-gd php7.1-mbstring php7.1-bz2 php7.1-dom php7.1-zip
+apt-get install libpng-dev libfreetype6-dev libjpeg-dev
+apt-get install curl openssl zip php7.3-bz2 php7.3-cli php7.3-curl php7.3-dom php7.3-gd php7.3-gmp php7.3-intl php7.3-mbstring php7.3-mysql php7.3-opcache php7.3-redis php7.3-zip
 ```
 
 ### Redis
@@ -217,6 +229,17 @@ SeAT makes use of [Redis](http://redis.io/) as a cache and message broker for th
 ```bash
 apt-get install redis-server
 ```
+
+!!! hint
+
+    By default, redis is making backup from its database - so it ensure integrity in case of failure.
+    However, in certain condition, like power outage, this backup might be unprocessable and avoid redis to run.
+    
+    Since we don't store anything critical in it, you may want to disable this. To do so, edit the configuration file
+    using `nano /etc/redis/redis.conf` and search line `appendonly no`, change it for `appendonly yes`
+    
+    If you are on a small server, You may also want to limit the part of memory used by redis (by default, it will consume all available memory).
+    To do so, into the redis configuration file, search line `# maxmemory <bytes>` and change it for `maxmemory xGB` where `x` is the memory limit you want to set.
 
 ## SeAT Installation
 
@@ -259,12 +282,12 @@ cd /var/www
 With all of the prerequisites installed as well as our `www` directory ready we can finally download SeAT. Do that with:
 
 ```bash
-composer create-project eveseat/seat --no-dev
+composer create-project eveseat/seat --no-dev --no-interaction
 ```
 
 Once the download is done, you should have seen output such as:
 
-```bash
+```
 Writing lock file
 Generating optimized autoload files
 > Illuminate\Foundation\ComposerScripts::postAutoloadDump
@@ -329,7 +352,7 @@ sudo -H -u www-data bash -c 'php /var/www/seat/artisan migrate'
 Seed the SeAT schedule with:
 
 ```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder'
+sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Console\\database\\seeds\\ScheduleSeeder'
 ```
 
 #### EVE Sde Update
@@ -405,7 +428,7 @@ The SeAT web interface requires a web server to serve the HTML goodies it has. W
 Together with an `nginx` installation we also need to install `php-fpm` to handle the PHP execution for us. Let's install `nginx` and `php-fpm` with:
 
 ```bash
-apt-get install nginx php7.1-fpm
+apt-get install nginx php7.3-fpm
 ```
 
 #### Nginx Configuration
@@ -460,6 +483,10 @@ server {
 EOL
 ```
 
+!!! warning
+
+    The upper provided text is a script, it must be executed as is. You'll not get the same result if you're only copying the configuration part.
+
 The configuration file as is at `/etc/nginx/sites-available/seat` itself won't be loaded by `nginx` yet. Storing configuration files in a `*sites-available*` directory is simply a convention used to allow administrators to quickly add & remove sites if needed. To *apply* the changes made by the new configuration file it needs to be symlinked to a `*sites-enabled*` directory.
 
 Let's symlink to the new configuration and drop the default one as a hardening exercise at the same time:
@@ -473,14 +500,15 @@ Finally, reload `nginx` and `php-fpm` for the new changes to take affect:
 
 ```bash
 systemctl restart nginx.service
-systemctl restart php7.1-fpm.service
+systemctl restart php7.3-fpm.service
 ```
 
 ### Admin Login
 
-Since SeAT 3.0, an admin user is a special user and can no longer link characters or corporations to it. Using the admin user, you will probably and most typically just add your main character to the Superuser group and never login as an admin again.
+The system built-in admin user is a special user which can't be linked to characters.
+Using the admin user, you will probably and most typically set your own account as an admin.
 
-To login as an administrator, simply run the following command :
+To login as the built-in administrator, simply run the following command :
 
 ```bash
 sudo -H -u www-data bash -c 'php /var/www/seat/artisan seat:admin:login'
@@ -504,11 +532,18 @@ Your authentication URL is valid for 60 seconds.
 http://localhost/auth/login/admin/9G3sb8hjMvrbIJrIf10KKtIj1c8e9mL5
 ```
 
-Copy it and paste it inside your browser and you will be authenticated as the admin user.
+Copy it and paste it inside your browser, and you will be authenticated as the admin user.
+
+!!! hint
+
+    You can define an user account as an administrator from the user card.
+    To do so, go into **Settings > Users**, search the user which need to be upgraded and clic on the edit button.
+    On the displaying card, check **Administrator** and confirm change using edit button.
 
 !!! warning
 
-        If you have not configured the `APP_URL` setting in the `.env` file, then the admin url will be generated for `localhost`. This is most likely incorrect and you can simply replace `localhost` with your IP address or domain name.
+    If you have not configured the `APP_URL` setting in the `.env` file, then the admin url will be generated for `localhost`.
+    This is most likely incorrect and you can simply replace `localhost` with your server IP address or domain name.
 
 ## ESI Configuration
 
@@ -516,7 +551,7 @@ As mentioned at the start of the guide, it is necessary for you to configure ESI
 
 !!! success
 
-        You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!
+    You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!
 
 [here]: ../configuration/env_file_reference.md
 [ESI Setup Guide]: ../configuration/esi_configuration.md
