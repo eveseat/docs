@@ -17,20 +17,20 @@ However, there are some minimum *recommended* specifications.
 
 ### Up to 25 users
 
-| Type                    | Requirement                               |
-| ----------------------- | ----------------------------------------- |
-| CPU                     | 2 virtual cores                           |
-| Memory                  | 2GB of RAM with a swap file.              |
-| Core Storage Space      | 1GB (tend to be stable)                   |
-| ESI Cache Storage Space | 2GB (tend to grow with users)             |
-| Database Storage Space  | 5GB (tend to grow with user and history)  |
+| Type                    | Requirement                              |
+| ----------------------- | ---------------------------------------- |
+| CPU                     | 2 virtual cores                          |
+| Memory                  | 2GB of RAM with a swap file              |
+| Core Storage Space      | 1GB (tend to be stable)                  |
+| ESI Cache Storage Space | 2GB (tend to grow with users)            |
+| Database Storage Space  | 5GB (tend to grow with user and history) |
 
 ### Up to 50 users
 
 | Type                    | Requirement                               |
 | ----------------------- | ----------------------------------------- |
 | CPU                     | 4 virtual cores                           |
-| Memory                  | 4GB of RAM.                               |
+| Memory                  | 4GB of RAM                                |
 | Core Storage Space      | 1GB (tend to be stable)                   |
 | ESI Cache Storage Space | 5GB (tend to grow with users)             |
 | Database Storage Space  | 10GB (tend to grow with user and history) |
@@ -40,7 +40,7 @@ However, there are some minimum *recommended* specifications.
 | Type                    | Requirement                               |
 | ----------------------- | ----------------------------------------- |
 | CPU                     | 6 virtual cores                           |
-| Memory                  | 8GB of RAM.                               |
+| Memory                  | 8GB of RAM                                |
 | Core Storage Space      | 1GB (tend to be stable)                   |
 | ESI Cache Storage Space | 10GB (tend to grow with users)            |
 | Database Storage Space  | 20GB (tend to grow with user and history) |
@@ -64,7 +64,7 @@ The more jobs you'll get, the more workers you'll need to process queue in less 
 ### Docker Environment
 
 For Docker based installations, all you need is `docker` and `docker-compose`.
-If you already have it installed, check your current version with `docker version` and `docker-compose version` respectively:
+If you already have it installed, check your current version with `docker version` and `docker-compose version` respectively.
 
 | Type           | Requirement                                              | Version Check            |
 | -------------- | -------------------------------------------------------- | ------------------------ |
@@ -96,4 +96,5 @@ Software version requirements are based on a *minimum* requirement.
 
 !!! tip
 
-    In case you want to deploy SeAT with Apache as web server, plan to configure it with Fast CGI using php-fpm instead bulk embedded php process.
+    In case you want to deploy SeAT with Apache as web server, plan to configure it with Fast CGI using php-fpm instead embedded php process.
+    Doing it so will make you benefit of significant improved performances.
