@@ -8,6 +8,14 @@ As far as hardware goes, there isn't really a hard and fast rule on what is need
 The more resources you make available, the faster API updates will occur.
 However, there are some minimum *recommended* specifications.
 
+!!! info
+
+    Required CPU cores are indicative and may changes depending on your processor.
+    They have been based on a one tier deployment (app, workers and database are hosted on the same server).
+    
+    To improve accuracy regarding CPU requirements, we provide a [Coremark] value.
+    Since Cloud providers like [Azure] and [Google Cloud] are providing their instance benchmark using this test, it should give you a more meaningful idea of what we are talking about.
+
 !!! warning
 
     If you intend to process a large amount of data, plan your storage accordingly.
@@ -19,7 +27,7 @@ However, there are some minimum *recommended* specifications.
 
 | Type                    | Requirement                              |
 | ----------------------- | ---------------------------------------- |
-| CPU                     | 2 virtual cores                          |
+| CPU                     | 2 virtual cores (Coremark 20 000+)       |
 | Memory                  | 2GB of RAM with a swap file              |
 | Core Storage Space      | 1GB (tend to be stable)                  |
 | ESI Cache Storage Space | 2GB (tend to grow with users)            |
@@ -29,7 +37,7 @@ However, there are some minimum *recommended* specifications.
 
 | Type                    | Requirement                               |
 | ----------------------- | ----------------------------------------- |
-| CPU                     | 4 virtual cores                           |
+| CPU                     | 2 virtual cores (Coremark 40 000+)        |
 | Memory                  | 4GB of RAM                                |
 | Core Storage Space      | 1GB (tend to be stable)                   |
 | ESI Cache Storage Space | 5GB (tend to grow with users)             |
@@ -39,7 +47,7 @@ However, there are some minimum *recommended* specifications.
 
 | Type                    | Requirement                               |
 | ----------------------- | ----------------------------------------- |
-| CPU                     | 6 virtual cores                           |
+| CPU                     | 4 virtual cores (Coremark 60 000+)        |
 | Memory                  | 8GB of RAM                                |
 | Core Storage Space      | 1GB (tend to be stable)                   |
 | ESI Cache Storage Space | 10GB (tend to grow with users)            |
@@ -98,3 +106,7 @@ Software version requirements are based on a *minimum* requirement.
 
     In case you want to deploy SeAT with Apache as web server, plan to configure it with Fast CGI using php-fpm instead embedded php process.
     Doing it so will make you benefit of significant improved performances.
+
+[Coremark]: https://www.eembc.org/coremark/
+[Azure]: https://docs.microsoft.com/fr-fr/azure/virtual-machines/linux/compute-benchmark-scores
+[Google Cloud]: https://cloud.google.com/compute/docs/benchmarks-linux
