@@ -82,22 +82,4 @@ To restore a backup to a new dockerized instance of SeAT, run:
 zcat seat_backup.sql.gz | docker-compose exec -T mariadb sh -c 'exec mysql "$MYSQL_DATABASE" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD"'
 ```
 
-## Performing Updates
-
-As expected, updates for SeAT are deployed via Dockerhub and the images within the [eveseat organization]. Every package version release will automatically start the build process to generate a new docker image. This means updates are suuuper simple in the docker world. To update your instance, simply run:
-
-```bash
-# Update to the latest dockerhub images
-docker-compose pull
-
-# Apply the updates to your instllation
-docker-compose up -d
-
-# Cleanup any dangling images
-docker image prune -f
-```
-
-!!! info "Better safe then sorry"
-    **Always** perform a [backup](#database-backups-and-restore) of your database before doing an update. Always.
-
 [configure SSO]: ../configuration/esi_configuration.md

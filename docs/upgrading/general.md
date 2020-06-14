@@ -1,35 +1,33 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
-!!! info "Docker-based Installation Instructions"
-
-    The upgrade procedure for Docker is extremely simple and documented [here]. This guide applies to any other installation type only.
-
 # General Upgrades
 
-As with anything, it is a **very** good idea to have backups ready before attempting any upgrades. In the case of SeAT, the most important component that needs to be backed up is the SeAT database. In short, something as simple as `mysqldump -uroot -p seat > backup.sql` should be perfectly fine. Should something go wrong, then you can simply re-install SeAT, restore the database and you should be good to go.
+As with anything, it is a **very** good idea to have backups ready before attempting any upgrades.
+In the case of SeAT, the most important component needs to be backed up is the SeAT database.
+Should something go wrong, then you can simply re-install SeAT, restore the database, and you should be good to go.
 
-## Upgrade Options
+## Docker installation
 
-There are 2 ways to upgrade SeAT. The recommended way being the `seat` tool and then the manual way when you are not using a docker-based installed. For most cases the `seat` tool should be fine as it tries to auto detect things for you, however, if you edited the defaults or installed on some custom operating system, then you may need to upgrade manually.
-
-## Upgrading using the seat tool
-
-All you need to do is run the upgrade command and all will be done for you. Follow the next steps to get this done:
-
-- If you haven't downloaded the `seat` tool yet, do so now by running:
+As expected, updates for SeAT are deployed via Dockerhub and the images within the [eveseat organization].
+Every package version release will automatically start the build process to generate a new docker image.
+This means updates are super simple in the docker world. To update your instance, simply run:
 
 ```bash
-curl -fsSL https://git.io/seat-tool -o /usr/local/bin/seat && chmod +x /usr/local/bin/seat
+# Update to the latest dockerhub images
+docker-compose pull
+
+# Apply the updates to your instllation
+docker-compose up -d
+
+# Cleanup any dangling images
+docker image prune -f
 ```
 
-- If you already have the `seat` tool downloaded, make sure the tool itself is at its latest version. Do this by running: `seat update:self`.
-- If you have not yet backed up your database, do so now! This is the only part that **can not** be recovered in case something goes wrong!
-- Ensure that the job queue is empty.
-- Upgrade SeAT by running: `seat update:seat`.
+!!! warning "Better safe then sorry"
 
-## Manually upgrading
+    **Always** perform a [database backup] of your database before doing an update. Always.
 
-If you cant or don't want to use the SeAT tool, follow these steps to upgrade SeAT.
+## Blade installation
 
 - Ensure that you are in the path where you installed. By default this should be `/var/www/seat`.
 - Put your application into maintenance mode. This will ensure that no request from the outside will hit your applications logic, and also help you perform an upgrade uninterrupted. Do this with:
@@ -65,7 +63,7 @@ php artisan migrate
 - With the migrations done, run the seeders to update any static data:
 
 ```bash
-php artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder
+php artisan db:seed --class=Seat\\Console\\database\\seeds\\ScheduleSeeder
 ```
 
 - Restart the supervisor workers to ensure they also pickup the latest code:
@@ -80,4 +78,12 @@ supervisorctl restart all
 php artisan up
 ```
 
+!!! warning "Better safe then sorry"
+
+    **Always** perform a database backup of your database before doing an update. Always.
+    
+    You can use `mysqldump -uroot -p seat > backup.sql` (change *root* and *seat* according to your configuration)
+
 [here]: ../admin_guides/docker_admin.md#performing-updates
+[database backup]: ../admin_guides/docker_admin.md#database-backups-and-restore
+[eveseat organization]: https://hub.docker.com/u/eveseat/
