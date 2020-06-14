@@ -84,6 +84,10 @@ If you already have it installed, check your current version with `docker versio
     Do not install Docker directly from your distributions repositories. These are usually out of date.
     Instead, rather follow the steps provided on dockers [official documentation](https://docs.docker.com/install/)
 
+    When considering a VPS provider, make sure you choose one that does not make use of OpenVZ or similar operating-system level virtualization technologies. These virtualization technologies limit you in terms of kernel access as they purely containerize an existing Linux installation.
+
+    For a successful docker installation, choose a provider that uses para-virtualized technologies such as KVM, VMWare or XEN allowing you full control to the instance (and therefor the kernel itself). Examples of such providers are [Digital Ocean](https://www.digitalocean.com/), [Linode](https://www.linode.com/) and [Vultr](https://www.vultr.com/).
+
 ### Blade Environment
 
 !!! info

@@ -7,18 +7,19 @@ As mentioned in numerous other places, docker is ideally the installation route 
 !!! info
 
     If you feel like docker might not be your cup of tea, checkout some of the [getting started](https://docs.docker.com/get-started/) guides that are available.
-
+    
 If you are using Docker on Windows, you will need to use the Manual Deployment option below.
-	
-## Docker Requirements
 
-In terms of performance, the same hardware requirements apply to docker installations as others. For information about the hardware requirements for SeAT, please see [this] page. The only major difference between docker and other installation options is that the containers themselves may take up a few hundred MB's of extra space. In most cases this should be a non-issue.
+!!! hint
 
-!!! warning
+    Before starting to do anything, be sure you read the complete workflow once.
+    It will help you to understand all steps from the installation process.
 
-    When considering a VPS provider, make sure you choose one that does not make use of OpenVZ or similar operating-system level virtualization technologies. These virtualization technologies limit you in terms of kernel access as they purely containerize an existing Linux installation.
+!!! note "Eve Application and ESI"
 
-    For a successful docker installation, choose a provider that uses para-virtualized technologies such as KVM, VMWare or XEN allowing you full control to the instance (and therefor the kernel itself). Examples of such providers are [Digital Ocean](https://www.digitalocean.com/), [Linode](https://www.linode.com/) and [Vultr](https://www.vultr.com/).
+    SeAT consumes CCP's [ESI](https://esi.evetech.net/) service in order to retrieve EVE Online related information.
+    Before you can make any authenticated calls to ESI, you have to register a third party EVE application on the [developers portal](developers.eveonline.com/).
+    This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.
 	
 !!! info
 
