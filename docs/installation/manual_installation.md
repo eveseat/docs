@@ -536,7 +536,7 @@ Copy it and paste it inside your browser, and you will be authenticated as the a
 
 !!! hint
 
-    You can define an user account as an administrator from the user card.
+    You can define a standard user account as an administrator from the user card.
     To do so, go into **Settings > Users**, search the user which need to be upgraded and clic on the edit button.
     On the displaying card, check **Administrator** and confirm change using edit button.
 
@@ -547,7 +547,14 @@ Copy it and paste it inside your browser, and you will be authenticated as the a
 
 ## ESI Configuration
 
-As mentioned at the start of the guide, it is necessary for you to configure ESI. For instructions now how to do this, please refer to the [ESI Setup Guide].
+As mentioned at the start of the guide, it is necessary for you to configure ESI.
+For instructions how to do this, please refer to the [ESI Setup Guide].
+
+!!! info
+
+    You may want to serve your SeAT installation over SSL (using HTTPS) - which is a recommanded behavior.
+    There are many way to do it, you can have a look on Let's Encrypt which provide you valid certificates for free.
+    Put an eye to their [Certbot Documentation].
 
 !!! success
 
@@ -555,3 +562,4 @@ As mentioned at the start of the guide, it is necessary for you to configure ESI
 
 [here]: ../configuration/env_file_reference.md
 [ESI Setup Guide]: ../configuration/esi_configuration.md
+[Certbot Documentation]: https://certbot.eff.org
