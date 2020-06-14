@@ -15,6 +15,12 @@ A small amount of Linux experience is preferred when it comes to this guide, alt
     Before starting to do anything, be sure you read the complete workflow once.
     It will help you to understand all steps from the installation process.
 
+!!! note "Eve Application and ESI"
+
+    SeAT consumes CCP's [ESI](https://esi.evetech.net/) service in order to retrieve EVE Online related information.
+    Before you can make any authenticated calls to ESI, you have to register a third party EVE application on the [developers portal](developers.eveonline.com/).
+    This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.
+
 ## Getting started
 
 We are going to assume you have root access to a fresh Ubuntu Server.
@@ -23,12 +29,6 @@ All of the below commands are to be entered in the SSH terminal session for the 
 If the server you want to install SeAT on is being used for other things too (such as hosting MySQL databases and or websites), then please keep that in mind while following this guide.
 
 Packages are installed using the `aptitude` package manager as the `root` user.
-
-!!! note "Eve Application and ESI"
-
-    SeAT consumes CCP's [ESI](https://esi.evetech.net/) service in order to retrieve EVE Online related information.
-    Before you can make any authenticated calls to ESI, you have to register a third party EVE application on the [developers portal](developers.eveonline.com/).
-    This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.
 
 ## OS Installation
 
@@ -502,48 +502,6 @@ Finally, reload `nginx` and `php-fpm` for the new changes to take affect:
 systemctl restart nginx.service
 systemctl restart php7.3-fpm.service
 ```
-
-### Admin Login
-
-The system built-in admin user is a special user which can't be linked to characters.
-Using the admin user, you will probably and most typically set your own account as an admin.
-
-To login as the built-in administrator, simply run the following command :
-
-```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan seat:admin:login'
-```
-
-You'll get a link after the command has finished running which looks similar to the one bellow:
-
-```txt
-root@ubuntu:/var/www/seat# sudo -H -u www-data bash -c 'php /var/www/seat/artisan seat:admin:login'
-SeAT Admin Login URL Generator
-User 'admin' does not exist. It will be created.
-Searching for the 'Superuser' role
-Creating the Superuser role
-Checking if the Superuser role has the superuser permission
-Adding the superuser permission to the role
-Checking if 'admin' is a super user
-Adding 'admin' to the Superuser role
-Generating authentication token
-
-Your authentication URL is valid for 60 seconds.
-http://localhost/auth/login/admin/9G3sb8hjMvrbIJrIf10KKtIj1c8e9mL5
-```
-
-Copy it and paste it inside your browser, and you will be authenticated as the admin user.
-
-!!! hint
-
-    You can define a standard user account as an administrator from the user card.
-    To do so, go into **Settings > Users**, search the user which need to be upgraded and clic on the edit button.
-    On the displaying card, check **Administrator** and confirm change using edit button.
-
-!!! warning
-
-    If you have not configured the `APP_URL` setting in the `.env` file, then the admin url will be generated for `localhost`.
-    This is most likely incorrect and you can simply replace `localhost` with your server IP address or domain name.
 
 ## ESI Configuration
 

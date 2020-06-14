@@ -173,8 +173,20 @@ These commands will `cd` to the directory containing the stacks `docker-compose.
 
 ### Configuration Changes
 
-All of the relevant configuration lives inside the `.env` file, next to your `docker-compose.yml` file. Modify its values by opening it in a text editor, making the appropriate changes and saving it again. Once that is done, run `docker-compose up -d` again to restart the container environment.
+All of relevant configuration lives inside the `.env` file, next to your `docker-compose.yml` file.
+Modify its values by opening it in a text editor, making the appropriate changes and saving it again.
+Once that is done, run `docker-compose up -d` again to restart the container environment.
 
-If you followed along until now with the docker installation, the next step would be to login as an administrator and to configure SSO. #WIP#
+## ESI Configuration
+
+As mentioned at the start of the guide, it is necessary for you to configure ESI.
+For instructions how to do this, please refer to the [ESI Setup Guide].
+
+!!! success
+
+    You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!
 
 [this]: requirements.md#hardware-requirements
+[ESI Setup Guide]: ../configuration/esi_configuration.md
+[Certbot Documentation]: https://certbot.eff.org
+[Traefik]: https://containo.us/traefik/

@@ -31,6 +31,7 @@ nav:
       - Configuration Overload: configuration/configuration_overload.md
       - SDE Overload: configuration/sde_overload.md
     - Admin Guides:
+      - Admin Login: admin_guides/admin_login.md
       - Docker Admin: admin_guides/docker_admin.md
       - Authorizations: admin_guides/authorizations.md
       - Squads: admin_guides/squads.md

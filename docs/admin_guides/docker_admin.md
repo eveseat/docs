@@ -16,24 +16,6 @@ docker-compose ps
 
 This should give you the name, entry point, current status and internal ports used within the docker network as output.
 
-## Admin Login
-
-Administrative access to SeAT has changed dramatically since version 3. It is no longer possible to login using a traditional username and password combination, but instead only using EVE Online SSO. 
-
-It is possible to gain access to an administrator user via a one time generated login URL. Run the following command to generate an admin login URL:
-
-```bash
-docker-compose exec seat-app php artisan seat:admin:login
-```
-
-This will generate an admin user with the necessary roles as well as produce a URL you can use to login to your SeAT instance as an administrator.
-
-!!! warning
-    If your instance shows the URL as *http://localhost/auth/login/admin/RANDOM__TOKEN* it means that you have not yet configured the URL where your SeAT instance is accessible from in the `.env` file. In this case, just copy the part after the `/auth` (with the token) into your browsers URL bar and submit the request to login.
-
-!!! note
-    Generally, you would probably only do this once and then add your EVE Online character to the Superusers role for future use.
-
 ## Configuration Changes
 
 A dockerized installation of SeAT is primarily configured via a configuration file located at `.env`. Configuration options such as your applications SSO secrets, SeAT's web server ports are amongst the many configuration options available in this file.
@@ -119,4 +101,3 @@ docker image prune -f
     **Always** perform a [backup](#database-backups-and-restore) of your database before doing an update. Always.
 
 [configure SSO]: ../configuration/esi_configuration.md
-[eveseat organization]: https://hub.docker.com/u/eveseat/
