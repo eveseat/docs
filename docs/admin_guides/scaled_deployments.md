@@ -1,5 +1,9 @@
 ![SeAT](https://i.imgur.com/aPPOxSK.png)
 
+!!! danger "DEPRECATED!!!"
+
+    This guide is deprecated and is not functional in SeAT v3. If you need more performance in SeAT v3 then you have two options, move the DB alone to another server, and/or beef up the server SeAT is running on. This guide may be updated in the future when horizontal scaling is viable again. It is left as is for now due to academic and nostalgic reasons.
+
 # Scaled SeAT Deployments
 
 At some stage, you may come to a point where a single install of SeAT might not be enough to process api key updates.
