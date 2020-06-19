@@ -79,6 +79,10 @@ If you already have it installed, check your current version with `docker versio
 | Docker         | [Docker: ^18.0](https://www.docker.com/)                 | `docker -v`              |
 | Docker Compose | [Docker compose: ^1.20](https://docs.docker.com/compose/)| `docker-compose version` |
 
+!!! info
+
+    If you plan to deploy SeAT on a Windows host, you will need [Docker for Windows](https://docs.docker.com/docker-for-windows/)
+
 !!! warning
 
     Do not install Docker directly from your distributions repositories. These are usually out of date.
@@ -93,12 +97,14 @@ If you already have it installed, check your current version with `docker versio
 !!! info
 
     We consider "blade", any environment on which SeAT has been deployed manually (instead using containers).
+    
+    If you plan to deploy SeAT on a Windows host, you will have to use [Docker](#docker-environment)
 
 Software version requirements are based on a *minimum* requirement.
 
 | Type                       | Requirement   | State Check |
 | -------------------------- | ------------- | ----------- |
-| Operating System           | Linux (any distribution is suitable, however, Ubuntu tends to get more up-to-date packages on official repositories). For Windows, you will need [Docker for Windows](https://docs.docker.com/docker-for-windows/). | Usually, running `cat /etc/issue` should give you a good idea. |
+| Operating System           | Linux (any distribution is suitable, however, Ubuntu tends to get more up-to-date packages on official repositories). | Usually, running `cat /etc/issue` should give you a good idea. |
 | Architecture               | 64-bit only                                                                                                         | `uname -p`               |
 | PHP                        | [PHP: ^7.3](http://php.net/) including mysql, gd, bz2, intl, pcntl, gmp, openssl, zip, opcache and redis extensions | `php -v` and `php -i`    |
 | Database                   | [MariaDB: ^10.2.7](https://mariadb.org/) or [MySQL: ^5.7](https://www.mysql.com/)                                   | `mysql -V`               |
