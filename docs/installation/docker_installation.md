@@ -6,24 +6,24 @@ As mentioned in numerous other places, docker is ideally the installation route 
 
 !!! info
 
-    If you feel like docker might not be your cup of tea, checkout some of the [getting started](https://docs.docker.com/get-started/) guides that are available.
-    
-If you are using Docker on Windows, you will need to use the Manual Deployment option below.
+	If you plan to run Docker on Windows, for the best performance it is suggested you run Docker using the Windows Subsystem for Linux 2 (WSL2) backend, available starting in Windows 10/Windows Server 20H1 (build 2004) releases.
 
 !!! hint
 
     Before starting to do anything, be sure you read the complete workflow once.
     It will help you to understand all steps from the installation process.
+    
+    If you feel like docker might not be your cup of tea, checkout some of the [getting started](https://docs.docker.com/get-started/) guides that are available.
+
+!!! warning
+
+    If you are using Docker on Windows, you will need to use the [Manual Deployment](#manual-deployment) option below.
 
 !!! note "Eve Application and ESI"
 
     SeAT consumes CCP's [ESI](https://esi.evetech.net/) service in order to retrieve EVE Online related information.
     Before you can make any authenticated calls to ESI, you have to register a third party EVE application on the [developers portal](developers.eveonline.com/).
     This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.
-	
-!!! info
-
-	If you plan to run Docker on Windows, for the best performance it is suggested you run Docker using the Windows Subsystem for Linux 2 (WSL2) backend, available starting in Windows 10/Windows Server 20H1 (build 2004) releases.
 
 ## Internal Container Setup Overview
 
@@ -79,7 +79,7 @@ If you do not have `docker`, install it now with the following command as `root`
 sh <(curl -fsSL get.docker.com)
 ```
 
-If you are on Windows, download and install Docker Desktop from https://www.docker.com/products/docker-desktop.
+If you are on Windows, download and install [Docker Desktop].
 
 #### Docker-compose Download
 
@@ -103,51 +103,51 @@ On Windows, create the directory `C:\seat-docker` with `mkdir C:\seat-docker` an
 
 Then, download the `docker-compose.yml` file with:
 
-Linux:
-```bash
-curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/docker-compose.yml -o docker-compose.yml
-```
+=== "Linux"
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/docker-compose.yml -o docker-compose.yml
+    ```
 
-Windows:
-```powershell
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/docker-compose.yml -OutFile docker-compose.yml
-```
+=== "Windows"
+    ```powershell
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/docker-compose.yml -OutFile docker-compose.yml
+    ```
 
 Next, download the docker `.env` file with:
 
-Linux:
-```bash
-curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/.env -o .env 
-```
+=== "Linux"
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/.env -o .env 
+    ```
 
-Windows:
-```powershell
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/.env -OutFile .env 
-```
+=== "Windows"
+    ```powershell
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/.env -OutFile .env 
+    ```
 
 Finally, download the mysql configuration file `my.cnf` with:
 
-Linux:
-```bash
-curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/my.cnf -o my.cnf
-```
+=== "Linux"
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/my.cnf -o my.cnf
+    ```
 
-Windows:
-```powershell
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/my.cnf -OutFile my.cnf
-```
+=== "Windows"
+    ```powershell
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/scripts/master/docker-compose/my.cnf -OutFile my.cnf
+    ```
 
 Now, we will generate a unique application key - this is used to encrypt stuff:
 
-Linux:
-```bash
-sed -i -- 's/APP_KEY=insecure/APP_KEY='$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c32 ; echo '')'/g' .env
-```
+=== "Linux"
+    ```bash
+    sed -i -- 's/APP_KEY=insecure/APP_KEY='$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c32 ; echo '')'/g' .env
+    ```
 
-Windows:
-```powershell
-$appkey = (-join ((65..90) + (97..122) | Get-Random -Count 32 | % {[char]$_})); (Get-Content .env -Raw) -replace "APP_KEY=insecure", "APP_KEY=$appkey" | Set-Content .env
-```
+=== "Windows"
+    ```powershell
+    $appkey = (-join ((65..90) + (97..122) | Get-Random -Count 32 | % {[char]$_})); (Get-Content .env -Raw) -replace "APP_KEY=insecure", "APP_KEY=$appkey" | Set-Content .env
+    ```
 
 Then, change `HOST`, `ACME_EMAIL` and `APP_URL` from the `.env` file with valid values (we will take care of SSL, so you can use https).
 
@@ -197,7 +197,7 @@ For instructions how to do this, please refer to the [ESI Setup Guide].
 
     You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!
 
-[this]: requirements.md#hardware-requirements
+[Docker Desktop]: https://www.docker.com/products/docker-desktop
 [ESI Setup Guide]: ../configuration/esi_configuration.md
 [Certbot Documentation]: https://certbot.eff.org
 [Traefik]: https://containo.us/traefik/
