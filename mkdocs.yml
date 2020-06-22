@@ -81,7 +81,7 @@ markdown_extensions:
         permalink: true
 extra:
   social:
-    - type: 'github'
+    - icon: fontawesome/brands/github-alt
       link: 'https://github.com/eveseat/seat'
 # Tabs customisation
 extra_css:
