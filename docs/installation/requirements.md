@@ -37,7 +37,7 @@ However, there are some minimum *recommended* specifications.
 
 | Type                    | Requirement                                     |
 | ----------------------- | ----------------------------------------------- |
-| CPU                     | 2 virtual cores (Coremark 40 000+)              |
+| CPU                     | 2 virtual cores (Coremark 20 000+)              |
 | Memory                  | 4GB of RAM                                      |
 | Core Storage Space      | 1GB (tend to be stable)                         |
 | ESI Cache Storage Space | 5GB (tend to grow with characters)              |
@@ -47,7 +47,7 @@ However, there are some minimum *recommended* specifications.
 
 | Type                    | Requirement                                     |
 | ----------------------- | ----------------------------------------------- |
-| CPU                     | 4 virtual cores (Coremark 60 000+)              |
+| CPU                     | 4 virtual cores (Coremark 40 000+)              |
 | Memory                  | 8GB of RAM                                      |
 | Core Storage Space      | 1GB (tend to be stable)                         |
 | ESI Cache Storage Space | 10GB (tend to grow with characters)             |
