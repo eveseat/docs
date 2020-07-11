@@ -50,7 +50,7 @@ Next, we are going to secure the database server by removing anonymous access an
 
 !!! note
 
-    The database `root` password should not be confused with the operating systems `root` passwords. They are both completely different. They should also share be the same password.
+    The database `root` password should not be confused with the operating systems `root` passwords. They are both completely different. They should also not have the same password.
 
 To secure the database, run:
 
