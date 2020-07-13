@@ -460,6 +460,12 @@ server {
 EOL
 ```
 
+!!! note
+```bash
+If you are hosting a domain, you should uncomment '#server_name  seat.yourdomain.com;' and edit it to your domain like: 
+'server_name  example.com'
+```
+
 The configuration file as is at `/etc/nginx/sites-available/seat` itself won't be loaded by `nginx` yet. Storing configuration files in a `*sites-available*` directory is simply a convention used to allow administrators to quickly add & remove sites if needed. To *apply* the changes made by the new configuration file it needs to be symlinked to a `*sites-enabled*` directory.
 
 Let's symlink to the new configuration and drop the default one as a hardening exercise at the same time:
