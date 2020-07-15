@@ -39,7 +39,7 @@ If you are running this migration after CCP killed the XML API then there is pro
 
 !!! Note
 ```bash
-To prevent your tokens from being invalidated, you must use the same Client ID and Secret Key that you had at the source of the database(.env file).
+To prevent your tokens from being invalidated, you must use the same Client ID and Secret Key that you had at the source of your database backup(.env file).
 ```
 
 ### Installing SeAT 3.0
