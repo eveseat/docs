@@ -37,6 +37,11 @@ If you are running this migration after CCP killed the XML API then there is pro
 - Make a backup of your SeAT database and store it somewhere safe! **Do not skip this step!**
 - In your SeAT directory, make a copy of the `.env` file. This file contains all of your SeAT configuration. These values may be useful in case of failure.
 
+!!! Note
+```bash
+To prevent your tokens from being invalidated, you must use the same Client ID and Secret Key that you had at the source of the database(.env file).
+```
+
 ### Installing SeAT 3.0
 
 Rename the current SeAT directory from `/var/www/seat` to `/var/www/seat2`.
