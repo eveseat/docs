@@ -463,7 +463,7 @@ server {
     # PHP-FPM configuration.
     location ~ \.php\$ {
        try_files \$uri /index.php =404;
-       fastcgi_pass unix:/run/php/php7.1-fpm.sock;
+       fastcgi_pass unix:/run/php/php7.3-fpm.sock;
        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
        include fastcgi_params;
     }
