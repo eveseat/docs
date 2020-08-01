@@ -24,7 +24,7 @@ If for some reason, an user beeing part of a squad was non longer meeting the sq
 ### Manual
 
 Manual squads need end user action, called an application.
-Then flow of manual squad depends on it's been moderated or not.
+Then flow of manual squad depends on it's is being moderated or not.
 
 In case the squad is not moderated, the end user will become a member of that squad as soon as he applied to it.
 Otherwise, his application will need a review.
