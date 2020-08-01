@@ -71,7 +71,7 @@ Displayed sovereignty depends on public in-game collected intel regarding system
 
 ![Moon Details](../img/moons_reporter_details.png)
 
-You are able to access details regarding a moon, simple by clicking on the eye button, located into the action column.
+You are able to access details regarding a moon, simple by clicking on the eye button, located in the action column.
 Moon card will give you some valuable information like contained raw materials, reprocessed materials and reactions candidates.
 
 The Moons Reporter is not only showing you types but also figures like volume, quantity and estimated value.
