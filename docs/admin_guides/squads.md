@@ -79,7 +79,7 @@ They will be able to see a list of every member of each squad they moderate, all
 Squad moderators can also see Squad candidates, the time when they applied and each application form.
 From there, they can approve an application or reject it.
 
-When an application is approved, the user who sent it is automatically becoming a member of the Squad.
+When an application is approved, the user who sent it is becomes a member of the Squad.
 If an application is denied, the application is removed and user can submit a new application.
 
 Only administrator users can add or remove moderators to/from a Squad.
