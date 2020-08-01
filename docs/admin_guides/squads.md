@@ -110,9 +110,9 @@ Every Squad Tile is built following the same pattern :
 ![Squad Tile](../img/squads_tile.png)
 
 Except metadata, other attributes are self-explained. Metadata is a list of counters showing you, from left to right :
-- members amount of that squad (in white)
-- moderators amount in that squad (in orange)
-- applications amount in the squad (in blue)
+- number of members of the squad (in white)
+- number of moderators of the squad (in orange)
+- number of applicants to the squad (in blue)
 
 !!! hint
     Squad Logo is a visual way for your end user to identify quickly a Squad.
