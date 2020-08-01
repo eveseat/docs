@@ -69,6 +69,7 @@ Otherwise, application button will not be available to him.
 
 If the user submit to a moderated squad, he will have to fill an application form.
 This will leave you the ability to build workflow internally and allow moderators to check any incoming members.
+Users can also cancel squad applications at any time using the Cancel button which will replace the Join button.
 
 ## Squads Moderators
 
