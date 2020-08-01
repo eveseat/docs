@@ -154,7 +154,7 @@ Squad applications can be managed from this area.
 When you create a new Squad, you have to fill a small form which will define it. Mandatory elements are :
 
 - The name of created squad which have to be unique
-- Squad Type (between Auto, Hidden and Manual - see [Squads Types](#squads-types]))
+- Squad Type (between Auto, Hidden and Manual - see [Squads Types](#squads-types))
 - A description, which will be displayed on both Squad Card and Squad Tile
 
 You also can upload a shiny logo which will be used instead the generated icon and provide filters for squad eligibility.
