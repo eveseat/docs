@@ -74,7 +74,7 @@ Users can also cancel squad applications at any time using the Cancel button whi
 ## Squads Moderators
 
 Moderators of a Squad don't need to be part of that squad.
-They will be able to show every member of squad they moderate, allowing them to invite further members or kick existing ones.
+They will be able to see a list of every member of each squad they moderate, allowing them to invite further members or kick existing ones.
 
 Squad moderator can also see Squad candidates, the time when they applied and each application form.
 From there, they can approve an application or refuse it.
