@@ -94,7 +94,7 @@ The Squads list is available to all users, without any restriction. You can acce
 ![Sidebar](../img/squads_sidebar.png)
 
 The list is split in three main areas.
-First area, at top, contains controls which will allow you to make filters and/or create squad.
+First area, at top, contains controls which will allow you to create a squad, or filter the shown squads.
 The main area, contains squads tiles from the active page. You can get up to six squads per page.
 Footer area is the pagination controls - allowing you to switch displayed page (first, previous, current, next and last).
 
