@@ -86,7 +86,7 @@ You will be able to add or remove any user to or from the role using action butt
 To remove an user from the role to which is part, simply click on the "Remove" button located on the member line.
 
 To add one or multiple user to the role, use the green "Add" button located at bottom right corner. This will show you a dialog box. Use the drop-down control to find users which you want to add.
-Once all users to be add have been choose, click on the "Close" button located at bottom right corner from that modal. Selected users will be shown with a warning background.
+Once all users to be add have been chosen, click on the "Close" button located at bottom right corner from that modal. Selected users will be shown with a warning background to highlight their addition to the role.
 This mean selection isn't saved yet - you have to apply change using the green "Submit" button located under the General pane.
 
 [Role-based Access Control]: https://en.wikipedia.org/wiki/Role-based_access_control
