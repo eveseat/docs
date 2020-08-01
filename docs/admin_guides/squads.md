@@ -11,7 +11,7 @@ Squads is the core implementation of the deprecated seat-groups plugin.
 
 ## Squads Types
 
-There are multiple kinds of squad. The way they work and automations they applied is depending on it.
+There are multiple kinds of squad. The way they work and the automations they apply depend on their type.
 
 ### Automatic
 
