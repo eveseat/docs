@@ -43,7 +43,7 @@ This mean, only admin user can invite another user to an hidden squad.
 Filters have different behaviors depending on the Squad Type on which they have been set.
 In case the Squad is of auto type, filters will be applied continuously to invite and kick members from the Squad - based on user changes.
 
-Otherwise, filters are automatically applied to kick member from a Squad and drive the "Apply" button on Squad Card.
+Otherwise, filters are used to automatically kick members from a Squad and determine the availability of the "Apply" button on Squad Card.
 
 Squads Filters have been designed to assist you to build rules which will determine whether an user can be part of a Squad.
 You pair different conditions together and link them with match keywords.
