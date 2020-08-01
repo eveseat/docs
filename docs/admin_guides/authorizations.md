@@ -80,7 +80,7 @@ Each permission block is structured as follow:
 
 ![Role Members](../img/authorization_members.png)
 
-The role members tab is a table listing all users who are currently inside the role. All of them benefits of permissions which have been defined in the permissions tab from that same role.
+The role members tab is a table listing all users who are currently assigned the role. All of them receive the benefits of the permissions which have been defined in the permissions tab from that same role.
 You will be able to add or remove any user to or from the role using action buttons.
 
 To remove an user from the role to which is part, simply click on the "Remove" button located on the member line.
