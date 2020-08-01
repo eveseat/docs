@@ -14,7 +14,7 @@ Of course, like other modules, you are able to restrict its usage using ACL by c
 
 ![Importing a report](../img/moons_reporter_import.png)
 
-Seeding an intelligence database is usually a really long task. The Moons Reporter is simplifying the process as most as possible by asking your raw moon report collected by the in-game moon probing interface.
+Seeding an intelligence database is usually a really long task. The Moons Reporter simplifies the process as much as possible by accepting your raw moon report collected by the in-game moon probing interface.
 
 Here is the process which need to be follow in order to be able to import a new moon report :
 
