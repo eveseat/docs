@@ -6,7 +6,7 @@ Since SeAT 4.0, a new tool is appear to assist you in your moon management task 
 Like your old google/excel sheet, it will gather all your intel related to moon probing.
 It provides a centralized and convenient way to store reports and make search in them.
 
-Of course, like other modules, you are able to restrict its usage using ACL by choosing who can view it and/or importing reports.
+Of course, like other modules, you are able to restrict its usage using ACL by choosing who can view it and/or import reports.
 
 ![Moons Reporter](../img/moons_reporter.png)
 
