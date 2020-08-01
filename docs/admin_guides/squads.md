@@ -157,7 +157,7 @@ When you create a new Squad, you have to fill a small form which will define it.
 - Squad Type (between Auto, Hidden and Manual - see [Squads Types](#squads-types]))
 - A description, which will be displayed on both Squad Card and Squad Tile
 
-You also can upload a shiny logo which will be used instead the generated icon and provide filters.
+You also can upload a shiny logo which will be used instead the generated icon and provide filters for squad eligibility.
 
 ![Squad Creation](../img/squads_create.png)
 
