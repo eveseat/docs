@@ -77,7 +77,7 @@ Moderators of a Squad don't need to be part of that squad.
 They will be able to see a list of every member of each squad they moderate, allowing them to invite further members or kick existing ones.
 
 Squad moderators can also see Squad candidates, the time when they applied and each application form.
-From there, they can approve an application or refuse it.
+From there, they can approve an application or reject it.
 
 When an application is approved, the user who sent it is automatically becoming a member of the Squad.
 If an application is denied, the application is removed and user can submit a new application.
