@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Since SeAT 4.0, there is a way to apply automatic logic between an end user and its authorization.
+Since SeAT 4.0, there is a way to apply automatic logic between an end user and its roles.
 The purpose is to keep distinct the security and automatisms.
 
 Squads is the core implementation of the deprecated seat-groups plugin.
