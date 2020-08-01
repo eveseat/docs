@@ -82,7 +82,7 @@ From there, they can approve an application or reject it.
 When an application is approved, the user who sent it is automatically becoming a member of the Squad.
 If an application is denied, the application is removed and user can submit a new application.
 
-Only admin user can add or remove moderators to/from a Squad.
+Only administrator users can add or remove moderators to/from a Squad.
 
 ## Interface
 
