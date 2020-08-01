@@ -72,7 +72,7 @@ Use the scope navigation to show permissions related to each scope.
 Each permission block is structured as follow:
 - a checkbox: if you check it, you mark the permission to be granted by the role
 - an optional icon: it is visual only and help to pair some permission inside a same scope. It might be useful for large scope like character or corporation to distinguish permission kind. Options include `military`, `financial` and `industrial`.
-- an user friendly name
+- a user friendly name
 - an optional description: this is mostly a text explaining the permission purpose
 - an optional limits button: it will help you to filter/restrict the permission to only a certain population. Only character and corporation scope permissions can be filtered.
 
