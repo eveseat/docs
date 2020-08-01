@@ -24,6 +24,10 @@ have been made in SeAT 4.0.
     
     Last but not least, we assume you are authenticated against your server as root user.
     
+!!! warning 
+        
+    This guide is for those who have a blade install and does not apply to docker installations!
+            
 ## Requirements
 
 - Check [SeAT 4.0 requirements]
