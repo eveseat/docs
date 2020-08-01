@@ -120,7 +120,7 @@ Except metadata, other attributes are self-explained. Metadata is a list of coun
 
 ### Squads Card
 
-When you click on a Squad Tile, you'll land on the related Squad Card. Squad Card is the leaving area of a Squad.
+When you click on a Squad Tile, you'll land on the related Squad Card. Squad Card is the landing area of a Squad.
 You will retrieve summarised information you had on the tile in the general pane.
 
 In case the Squad is manual, you will get access to the list of Squad moderators.
