@@ -162,7 +162,7 @@ You also can upload a shiny logo which will be used instead the generated icon a
 ![Squad Creation](../img/squads_create.png)
 
 !!! caution
-    As soon as you're saving your Squad, filters are applied.
+    As soon as you save your Squad, filters are applied.
     In case the Squad is of auto type, eligible members will be added to it.
     For any other Squad Types, non-eligible members will be kicked from the Squad
 
