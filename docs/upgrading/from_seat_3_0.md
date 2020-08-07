@@ -15,7 +15,7 @@ have been made in SeAT 4.0.
 
     Before starting to do anything, be sure you read and understand this whole page content.
 
-    Also, remember to do at least a complete backup of your current database that you pick out of server on which SeAT
+    Also, remember to do at least a complete backup of your current database that you copy out of server on which SeAT
     is currently running, together with the `.env` file. Both of them are the only things required to rebuilt your instance
     in case of failure.
     
