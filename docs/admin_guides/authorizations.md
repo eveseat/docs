@@ -76,6 +76,9 @@ Each permission block is structured as follow:
 - an optional description: this is mostly a text explaining the permission purpose
 - an optional limits button: it will help you to filter/restrict the permission to only a certain population. Only character and corporation scope permissions can be filtered.
 
+!!! warning
+
+    In SeAT 3, leaving the affiliations of a role empty, meant that the role would apply to no relevant entities. It had no effect. This has changed in SeAT 4. If you give a role a permission with no filter, this permission will apply globally to all entities. For example giving the Corporation Sheet permission to a role with no filter means that the members of the role will be able to see the corporation sheets of every corporation on the server.
 #### Role members
 
 ![Role Members](../img/authorization_members.png)
