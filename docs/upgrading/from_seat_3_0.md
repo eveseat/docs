@@ -156,6 +156,7 @@ We will convert database to work with new SeAT version. To do so, we're using co
 sudo -H -u www-data bash -c 'php /var/www/seat/artisan vendor:publish --force --all'
 sudo -H -u www-data bash -c 'php /var/www/seat/artisan migrate'
 sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Console\\database\\seeds\\ScheduleSeeder'
+sudo -H -u www-data bash -c 'php /var/www/seat/artisan eve:update:sde --force'
 ```
 
 ### Complete
