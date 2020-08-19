@@ -12,9 +12,9 @@ Be sure to also have a look at the [Development Tips] page!
 
 I think its important to keep in mind a few things about how SeAT is put together. The most important being a brief description of what each core package offers, and how you can integrate with them. For a breakdown on what the core packages provide, please refer the to [breakdown].
 
-SeAT 3 is written on [Laravel 5.5](http://laravel.com/docs/5.5). A **very** good thing to do would be to actually read the documentation top->bottom and get an idea of what is possible with the framework. SeAT core packages make heavy use of many of the features, based directly of what has been interpreted by this very documentation.
+SeAT 4 is written on [Laravel 6](http://laravel.com/docs/6.x). A **very** good thing to do would be to actually read the documentation top->bottom and get an idea of what is possible with the framework. SeAT core packages make heavy use of many of the features, based directly of what has been interpreted by this very documentation.
 
-If you really want to start contributing packages, but juts cant get your head around this whole Laravel thing, then I can suggest you have a look at this excellent free course material covering the basics of what you will encounter in the SeAT codebase. [https://laracasts.com/series/laravel-5-fundamentals](https://laracasts.com/series/laravel-5-fundamentals)
+If you really want to start contributing packages, but just cant get your head around this whole Laravel thing, then I can suggest you have a look at this excellent free course material covering the basics of what you will encounter in the SeAT codebase. [https://laracasts.com/series/laravel-6-from-scratch](https://laracasts.com/series/laravel-6-from-scratch)
 
 ## Getting started
 
@@ -90,12 +90,12 @@ As a final test, I check that my route is accessible from a booted SeAT app. :)
 
 #### Access Control
 
-Obviously, some routes are not for everyone's eyes. SeAT comes with middleware that can be used to filter out requests that may not be authorized for your route. As can be seen in the example below (from [here](https://github.com/eveseat/api/blob/e8c713740fc571683130379acff0f39736b937ad/src/Http/routes.php#L32)), we are filtering out requests to `api-admin` for only superusers.
+Obviously, some routes are not for everyone's eyes. SeAT comes with middleware that can be used to filter out requests that may not be authorized for your route. As can be seen in the example below (from [here](https://github.com/eveseat/api/blob/85590fbf0b18b7078d977cade50fdfc3d22709d7/src/Http/routes.php#L34)), we are filtering out requests to `api-admin` for only superusers.
 
 ```php
 Route::group([
         'namespace'  => 'Admin',
-        'middleware' => 'bouncer:superuser', // The ACL specification.
+        'middleware' => ['auth', 'can:global.superuser'], // The ACL specification.
         'prefix'     => 'api-admin'
     ], function () {
         Route::get('/', [
@@ -141,14 +141,14 @@ Integrating with the sidebar is also really easy. All you have to do is create a
 ```php
 return [
     'api' => [
-        'permission'    => 'Superuser',
+        'permission'    => 'global.superuser',
         'name'          => 'Api Tokens',
-        'icon'          => 'fa-exchange',
+        'icon'          => 'fas fa-exchange',
         'route_segment' => 'api-admin',
         'entries'       => [
             [   // Manage API Tokens
                 'name'  => 'Manage',
-                'icon'  => 'fa-key',
+                'icon'  => 'fas fa-key',
                 'route' => 'api-admin.list'
             ]
         ]
@@ -203,9 +203,45 @@ $this->mergeConfigFrom(__DIR__ . '/Config/package.sidebar.php', 'package.sidebar
 
 The first argument is the file with the sidebar definitions, the second is the namespace.
 
+## Permissions
+
+You are able to register and use your own permissions for use within SeAT. This is relatively simple and done by creating a config file in the location `Config/Permissions/package.permissions.php`. It should return an array of the following format:
+
+```php
+[
+    'sheet' => [
+        'label'       => 'Grant access to Character Sheet',
+        'description' => 'The Character Sheet contains basic information....',
+        'division'    => 'financial',
+    ],
+    'intel' => [
+        'label'       => 'web::permissions.character_intel_label',
+        'description' => 'web::permissions.character_intel_description',
+        'division'    => 'military',
+    ],
+        'planetary' => [
+        'label'       => 'web::permissions.character_planetary_label',
+        'description' => 'web::permissions.character_planetary_description',
+        'division'    => 'industrial',
+    ],
+];
+```
+
+This config file is then loaded from your app service provider as below:
+
+```php
+ $this->registerPermissions(__DIR__ . '/Config/Permissions/package.permissions.php', 'package');
+```
+
 ## Database
 
-For our API package, we have a database requirement. We need to store api tokens and the ip address that is allowed to use them. We are also going to store an access log (based on the config setting). We create migrations and models just like you would for a base Laravel 5.1 application. The only thing to remember is that your migrations for your package must be published (and specified in your service provider).
+For our API package, we have a database requirement. We need to store api tokens and the ip address that is allowed to use them. We are also going to store an access log (based on the config setting). We create migrations and models just like you would for a base Laravel 6 application. The only thing to remember is that your migrations for your package must be published (and specified in your service provider).
+
+Registering these migrations looks like the following:
+
+```php
+$this->loadMigrationsFrom(__DIR__ . '/database/migrations/');
+```
 
 [Development Tips]: development_tips.md
 [breakdowns]: core_package_breakdown.md
