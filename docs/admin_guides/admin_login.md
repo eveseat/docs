@@ -15,7 +15,7 @@ In order to authenticate with built-in admin user, use command disclosed bellow 
     docker-compose exec seat-app php artisan seat:admin:login
     ```
 
-=== "Blade"
+=== "Bare metal"
     ```bash
     sudo -H -u www-data bash -c 'php /var/www/seat/artisan seat:admin:login'
     ```

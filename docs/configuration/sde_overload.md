@@ -3,6 +3,7 @@
 SeAT sources information about the SDE from a json file hosted [here]. It may happen that the SDE gets updated but the the json resource has not yet been updated. For this reason, its possible to specify the version to get based on what is available on [www.fuzzwork.co.uk].
 
 ### Overriding the resources json
+
 Check the version of SDE dumps available on [www.fuzzwork.co.uk]. At the time of this writing, `frostline-1.0-116241` was the latest. Once you have the version string ready, open the `.env` configuration file and add a key as follows:
 
 ```php
@@ -12,7 +13,7 @@ SDE_VERSION=frostline-1.0-116241
 When running the SDE updater, specify the `--local` parameter to source the version string from the configuration file:
 
 ```bash
-$ php artisan eve:update:sde --local
+php artisan eve:update:sde --local
 ```
 
 !!! info

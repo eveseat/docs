@@ -3,10 +3,12 @@
 # Email Setup - Using GMail
 
 ## Introduction
+
 SeAT requires email to be setup to allow for things like notifications to be sent.
 This guide will attempt to describe how to go about setting up your email using [GMail] as an SMTP.
 
 ## The config
+
 As with anything Laravel, the config for your email setup will live in your installs `.env` file. To use GMail as an SMTP service, set the `MAIL_DRIVER` option in your `.env` configuration file to `smtp`. Next, specify the SMTP details:
 
 ```php

@@ -3,6 +3,7 @@
 # Role-Based Access Control
 
 ## Introduction
+
 SeAT supports configuring user access control by means of [Role-based Access Control] (RBAC).
 This allows for SeAT administrators to granularly control who has access to what based on which roles a SeAT user has.
 
@@ -13,6 +14,7 @@ In SeAT, the default rule is to deny access. As a result, someone without a perm
     The more granular are your roles, the easier they will be to maintain them and built your automation rules.
 
 ## Definitions
+
 This section aims to clear up the definitions used in the SeAT RBAC implementation.
 
 * **User**  
@@ -70,15 +72,17 @@ The role permissions tab is built using a navigation bar, which is showing all a
 Use the scope navigation to show permissions related to each scope.
 
 Each permission block is structured as follow:
-- a checkbox: if you check it, you mark the permission to be granted by the role
-- an optional icon: it is visual only and help to pair some permission inside a same scope. It might be useful for large scope like character or corporation to distinguish permission kind. Options include `military`, `financial` and `industrial`.
-- a user friendly name
-- an optional description: this is mostly a text explaining the permission purpose
-- an optional limits button: it will help you to filter/restrict the permission to only a certain population. Only character and corporation scope permissions can be filtered.
+
+* a checkbox: if you check it, you mark the permission to be granted by the role
+* an optional icon: it is visual only and help to pair some permission inside a same scope. It might be useful for large scope like character or corporation to distinguish permission kind. Options include `military`, `financial` and `industrial`.
+* a user friendly name
+* an optional description: this is mostly a text explaining the permission purpose
+* an optional limits button: it will help you to filter/restrict the permission to only a certain population. Only character and corporation scope permissions can be filtered.
 
 !!! warning
 
     In SeAT 3, leaving the affiliations of a role empty, meant that the role would apply to no relevant entities. It had no effect. This has changed in SeAT 4. If you give a role a permission with no filter, this permission will apply globally to all entities. For example giving the Corporation Sheet permission to a role with no filter means that the members of the role will be able to see the corporation sheets of every corporation on the server.
+
 #### Role members
 
 ![Role Members](../img/authorization_members.png)

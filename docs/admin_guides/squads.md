@@ -101,6 +101,7 @@ Footer area is the pagination controls - allowing you to switch displayed page (
 ![Squad List](../img/squads_list.png)
 
 Every Squad Tile is built following the same pattern :
+
 1) Logo
 2) Name and description
 3) User status related to that squad
@@ -109,10 +110,11 @@ Every Squad Tile is built following the same pattern :
 
 ![Squad Tile](../img/squads_tile.png)
 
-Except metadata, other attributes are self-explained. Metadata is a list of counters showing you, from left to right :
-- number of members of the squad (in white)
-- number of moderators of the squad (in orange)
-- number of applicants to the squad (in blue)
+Except metadata, other attributes are self-explained. Metadata is a list of counters showing you, from left to right:
+
+* number of members of the squad (in white)
+* number of moderators of the squad (in orange)
+* number of applicants to the squad (in blue)
 
 !!! hint
     Squad Logo is a visual way for your end user to identify quickly a Squad.
@@ -153,9 +155,9 @@ Squad applications can be managed from this area.
 
 When you create a new Squad, you have to fill a small form which will define it. Mandatory elements are :
 
-- The name of created squad which have to be unique
-- Squad Type (between Auto, Hidden and Manual - see [Squads Types](#squads-types))
-- A description, which will be displayed on both Squad Card and Squad Tile
+* The name of created squad which have to be unique
+* Squad Type (between Auto, Hidden and Manual - see [Squads Types](#squads-types))
+* A description, which will be displayed on both Squad Card and Squad Tile
 
 You also can upload a shiny logo which will be used instead the generated icon and provide filters for squad eligibility.
 

@@ -24,7 +24,6 @@ docker image prune -f
 ```
 
 !!! warning "Better safe then sorry"
-
     **Always** perform a [database backup] of your database before doing an update. Always.
 
 ## Blade installation
@@ -79,9 +78,8 @@ php artisan up
 ```
 
 !!! warning "Better safe then sorry"
-
     **Always** perform a database backup of your database before doing an update. Always.
-    
+
     You can use `mysqldump -uroot -p seat > backup.sql` (change *root* and *seat* according to your configuration)
 
 [here]: ../admin_guides/docker_admin.md#performing-updates

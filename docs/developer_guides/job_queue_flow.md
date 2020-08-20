@@ -5,8 +5,7 @@
 When a job is queued, it's instance is serialized and push into the Redis database.
 Horizon, our jobs orchestrator is taking care of every new jobs falling in redis and push it to an available worker from the targeted queue.
 
-With SeAT 4, queues have been renamed and are scoped.
-This help to identify load per "topic" and ensure a better parallel processing of jobs.
+With SeAT 4, queues have been renamed and are scoped. This helps to identify load per "topic" and ensure better parallel processing of jobs.
 
 As shown bellow, queues `characters`, `corporations` and `public` are dedicated to ESI jobs.
 

@@ -7,8 +7,9 @@ By default, SeAT uses [Bootstrap 3](https://getbootstrap.com/docs/3.4/) and the 
 You may want to customise SeAT design to match either your corporation or alliance colours.
 
 To do so, you can use two available css hooks :
- - `custom-layout-mini.css` used by the sign-in page
- - `custom-layout.css` used bu all the entier application, globally
+
+* `custom-layout-mini.css` used by the sign-in page
+* `custom-layout.css` used bu all the entier application, globally
 
 Both of them must be located into your `public` directory.
 

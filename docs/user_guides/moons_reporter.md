@@ -18,10 +18,10 @@ Seeding an intelligence database is usually a really long task. The Moons Report
 
 Here is the process which need to be follow in order to be able to import a new moon report :
 
-  - fire your probe in-game and wait for the report to land
-  - use the "Copy to Clipboard" button from your "Moon Probe and Analysis" window 
-  - go on the Moons Report and hit the "Import" button located on top right (1)
-  - paste copied content in the opening modal and hit "Post report"
+* fire your probe in-game and wait for the report to land
+* use the "Copy to Clipboard" button from your "Moon Probe and Analysis" window 
+* go on the Moons Report and hit the "Import" button located on top right (1)
+* paste copied content in the opening modal and hit "Post report"
 
 That's all, SeAT will take care of your report and apply change accordingly.
 
@@ -41,11 +41,11 @@ That's all, SeAT will take care of your report and apply change accordingly.
 
 The Moons Reporter is shipped with an advanced search panel (2) which allow you to search moons by different criteria :
 
-  - region
-  - constellation
-  - system
-  - rank
-  - produces
+* region
+* constellation
+* system
+* rank
+* produces
 
 Region, Constellation and System filters will be driven together depending on what you're doing - making your search easier.
 
@@ -83,19 +83,19 @@ The base reprocessing yield is 80% - however, you are able to determine which yi
 Some stats are provide in Moons Reporter footer (4). They are showing you the number of raw materials, per rank, from all your scanned moons.
 Those stats are list in the same order as the indicator column :
 
-  - Gaz or Ubiquitous asteroids
-  - R8 or Common asteroids
-  - R16 or Uncommon asteroids
-  - R32 or Rare asteroids
-  - R64 or Exceptional asteroids
-  - Ore (standard asteroids - like Scordite, Spodumain, etc...)
+* Gaz or Ubiquitous asteroids
+* R8 or Common asteroids
+* R16 or Uncommon asteroids
+* R32 or Rare asteroids
+* R64 or Exceptional asteroids
+* Ore (standard asteroids - like Scordite, Spodumain, etc...)
 
 ## Migrating
 
 Moons Reporter can only accept reports using Eve Online raw format. As a result, you will probably not be able to import data from an existing sheet without process.
 Luckily, the used format is quite simple to recover from collected data. You will find bellow a sample :
 
-```
+```text
 Moon	Moon Product	Quantity	Ore TypeID	SolarSystemID	PlanetID	MoonID
 
 OP9L-F II - Moon 1
@@ -108,21 +108,22 @@ OP9L-F II - Moon 1
 Keep the two first lines as it, it's the report header.
 You will then have same format for every moon you need to put inside the report :
 
-  - The full qualified moon name
-  - One line per moon compound - indented by a tabulation
+* The full qualified moon name
+* One line per moon compound - indented by a tabulation
 
 Moon compound line are built using :
 
-  - Type name
-  - Rate (number between 0 and 1, using `.` a decimal separator - without thousands separator)
-  - Type identifier (number without either decimal or thousands separator)
-  - Solar system identifier (number without either decimal or thousands separator)
-  - Planet identifier (number without either decimal or thousands separator)
-  - Moon identifier (number without either decimal or thousands separator)
+* Type name
+* Rate (number between 0 and 1, using `.` a decimal separator - without thousands separator)
+* Type identifier (number without either decimal or thousands separator)
+* Solar system identifier (number without either decimal or thousands separator)
+* Planet identifier (number without either decimal or thousands separator)
+* Moon identifier (number without either decimal or thousands separator)
 
 If you need either the type name or the type identifier, you can use the amazing work from Fuzzy Steve :
-- [Types information](https://www.fuzzwork.co.uk/dump/latest/invTypes.csv.bz2)
-- [Celestial information](https://www.fuzzwork.co.uk/dump/latest/mapDenormalize.csv.bz2)
+
+* [Types information](https://www.fuzzwork.co.uk/dump/latest/invTypes.csv.bz2)
+* [Celestial information](https://www.fuzzwork.co.uk/dump/latest/mapDenormalize.csv.bz2)
 
 !!! caution
     Take care of separators. Report is using tabulations between column and not simple spaces.

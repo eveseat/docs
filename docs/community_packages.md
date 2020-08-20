@@ -5,6 +5,7 @@
 Below is a list of packages contributed by the community. These packages normally follow the same installation procedure, however, its best you consult the documentation of the package itself in case there is anything special you need to get it working.
 
 ## Generic package installation
+
 Packages will normally come in the form of a composer package that you need to include in your SeAT install, as well as a Service Provider that you need to bootstrap. So, generically speaking, installing a package will mean that you:
 
 - Ensure that you are in the *path* where you installed. By default this should be 
@@ -39,6 +40,7 @@ php artisan migrate
 ```bash
 php artisan seat:cache:clear
 ```
+
 - Bring your application *live* and back out of maintenance mode:
 
 ```bash
@@ -84,7 +86,6 @@ Installing packages like this will ensure that none of the core SeAT packages ar
 | [warlof/eveseat-mining-ledger](https://github.com/warlof/eveseat-mining-ledger) | [![Latest Stable Version](https://poser.pugx.org/warlof/eveseat-mining-ledger/v/stable?format=flat-square)](https://github.com/warlof/eveseat-mining-ledger) | ESI capability that provides a mining ledger to SeAT 2.x |
 
 !!! danger
-
     Packages in this section are provided as history and idea database. They will not work on the stable version since they are non longer maintained by their author or have been integrated in core.
 
 ### Other SeAT related packages

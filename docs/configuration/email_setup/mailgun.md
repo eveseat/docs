@@ -3,12 +3,14 @@
 # Email Setup - Using Mailgun
 
 ## Introduction
+
 SeAT requires email to be setup to allow for things like notifications to be sent.
 This guide will attempt to describe how to go about setting up your email using the [Mailgun] service.
 Though Mailgun is a commercial service, you get to send 10k emails for free per month.
 It also provides epic stats for you to track emails with etc.
 
 ## The config
+
 As with anything Laravel, the config for mailgun will live in your installs `.env` file.
 To use the Mailgun driver, first  set the `MAIL_DRIVER` option in your `.env` configuration file to `mailgun`.
 Next, we will add two options to specify details about our mailgun account.
