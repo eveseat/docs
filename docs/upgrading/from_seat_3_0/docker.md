@@ -28,7 +28,7 @@ The upgrade path from SeAT 3.0 to SeAT 4.0 requires some manual work. This is pr
 
 If you are currently using a docker installation for SeAT 3, you are in for a treat because upgrading is super easy. All we are going to do is bring the v4 stack up, connect your database and watch as the Docker entrypoint takes care of the rest.
 
-This guide is going to sterp through some quick preparation steps, then perform the upgrade and finally, check that everything worked out as expected. Let's dive in.
+This guide is going to step through some quick preparation steps, then perform the upgrade and finally, check that everything worked out as expected. Let's dive in.
 
 ### tl;dr upgrades
 
