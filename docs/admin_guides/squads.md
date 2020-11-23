@@ -55,6 +55,11 @@ Match keywords can be either `All` or `Any`.
 To add a condition, use `Add Rule` button located at the end of the modal.
 In case you have to build a complex rule, use `Add Group` which will allow you to pair multiple condition in a single one.
 
+!!! info
+    Filters are ship with multiple operators. All operators are not working with all filters.
+    `Is` and `Is not` are used to indicate either equality with criteria or inequality. Those operators are the most common and work with near all filter type.
+    `Contains` is used to indicate that criteria must be included in a domain. This operator is currently only working with `Scopes` filter.
+
 ![Squads Filters](../img/squads_filters.png)
 
 !!! example
