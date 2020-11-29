@@ -301,6 +301,15 @@ Then, bring it back up with the `-d` flag.
 docker-compose up -d
 ```
 
+### Convert User Tokens
+
+SeAT 4.x is using the new CCP Token format (v2). In order to use registered tokens from your previous installation,
+you'll have to run the following command:
+
+```bash
+docker-compose exec seat-web php artisan seat:token:upgrade
+```
+
 ### Update EVE SDE
 
 This is the final step, for real. You need to update the EVE SDE. With your stack up and running (after executing `docker-compose up -d`), you can now force an SDE update with:
