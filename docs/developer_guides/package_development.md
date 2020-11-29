@@ -241,6 +241,7 @@ The definition key (`sheet`, `intel`, `planetary` in the upper sample) will be u
 !!! info
 
     By default, if no gate are provided, those shipped in core will be used according to this pattern :
+    
      - character scope: CharacterPolicy, this will require an instance of CharacterInfo to be used in your checks
      - corporation scope: CorporationPolicy, this will require an instance of CorporationInfo to be used in your checks
      - anything else: GlobalPolicy
