@@ -245,7 +245,7 @@ The definition key (`sheet`, `intel`, `planetary` in the upper sample) will be u
      - corporation scope: CorporationPolicy, this will require an instance of CorporationInfo to be used in your checks
      - anything else: GlobalPolicy
      
-    You'll find policy sample at this location https://github.com/eveseat/web/tree/master/src/Acl/Policies.
+    You'll find policy sample at [this location](https://github.com/eveseat/web/tree/master/src/Acl/Policies).
     
     In SeAT 4, a permission is made of a scope and an ability. The ability is defined by the permissions configuration file and the scope is defined on registration.
 
@@ -253,14 +253,14 @@ The definition key (`sheet`, `intel`, `planetary` in the upper sample) will be u
 
     If you're upgrading a SeAT 3.x plugin, the cheat sheet bellow will probably helps you.
     
-    | SeAT 3.x                                     | SeAT 4.x                         | Purpose                                                                 |
-    | -------------------------------------------- | -------------------------------- | ----------------------------------------------------------------------- |
-    | `auth()->user()`                             | `auth()->user()`                 | Retrieve the currently authenticated user.                              |
-    | `auth()->user()->group->main_character       | `auth()->user()->main_character` | Retrieve the main character from the currently authenticated user.      |
-    | `auth()->user()->group->main_character->name | `auth()->user()->name`           | Retrieve the main character name from the currently authenticated user. |
-    | `auth()->user()->group->characters           | `auth()->user()->characters`     | Retrieve all characters from the currently authenticated user.          |
-    | `auth()->user()->refresh_token               | `CharacterInfo()->refresh_token  | Retrieve the refresh token attached to a character.                     |
-    | `auth()->user()->group->refresh_tokens       | `auth()->user()->refresh_tokens  | Retrieve all refresh tokens attached to authenticated user.             |
+    | SeAT 3.x                                      | SeAT 4.x                          | Purpose                                                                 |
+    | --------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------- |
+    | `auth()->user()`                              | `auth()->user()`                  | Retrieve the currently authenticated user.                              |
+    | `auth()->user()->group->main_character`       | `auth()->user()->main_character`  | Retrieve the main character from the currently authenticated user.      |
+    | `auth()->user()->group->main_character->name` | `auth()->user()->name`            | Retrieve the main character name from the currently authenticated user. |
+    | `auth()->user()->group->characters`           | `auth()->user()->characters`      | Retrieve all characters from the currently authenticated user.          |
+    | `auth()->user()->refresh_token`               | `CharacterInfo()->refresh_token`  | Retrieve the refresh token attached to a character.                     |
+    | `auth()->user()->group->refresh_tokens`       | `auth()->user()->refresh_tokens`  | Retrieve all refresh tokens attached to authenticated user.             |
     
     Also, if you need it, a table called `mig_groups` is available in database containing a list of all converted group into standalone user.
     This table will stay here until next SeAT major update.
