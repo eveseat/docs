@@ -24,7 +24,7 @@ All of them will get you SeAT installed, but you still have to manually configur
 
 | Method   | Comments     |
 | -------- | ------------ |
-| Docker   | `bash <(curl -fsSL https://git.io/seat-docker)` <br> This will download and run a [helper script](https://github.com/eveseat/scripts/blob/master/docker-compose/bootstrap.sh) that will ensure `docker` and `docker-compose` is available and start SeAT in containers. |
+| Docker   | Follow our [docker installation] guide. This is the recommended way to install SeAT as it will handle near everything for you. |
 | Manually | You can always install SeAT by following our [manual installation guide]. All you need is PHP, MariaDB, Redis and a web server and some Linux experience. |
 
 !!! warning
