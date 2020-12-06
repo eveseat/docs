@@ -77,7 +77,7 @@ php artisan db:seed --class=Seat\\Console\\database\\seeds\\ScheduleSeeder
 php artisan up
 ```
 
-- Prune job queue, this will prevent alreafy queued jobs to use old codebase
+- Prune job queue, this will prevent already queued jobs to use old codebase
 
 ```bash
 php artisan cache:clear
