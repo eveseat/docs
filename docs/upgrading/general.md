@@ -29,6 +29,12 @@ docker image prune -f
 ## Blade installation
 
 - Ensure that you are in the path where you installed. By default this should be `/var/www/seat`.
+- Cut jobs processing.
+
+```bash
+supervisorctl stop all
+```
+
 - Put your application into maintenance mode. This will ensure that no request from the outside will hit your applications logic, and also help you perform an upgrade uninterrupted. Do this with:
 
 ```bash
@@ -65,16 +71,22 @@ php artisan migrate
 php artisan db:seed --class=Seat\\Console\\database\\seeds\\ScheduleSeeder
 ```
 
-- Restart the supervisor workers to ensure they also pickup the latest code:
-
-```bash
-supervisorctl restart all
-```
-
 - Finally, we can simply bring our application back out of maintenance mode with:
 
 ```bash
 php artisan up
+```
+
+- Prune job queue, this will prevent alreafy queued jobs to use old codebase
+
+```bash
+php artisan cache:clear
+```
+
+- Restart the supervisor workers to ensure they also pickup the latest code:
+
+```bash
+supervisorctl start all
 ```
 
 !!! warning "Better safe then sorry"
