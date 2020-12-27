@@ -77,7 +77,7 @@ If you already have it installed, check your current version with `docker versio
 | Type           | Requirement                                              | Version Check            |
 | -------------- | -------------------------------------------------------- | ------------------------ |
 | Docker         | [Docker: ^18.0](https://www.docker.com/)                 | `docker -v`              |
-| Docker Compose | [Docker compose: ^1.20](https://docs.docker.com/compose/)| `docker-compose version` |
+| Docker Compose | [Docker compose: ^1.26](https://docs.docker.com/compose/)| `docker-compose version` |
 
 !!! info
 
