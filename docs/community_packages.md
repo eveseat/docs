@@ -63,6 +63,8 @@ Installing packages like this will ensure that none of the core SeAT packages ar
 | [warlof/seat-connector](https://github.com/warlof/seat-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-connector/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-connector) | A generic connector module that handles invites and roles management with any registered platform |
 | [warlof/seat-discord-connector](https://github.com/warlof/seat-discord-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-discord-connector/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-discord-connector) | A Discord driver to be used with `seat-connector` |
 | [warlof/seat-teamspeak](https://github.com/warlof/seat-teamspeak) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-teamspeak/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-teamspeak) | A Teamspeak driver to be used with `seat-connector` |
+| [cryptaeve/seat-squad-sync](https://github.com/crypta-eve/seat-squad-sync ) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-squad-sync/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-squad-sync ) | Adds the ability to sync squad members into filters of permissions |
+| [cryptaeve/seat-text](https://github.com/crypta-eve/seat-text) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-text/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-text) | A module to serve public static ascii, with editing access controlled by seat |
 
 #### Incompatible packages with current stable SeAT version
 
