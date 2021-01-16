@@ -77,7 +77,7 @@ If you already have it installed, check your current version with `docker versio
 | Type           | Requirement                                              | Version Check            |
 | -------------- | -------------------------------------------------------- | ------------------------ |
 | Docker         | [Docker: ^18.0](https://www.docker.com/)                 | `docker -v`              |
-| Docker Compose | [Docker compose: ^1.20](https://docs.docker.com/compose/)| `docker-compose version` |
+| Docker Compose | [Docker compose: ^1.26](https://docs.docker.com/compose/)| `docker-compose version` |
 
 !!! info
 
@@ -92,11 +92,11 @@ If you already have it installed, check your current version with `docker versio
 
     For a successful docker installation, choose a provider that uses para-virtualized technologies such as KVM, VMWare or XEN allowing you full control to the instance (and therefor the kernel itself). Examples of such providers are [Digital Ocean](https://www.digitalocean.com/), [Linode](https://www.linode.com/) and [Vultr](https://www.vultr.com/).
 
-### Blade Environment
+### Bare metal Environment
 
 !!! info
 
-    We consider "blade", any environment on which SeAT has been deployed manually (instead using containers).
+    We consider "bare metal", any environment on which SeAT has been deployed manually (instead using containers).
     
     If you plan to deploy SeAT on a Windows host, you will have to use [Docker](#docker-environment)
 

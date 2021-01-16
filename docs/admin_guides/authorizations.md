@@ -22,7 +22,7 @@ A SeAT user account. This can be either a user account that was created in SeAT 
 The only difference between the accounts is that with an SSO account, SeAT has no idea what the account's password is.
 Otherwise, everything else is exactly the same.
 
-* **Scope**
+* **Scope**  
 A scope is a domain grouping different permissions related to the same topic. Permissions from certain scope can be limited (ie: character or corporation).
 
 * **Permission**  
@@ -32,7 +32,7 @@ A Permission is an attribute that is assigned to a *Role*. It grants access base
 A Role is simply a collection of permissions. Users get assigned a roles and inherit the permissions granted by that role.
 A user cannot be given a raw permission. Permissions can only be granted by creating a Role, assigning permissions to the Role and granting the role to a user.
 
-* **Filters**
+* **Filters**  
 Permissions from certain scope can received filters. That simply mean the granted permission is limited to certain conditions.
 As an example, you may want to limit the asset permission from character scope to only a selection of character.
 

@@ -219,13 +219,59 @@ You are able to register and use your own permissions for use within SeAT. This 
         'description' => 'web::permissions.character_intel_description',
         'division'    => 'military',
     ],
-        'planetary' => [
+    'planetary' => [
         'label'       => 'web::permissions.character_planetary_label',
         'description' => 'web::permissions.character_planetary_description',
         'division'    => 'industrial',
     ],
 ];
 ```
+
+| property    | mandatory | purpose                                                                                                                                                           |
+| ----------- | ----------| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| label       | yes       | The displayed name of your permission. It must be a translation token.                                                                                            |
+| description |           | The displayed permission description. It should help user to determine what the permission is doing. It must be a translation token.                              |
+| division    |           | It will show a "category" icon to help user figures what will be impacted by the permission. Value can be one of `military`, `assets`, `financial`, `industrial`. |
+| gate        |           | If you need to manage your permission with a custom policy, you can provide a policy FQCN.                                                                        |
+
+The definition key (`sheet`, `intel`, `planetary` in the upper sample) will be used as permission unique identifier by the system. This is the one stored in the database, together with scope.
+
+![Permission Structure](../img/permissions_structure.png)
+
+!!! info
+
+    By default, if no gate are provided, those shipped in core will be used according to this pattern :
+    
+     - character scope: CharacterPolicy, this will require an instance of CharacterInfo to be used in your checks
+     - corporation scope: CorporationPolicy, this will require an instance of CorporationInfo to be used in your checks
+     - anything else: GlobalPolicy
+     
+    You'll find policy sample at [this location](https://github.com/eveseat/web/tree/master/src/Acl/Policies).
+    
+    In SeAT 4, a permission is made of a scope and an ability. The ability is defined by the permissions configuration file and the scope is defined on registration.
+
+!!! hint
+
+    If you're upgrading a SeAT 3.x plugin, the cheat sheet bellow will probably helps you.
+    
+    | SeAT 3.x                                      | SeAT 4.x                          | Purpose                                                                 |
+    | --------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------- |
+    | `auth()->user()`                              | `auth()->user()`                  | Retrieve the currently authenticated user.                              |
+    | `auth()->user()->group->main_character`       | `auth()->user()->main_character`  | Retrieve the main character from the currently authenticated user.      |
+    | `auth()->user()->group->main_character->name` | `auth()->user()->name`            | Retrieve the main character name from the currently authenticated user. |
+    | `auth()->user()->group->characters`           | `auth()->user()->characters`      | Retrieve all characters from the currently authenticated user.          |
+    | `auth()->user()->refresh_token`               | `CharacterInfo()->refresh_token`  | Retrieve the refresh token attached to a character.                     |
+    | `auth()->user()->group->refresh_tokens`       | `auth()->user()->refresh_tokens`  | Retrieve all refresh tokens attached to authenticated user.             |
+    
+    Also, if you need it, a table called `mig_groups` is available in database containing a list of all converted group into standalone user.
+    This table will stay here until next SeAT major update.
+    
+    | Field               | Purpose                                                                                  |
+    | ------------------- | ---------------------------------------------------------------------------------------- |
+    | `group_id`          | The unique ID from SeAT 3 user group                                                     |
+    | `old_user_id`       | The unique ID from SeAT 3 user (match to Character ID)                                   |
+    | `new_user_id`       | The unique ID from SeAT 4 user                                                           |
+    | `main_character_id` | The SeAT 3 registered main character ID - or random from the User Group if none were set |
 
 This config file is then loaded from your app service provider as below:
 

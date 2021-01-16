@@ -1,4 +1,4 @@
-# SeAT 3.0 to 4.0
+# SeAT 3.0 to 4.0 (Docker)
 
 The upgrade path from SeAT 3.0 to SeAT 4.0 requires some manual work. This is primarily due to large amounts of refactoring that made it into SeAT 4.
 
@@ -11,6 +11,9 @@ The upgrade path from SeAT 3.0 to SeAT 4.0 requires some manual work. This is pr
 
 !!! warning
     Before you do anything, read and understand this entire upgrade guide.
+    
+    Those instructions are valid for Docker deployment only.
+    Please refer to [bare metal instructions] for a non-docker installation.
 
     **Remember** to do make a complete backup of your current database making a copy off the server where SeAT runs together with the `.env` file. Both of these are the only things required to rebuilt your instance in case of failure.
 
@@ -25,7 +28,23 @@ The upgrade path from SeAT 3.0 to SeAT 4.0 requires some manual work. This is pr
 
 If you are currently using a docker installation for SeAT 3, you are in for a treat because upgrading is super easy. All we are going to do is bring the v4 stack up, connect your database and watch as the Docker entrypoint takes care of the rest.
 
-This guide is going to sterp through some quick preperation steps, then perform the upgrade and finally, check that everything worked out as expected. Let's dive in.
+This guide is going to step through some quick preparation steps, then perform the upgrade and finally, check that everything worked out as expected. Let's dive in.
+
+### tl;dr upgrades
+
+We highly reccomend that you read the details of this upgrade guide to get familiar with what has changed. But, if this is your nth upgrade, maybe you just want to get the summary of everything, so here it is:
+
+- Make a [backup] of your database.
+- `cd` to your install dir (which is probably `/opt/seat-docker`) and bring the stack down with `docker-compose down`
+- Make a copy of your `.env` and `docker-compose.yml` files.
+- Download the new `docker-compose.yml` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml`.
+- Down the new `.env` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env`.
+- Upgrade your `docker-compose` installation. It should be version `1.26` and up.
+- Configure the new `.env` file. Important configs include the `TRAEFIK_` variables, the `SEAT_SUBDOMAIN` variable. Copy over existing values from your old `.env` file for the `EVE_CLIENT_` variables, the `APP_KEY` varaible and finally the `DB_` variables.
+- Bring the stack back up with `docker-compose up -d` and watch the migration process.
+- Finally, once the migration process is complete, update the EVE SDE to populate the tables with static data with: `docker-compose exec seat-web php artisan eve:update:sde --force -n`
+
+🎉
 
 ### Docker changes since SeAT 3
 
@@ -43,11 +62,22 @@ Before you upgrade, you need to backup.
 
 #### Backup your database
 
-The single most important thing you need is a backup of your SeAT 3 database. Without a backup you will *not* be able to recover in case of a disaster. So, head on over to the [docker db backup section](/admin_guides/docker_admin/#database-backups-and-restore) and do that right now.
+The single most important thing you need is a backup of your SeAT 3 database. Without a backup you will *not* be able to recover in case of a disaster. So, head on over to the [docker db backup section] and do that right now.
 
 #### Backup your env file
 
 The `.env` file is the one that has your SeAT installations' configuration. It contains things like your SSO Client ID and Secret (aka: credentials). By default, SeAT docker installations live in `/opt/seat-docker` meaning your `.env` file will be at `/opt/seat-docker/.env`. Make a copy of this file and store it somewhere safe.
+
+#### Upgrade docker-compose
+
+The `docker-compose` binary should be upgraded so that we can make use of `${VARIABLES}` inside `.env` files.
+
+If you installed `docker-compose` using your OS' package manager, upgrade the tool using that. Otherwise, a `curl` invocation to download the latest version should also work.
+
+```bash
+curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+```
 
 #### Stop SeAT 3
 
@@ -92,7 +122,7 @@ curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-comp
 
 With this we have created a copy of the older docker-compose file (just in case), and downloaded the new one.
 
-#### Get the new env file
+#### Get the new .env file
 
 The next step is to get a fresh copy of the new `.env` file to use together with the new docker-compose setup. There have been a number of changes to this file (primarily as a result of the web server swap out) which we will describe in the next section.
 
@@ -103,10 +133,10 @@ mv .env .env.back
 curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
 ```
 
-#### Configure the new env file
+#### Configure the new .env file
 
 !!! info
-    This is admitedly the hardest part of the migtation, so pay close attention. Take it slowly and thing about what you are doing here.
+    This is admitedly the hardest part of the migtation, so pay close attention. Take it slowly and think about what you are doing here.
 
 There are four main settings categories that need to be updated in the new `.env` file. Those are:
 
@@ -151,6 +181,24 @@ These fields need to be updated as follows:
 A `SEAT_SUBDOMAIN` value is also present, which sets the subdomain where the SeAT web UI lives. This value needs to match what your SeAT 3 installation used, especially so that the existing SSO application you have configured on the EVE SSO portal matches the configured callback url.
 
 By default, most folks will only configure the domain, subdomain and email and be done. Of course, if you have custom configurations and needs, feel free to adapt.
+
+###### Traefik - TLS
+
+Traefik should handle all of the relevant configuration to get your site to listen with a valid TLS certificate. The secrets for the TLS configuration in Traefik relies on an `acme.json` file which you should mount into the Traefik container from the outside so that it persists restart.
+
+Prepare the json file from within `/opt/seat-docker` with:
+
+```bash
+mkdir acme
+touch acme/acme.json
+chmod 600 acme/acme.json
+```
+
+Next, make sure you have the `TRAEFIK_ACME_EMAIL` variable set, and finally, uncomment the labels that will make use of the Let's Encrypt cert resolver in the `docker-compose.yml` file. By default, they will look like this, whereby you need to remove the `#` in front.
+
+```text
+#- "traefik.http.routers.seat-web.tls.certResolver=primary"
+```
 
 ##### EVE Online SSO
 
@@ -253,158 +301,33 @@ Then, bring it back up with the `-d` flag.
 docker-compose up -d
 ```
 
+### Convert User Tokens
+
+SeAT 4.x is using the new CCP Token format (v2). In order to use registered tokens from your previous installation,
+you'll have to run the following command:
+
+```bash
+docker-compose exec seat-web php artisan seat:token:upgrade
+```
+
+### Update EVE SDE
+
+This is the final step, for real. You need to update the EVE SDE. With your stack up and running (after executing `docker-compose up -d`), you can now force an SDE update with:
+
+```bash
+docker-compose exec seat-web php artisan eve:update:sde --force -n
+```
+
 Congrats, and welcome to SeAT 4!
-
-## Bare Metal Upgrade Procedure
-
-### Preparation
-
-If users are using your SeAT instance, or the workers are churning away in the background, then you may risk losing some information (although unlikely) - or cause crash during database conversion.
-Please start to turning SeAT in maintenance mode, cutting jobs and clearing caches before starting the upgrade.
-
-Turn workers down, use the command
-
-```bash
-service supervisor stop
-```
-
-Put SeAT in maintenance mode
-
-```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan down'
-```
-
-Clear cache
-
-```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan seat:cache:clear
-```
-
-### Backups
-
-- Make a backup of your SeAT database and store it somewhere safe! **Do no skip this step!**
-- In your SeAT directory, make a copy of the `.env` file.
-This file contains all your SeAT configuration, including tokens watermark required to update your registered users content.
-These values might be useful in case of failure.
-
-### Installing SeAT 4.0
-
-Rename the current SeAT directory from `/var/www/seat` to `/var/www/seat3`.
-You don't have to update any config since we will only use the command line for the process.
-
-```bash
-mv /var/www/seat /var/www/seat3
-```
-
-#### PHP
-
-If it's not already the case, you'll have to deploy at least PHP 7.3 on the server.
-The provided command bellow will help you in this task and add newly required PHP extensions in the meantime.
-
-```bash
-apt-get update
-apt-get install libpng-dev libfreetype6-dev libjpeg-dev
-apt-get install curl openssl zip php7.3-bz2 php7.3-cli php7.3-curl php7.3-dom php7.3-gd php7.3-gmp php7.3-intl php7.3-mbstring php7.3-mysql php7.3-opcache php7.3-redis php7.3-zip
-```
-
-Remember to update your NGinX configuration to use the new CGI version. To do so, open configuration file located at `/etc/nginx/sites-available/seat` and replace
-
-```text
-       fastcgi_pass unix:/run/php/php7.1-fpm.sock;
-```
-
-with
-
-```text
-       fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-```
-
-#### SeAT
-
-Once packages have been updated, we will deploy the new SeAT's version using composer.
-
-```bash
-composer create-project eveseat/seat /var/www/seat "4.0.*" --no-dev --no-interaction
-```
-
-Once the download is done, you should have seen output such as:
-
-```bash
-Writing lock file
-Generating optimized autoload files
-> Illuminate\Foundation\ComposerScripts::postAutoloadDump
-> @php artisan package:discover
-Discovered Package: darkaonline/l5-swagger
-Discovered Package: eveseat/api
-Discovered Package: eveseat/console
-Discovered Package: eveseat/eveapi
-Discovered Package: eveseat/notifications
-Discovered Package: eveseat/services
-Discovered Package: eveseat/web
-Package manifest generated successfully.
-> @php artisan key:generate
-Application key [base64:CmhqYNkaIcHo8nYC8LiEWa3U5/+BiTLih5dZftxlV2k=] set successfully.
-```
-
-Finally, fix directories permissions using the two commands bellow:
-
-```bash
-chown -R www-data:www-data /var/www/seat
-chmod -R guo+w /var/www/seat/storage/
-```
-
-#### Setup
-
-Now sources have been deployed, we have to update `.env` configuration file.
-Use information from backup located at `/var/www/seat3/.env` to update the newly generated file located at `/var/www/seat/.env`.
-
-!!! info
-    In case you had third party packages installed, it's time to deploy them back.
-    We invite you to report to their own documentation regarding any specific guideline.
-
-!!! warning
-    Please pay special attention to **APP_KEY**, **DB_HOST**, **DB_PORT**, **DB_DATABASE**, **DB_USERNAME**,
-    **DB_PASSWORD**, **EVE_CLIENT_ID**, **EVE_CLIENT_SECRET** and **EVE_CALLBACK_URL** parameters.
-
-#### Database
-
-We will convert database to work with new SeAT version. To do so, we're using common commands disclosed bellow:
-
-```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan vendor:publish --force --all'
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan migrate'
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Console\\database\\seeds\\ScheduleSeeder'
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan eve:update:sde --force'
-```
-
-### Complete
-
-Finally, restore workers states and put SeAT online using initial commands in reverse order.
-
-Put SeAT online
-
-```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan up'
-```
-
-Turn workers up
-
-```bash
-service supervisor start
-```
-
-## Access
-
-SeAT 4.0 is coming with a complete revamp of permissions system. As a result, your previous roles haven't been converted.
-However, they've been keep - so you can configure them with the new system.
-
-You will have to use built-in admin account for your first connexion using `sudo -H -u www-data bash -c 'php /var/www/seat/artisan seat:admin:login'`
 
 !!! info
 
     Super administrator is now an user flag and have to be defined at user level instead of Access Permissions.
     You'll get more information regarding the new system on [Admin Login] and [Authorizations] pages.
 
-[SeAT 4.0 requirements]: ../installation/requirements.md
-[Admin Login]: ../admin_guides/admin_login.md
-[Authorizations]: ../admin_guides/authorizations.md
+[SeAT 4.0 requirements]: ../../installation/requirements.md
+[Admin Login]: ../../admin_guides/admin_login.md
+[Authorizations]: ../../admin_guides/authorizations.md
+[backup]: ../../admin_guides/docker_admin.md#database-backups-and-restore
+[docker db backup section]: ../../admin_guides/docker_admin.md#database-backups-and-restore
+[bare metal instructions]: bare_metal.md

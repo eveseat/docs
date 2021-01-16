@@ -19,7 +19,9 @@ nav:
       - Manual Installation: installation/manual_installation.md
     - Upgrading:
       - General: upgrading/general.md
-      - From SeAT 3.0: upgrading/from_seat_3_0.md
+      - From SeAT 3.0:
+        - Docker: upgrading/from_seat_3_0/docker.md
+        - Bare metal: upgrading/from_seat_3_0/bare_metal.md
       - From SeAT 2.0: upgrading/from_seat_2_0.md
       - From SeAT 1.0: upgrading/from_seat_1_0.md
     - Configuration:
@@ -35,6 +37,7 @@ nav:
       - Admin Login: admin_guides/admin_login.md
       - Docker Admin: admin_guides/docker_admin.md
       - Authorizations: admin_guides/authorizations.md
+      - Buckets: admin_guides/buckets.md
       - Squads: admin_guides/squads.md
       - Understanding Tracking: admin_guides/understanding_tracking.md
       - Scaled Deployments: admin_guides/scaled_deployments.md
