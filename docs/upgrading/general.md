@@ -83,6 +83,13 @@ php artisan up
 php artisan cache:clear
 ```
 
+- Renew cached configuration and routes
+
+```bash
+php artisan config:cache
+php artisan route:cache
+```
+
 - Restart the supervisor workers to ensure they also pickup the latest code:
 
 ```bash
