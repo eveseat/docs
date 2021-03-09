@@ -2,7 +2,7 @@
 
 # Docker
 
-Docker is ideally the installation route you want to go. Docker enables us to run SeAT on any platform capable of running docker itself (which includes Windows!). Additionally, upgrades and service maintenance is really low effort as you don't have to care about any dependencies. All of it is maintained within a docker stack and dockerhub.
+Docker is ideally the installation route you want to go. Docker enables us to run SeAT on any platform capable of running docker itself (which includes Windows!). Additionally, upgrades and service maintenance are really low effort as you don't have to care about any dependencies. All of it is maintained within a docker stack and dockerhub.
 
 !!! info
     If you plan on running Docker on Windows, for the best performance it is suggested that you run Docker using the Windows Subsystem for Linux 2 (WSL2) backend, available starting in Windows 10/Windows Server 20H1 (build 2004) releases.
@@ -16,17 +16,17 @@ Docker is ideally the installation route you want to go. Docker enables us to ru
     If you are using Docker on Windows, you will need to use the [Manual Deployment](#manual-deployment) option below.
 
 !!! note "Eve Application and ESI"
-    SeAT used CCP's [ESI](https://esi.evetech.net/) service in order to retrieve EVE Online related information. Before you can make any authenticated calls to ESI, you have to register a third party EVE application on the [developers portal](developers.eveonline.com/). This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.
+    SeAT used CCP's [ESI](https://esi.evetech.net/) service in order to retrieve EVE Online-related information. Before you can make any authenticated calls to ESI, you have to register a third-party EVE application on the [developers portal](developers.eveonline.com/). This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.
 
 ## Internal Container Setup Overview
 
 The setup for SeAT's docker installation orchestrated using [docker-compose](https://docs.docker.com/compose/). With docker-compose, we can use a single `docker-compose.yml` file to define the entire stack complete with all of the dependencies required to run SeAT. A pre-built and recommended compose file (which is also used by the bootstrapping script) is hosted in the seat-docker repository [here](https://github.com/eveseat/seat-docker).
 
-The previously mentioned compose file is really simple. A high level overview of its contents is:
+The previously mentioned compose file is really simple. A high-level overview of its contents is:
 
 - A single docker network called `seat-network` is defined. All containers are connected to this network and is used as the primary means for inter-container communications.
 - A single volume called `mariadb-data` is defined. This is the *most important* volume as it contains all of the database data. This is the one volume that you should configure a backup solution for!
-- Six services (or containers) are used within the SeAT docker stack. Three services use basic images pulled directly from [Dockerhub](https://hub.docker.com/) and three others use a custom built image, also hosted on DockerHub. The container images used are:
+- Six services (or containers) are used within the SeAT docker stack. Three services use basic images pulled directly from [Dockerhub](https://hub.docker.com/) and three others use a custom-built image, also hosted on DockerHub. The container images used are:
 
 | Image Name | Image Repository |
 | ---------- | ---------------- |
@@ -35,13 +35,13 @@ The previously mentioned compose file is really simple. A high level overview of
 | `traefik:2.2` | [https://hub.docker.com/_/traefik](https://hub.docker.com/_/traefik) |
 | `eveseat/seat` | [https://hub.docker.com/r/eveseat/seat](https://hub.docker.com/r/eveseat/seat) |
 
-- The environment is configured using a top level `.env` file (not to be confused with the SeAT specific `.env` file.
+- The environment is configured using a top-level `.env` file (not to be confused with the SeAT specific `.env` file.
 - Only too ports are exposed by default. Those are `tcp/80` and `tcp/443`. These can be connected to in order to access the SeAT web interface.
 - All containers are configured to restart on failure, so if your server reboots or a container dies for whatever reason it should automatically start up again.
 
 ## SeAT Docker Installation
 
-Depending on wether you already have `docker` and `docker-compose` already installed, you may choose how to start the installation. If you already have the required tooling installed and running their latest versions, all you need to do is download the latest `docker-compose.yml` and `.env` files to get started.
+Depending on whether you already have `docker` and `docker-compose` already installed, you may choose how to start the installation. If you already have the required tooling installed and running their latest versions, all you need to do is download the latest `docker-compose.yml` and `.env` files to get started.
 
 ### Automated Setup Script
 
@@ -130,7 +130,7 @@ Open up the `.env` file in a text editor and fill in a few of the configuration 
 `TRAEFIK_DOMAIN` should be set to the base domain your installation lives on.  
 `SEAT_SUBDOMAIN` sould be the subdomain for the SeAT web UI. eg: seat.domain.local
 
-For TLS coniguraiton, you need to set the `TRAEFIK_ACME_EMAIL` value and then in the `docker-compose.yml` file uncomment the labels that relating to `certResolver`. They typically look like this: `traefik.http.routers.api.tls.certResolver=primary`. Finally, create an ACME configuration file with:
+For TLS configuration, you need to set the `TRAEFIK_ACME_EMAIL` value, and then in the `docker-compose.yml` file uncomment the labels that relating to `certResolver`. They typically look like this: `traefik.http.routers.api.tls.certResolver=primary`. Finally, create an ACME configuration file with:
 
 ```bash
 mkdir acme
@@ -148,7 +148,7 @@ chmod 600 acme/acme.json
 
 ### ESI Configuration
 
-As mentioned at the start of the guide, it is necessary for you to configure ESI. For instructions how to do this, please refer to the [ESI Setup Guide].
+As mentioned at the start of the guide, it is necessary for you to configure ESI. For instructions on how to do this, please refer to the [ESI Setup Guide].
 
 With the configuration files ready, start up the stack with:
 
@@ -169,7 +169,7 @@ These commands will `cd` to the directory containing the stacks `docker-compose.
 
 ## Configuration Changes
 
-All of relevant configuration lives inside the `.env` file, next to your `docker-compose.yml` file. Modify their values by opening it in a text editor, making the appropriate changes and saving it again. Once that is done, run `docker-compose up -d` again to restart the container environment.
+All of the relevant configuration lives inside the `.env` file, next to your `docker-compose.yml` file. Modify their values by opening it in a text editor, making the appropriate changes, and saving it again. Once that is done, run `docker-compose up -d` again to restart the container environment.
 
 !!! success
     You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!
