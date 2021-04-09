@@ -1,0 +1,1427 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Simple EVE Api Tool Documentation">
+      
+      
+        <link rel="canonical" href="https://eveseat.github.io/docs/installation/docker_installation/">
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.0">
+    
+    
+      
+        <title>Docker Installation - SeAT Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.89dc9fe3.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecd4686e.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#757575">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/extra_footer.css">
+    
+      <link rel="stylesheet" href="../../css/extra_typo.css">
+    
+    
+      
+        
+<link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-119530306-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview")})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="grey" data-md-color-accent="indigo">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#docker" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://eveseat.github.io/docs" title="SeAT Documentation" class="md-header-nav__button md-logo" aria-label="SeAT Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            SeAT Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Docker Installation
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/eveseat/docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://eveseat.github.io/docs" title="SeAT Documentation" class="md-nav__button md-logo" aria-label="SeAT Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    SeAT Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/eveseat/docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Installation
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Installation" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Installation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../requirements/" title="Requirements" class="md-nav__link">
+      Requirements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Docker Installation
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Docker Installation" class="md-nav__link md-nav__link--active">
+      Docker Installation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#internal-container-setup-overview" class="md-nav__link">
+    Internal Container Setup Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seat-docker-installation" class="md-nav__link">
+    SeAT Docker Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="SeAT Docker Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automated-setup-script" class="md-nav__link">
+    Automated Setup Script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-deployment" class="md-nav__link">
+    Manual Deployment
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-download" class="md-nav__link">
+    Docker Download
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose-download" class="md-nav__link">
+    Docker-compose Download
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose-working-directory" class="md-nav__link">
+    Docker compose working directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seat-docker-composeyml-and-env-file" class="md-nav__link">
+    SeAT docker-compose.yml and .env File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seat-docker-configuration" class="md-nav__link">
+    SeAT docker configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esi-configuration" class="md-nav__link">
+    ESI Configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-the-stack" class="md-nav__link">
+    Monitoring the Stack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-changes" class="md-nav__link">
+    Configuration Changes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../manual_installation/" title="Manual Installation" class="md-nav__link">
+      Manual Installation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Upgrading
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Upgrading" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Upgrading
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/general/" title="General" class="md-nav__link">
+      General
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      From SeAT 3.0
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="From SeAT 3.0" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        From SeAT 3.0
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/from_seat_3_0/docker/" title="Docker" class="md-nav__link">
+      Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/from_seat_3_0/bare_metal/" title="Bare metal" class="md-nav__link">
+      Bare metal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/from_seat_2_0/" title="From SeAT 2.0" class="md-nav__link">
+      From SeAT 2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/from_seat_1_0/" title="From SeAT 1.0" class="md-nav__link">
+      From SeAT 1.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Configuration
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/esi_configuration/" title="ESI Configuration" class="md-nav__link">
+      ESI Configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Email Setup
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Email Setup" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Email Setup
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/email_setup/mailgun/" title="Mailgun" class="md-nav__link">
+      Mailgun
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/email_setup/gmail/" title="GMail" class="md-nav__link">
+      GMail
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/env_file_reference/" title="Env File Reference" class="md-nav__link">
+      Env File Reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/eve_administrative_contact/" title="EVE Administrative Contact" class="md-nav__link">
+      EVE Administrative Contact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/configuration_overload/" title="Configuration Overload" class="md-nav__link">
+      Configuration Overload
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/sde_overload/" title="SDE Overload" class="md-nav__link">
+      SDE Overload
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Admin Guides
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Admin Guides" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Admin Guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/admin_login/" title="Admin Login" class="md-nav__link">
+      Admin Login
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/docker_admin/" title="Docker Admin" class="md-nav__link">
+      Docker Admin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/authorizations/" title="Authorizations" class="md-nav__link">
+      Authorizations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/buckets/" title="Buckets" class="md-nav__link">
+      Buckets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/squads/" title="Squads" class="md-nav__link">
+      Squads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/understanding_tracking/" title="Understanding Tracking" class="md-nav__link">
+      Understanding Tracking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/scaled_deployments/" title="Scaled Deployments" class="md-nav__link">
+      Scaled Deployments
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      User Guides
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="User Guides" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        User Guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user_guides/moons_reporter/" title="Moons Reporter" class="md-nav__link">
+      Moons Reporter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Developer Guides
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Developer Guides" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Developer Guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developer_guides/developer_installation/" title="Developer Installation" class="md-nav__link">
+      Developer Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developer_guides/general_guide/" title="General Guide" class="md-nav__link">
+      General Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developer_guides/job_queue_flow/" title="Job Queue Flow" class="md-nav__link">
+      Job Queue Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developer_guides/development_tips/" title="Development Tips" class="md-nav__link">
+      Development Tips
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developer_guides/core_package_breakdown/" title="Core Package Breakdown" class="md-nav__link">
+      Core Package Breakdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developer_guides/package_development/" title="Package Development" class="md-nav__link">
+      Package Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../developer_guides/seat_api/" title="SeAT API" class="md-nav__link">
+      SeAT API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../styling/" title="Styling" class="md-nav__link">
+      Styling
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../community_packages/" title="Community Packages" class="md-nav__link">
+      Community Packages
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      About
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="About" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/contact/" title="Contact" class="md-nav__link">
+      Contact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/reporting_bugs/" title="Reporting Bugs" class="md-nav__link">
+      Reporting Bugs
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#internal-container-setup-overview" class="md-nav__link">
+    Internal Container Setup Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seat-docker-installation" class="md-nav__link">
+    SeAT Docker Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="SeAT Docker Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#automated-setup-script" class="md-nav__link">
+    Automated Setup Script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-deployment" class="md-nav__link">
+    Manual Deployment
+  </a>
+  
+    <nav class="md-nav" aria-label="Manual Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#docker-download" class="md-nav__link">
+    Docker Download
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose-download" class="md-nav__link">
+    Docker-compose Download
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-compose-working-directory" class="md-nav__link">
+    Docker compose working directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seat-docker-composeyml-and-env-file" class="md-nav__link">
+    SeAT docker-compose.yml and .env File
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seat-docker-configuration" class="md-nav__link">
+    SeAT docker configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esi-configuration" class="md-nav__link">
+    ESI Configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-the-stack" class="md-nav__link">
+    Monitoring the Stack
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-changes" class="md-nav__link">
+    Configuration Changes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/eveseat/docs/edit/master/docs/installation/docker_installation.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <p><img alt="SeAT" src="https://i.imgur.com/aPPOxSK.png" /></p>
+<h1 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h1>
+<p>Docker is ideally the installation route you want to go. Docker enables us to run SeAT on any platform capable of running docker itself (which includes Windows!). Additionally, upgrades and service maintenance are really low effort as you don't have to care about any dependencies. All of it is maintained within a docker stack and dockerhub.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>If you plan on running Docker on Windows, for the best performance it is suggested that you run Docker using the Windows Subsystem for Linux 2 (WSL2) backend, available starting in Windows 10/Windows Server 20H1 (build 2004) releases.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Before starting the installation process, be sure you read this complete document first. It will help you understand all of the steps from an installation process.</p>
+<p>If you feel like docker might not be your cup of tea, checkout some of the other <a href="https://docs.docker.com/get-started/">getting started</a> guides that are available.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you are using Docker on Windows, you will need to use the <a href="#manual-deployment">Manual Deployment</a> option below.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Eve Application and ESI</p>
+<p>SeAT used CCP's <a href="https://esi.evetech.net/">ESI</a> service in order to retrieve EVE Online-related information. Before you can make any authenticated calls to ESI, you have to register a third-party EVE application on the <a href="developers.eveonline.com/">developers portal</a>. This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.</p>
+</div>
+<h2 id="internal-container-setup-overview">Internal Container Setup Overview<a class="headerlink" href="#internal-container-setup-overview" title="Permanent link">&para;</a></h2>
+<p>The setup for SeAT's docker installation orchestrated using <a href="https://docs.docker.com/compose/">docker-compose</a>. With docker-compose, we can use a single <code>docker-compose.yml</code> file to define the entire stack complete with all of the dependencies required to run SeAT. A pre-built and recommended compose file (which is also used by the bootstrapping script) is hosted in the seat-docker repository <a href="https://github.com/eveseat/seat-docker">here</a>.</p>
+<p>The previously mentioned compose file is really simple. A high-level overview of its contents is:</p>
+<ul>
+<li>A single docker network called <code>seat-network</code> is defined. All containers are connected to this network and is used as the primary means for inter-container communications.</li>
+<li>A single volume called <code>mariadb-data</code> is defined. This is the <em>most important</em> volume as it contains all of the database data. This is the one volume that you should configure a backup solution for!</li>
+<li>Six services (or containers) are used within the SeAT docker stack. Three services use basic images pulled directly from <a href="https://hub.docker.com/">Dockerhub</a> and three others use a custom-built image, also hosted on DockerHub. The container images used are:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Image Name</th>
+<th>Image Repository</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mariadb:10</code></td>
+<td><a href="https://hub.docker.com/_/mariadb/">https://hub.docker.com/_/mariadb/</a></td>
+</tr>
+<tr>
+<td><code>redis:5-alpine</code></td>
+<td><a href="https://hub.docker.com/_/redis/">https://hub.docker.com/_/redis/</a></td>
+</tr>
+<tr>
+<td><code>traefik:2.2</code></td>
+<td><a href="https://hub.docker.com/_/traefik">https://hub.docker.com/_/traefik</a></td>
+</tr>
+<tr>
+<td><code>eveseat/seat</code></td>
+<td><a href="https://hub.docker.com/r/eveseat/seat">https://hub.docker.com/r/eveseat/seat</a></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The environment is configured using a top-level <code>.env</code> file (not to be confused with the SeAT specific <code>.env</code> file.</li>
+<li>Only too ports are exposed by default. Those are <code>tcp/80</code> and <code>tcp/443</code>. These can be connected to in order to access the SeAT web interface.</li>
+<li>All containers are configured to restart on failure, so if your server reboots or a container dies for whatever reason it should automatically start up again.</li>
+</ul>
+<h2 id="seat-docker-installation">SeAT Docker Installation<a class="headerlink" href="#seat-docker-installation" title="Permanent link">&para;</a></h2>
+<p>Depending on whether you already have <code>docker</code> and <code>docker-compose</code> already installed, you may choose how to start the installation. If you already have the required tooling installed and running their latest versions, all you need to do is download the latest <code>docker-compose.yml</code> and <code>.env</code> files to get started.</p>
+<h3 id="automated-setup-script">Automated Setup Script<a class="headerlink" href="#automated-setup-script" title="Permanent link">&para;</a></h3>
+<p>If you do not have the required software installed yet, consider running the <a href="https://github.com/eveseat/seat-docker/blob/master/bootstrap.sh">bootstrap script</a> that will check for <code>docker</code> and <code>docker-compose</code>, install it and start the SeAT stack up for you. The script can be run with:</p>
+<div class="highlight"><pre><span></span><code>bash &lt;<span class="o">(</span>curl -fsSL https://git.io/get-seat<span class="o">)</span>
+</code></pre></div>
+
+<p>Once the script is finished, you can skip to the <a href="#monitoring-the-stack">monitoring the stack</a> section of this guide.</p>
+<p>If you don't want to run this script, follow along in the next section of this guide.</p>
+<h3 id="manual-deployment">Manual Deployment<a class="headerlink" href="#manual-deployment" title="Permanent link">&para;</a></h3>
+<h4 id="docker-download">Docker Download<a class="headerlink" href="#docker-download" title="Permanent link">&para;</a></h4>
+<p>If you do not have <code>docker</code>, install it now with the following command as <code>root</code>:</p>
+<div class="highlight"><pre><span></span><code>sh &lt;<span class="o">(</span>curl -fsSL get.docker.com<span class="o">)</span>
+</code></pre></div>
+
+<p>If you are on Windows, download and install <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>.</p>
+<h4 id="docker-compose-download">Docker-compose Download<a class="headerlink" href="#docker-compose-download" title="Permanent link">&para;</a></h4>
+<p>If you do not have <code>docker-compose</code>, install it now with the following command as <code>root</code> (Docker Compose is included with Docker Desktop on Windows):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Downloads docker-compose</span>
+curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-<span class="k">$(</span>uname -s<span class="k">)</span>-<span class="k">$(</span>uname -m<span class="k">)</span> -o /usr/local/bin/docker-compose
+
+<span class="c1"># Makes docker-compose executable</span>
+chmod +x /usr/local/bin/docker-compose
+</code></pre></div>
+
+<h4 id="docker-compose-working-directory">Docker compose working directory<a class="headerlink" href="#docker-compose-working-directory" title="Permanent link">&para;</a></h4>
+<p>With <code>docker</code> and <code>docker-compose</code> ready, create yourself a directory in <code>/opt</code> with <code>mkdir -p /opt/seat-docker</code> and <code>cd</code> to it. Remember this directory as you will need to come back to it often.</p>
+<p>On Windows, create the <code>C:\seat-docker</code> directory with <code>mkdir C:\seat-docker</code> and <code>cd</code> to it.</p>
+<h4 id="seat-docker-composeyml-and-env-file">SeAT docker-compose.yml and .env File<a class="headerlink" href="#seat-docker-composeyml-and-env-file" title="Permanent link">&para;</a></h4>
+<p>Then, download the <code>docker-compose.yml</code> file with:</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Linux</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml
+</code></pre></div>
+
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Windows</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">eveseat</span><span class="p">/</span><span class="n">seat-docker</span><span class="p">/</span><span class="n">master</span><span class="p">/</span><span class="n">docker-compose</span><span class="p">.</span><span class="n">yml</span> <span class="n">-OutFile</span> <span class="n">docker-compose</span><span class="p">.</span><span class="n">yml</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>Next, download the docker <code>.env</code> file with:</p>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Linux</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
+</code></pre></div>
+
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Windows</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nb">Invoke-WebRequest</span> <span class="n">-Uri</span> <span class="n">https</span><span class="err">:</span><span class="p">//</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">eveseat</span><span class="p">/</span><span class="n">seat-docker</span><span class="p">/</span><span class="n">master</span><span class="p">/.</span><span class="n">env</span> <span class="n">-OutFile</span> <span class="p">.</span><span class="n">env</span>
+</code></pre></div>
+
+</div>
+</div>
+<p>Next, we will generate a unique application key - this is used internally for encryption:</p>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Linux</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code>sed -i -- <span class="s1">&#39;s/APP_KEY=insecure/APP_KEY=&#39;</span><span class="k">$(</span>head /dev/urandom <span class="p">|</span> tr -dc A-Za-z0-9 <span class="p">|</span> head -c32 <span class="p">;</span> <span class="nb">echo</span> <span class="s1">&#39;&#39;</span><span class="k">)</span><span class="s1">&#39;/g&#39;</span> .env
+</code></pre></div>
+
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Windows</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nv">$appkey</span> <span class="p">=</span> <span class="p">(</span><span class="n">-join</span> <span class="p">((</span><span class="n">65</span><span class="p">..</span><span class="n">90</span><span class="p">)</span> <span class="p">+</span> <span class="p">(</span><span class="n">97</span><span class="p">..</span><span class="n">122</span><span class="p">)</span> <span class="p">|</span> <span class="nb">Get-Random</span> <span class="n">-Count</span> <span class="n">32</span> <span class="p">|</span> <span class="p">%</span> <span class="p">{</span><span class="no">[char]</span><span class="nv">$_</span><span class="p">}));</span> <span class="p">(</span><span class="nb">Get-Content</span> <span class="p">.</span><span class="n">env</span> <span class="n">-Raw</span><span class="p">)</span> <span class="o">-replace</span> <span class="s2">&quot;APP_KEY=insecure&quot;</span><span class="p">,</span> <span class="s2">&quot;APP_KEY=$appkey&quot;</span> <span class="p">|</span> <span class="nb">Set-Content</span> <span class="p">.</span><span class="n">env</span>
+</code></pre></div>
+
+</div>
+</div>
+<h4 id="seat-docker-configuration">SeAT docker configuration<a class="headerlink" href="#seat-docker-configuration" title="Permanent link">&para;</a></h4>
+<p>Open up the <code>.env</code> file in a text editor and fill in a few of the configuration items needed.</p>
+<p><code>TRAEFIK_DOMAIN</code> should be set to the base domain your installation lives on.<br />
+<code>SEAT_SUBDOMAIN</code> sould be the subdomain for the SeAT web UI. eg: seat.domain.local</p>
+<p>For TLS configuration, you need to set the <code>TRAEFIK_ACME_EMAIL</code> value, and then in the <code>docker-compose.yml</code> file uncomment the labels that relating to <code>certResolver</code>. They typically look like this: <code>traefik.http.routers.api.tls.certResolver=primary</code>. Finally, create an ACME configuration file with:</p>
+<div class="highlight"><pre><span></span><code>mkdir acme
+touch acme/acme.json
+chmod <span class="m">600</span> acme/acme.json
+</code></pre></div>
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>SeAT docker template is shipped with <a href="https://containo.us/traefik/">Traefik</a> to hide your container behind a proxy and securing traffic up to it. In case you want to manage traffic proxying and certification on your own, you can disable traefik container from the stack by adding <code>#</code> [front of lines] from the <code>docker-compose.yml</code> file.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The location of the <code>docker-compose.yml</code> and <code>.env</code> files are important. You need to <code>cd</code> back to the directory where these are stored in order to be able to execute commands for this stack at a later stage.</p>
+<p>Also, be sure you provide a valid e-mail address as it will be used to register your account against <a href="https://letsencrypt.org">Let's Encrypt</a>. For those unfamiliar with this, it's CA that provides valid certificates for free.</p>
+</div>
+<h3 id="esi-configuration">ESI Configuration<a class="headerlink" href="#esi-configuration" title="Permanent link">&para;</a></h3>
+<p>As mentioned at the start of the guide, it is necessary for you to configure ESI. For instructions on how to do this, please refer to the <a href="../../configuration/esi_configuration/">ESI Setup Guide</a>.</p>
+<p>With the configuration files ready, start up the stack with:</p>
+<div class="highlight"><pre><span></span><code>docker-compose up -d
+</code></pre></div>
+
+<h2 id="monitoring-the-stack">Monitoring the Stack<a class="headerlink" href="#monitoring-the-stack" title="Permanent link">&para;</a></h2>
+<p>Knowing what is going on inside of your containers is crucial to understanding how everything is running as well as useful when debugging any problems that may occur. While the containers are starting up or have been running for a while, you can always <code>cd</code> to the directory where your <code>docker-compose.yml</code> file lives and run the <code>logs</code> command to see the output of all of the containers in the stack. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> /opt/seat-docker
+docker-compose logs --tail <span class="m">10</span> -f
+</code></pre></div>
+
+<p>These commands will <code>cd</code> to the directory containing the stacks <code>docker-compose.yml</code> file and run the <code>logs</code> command, showing the last <em>10</em> log entries and then printing new ones as they arrive.</p>
+<h2 id="configuration-changes">Configuration Changes<a class="headerlink" href="#configuration-changes" title="Permanent link">&para;</a></h2>
+<p>All of the relevant configuration lives inside the <code>.env</code> file, next to your <code>docker-compose.yml</code> file. Modify their values by opening it in a text editor, making the appropriate changes, and saving it again. Once that is done, run <code>docker-compose up -d</code> again to restart the container environment.</p>
+<div class="admonition success">
+<p class="admonition-title">Success</p>
+<p>You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!</p>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../requirements/" title="Requirements" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Requirements
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../manual_installation/" title="Manual Installation" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Manual Installation
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2015 - 2020 Leon Jacobs
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/eveseat/seat" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.36cbf620.min.js"></script>
+      <script src="../../assets/javascripts/bundle.00c583dd.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.7f7c8775.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

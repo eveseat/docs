@@ -1,0 +1,1688 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Simple EVE Api Tool Documentation">
+      
+      
+        <link rel="canonical" href="https://eveseat.github.io/docs/upgrading/from_seat_3_0/docker/">
+      
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.0">
+    
+    
+      
+        <title>Docker - SeAT Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.89dc9fe3.min.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecd4686e.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#757575">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../css/extra_footer.css">
+    
+      <link rel="stylesheet" href="../../../css/extra_typo.css">
+    
+    
+      
+        
+<link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-119530306-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview")})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="grey" data-md-color-accent="indigo">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#seat-30-to-40-docker" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://eveseat.github.io/docs" title="SeAT Documentation" class="md-header-nav__button md-logo" aria-label="SeAT Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            SeAT Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Docker
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/eveseat/docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://eveseat.github.io/docs" title="SeAT Documentation" class="md-nav__button md-logo" aria-label="SeAT Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    SeAT Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/eveseat/docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Installation
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Installation" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Installation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../installation/requirements/" title="Requirements" class="md-nav__link">
+      Requirements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../installation/docker_installation/" title="Docker Installation" class="md-nav__link">
+      Docker Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../installation/manual_installation/" title="Manual Installation" class="md-nav__link">
+      Manual Installation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Upgrading
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Upgrading" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Upgrading
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../general/" title="General" class="md-nav__link">
+      General
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2" checked>
+    
+    <label class="md-nav__link" for="nav-3-2">
+      From SeAT 3.0
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="From SeAT 3.0" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        From SeAT 3.0
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Docker
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Docker" class="md-nav__link md-nav__link--active">
+      Docker
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-upgrade-procedure" class="md-nav__link">
+    Docker Upgrade Procedure
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Upgrade Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tldr-upgrades" class="md-nav__link">
+    tl;dr upgrades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-changes-since-seat-3" class="md-nav__link">
+    Docker changes since SeAT 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preperation" class="md-nav__link">
+    Preperation
+  </a>
+  
+    <nav class="md-nav" aria-label="Preperation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backup-your-database" class="md-nav__link">
+    Backup your database
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-your-env-file" class="md-nav__link">
+    Backup your env file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-docker-compose" class="md-nav__link">
+    Upgrade docker-compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-seat-3" class="md-nav__link">
+    Stop SeAT 3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-to-seat-4" class="md-nav__link">
+    Upgrading to SeAT 4
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrading to SeAT 4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-new-docker-compose-file" class="md-nav__link">
+    Get the new docker-compose file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-the-new-env-file" class="md-nav__link">
+    Get the new .env file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-the-new-env-file" class="md-nav__link">
+    Configure the new .env file
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure the new .env file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traefik" class="md-nav__link">
+    Traefik
+  </a>
+  
+    <nav class="md-nav" aria-label="Traefik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traefik-tls" class="md-nav__link">
+    Traefik - TLS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eve-online-sso" class="md-nav__link">
+    EVE Online SSO
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-seat-application-key" class="md-nav__link">
+    The SeAT Application Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-details" class="md-nav__link">
+    Database details
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bringing-seat-4-up" class="md-nav__link">
+    Bringing SeAT 4 up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-your-installation" class="md-nav__link">
+    Check your installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-user-tokens" class="md-nav__link">
+    Convert User Tokens
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-eve-sde" class="md-nav__link">
+    Update EVE SDE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bare_metal/" title="Bare metal" class="md-nav__link">
+      Bare metal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../from_seat_2_0/" title="From SeAT 2.0" class="md-nav__link">
+      From SeAT 2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../from_seat_1_0/" title="From SeAT 1.0" class="md-nav__link">
+      From SeAT 1.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Configuration
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../configuration/esi_configuration/" title="ESI Configuration" class="md-nav__link">
+      ESI Configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Email Setup
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Email Setup" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Email Setup
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../configuration/email_setup/mailgun/" title="Mailgun" class="md-nav__link">
+      Mailgun
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../configuration/email_setup/gmail/" title="GMail" class="md-nav__link">
+      GMail
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../configuration/env_file_reference/" title="Env File Reference" class="md-nav__link">
+      Env File Reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../configuration/eve_administrative_contact/" title="EVE Administrative Contact" class="md-nav__link">
+      EVE Administrative Contact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../configuration/configuration_overload/" title="Configuration Overload" class="md-nav__link">
+      Configuration Overload
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../configuration/sde_overload/" title="SDE Overload" class="md-nav__link">
+      SDE Overload
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Admin Guides
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Admin Guides" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Admin Guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../admin_guides/admin_login/" title="Admin Login" class="md-nav__link">
+      Admin Login
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../admin_guides/docker_admin/" title="Docker Admin" class="md-nav__link">
+      Docker Admin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../admin_guides/authorizations/" title="Authorizations" class="md-nav__link">
+      Authorizations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../admin_guides/buckets/" title="Buckets" class="md-nav__link">
+      Buckets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../admin_guides/squads/" title="Squads" class="md-nav__link">
+      Squads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../admin_guides/understanding_tracking/" title="Understanding Tracking" class="md-nav__link">
+      Understanding Tracking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../admin_guides/scaled_deployments/" title="Scaled Deployments" class="md-nav__link">
+      Scaled Deployments
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      User Guides
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="User Guides" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        User Guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../user_guides/moons_reporter/" title="Moons Reporter" class="md-nav__link">
+      Moons Reporter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Developer Guides
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Developer Guides" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Developer Guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../developer_guides/developer_installation/" title="Developer Installation" class="md-nav__link">
+      Developer Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../developer_guides/general_guide/" title="General Guide" class="md-nav__link">
+      General Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../developer_guides/job_queue_flow/" title="Job Queue Flow" class="md-nav__link">
+      Job Queue Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../developer_guides/development_tips/" title="Development Tips" class="md-nav__link">
+      Development Tips
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../developer_guides/core_package_breakdown/" title="Core Package Breakdown" class="md-nav__link">
+      Core Package Breakdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../developer_guides/package_development/" title="Package Development" class="md-nav__link">
+      Package Development
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../developer_guides/seat_api/" title="SeAT API" class="md-nav__link">
+      SeAT API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../styling/" title="Styling" class="md-nav__link">
+      Styling
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../community_packages/" title="Community Packages" class="md-nav__link">
+      Community Packages
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      About
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="About" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../about/contact/" title="Contact" class="md-nav__link">
+      Contact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../about/reporting_bugs/" title="Reporting Bugs" class="md-nav__link">
+      Reporting Bugs
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-upgrade-procedure" class="md-nav__link">
+    Docker Upgrade Procedure
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Upgrade Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tldr-upgrades" class="md-nav__link">
+    tl;dr upgrades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-changes-since-seat-3" class="md-nav__link">
+    Docker changes since SeAT 3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preperation" class="md-nav__link">
+    Preperation
+  </a>
+  
+    <nav class="md-nav" aria-label="Preperation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backup-your-database" class="md-nav__link">
+    Backup your database
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-your-env-file" class="md-nav__link">
+    Backup your env file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrade-docker-compose" class="md-nav__link">
+    Upgrade docker-compose
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-seat-3" class="md-nav__link">
+    Stop SeAT 3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-to-seat-4" class="md-nav__link">
+    Upgrading to SeAT 4
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrading to SeAT 4">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-new-docker-compose-file" class="md-nav__link">
+    Get the new docker-compose file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-the-new-env-file" class="md-nav__link">
+    Get the new .env file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-the-new-env-file" class="md-nav__link">
+    Configure the new .env file
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure the new .env file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traefik" class="md-nav__link">
+    Traefik
+  </a>
+  
+    <nav class="md-nav" aria-label="Traefik">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traefik-tls" class="md-nav__link">
+    Traefik - TLS
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#eve-online-sso" class="md-nav__link">
+    EVE Online SSO
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-seat-application-key" class="md-nav__link">
+    The SeAT Application Key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#database-details" class="md-nav__link">
+    Database details
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bringing-seat-4-up" class="md-nav__link">
+    Bringing SeAT 4 up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-your-installation" class="md-nav__link">
+    Check your installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-user-tokens" class="md-nav__link">
+    Convert User Tokens
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-eve-sde" class="md-nav__link">
+    Update EVE SDE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/eveseat/docs/edit/master/docs/upgrading/from_seat_3_0/docker.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="seat-30-to-40-docker">SeAT 3.0 to 4.0 (Docker)<a class="headerlink" href="#seat-30-to-40-docker" title="Permanent link">&para;</a></h1>
+<p>The upgrade path from SeAT 3.0 to SeAT 4.0 requires some manual work. This is primarily due to large amounts of refactoring that made it into SeAT 4.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Major changes have been made to the way packages workg together, especially the eveapi, web and services packages.</p>
+<p>The way jobs are queued and queues themselves have also changed, mostly to reduce resource usage and to improve fluency.</p>
+<p>Before starting the upgrade, pay check the plugins you may be using and ensure that they are compatible with SeAT 4. If you are unsure, join us on Slack so that we can tru and assist or redirect you to proper person.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before you do anything, read and understand this entire upgrade guide.</p>
+<p>Those instructions are valid for Docker deployment only.
+Please refer to <a href="../bare_metal/">bare metal instructions</a> for a non-docker installation.</p>
+<p><strong>Remember</strong> to do make a complete backup of your current database making a copy off the server where SeAT runs together with the <code>.env</code> file. Both of these are the only things required to rebuilt your instance in case of failure.</p>
+</div>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Check <a href="../../../installation/requirements/">SeAT 4.0 requirements</a></li>
+<li>A database backup is an absolute <strong>must</strong>. Everything in SeAT can be recovered in some way or form except <em>for your database</em>.</li>
+<li>Enough storage space to have SeAT 3, SeAT 4 and a backup of your SeAT 3 database.</li>
+<li>Ensure all your SeAT 3 packages are up-to-date (check this in <strong>Settings &gt; SeAT Settings</strong>)</li>
+</ul>
+<h2 id="docker-upgrade-procedure">Docker Upgrade Procedure<a class="headerlink" href="#docker-upgrade-procedure" title="Permanent link">&para;</a></h2>
+<p>If you are currently using a docker installation for SeAT 3, you are in for a treat because upgrading is super easy. All we are going to do is bring the v4 stack up, connect your database and watch as the Docker entrypoint takes care of the rest.</p>
+<p>This guide is going to step through some quick preparation steps, then perform the upgrade and finally, check that everything worked out as expected. Let's dive in.</p>
+<h3 id="tldr-upgrades">tl;dr upgrades<a class="headerlink" href="#tldr-upgrades" title="Permanent link">&para;</a></h3>
+<p>We highly reccomend that you read the details of this upgrade guide to get familiar with what has changed. But, if this is your nth upgrade, maybe you just want to get the summary of everything, so here it is:</p>
+<ul>
+<li>Make a <a href="../../../admin_guides/docker_admin/#database-backups-and-restore">backup</a> of your database.</li>
+<li><code>cd</code> to your install dir (which is probably <code>/opt/seat-docker</code>) and bring the stack down with <code>docker-compose down</code></li>
+<li>Make a copy of your <code>.env</code> and <code>docker-compose.yml</code> files.</li>
+<li>Download the new <code>docker-compose.yml</code> file with <code>curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml</code>.</li>
+<li>Down the new <code>.env</code> file with <code>curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env</code>.</li>
+<li>Upgrade your <code>docker-compose</code> installation. It should be version <code>1.26</code> and up.</li>
+<li>Configure the new <code>.env</code> file. Important configs include the <code>TRAEFIK_</code> variables, the <code>SEAT_SUBDOMAIN</code> variable. Copy over existing values from your old <code>.env</code> file for the <code>EVE_CLIENT_</code> variables, the <code>APP_KEY</code> varaible and finally the <code>DB_</code> variables.</li>
+<li>Bring the stack back up with <code>docker-compose up -d</code> and watch the migration process.</li>
+<li>Finally, once the migration process is complete, update the EVE SDE to populate the tables with static data with: <code>docker-compose exec seat-web php artisan eve:update:sde --force -n</code></li>
+</ul>
+<p>🎉</p>
+<h3 id="docker-changes-since-seat-3">Docker changes since SeAT 3<a class="headerlink" href="#docker-changes-since-seat-3" title="Permanent link">&para;</a></h3>
+<p>A number of changes have been made how the docker-compose stack is glued together.</p>
+<p>First, the docker repository for SeAT 4 has a new home <a href="https://github.com/eveseat/seat-docker">here</a>, and a new image <a href="https://hub.docker.com/r/eveseat/seat">here</a>.</p>
+<p>In SeAT 3, services such as web, workers and cron were all using seperate images. For SeAT 4, we have consilidated all of that into a single image, with a service-aware entrypoint. The code for all of this lives in a new dedicated repository instead of being "hidden" away in the script repo <a href="https://github.com/eveseat/scripts/tree/master/docker-compose">here</a>. All of these changes also mean that we now have the ability to properly tag the docker images instead of relying on the <code>latest</code> tag like we did in SeAT 3. Finally.</p>
+<p>Next, the default <code>nginx</code> web server has been replaced with <a href="https://containo.us/traefik/">Traefik</a>. For the majority of users this means little to no change to what you were used to. However, if you were fronting your instance with another reverse proxy, it is important to be aware of this change. The base image used for the SeAT docker image uses apache2 to serve the web UI, and Traefik reverse proxies to this, exposing it to the world. Advanced users can rip this out, expose the apache server directly and continue using the setup you have. The options are limitless.</p>
+<h3 id="preperation">Preperation<a class="headerlink" href="#preperation" title="Permanent link">&para;</a></h3>
+<p>Before you upgrade, you need to backup.</p>
+<h4 id="backup-your-database">Backup your database<a class="headerlink" href="#backup-your-database" title="Permanent link">&para;</a></h4>
+<p>The single most important thing you need is a backup of your SeAT 3 database. Without a backup you will <em>not</em> be able to recover in case of a disaster. So, head on over to the <a href="../../../admin_guides/docker_admin/#database-backups-and-restore">docker db backup section</a> and do that right now.</p>
+<h4 id="backup-your-env-file">Backup your env file<a class="headerlink" href="#backup-your-env-file" title="Permanent link">&para;</a></h4>
+<p>The <code>.env</code> file is the one that has your SeAT installations' configuration. It contains things like your SSO Client ID and Secret (aka: credentials). By default, SeAT docker installations live in <code>/opt/seat-docker</code> meaning your <code>.env</code> file will be at <code>/opt/seat-docker/.env</code>. Make a copy of this file and store it somewhere safe.</p>
+<h4 id="upgrade-docker-compose">Upgrade docker-compose<a class="headerlink" href="#upgrade-docker-compose" title="Permanent link">&para;</a></h4>
+<p>The <code>docker-compose</code> binary should be upgraded so that we can make use of <code>${VARIABLES}</code> inside <code>.env</code> files.</p>
+<p>If you installed <code>docker-compose</code> using your OS' package manager, upgrade the tool using that. Otherwise, a <code>curl</code> invocation to download the latest version should also work.</p>
+<div class="highlight"><pre><span></span><code>curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-<span class="k">$(</span>uname -s<span class="k">)</span>-<span class="k">$(</span>uname -m<span class="k">)</span> -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+</code></pre></div>
+
+<h4 id="stop-seat-3">Stop SeAT 3<a class="headerlink" href="#stop-seat-3" title="Permanent link">&para;</a></h4>
+<p>First, we need to stop the SeAT 3 stack. Assuming you have the default <code>/opt/seat-docker</code> location for your installation, cd to it first and then run:</p>
+<div class="highlight"><pre><span></span><code>docker-compose down
+</code></pre></div>
+
+<p>The output should be similar to this:</p>
+<div class="highlight"><pre><span></span><code>root@seat:/opt/seat-docker# docker-compose down
+Stopping seat-nginx   ... done
+Stopping seat-cron    ... done
+Stopping seat-worker  ... done
+Stopping seat-app     ... done
+Stopping seat-mariadb ... done
+Stopping seat-redis   ... done
+Removing seat-nginx   ... done
+Removing seat-cron    ... done
+Removing seat-worker  ... done
+Removing seat-app     ... done
+Removing seat-mariadb ... done
+Removing seat-redis   ... done
+Removing network seat-docker_seat-network
+</code></pre></div>
+
+<h3 id="upgrading-to-seat-4">Upgrading to SeAT 4<a class="headerlink" href="#upgrading-to-seat-4" title="Permanent link">&para;</a></h3>
+<h4 id="get-the-new-docker-compose-file">Get the new docker-compose file<a class="headerlink" href="#get-the-new-docker-compose-file" title="Permanent link">&para;</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have made customisations to how you deployed SeAT with docker-compose, then you should probably <strong>not</strong> be replacing the compose file like we are about to do. Instead, have a look at the new one <a href="https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml">here</a> and adapt.</p>
+</div>
+<p>Next, we will download the new SeAT 4 docker-compose file. Do that with:</p>
+<div class="highlight"><pre><span></span><code>mv docker-compose.yml docker-compose.yml.back
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml
+</code></pre></div>
+
+<p>With this we have created a copy of the older docker-compose file (just in case), and downloaded the new one.</p>
+<h4 id="get-the-new-env-file">Get the new .env file<a class="headerlink" href="#get-the-new-env-file" title="Permanent link">&para;</a></h4>
+<p>The next step is to get a fresh copy of the new <code>.env</code> file to use together with the new docker-compose setup. There have been a number of changes to this file (primarily as a result of the web server swap out) which we will describe in the next section.</p>
+<p>Get it with:</p>
+<div class="highlight"><pre><span></span><code>mv .env .env.back
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
+</code></pre></div>
+
+<h4 id="configure-the-new-env-file">Configure the new .env file<a class="headerlink" href="#configure-the-new-env-file" title="Permanent link">&para;</a></h4>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This is admitedly the hardest part of the migtation, so pay close attention. Take it slowly and think about what you are doing here.</p>
+</div>
+<p>There are four main settings categories that need to be updated in the new <code>.env</code> file. Those are:</p>
+<ul>
+<li>Traefik (webserver)</li>
+<li>EVE Online SSO Config</li>
+<li>The application key</li>
+<li>Database credentials</li>
+</ul>
+<p>All of these categories will be described below in detail. For all of them, you have to open the newly downloaded <code>.env</code> file in a text editor and update the values. To be sure you are editing the correct file, check its header. It should say:</p>
+<div class="highlight"><pre><span></span><code># SeAT Docker Compose Configuration
+
+# Web server configuration.
+# SeAT running in a docker-compose setup ships with Traefik
+# as the default web server. You only need to configure the
+# parent domain and port where the web server will listen.
+# In most cases, just configuring the domain will be all
+# you need to do.
+</code></pre></div>
+
+<h5 id="traefik">Traefik<a class="headerlink" href="#traefik" title="Permanent link">&para;</a></h5>
+<p>As mentioned earlier. The web server has been swapped out in favour of Traefik. As a result, you need to set a few configuration options to get the web UI to work. If you have a setup where you have configured something like <code>nginx</code> outside of your Docker installation, we highly reccomend you just remove that and switch over to Traefik. Of anything, it's handling of TLS with Let's Encrypt is quite literally a one-time setup and forget thing.</p>
+<p>Inside the <code>.env</code> file, Traefik specific configuration options are prefixed with <code>TRAEFIK_</code>. They are:</p>
+<div class="highlight"><pre><span></span><code>TRAEFIK_DOMAIN=seat.local
+TRAEFIK_HTTPS_PORT=443
+TRAEFIK_HTTP_PORT=80
+TRAEFIK_ACME_EMAIL=you@domain.com
+</code></pre></div>
+
+<p>These fields need to be updated as follows:</p>
+<ul>
+<li><code>TRAEFIK_DOMAIN</code>: This is the base domain where your SeAT installation lives. For example, if your SeAT 3 installation lives at seat.domain.com, you enter domain.com here.</li>
+<li><code>TRAEFIK_HTTPS_PORT</code>: This is the external port that will be open to the world. SeAT 4 in docker with Traefik will only listen on TLS as well. Since its configured to be <code>443</code>, it will most likely clash with your external web server. We reccomend that you just disable your external web server and use Traefik. TLS configuration with it is a breeze!</li>
+<li><code>TRAEFIK_HTTPS_PORT</code>: This is the non-TLS port that Let's Encrypt (as part of the ACME protocol) will connect to during certificate renewals. SeAT will not be available here.</li>
+<li><code>TRAEFIK_ACME_EMAIL</code>: The email address used for Let's Encrypt certificate renewals.</li>
+</ul>
+<p>A <code>SEAT_SUBDOMAIN</code> value is also present, which sets the subdomain where the SeAT web UI lives. This value needs to match what your SeAT 3 installation used, especially so that the existing SSO application you have configured on the EVE SSO portal matches the configured callback url.</p>
+<p>By default, most folks will only configure the domain, subdomain and email and be done. Of course, if you have custom configurations and needs, feel free to adapt.</p>
+<h6 id="traefik-tls">Traefik - TLS<a class="headerlink" href="#traefik-tls" title="Permanent link">&para;</a></h6>
+<p>Traefik should handle all of the relevant configuration to get your site to listen with a valid TLS certificate. The secrets for the TLS configuration in Traefik relies on an <code>acme.json</code> file which you should mount into the Traefik container from the outside so that it persists restart.</p>
+<p>Prepare the json file from within <code>/opt/seat-docker</code> with:</p>
+<div class="highlight"><pre><span></span><code>mkdir acme
+touch acme/acme.json
+chmod <span class="m">600</span> acme/acme.json
+</code></pre></div>
+
+<p>Next, make sure you have the <code>TRAEFIK_ACME_EMAIL</code> variable set, and finally, uncomment the labels that will make use of the Let's Encrypt cert resolver in the <code>docker-compose.yml</code> file. By default, they will look like this, whereby you need to remove the <code>#</code> in front.</p>
+<div class="highlight"><pre><span></span><code>#- &quot;traefik.http.routers.seat-web.tls.certResolver=primary&quot;
+</code></pre></div>
+
+<h5 id="eve-online-sso">EVE Online SSO<a class="headerlink" href="#eve-online-sso" title="Permanent link">&para;</a></h5>
+<p>Since SeAT's authentication relies on EVE's SSO, you need to configure the relevant client id and secret. You can find your old values in the backup you have made of the <code>.env</code> file. The values you need to set are:</p>
+<ul>
+<li><code>EVE_CLIENT_ID</code></li>
+<li><code>EVE_CLIENT_SECRET</code></li>
+</ul>
+<p>For the callback URL, ensure that you have correctly configured the <code>SEAT_SUBDOMAIN</code> value in the previous step.</p>
+<h5 id="the-seat-application-key">The SeAT Application Key<a class="headerlink" href="#the-seat-application-key" title="Permanent link">&para;</a></h5>
+<p>By default, the <code>APP_KEY</code> value for a fresh <code>.env</code> file will be <code>insecure</code>. This is a purposefully incorrectly formatted value. You can simply set this to the value you have for the same variable in your backup <code>.env</code> file.</p>
+<h5 id="database-details">Database details<a class="headerlink" href="#database-details" title="Permanent link">&para;</a></h5>
+<p>This is one of the more important steps. The database configuration needs to match what your SeAT 3 installation used because the database data lives in a docker volume. When the stack will start up for the first time again, the SeAT 4 container will have access to the SeAT 3 database volume, and run migrations there. So, you need to copy the database credentials from the old <code>.env</code> file to the new one.</p>
+<p>The variable names have remained unchanged, but for referece they are:</p>
+<div class="highlight"><pre><span></span><code>DB_DATABASE=seat
+DB_USERNAME=seat
+DB_HOST=mariadb
+DB_PASSWORD=i_should_be_changed
+</code></pre></div>
+
+<h3 id="bringing-seat-4-up">Bringing SeAT 4 up<a class="headerlink" href="#bringing-seat-4-up" title="Permanent link">&para;</a></h3>
+<p>The only thing that is left to do is to start the stack up again. The first time we are goin to start SeAT 4 we wont use the <code>-d</code> flag. This is just so that you can see what's happening during the upgrade procedure. So, start SeAT with:</p>
+<div class="highlight"><pre><span></span><code>docker-compose up
+</code></pre></div>
+
+<p>You should see something like this happen when you run the above command:</p>
+<div class="highlight"><pre><span></span><code>root@seat:/opt/seat-docker# docker-compose up
+Creating network &quot;seat-docker_seat-network&quot; with the default driver
+Pulling mariadb (mariadb:10)...
+10: Pulling from library/mariadb
+3ff22d22a855: Already exists
+e7cb79d19722: Already exists
+323d0d660b6a: Already exists
+
+...
+</code></pre></div>
+
+<p>After a while, migrations should start running:</p>
+<div class="highlight"><pre><span></span><code>...
+
+seat-web_1     | starting web service
+seat-web_1     | Starting first run routines
+seat-web_1     | Migrating: 2018_06_05_110000_drop_assets_from_outposts
+seat-web_1     | Migrated:  2018_06_05_110000_drop_assets_from_outposts (0.02 seconds)
+seat-web_1     | Migrating: 2019_02_09_110731_drop_type_from_notification_groups
+seat-web_1     | Migrated:  2019_02_09_110731_drop_type_from_notification_groups (0.01 seconds)
+seat-web_1     | Migrating: 2019_05_11_164831_add_permission_role_filter
+
+...
+</code></pre></div>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do <strong>not</strong> interrupt the database migration phase. It will leave your database in a potentially corrupt state, meaning you are going to have to do some extra pluming to get a backup restored. Not a train smash, but not worth it.</p>
+</div>
+<p>Be patient, there are many, many database changes that need to apply.</p>
+<p>Eventually, when everything is done you should start seeing the following output:</p>
+<div class="highlight"><pre><span></span><code>seat-worker_1  | [2020-08-19 21:11:45][2] Processing: Seat\Eveapi\Jobs\Status\Status
+seat-worker_1  | [2020-08-19 21:11:45][1] Processing: Seat\Eveapi\Jobs\Status\Esi
+seat-worker_1  | [2020-08-19 21:11:46][2] Processed:  Seat\Eveapi\Jobs\Status\Status
+seat-worker_1  | [2020-08-19 21:11:46][1] Processed:  Seat\Eveapi\Jobs\Status\Esi
+</code></pre></div>
+
+<p>This is a good sign, and means everything is now ready!</p>
+<h3 id="check-your-installation">Check your installation<a class="headerlink" href="#check-your-installation" title="Permanent link">&para;</a></h3>
+<p>The first obvious step will be to check that you can access the web UI. If not, something is probably weird with the web server configuration and needs some tweaking.</p>
+<p>If everything seems to be working fine, you can hit <code>crtl + c</code> which will bring the stack down gracefully.</p>
+<div class="highlight"><pre><span></span><code>^CGracefully stopping... (press Ctrl+C again to force)
+Stopping seat-docker_seat-cron_1   ...
+Stopping seat-docker_seat-worker_1 ...
+Stopping seat-docker_seat-web_1    ...
+Stopping seat-docker_traefik_1     ... done
+Stopping seat-docker_redis_1       ...
+</code></pre></div>
+
+<p>Then, bring it back up with the <code>-d</code> flag.</p>
+<div class="highlight"><pre><span></span><code>docker-compose up -d
+</code></pre></div>
+
+<h3 id="convert-user-tokens">Convert User Tokens<a class="headerlink" href="#convert-user-tokens" title="Permanent link">&para;</a></h3>
+<p>SeAT 4.x is using the new CCP Token format (v2). In order to use registered tokens from your previous installation,
+you'll have to run the following command:</p>
+<div class="highlight"><pre><span></span><code>docker-compose <span class="nb">exec</span> seat-web php artisan seat:token:upgrade
+</code></pre></div>
+
+<h3 id="update-eve-sde">Update EVE SDE<a class="headerlink" href="#update-eve-sde" title="Permanent link">&para;</a></h3>
+<p>This is the final step, for real. You need to update the EVE SDE. With your stack up and running (after executing <code>docker-compose up -d</code>), you can now force an SDE update with:</p>
+<div class="highlight"><pre><span></span><code>docker-compose <span class="nb">exec</span> seat-web php artisan eve:update:sde --force -n
+</code></pre></div>
+
+<p>Congrats, and welcome to SeAT 4!</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Super administrator is now an user flag and have to be defined at user level instead of Access Permissions.
+You'll get more information regarding the new system on <a href="../../../admin_guides/admin_login/">Admin Login</a> and <a href="../../../admin_guides/authorizations/">Authorizations</a> pages.</p>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../../general/" title="General" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                General
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../bare_metal/" title="Bare metal" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Bare metal
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2015 - 2020 Leon Jacobs
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/eveseat/seat" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.36cbf620.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.00c583dd.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.7f7c8775.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

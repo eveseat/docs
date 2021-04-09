@@ -1,0 +1,1633 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Simple EVE Api Tool Documentation">
+      
+      
+        <link rel="canonical" href="https://eveseat.github.io/docs/developer_guides/package_development/">
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-5.1.0">
+    
+    
+      
+        <title>Package Development - SeAT Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.89dc9fe3.min.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ecd4686e.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#757575">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/extra_footer.css">
+    
+      <link rel="stylesheet" href="../../css/extra_typo.css">
+    
+    
+      
+        
+<link rel="preconnect dns-prefetch" href="https://www.google-analytics.com">
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-119530306-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview")})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="grey" data-md-color-accent="indigo">
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#developers-guides-package-development" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://eveseat.github.io/docs" title="SeAT Documentation" class="md-header-nav__button md-logo" aria-label="SeAT Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" /></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            SeAT Documentation
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Package Development
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/eveseat/docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://eveseat.github.io/docs" title="SeAT Documentation" class="md-nav__button md-logo" aria-label="SeAT Documentation">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+
+    </a>
+    SeAT Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/eveseat/docs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Installation
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Installation" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Installation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../installation/requirements/" title="Requirements" class="md-nav__link">
+      Requirements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../installation/docker_installation/" title="Docker Installation" class="md-nav__link">
+      Docker Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../installation/manual_installation/" title="Manual Installation" class="md-nav__link">
+      Manual Installation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Upgrading
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Upgrading" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Upgrading
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/general/" title="General" class="md-nav__link">
+      General
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      From SeAT 3.0
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="From SeAT 3.0" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        From SeAT 3.0
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/from_seat_3_0/docker/" title="Docker" class="md-nav__link">
+      Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/from_seat_3_0/bare_metal/" title="Bare metal" class="md-nav__link">
+      Bare metal
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/from_seat_2_0/" title="From SeAT 2.0" class="md-nav__link">
+      From SeAT 2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../upgrading/from_seat_1_0/" title="From SeAT 1.0" class="md-nav__link">
+      From SeAT 1.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Configuration
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Configuration
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/esi_configuration/" title="ESI Configuration" class="md-nav__link">
+      ESI Configuration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Email Setup
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Email Setup" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Email Setup
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/email_setup/mailgun/" title="Mailgun" class="md-nav__link">
+      Mailgun
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/email_setup/gmail/" title="GMail" class="md-nav__link">
+      GMail
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/env_file_reference/" title="Env File Reference" class="md-nav__link">
+      Env File Reference
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/eve_administrative_contact/" title="EVE Administrative Contact" class="md-nav__link">
+      EVE Administrative Contact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/configuration_overload/" title="Configuration Overload" class="md-nav__link">
+      Configuration Overload
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../configuration/sde_overload/" title="SDE Overload" class="md-nav__link">
+      SDE Overload
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Admin Guides
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Admin Guides" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Admin Guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/admin_login/" title="Admin Login" class="md-nav__link">
+      Admin Login
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/docker_admin/" title="Docker Admin" class="md-nav__link">
+      Docker Admin
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/authorizations/" title="Authorizations" class="md-nav__link">
+      Authorizations
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/buckets/" title="Buckets" class="md-nav__link">
+      Buckets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/squads/" title="Squads" class="md-nav__link">
+      Squads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/understanding_tracking/" title="Understanding Tracking" class="md-nav__link">
+      Understanding Tracking
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../admin_guides/scaled_deployments/" title="Scaled Deployments" class="md-nav__link">
+      Scaled Deployments
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      User Guides
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="User Guides" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        User Guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user_guides/moons_reporter/" title="Moons Reporter" class="md-nav__link">
+      Moons Reporter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+    
+    <label class="md-nav__link" for="nav-7">
+      Developer Guides
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Developer Guides" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        Developer Guides
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../developer_installation/" title="Developer Installation" class="md-nav__link">
+      Developer Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../general_guide/" title="General Guide" class="md-nav__link">
+      General Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../job_queue_flow/" title="Job Queue Flow" class="md-nav__link">
+      Job Queue Flow
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../development_tips/" title="Development Tips" class="md-nav__link">
+      Development Tips
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../core_package_breakdown/" title="Core Package Breakdown" class="md-nav__link">
+      Core Package Breakdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Package Development
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3,9H17V7H3V9M3,13H17V11H3V13M3,17H17V15H3V17M19,17H21V15H19V17M19,7V9H21V7H19M19,13H21V11H19V13Z" /></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Package Development" class="md-nav__link md-nav__link--active">
+      Package Development
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background-notes" class="md-nav__link">
+    Background notes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-provider" class="md-nav__link">
+    Service provider
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-structure" class="md-nav__link">
+    Package structure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#routes-and-controllers" class="md-nav__link">
+    Routes and controllers
+  </a>
+  
+    <nav class="md-nav" aria-label="Routes and controllers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routes" class="md-nav__link">
+    Routes
+  </a>
+  
+    <nav class="md-nav" aria-label="Routes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    Access Control
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middleware" class="md-nav__link">
+    Middleware
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#views" class="md-nav__link">
+    Views
+  </a>
+  
+    <nav class="md-nav" aria-label="Views">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sidebar-menu" class="md-nav__link">
+    Sidebar menu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#character-submenus" class="md-nav__link">
+    Character submenus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corporation-submenus" class="md-nav__link">
+    Corporation submenus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootstrapping-menu-items" class="md-nav__link">
+    Bootstrapping menu items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    Permissions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database" class="md-nav__link">
+    Database
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../seat_api/" title="SeAT API" class="md-nav__link">
+      SeAT API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../styling/" title="Styling" class="md-nav__link">
+      Styling
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../community_packages/" title="Community Packages" class="md-nav__link">
+      Community Packages
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../troubleshooting/" title="Troubleshooting" class="md-nav__link">
+      Troubleshooting
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      About
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="About" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+        </span>
+        About
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/contact/" title="Contact" class="md-nav__link">
+      Contact
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../about/reporting_bugs/" title="Reporting Bugs" class="md-nav__link">
+      Reporting Bugs
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#background-notes" class="md-nav__link">
+    Background notes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-provider" class="md-nav__link">
+    Service provider
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-structure" class="md-nav__link">
+    Package structure
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#routes-and-controllers" class="md-nav__link">
+    Routes and controllers
+  </a>
+  
+    <nav class="md-nav" aria-label="Routes and controllers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#routes" class="md-nav__link">
+    Routes
+  </a>
+  
+    <nav class="md-nav" aria-label="Routes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-control" class="md-nav__link">
+    Access Control
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#middleware" class="md-nav__link">
+    Middleware
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#views" class="md-nav__link">
+    Views
+  </a>
+  
+    <nav class="md-nav" aria-label="Views">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sidebar-menu" class="md-nav__link">
+    Sidebar menu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#character-submenus" class="md-nav__link">
+    Character submenus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corporation-submenus" class="md-nav__link">
+    Corporation submenus
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootstrapping-menu-items" class="md-nav__link">
+    Bootstrapping menu items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#permissions" class="md-nav__link">
+    Permissions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#database" class="md-nav__link">
+    Database
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/eveseat/docs/edit/master/docs/developer_guides/package_development.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <p><img alt="SeAT" src="https://i.imgur.com/aPPOxSK.png" /></p>
+<h1 id="developers-guides-package-development">Developers Guides - Package Development<a class="headerlink" href="#developers-guides-package-development" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>So, you want to write a SeAT package? Hopefully this guide helps you along the way! This guide was written while writing the API package for SeAT <a href="https://github.com/eveseat/api">here</a>. I figured it would be best to try and capture the process to help in case I miss any important details.</p>
+<p>Be sure to also have a look at the <a href="../development_tips/">Development Tips</a> page!</p>
+<h2 id="background-notes">Background notes<a class="headerlink" href="#background-notes" title="Permanent link">&para;</a></h2>
+<p>I think its important to keep in mind a few things about how SeAT is put together. The most important being a brief description of what each core package offers, and how you can integrate with them. For a breakdown on what the core packages provide, please refer the to [breakdown].</p>
+<p>SeAT 4 is written on <a href="http://laravel.com/docs/6.x">Laravel 6</a>. A <strong>very</strong> good thing to do would be to actually read the documentation top-&gt;bottom and get an idea of what is possible with the framework. SeAT core packages make heavy use of many of the features, based directly of what has been interpreted by this very documentation.</p>
+<p>If you really want to start contributing packages, but just cant get your head around this whole Laravel thing, then I can suggest you have a look at this excellent free course material covering the basics of what you will encounter in the SeAT codebase. <a href="https://laracasts.com/series/laravel-6-from-scratch">https://laracasts.com/series/laravel-6-from-scratch</a></p>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<p>The very first thing to do is prepare the empty git repository on say Github, as well as the composer package itself. Clone a clean repository, and run <code>composer init</code>, answering any questions. Once that is done, edit the resultant <code>composer.json</code> and prepare the <code>autoload</code> block. SeAT core follows the <a href="http://www.php-fig.org/psr/psr-4/">PSR-4</a> autoloading standard. I will suggest you do the same. For some more detailed composer info, refer to the docs <a href="https://getcomposer.org/doc/01-basic-usage.md">here</a>. For the API package, I am going to autoload <strong>Seat\Api</strong> from the <code>src</code> directory using PSR-4.</p>
+<h2 id="service-provider">Service provider<a class="headerlink" href="#service-provider" title="Permanent link">&para;</a></h2>
+<p>As mentioned in the package <a href="../core_package_breakdown/">breakdowns</a>, the <em>eveseat/seat</em> repository bootstraps packages via service providers or package discovery. This is actually a Laravel convention that SeAT just follows. To get our package ready, we need to create a service provider. Thankfully there is a command to stub a new one for us. For the API package, I just ran <code>php artisan make:provider ApiServiceProvider</code> and copied the resultant file from <code>app/Providers</code> to my packages <code>src/</code> directory. Our packages file structure now looks as follows:</p>
+<div class="highlight"><pre><span></span><code>├── composer.json
+└── src
+    └── ApiServiceProvider.php
+</code></pre></div>
+
+<h2 id="package-structure">Package structure<a class="headerlink" href="#package-structure" title="Permanent link">&para;</a></h2>
+<p>From here you pretty much free to do what you want. How you structure the package will obviously depend on what exactly your package provides. In principle, I prefer to follow the same package structure as Laravel does for web / console features. Since we are going to be providing web features with the API, we will quickly create a few folders in preparation for this. I know beforehand that we are going to need a model to store API tokens; middleware to authenticate API requests; routes and controllers for the actual api logic (preferably making use of the <em>eveapi/services</em> repository classes for data access) as well as a few web views for administrators to generate API tokens for applications. With that in mind, the initial structure looks as follows:</p>
+<div class="highlight"><pre><span></span><code>├── composer.json
+└── src
+    ├── ApiServiceProvider.php
+    ├── Config
+    ├── Http
+    │   ├── Controllers
+    │   └── Middleware
+    ├── Models
+    ├── database
+    │   └── migrations
+    └── resources
+        └── views
+</code></pre></div>
+
+<p>This will obviously change as we progress building the package.</p>
+<h2 id="routes-and-controllers">Routes and controllers<a class="headerlink" href="#routes-and-controllers" title="Permanent link">&para;</a></h2>
+<p>To start testing the API, we need to add a route and controller to process some requests and responses. My <code>routes.php</code> file will have a global <code>Route::group()</code> to encapsulate the routes in the <strong>Seat\Api</strong> namespace as well as prefix them with <code>api/</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="x">// File: routes.php</span>
+<span class="x">Route::group([ &#39;namespace&#39; =&gt; &#39;Seat\Api\Http\Controllers&#39;,</span>
+<span class="x">    &#39;prefix&#39; =&gt; &#39;api&#39;</span>
+<span class="x">], function () {</span>
+
+<span class="x">    // Logic here</span>
+<span class="x">});</span>
+</code></pre></div>
+
+<p>See the final product <a href="https://github.com/eveseat/api/blob/master/src/Http/routes.php">here</a> for a more complete example.</p>
+<p>Next, I add some logic with a route to <code>/</code>, update the base frameworks <code>composer.json</code> to autoload the <strong>Seat\Api</strong> namespace from the directory where my package lives, run <code>composer dump-autoload</code> and add the service provider to the <em>eveseat/seat</em> repositories <code>app.php</code> providers array. Lastly, I add a method to the service provider to load the routes and call it form the <code>boot()</code> method in the generated stub.</p>
+<p>See the complete service provider <a href="https://github.com/eveseat/api/blob/master/src/ApiServiceProvider.php">here</a></p>
+<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<span class="x">* Include the routes</span>
+<span class="x">*/</span>
+<span class="x">public function add_routes()</span>
+<span class="x">{</span>
+
+<span class="x">    if (!$this-&gt;app-&gt;routesAreCached()) {</span>
+<span class="x">        include __DIR__ . &#39;/Http/routes.php&#39;;</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<p>As a final test, I check that my route is accessible from a booted SeAT app. :)  </p>
+<h3 id="routes">Routes<a class="headerlink" href="#routes" title="Permanent link">&para;</a></h3>
+<h4 id="access-control">Access Control<a class="headerlink" href="#access-control" title="Permanent link">&para;</a></h4>
+<p>Obviously, some routes are not for everyone's eyes. SeAT comes with middleware that can be used to filter out requests that may not be authorized for your route. As can be seen in the example below (from <a href="https://github.com/eveseat/api/blob/85590fbf0b18b7078d977cade50fdfc3d22709d7/src/Http/routes.php#L34">here</a>), we are filtering out requests to <code>api-admin</code> for only superusers.</p>
+<div class="highlight"><pre><span></span><code><span class="x">Route::group([</span>
+<span class="x">        &#39;namespace&#39;  =&gt; &#39;Admin&#39;,</span>
+<span class="x">        &#39;middleware&#39; =&gt; [&#39;auth&#39;, &#39;can:global.superuser&#39;], // The ACL specification.</span>
+<span class="x">        &#39;prefix&#39;     =&gt; &#39;api-admin&#39;</span>
+<span class="x">    ], function () {</span>
+<span class="x">        Route::get(&#39;/&#39;, [</span>
+<span class="x">            &#39;as&#39;   =&gt; &#39;api-admin.list&#39;,</span>
+<span class="x">            &#39;uses&#39; =&gt; &#39;ApiAdminController@listTokens&#39;]);</span>
+<span class="x">    });</span>
+</code></pre></div>
+
+<p>I suggest you have a look at the <code>eveseat/web</code> packages routes definitions for more examples on how the middleware is used. <a href="https://github.com/eveseat/web/tree/master/src/Http/Routes">https://github.com/eveseat/web/tree/master/src/Http/Routes</a></p>
+<h4 id="middleware">Middleware<a class="headerlink" href="#middleware" title="Permanent link">&para;</a></h4>
+<p>To auth our API requests, we are going to go with token based authentication for now. We want users to present us with a <code>X-Token</code> header (from a valid allowed src IP address) before they may proceed with their request. To do this, we will filter requests using middleware. Thankfully, again, Laravel comes with a command to stub us some empty middleware. Run <code>php artisan make:middleware ApiToken</code> and copy it to your projects <code>Middleware</code> folder. Next we should register the middleware in our service provider. I do this by adding a method and calling it in <code>boot()</code>.</p>
+<p>See the complete middleware <a href="https://github.com/eveseat/api/blob/master/src/Http/Middleware/ApiToken.php">here</a></p>
+<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<span class="x"> * Include the middleware needed</span>
+<span class="x"> *</span>
+<span class="x"> * @param $router</span>
+<span class="x"> */</span>
+<span class="x">public function add_middleware($router)</span>
+<span class="x">{</span>
+
+<span class="x">    // Authenticate checks that the token is valid</span>
+<span class="x">    // from an allowed IP address</span>
+<span class="x">    $router-&gt;middleware(&#39;api.auth&#39;, ApiToken::class);</span>
+
+<span class="x">}</span>
+</code></pre></div>
+
+<h2 id="views">Views<a class="headerlink" href="#views" title="Permanent link">&para;</a></h2>
+<p>Although almost all of our interfacing with this package will be via the json api endpoints, we need to add a few routes that will give an administrator the ability to generate API tokens as well as view logs etc. This will be for an administrator, so we will re-use the ACL features provided by the <code>eveseat/web</code> package to ensure that only admins an access our api-admin routes. Views live in <code>resources/views</code> and are bootstrapped to the <code>api</code> namespace in the service provider. See the service provider <a href="https://github.com/eveseat/api/blob/master/src/ApiServiceProvider.php">here</a> for an example.</p>
+<p>Note how we are re-using views that exist in the <code>web</code> namespace. All we have to do is extend one of the <a href="https://github.com/eveseat/web/tree/master/src/resources/views/layouts/grids">grids</a> like <a href="https://github.com/eveseat/api/blob/master/src/resources/views/list.blade.php#L1">here</a> and start without our blade template.</p>
+<h3 id="sidebar-menu">Sidebar menu<a class="headerlink" href="#sidebar-menu" title="Permanent link">&para;</a></h3>
+<p>Integrating with the sidebar is also really easy. All you have to do is create a config file, bootstrap it in the service provider and viola. The config file itself has a set structure for the <code>web</code> package to interpret and can be seen <a href="https://github.com/eveseat/api/blob/master/src/Config/package.sidebar.php">here</a>.</p>
+<div class="highlight"><pre><span></span><code><span class="x">return [</span>
+<span class="x">    &#39;api&#39; =&gt; [</span>
+<span class="x">        &#39;permission&#39;    =&gt; &#39;global.superuser&#39;,</span>
+<span class="x">        &#39;name&#39;          =&gt; &#39;Api Tokens&#39;,</span>
+<span class="x">        &#39;icon&#39;          =&gt; &#39;fas fa-exchange&#39;,</span>
+<span class="x">        &#39;route_segment&#39; =&gt; &#39;api-admin&#39;,</span>
+<span class="x">        &#39;entries&#39;       =&gt; [</span>
+<span class="x">            [   // Manage API Tokens</span>
+<span class="x">                &#39;name&#39;  =&gt; &#39;Manage&#39;,</span>
+<span class="x">                &#39;icon&#39;  =&gt; &#39;fas fa-key&#39;,</span>
+<span class="x">                &#39;route&#39; =&gt; &#39;api-admin.list&#39;</span>
+<span class="x">            ]</span>
+<span class="x">        ]</span>
+<span class="x">    ]</span>
+<span class="x">];</span>
+</code></pre></div>
+
+<p>The format is generally an array, whereby the first key is the name of your package (<code>api</code> in this case). Thereafter you can specify the main entry, and any sub entries you want to add. The <code>route</code> key should refer to the named route. The sidebar loader will resolve the route itself for you. If you have any permissions requirements for your package, the <code>permission</code> key can be used together with a required SeAT permission to render the view.</p>
+<h3 id="character-submenus">Character submenus<a class="headerlink" href="#character-submenus" title="Permanent link">&para;</a></h3>
+<p>Integrating with the character sub menus is also really easy. Just like the sidebar, all you have to do is create a config file, bootstrap it in the service provider and viola. The namespace should be named <code>package.character.menu</code> in your service provider. A sample config file can be seen below:</p>
+<div class="highlight"><pre><span></span><code><span class="x">// file: package.character.menu.php</span>
+
+<span class="x">return [</span>
+<span class="x">    [</span>
+<span class="x">        &#39;name&#39;           =&gt; &#39;Research&#39;,</span>
+<span class="x">        &#39;permission&#39;     =&gt; &#39;character.research&#39;,</span>
+<span class="x">        &#39;highlight_view&#39; =&gt; &#39;research&#39;,</span>
+<span class="x">        &#39;route&#39;          =&gt; &#39;character.view.research&#39;</span>
+<span class="x">    ]</span>
+<span class="x">];</span>
+</code></pre></div>
+
+<h3 id="corporation-submenus">Corporation submenus<a class="headerlink" href="#corporation-submenus" title="Permanent link">&para;</a></h3>
+<p>Integrating with the corporation sub menus is also really easy. Just like the sidebar and character menus, all you have to do is create a config file, bootstrap it in the service provider and viola. The namespace should be named <code>package.corporation.menu</code> in your service provider. A sample config file can be seen below:</p>
+<div class="highlight"><pre><span></span><code><span class="x">// file: package.corporation.menu.php</span>
+
+<span class="x">return [</span>
+<span class="x">    [</span>
+<span class="x">        &#39;name&#39;           =&gt; &#39;Research&#39;,</span>
+<span class="x">        &#39;permission&#39;     =&gt; &#39;corporation.research&#39;,</span>
+<span class="x">        &#39;highlight_view&#39; =&gt; &#39;research&#39;,</span>
+<span class="x">        &#39;route&#39;          =&gt; &#39;corporation.view.research&#39;</span>
+<span class="x">    ]</span>
+<span class="x">];</span>
+</code></pre></div>
+
+<h3 id="bootstrapping-menu-items">Bootstrapping menu items<a class="headerlink" href="#bootstrapping-menu-items" title="Permanent link">&para;</a></h3>
+<p>In the above items, we refer to the files needing to be <em>bootstrapped</em> via the service provider. All this really means is that we have to tell the Laravel application where to find configuration information for a namespace. So, if we wanted to add a sidebar item, we would add the following line to the <code>register()</code> method of the service provider:</p>
+<div class="highlight"><pre><span></span><code><span class="x">// Include this packages menu items</span>
+<span class="x">$this-&gt;mergeConfigFrom(__DIR__ . &#39;/Config/package.sidebar.php&#39;, &#39;package.sidebar&#39;);</span>
+</code></pre></div>
+
+<p>The first argument is the file with the sidebar definitions, the second is the namespace.</p>
+<h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">&para;</a></h2>
+<p>You are able to register and use your own permissions for use within SeAT. This is relatively simple and done by creating a config file in the location <code>Config/Permissions/package.permissions.php</code>. It should return an array of the following format:</p>
+<div class="highlight"><pre><span></span><code><span class="x">[</span>
+<span class="x">    &#39;sheet&#39; =&gt; [</span>
+<span class="x">        &#39;label&#39;       =&gt; &#39;Grant access to Character Sheet&#39;,</span>
+<span class="x">        &#39;description&#39; =&gt; &#39;The Character Sheet contains basic information....&#39;,</span>
+<span class="x">        &#39;division&#39;    =&gt; &#39;financial&#39;,</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;intel&#39; =&gt; [</span>
+<span class="x">        &#39;label&#39;       =&gt; &#39;web::permissions.character_intel_label&#39;,</span>
+<span class="x">        &#39;description&#39; =&gt; &#39;web::permissions.character_intel_description&#39;,</span>
+<span class="x">        &#39;division&#39;    =&gt; &#39;military&#39;,</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;planetary&#39; =&gt; [</span>
+<span class="x">        &#39;label&#39;       =&gt; &#39;web::permissions.character_planetary_label&#39;,</span>
+<span class="x">        &#39;description&#39; =&gt; &#39;web::permissions.character_planetary_description&#39;,</span>
+<span class="x">        &#39;division&#39;    =&gt; &#39;industrial&#39;,</span>
+<span class="x">    ],</span>
+<span class="x">];</span>
+</code></pre></div>
+
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>mandatory</th>
+<th>purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td>yes</td>
+<td>The displayed name of your permission. It must be a translation token.</td>
+</tr>
+<tr>
+<td>description</td>
+<td></td>
+<td>The displayed permission description. It should help user to determine what the permission is doing. It must be a translation token.</td>
+</tr>
+<tr>
+<td>division</td>
+<td></td>
+<td>It will show a "category" icon to help user figures what will be impacted by the permission. Value can be one of <code>military</code>, <code>assets</code>, <code>financial</code>, <code>industrial</code>.</td>
+</tr>
+<tr>
+<td>gate</td>
+<td></td>
+<td>If you need to manage your permission with a custom policy, you can provide a policy FQCN.</td>
+</tr>
+</tbody>
+</table>
+<p>The definition key (<code>sheet</code>, <code>intel</code>, <code>planetary</code> in the upper sample) will be used as permission unique identifier by the system. This is the one stored in the database, together with scope.</p>
+<p><img alt="Permission Structure" src="../../img/permissions_structure.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>By default, if no gate are provided, those shipped in core will be used according to this pattern :</p>
+<ul>
+<li>character scope: CharacterPolicy, this will require an instance of CharacterInfo to be used in your checks</li>
+<li>corporation scope: CorporationPolicy, this will require an instance of CorporationInfo to be used in your checks</li>
+<li>anything else: GlobalPolicy</li>
+</ul>
+<p>You'll find policy sample at <a href="https://github.com/eveseat/web/tree/master/src/Acl/Policies">this location</a>.</p>
+<p>In SeAT 4, a permission is made of a scope and an ability. The ability is defined by the permissions configuration file and the scope is defined on registration.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you're upgrading a SeAT 3.x plugin, the cheat sheet bellow will probably helps you.</p>
+<table>
+<thead>
+<tr>
+<th>SeAT 3.x</th>
+<th>SeAT 4.x</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auth()-&gt;user()</code></td>
+<td><code>auth()-&gt;user()</code></td>
+<td>Retrieve the currently authenticated user.</td>
+</tr>
+<tr>
+<td><code>auth()-&gt;user()-&gt;group-&gt;main_character</code></td>
+<td><code>auth()-&gt;user()-&gt;main_character</code></td>
+<td>Retrieve the main character from the currently authenticated user.</td>
+</tr>
+<tr>
+<td><code>auth()-&gt;user()-&gt;group-&gt;main_character-&gt;name</code></td>
+<td><code>auth()-&gt;user()-&gt;name</code></td>
+<td>Retrieve the main character name from the currently authenticated user.</td>
+</tr>
+<tr>
+<td><code>auth()-&gt;user()-&gt;group-&gt;characters</code></td>
+<td><code>auth()-&gt;user()-&gt;characters</code></td>
+<td>Retrieve all characters from the currently authenticated user.</td>
+</tr>
+<tr>
+<td><code>auth()-&gt;user()-&gt;refresh_token</code></td>
+<td><code>CharacterInfo()-&gt;refresh_token</code></td>
+<td>Retrieve the refresh token attached to a character.</td>
+</tr>
+<tr>
+<td><code>auth()-&gt;user()-&gt;group-&gt;refresh_tokens</code></td>
+<td><code>auth()-&gt;user()-&gt;refresh_tokens</code></td>
+<td>Retrieve all refresh tokens attached to authenticated user.</td>
+</tr>
+</tbody>
+</table>
+<p>Also, if you need it, a table called <code>mig_groups</code> is available in database containing a list of all converted group into standalone user.
+This table will stay here until next SeAT major update.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>group_id</code></td>
+<td>The unique ID from SeAT 3 user group</td>
+</tr>
+<tr>
+<td><code>old_user_id</code></td>
+<td>The unique ID from SeAT 3 user (match to Character ID)</td>
+</tr>
+<tr>
+<td><code>new_user_id</code></td>
+<td>The unique ID from SeAT 4 user</td>
+</tr>
+<tr>
+<td><code>main_character_id</code></td>
+<td>The SeAT 3 registered main character ID - or random from the User Group if none were set</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This config file is then loaded from your app service provider as below:</p>
+<div class="highlight"><pre><span></span><code><span class="x"> $this-&gt;registerPermissions(__DIR__ . &#39;/Config/Permissions/package.permissions.php&#39;, &#39;package&#39;);</span>
+</code></pre></div>
+
+<h2 id="database">Database<a class="headerlink" href="#database" title="Permanent link">&para;</a></h2>
+<p>For our API package, we have a database requirement. We need to store api tokens and the ip address that is allowed to use them. We are also going to store an access log (based on the config setting). We create migrations and models just like you would for a base Laravel 6 application. The only thing to remember is that your migrations for your package must be published (and specified in your service provider).</p>
+<p>Registering these migrations looks like the following:</p>
+<div class="highlight"><pre><span></span><code><span class="x">$this-&gt;loadMigrationsFrom(__DIR__ . &#39;/database/migrations/&#39;);</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../core_package_breakdown/" title="Core Package Breakdown" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Core Package Breakdown
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../seat_api/" title="SeAT API" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                SeAT API
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2015 - 2020 Leon Jacobs
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+      <a href="https://github.com/eveseat/seat" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.36cbf620.min.js"></script>
+      <script src="../../assets/javascripts/bundle.00c583dd.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.7f7c8775.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
