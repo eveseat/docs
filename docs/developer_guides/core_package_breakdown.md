@@ -12,15 +12,7 @@ Namespace: **Seat\Api**
 
 Source Code: [link](https://github.com/eveseat/api)
 
-This repository contains all of the SeAT Api Endpoints, as well as the routes and views for API key management.
-
-### eveseat/console
-
-Namespace: **Seat\Console**
-
-Source Code: [link](https://github.com/eveseat/console)
-
-This repository contains all of the SeAT console applications. Console apps are accessed via the `artisan` command line eg: `php artisan seat:version`. Console applications typically make use of repository classes (more on these later) that live in the *eveseat/services* source code repository to retrieve and set information from the database. For more information on how to write a Laravel Console Command, see the [documentation here](http://laravel.com/docs/5.5/artisan)
+This repository contains all the SeAT Api Endpoints, as well as the routes and views for API key management.
 
 ### eveseat/eveapi
 
@@ -52,7 +44,7 @@ Namespace: **App**
 
 Source Code: [link](https://github.com/eveseat/seat)
 
-This is the main SeAT repository. It does not really contain much logic. In fact, it should just be seen as the glue between all of the core packages. This is the repository that is cloned when a new installation is done.
+This is the main SeAT repository. It does not really contain much logic. In fact, it should just be seen as the glue between all the core packages. This is the repository that is cloned when a new installation is done.
 
 The most important part of this repository is the service providers that are bootstrapped with the application. The [providers array](https://github.com/eveseat/seat/blob/39ff75beb8185acd46f8490129e9178a9f190a70/config/app.php#L168) has the default Laravel providers as well as the SeAT providers at the end. These providers tell the application where to find routes, views, configs etc. For more detailed information about providers, refer to the [Laravel 5.5 documentation](http://laravel.com/docs/5.5/providers). When you write your package though, you should make use of package discovery as described in the [Laravel 5.5 documenation](https://laravel.com/docs/5.5/packages#package-discovery). This will make the installation of your package super simple without the need to edit any files.
 

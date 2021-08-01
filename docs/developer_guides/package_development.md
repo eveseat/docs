@@ -22,13 +22,18 @@ The very first thing to do is prepare the empty git repository on say Github, as
 
 ## Service provider
 
-As mentioned in the package [breakdowns], the *eveseat/seat* repository bootstraps packages via service providers or package discovery. This is actually a Laravel convention that SeAT just follows. To get our package ready, we need to create a service provider. Thankfully there is a command to stub a new one for us. For the API package, I just ran `php artisan make:provider ApiServiceProvider` and copied the resultant file from `app/Providers` to my packages `src/` directory. Our packages file structure now looks as follows:
+As mentioned in the package [breakdowns], the *eveseat/seat* repository bootstraps packages via service providers or package discovery. This is actually a Laravel convention that SeAT just follows. To get our package ready, we need to create a service provider. For the API package, I create an `ApiServiceProvider` class in `src/` directory which extends `Seat\Services\AbstractSeatPlugin`. Our packages file structure now looks as follows:
 
 ```text
 ├── composer.json
 └── src
     └── ApiServiceProvider.php
 ```
+
+!!! hint
+
+    The `AbstractSeatPlugin` class is extending Laravel `ServiceProvider` class and ship you with useful methods that help to register your plugin in the stack (including version discovery, permissions registration, etc...).
+    You must use it rather than the standard one, especially if you want permissions and get your packages in Settings > SeAT Settings > SeAT Module Versions pane.
 
 ## Package structure
 

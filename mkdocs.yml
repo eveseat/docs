@@ -45,7 +45,6 @@ nav:
       - Moons Reporter: user_guides/moons_reporter.md
     - Developer Guides:
       - Developer Installation: developer_guides/developer_installation.md
-      - General Guide: developer_guides/general_guide.md
       - Job Queue Flow: developer_guides/job_queue_flow.md
       - Development Tips: developer_guides/development_tips.md
       - Core Package Breakdown: developer_guides/core_package_breakdown.md

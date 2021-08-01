@@ -2,52 +2,67 @@
 
 # Developer Installation
 
-Getting a development environment for SeAT 3 up and running is now even easier than before using Docker.
+With SeAT 4, starting with Docker build 4.1.0, spawning a development environment has been made easier.
+You can use the same image as of production environment - either you're working on core packages or third party ones.
 
-## Docker
+## General
 
-Simply download the latest files from [github](https://github.com/eveseat/scripts.git), run `bash prepare-source.sh` and finally `docker-compose up -d`. If you already have a repository where the SeAT sources live, update the `.env` file and specify the **full path** to your SeAT codebase.
+First, start with [standard installation](../installation/docker_installation.md) to get a working environment.
 
-### Setup
+The official docker-compose wrapper is shipped with a `packages` directory.
+It is mounted readonly, and you can store your development sources in it.
 
-1. `git clone https://github.com/eveseat/scripts.git /var/seat`
-2. `cd /var/seat/docker-compose-dev`
-3. `bash prepare-source.sh` (Or, if you have an existing repository update the `.env` file)
-4. `docker-compose --project-name seat-dev up -d --build`
+To make things easier, we recommend you keep vendor path convention to split your sources across every single package you want to play with.
 
-In order to login using SSO you must create an Application on the [CCP Developers Portal](https://developers.eveonline.com/). Select all esi-scopes and save the `EVE_CLIENT_ID` and `EVE_CLIENT_SECRET` in `.env`.
+## Overrider
 
-!!! info
+The image has been designed to look for a file called `override.json` inside `packages` directory.
+When it is found, it will be merged together with standard `composer.json` file from `eveseat/seat` package.
 
-    You can follow the install of the seat-web container by issuing the `docker logs -f seat-app` command. When you see something like the below, seat should be ready to go.
+It's designed to override both `autoload` and `providers`.
+Here is a complete `override.json` structure:
 
-    ```text
-    seat-web_1     | [Sat Aug 15 17:46:13.327701 2020] [core:notice] [pid 32] AH00094: Command line: 'apache2 -D FOREGROUND'
-    ```
-
-## Webserver host
-
-The webserver used is Traefik, which will serve the SeAT Web UI at <https://web.seat.local/>. Just browsing to localhost will not work as this relies on SNI (Server Name Indication). To reach the UI, add new hosts entries to your hosts file.
-
-!!! info
-    (`/etc/hosts` for 'nix systems or `c:\windows\system32\drivers\etc\hosts` for windows):
-
-```text
-127.0.0.1   web.seat.local
-127.0.0.1   traefik.seat.local
+```json
+{
+  "autoload": {
+    "namespace_to_load\\": "packages/sources_path"
+  },
+  "providers": [
+    "FQCN\\Provider"
+  ]
+}
 ```
 
-Note that if you have the developer install on a machine other than your own local machine, replace the IP above with the IP address of the relevant machine.
+An override can have either autoload, providers or even both property.
+Do not forget to escape `\` in order to get a valid json file.
 
-## Configuring .env file with the app url and SSO settings
+When your container will start, mapping from `autoload` property in your `override.json` file will be merged with `autoload-dev` property from official `composer.json`.
 
-Use a text editor to edit `.env` in this directory and change your `WEB_DOMAIN=` to the domain seat will live on (for the dev env you can leave this as is). Enter your `EVE_CLIENT_ID` `EVE_CLIENT_SECRET` from the application you made. Save and close the file.
+!!! tips
 
-## Setup admin account
+    1. If you need access the console of any container, access it via `docker exec seat-web sh` where `seat-web` is the name of the target container.
+    2. You can execute `artisan` commands from outside of docker with `docker exec seat-web php artisan <command>`
 
-Login with your EVE account into the instance. Next, run `docker-compose exec seat-web php artisan seat:admin:login` and copy / paste the link provided into your browser. Finally, go to Settings -> Users -> Edit your user and tick the "Administrator" toggle.
+## Teach things by example
 
-### Docker Tips
+As an example, let's say I want to make a new feature in web core package, I'll spawn an `eveseat` directory at root `packages` directory, followed by a clone from `eveseat/web` git repository.
+Last but not least, I'll create an `override.json` file to inform SeAT there are developer things to load.
 
-1. If you need access the console of any container, access it via `docker exec seat-app sh` where `seat-app` is the name of the target container.
-2. You can execute `artisan` commands from outside of docker with `docker exec seat-app php artisan <command>`
+1. Create vendor directory into `packages` directory `mkdir packages/eveseat`
+2. Cloning core web package into `packages/eveseat/web` directory `git clone https://github.com/eveseat/web.git packages/eveseat/web`
+3. Create an `override.json` to use custom web sources
+
+```shell
+cat > packages/override.json << EOL
+{
+  "autoload": {
+    "Seat\\Web\\": "packages/eveseat/web/src/"
+  }
+}
+EOL
+```
+
+!!! tips
+
+    If you're working with Windows, prefer to store your files in wsl layer rather than Windows directory.
+    Both work, however, you'll get better performances!

@@ -16,6 +16,7 @@ No doubt, there are no limits to what code you can write, how you structure it a
 - Prefix your settings with both an author and package eg: `warlof.teamspeak.address`.
 - Prefix redis records with both author and package eg: `warlof.teamspeak.channels`.
 - In your `composer.json` file, set the `type` to `seat-plugin`.
+- Avoid altering core tables, especially introducing relationship - this might break core migrations. Prefer to use observer if you need to maintain your data across core models.
 
 ## Model Observers
 
