@@ -196,6 +196,8 @@ chmod 600 acme/acme.json
 
 Next, make sure you have the `TRAEFIK_ACME_EMAIL` variable set, and finally, uncomment the labels that will make use of the Let's Encrypt cert resolver in the `docker-compose.yml` file. By default, they will look like this, whereby you need to remove the `#` in front.
 
+(Note: the line below in `docker-compose.yml` is located in two places, only remove the `#` from seat-web)
+
 ```text
 #- "traefik.http.routers.seat-web.tls.certResolver=primary"
 ```
