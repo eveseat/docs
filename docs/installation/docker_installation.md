@@ -172,7 +172,7 @@ These commands will `cd` to the directory containing the stacks `docker-compose.
 All of the relevant configuration lives inside the `.env` file, next to your `docker-compose.yml` file. Modify their values by opening it in a text editor, making the appropriate changes, and saving it again. Once that is done, run `docker-compose up -d` again to restart the container environment.
 
 !!! success
-    You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!
+    You made it! Use a browser and browse to the domain / subdomain of your server to access SeAT!
 
 [Docker Desktop]: https://www.docker.com/products/docker-desktop
 [ESI Setup Guide]: ../configuration/esi_configuration.md
