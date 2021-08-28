@@ -485,7 +485,7 @@ EOL
 
 !!! warning
 
-    The upper provided text is a script, it must be executed as is. You'll not get the same result if you're only copying the configuration part.
+    The code block above should not be copied directly into a file. It is a script and should be pasted directly into the linux terminal. It will create the nginx config for you. If you create the file yourself with the above content then the file will not be valid and you will receive errors from nginx.
 
 The configuration file as is at `/etc/nginx/sites-available/seat` itself won't be loaded by `nginx` yet. Storing configuration files in a `*sites-available*` directory is simply a convention used to allow administrators to quickly add & remove sites if needed. To *apply* the changes made by the new configuration file it needs to be symlinked to a `*sites-enabled*` directory.
 
