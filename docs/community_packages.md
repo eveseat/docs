@@ -11,40 +11,40 @@ Packages will normally come in the form of a composer package that you need to i
 - Ensure that you are in the *path* where you installed. By default this should be 
 `/var/www/seat`.
 
-- Put your application into *maintenance mode*. This will ensure that no request from the outside will hit your applications logic, and also help you perform an upgrade uninterrupted. Do this with:
+- Put your application into *maintenance mode*. This will ensure that no request from the outside will hit your applications logic, and also help you perform an upgrade uninterrupted. Do this with the following commands issued as the webserver user:
 
 ```bash
-php artisan down
+sudo -H -u www-data bash -c 'php artisan down'
 ```
 
 - *Require* the package via composer:
 
 ```bash
-composer require <package vendor>/<package-name>
+sudo -H -u www-data bash -c 'composer require <package vendor>/<package-name>'
 ```
 
 - *Publish* the assets with artisan:
 
 ```bash
-php artisan vendor:publish --force --all
+sudo -H -u www-data bash -c 'php artisan vendor:publish --force --all'
 ```
 
 - *Run migration* in order to update database:
 
 ```bash
-php artisan migrate
+sudo -H -u www-data bash -c 'php artisan migrate'
 ```
 
 - *Clear SeAT cache* after installation:
 
 ```bash
-php artisan seat:cache:clear
+sudo -H -u www-data bash -c 'php artisan seat:cache:clear'
 ```
 
 - Bring your application *live* and back out of maintenance mode:
 
 ```bash
-php artisan up
+sudo -H -u www-data bash -c 'php artisan up'
 ```
 
 Installing packages like this will ensure that none of the core SeAT packages are affected and you should be free to upgrade SeAT core at anytime.
