@@ -86,6 +86,7 @@ After running the above command wait for containers affected to rebuild. If SeAT
 | [warlof/seat-teamspeak](https://github.com/warlof/seat-teamspeak) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-teamspeak/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-teamspeak) | A Teamspeak driver to be used with `seat-connector` |
 | [cryptaeve/seat-squad-sync](https://github.com/crypta-eve/seat-squad-sync ) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-squad-sync/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-squad-sync ) | Adds the ability to sync squad members into filters of permissions |
 | [cryptaeve/seat-text](https://github.com/crypta-eve/seat-text) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-text/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-text) | A module to serve public static ascii, with editing access controlled by seat |
+| [alliancewaw/seat-mumble-register](https://github.com/waw-eve/seat-mumble-register) | [![Latest Stable Version](https://poser.pugx.org/waw-eve/seat-mumble-register/v/stable)](https://packagist.org/packages/waw-eve/seat-mumble-register) | This plugin provide an extension to generate a certificate for SeAT user and regist it to mumble server |
 
 #### Incompatible packages with current stable SeAT version
 
