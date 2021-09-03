@@ -11,40 +11,40 @@ Packages will normally come in the form of a composer package that you need to i
 - Ensure that you are in the *path* where you installed. By default this should be 
 `/var/www/seat`.
 
-- Put your application into *maintenance mode*. This will ensure that no request from the outside will hit your applications logic, and also help you perform an upgrade uninterrupted. Do this with:
+- Put your application into *maintenance mode*. This will ensure that no request from the outside will hit your applications logic, and also help you perform an upgrade uninterrupted. Do this with the following commands issued as the webserver user:
 
 ```bash
-php artisan down
+sudo -H -u www-data bash -c 'php artisan down'
 ```
 
 - *Require* the package via composer:
 
 ```bash
-composer require <package vendor>/<package-name>
+sudo -H -u www-data bash -c 'composer require <package vendor>/<package-name>'
 ```
 
 - *Publish* the assets with artisan:
 
 ```bash
-php artisan vendor:publish --force --all
+sudo -H -u www-data bash -c 'php artisan vendor:publish --force --all'
 ```
 
 - *Run migration* in order to update database:
 
 ```bash
-php artisan migrate
+sudo -H -u www-data bash -c 'php artisan migrate'
 ```
 
 - *Clear SeAT cache* after installation:
 
 ```bash
-php artisan seat:cache:clear
+sudo -H -u www-data bash -c 'php artisan seat:cache:clear'
 ```
 
 - Bring your application *live* and back out of maintenance mode:
 
 ```bash
-php artisan up
+sudo -H -u www-data bash -c 'php artisan up'
 ```
 
 Installing packages like this will ensure that none of the core SeAT packages are affected and you should be free to upgrade SeAT core at anytime.
@@ -78,15 +78,16 @@ After running the above command wait for containers affected to rebuild. If SeAT
 
 | Package | Version | Description |
 | ------- | ------- | ----------- |
+| [alliancewaw/seat-mumble-register](https://github.com/waw-eve/seat-mumble-register) | [![Latest Stable Version](https://poser.pugx.org/waw-eve/seat-mumble-register/v/stable)](https://packagist.org/packages/waw-eve/seat-mumble-register) | This plugin provide an extension to generate a certificate for SeAT user and regist it to mumble server |
+| [cryptaeve/seat-squad-sync](https://github.com/crypta-eve/seat-squad-sync ) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-squad-sync/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-squad-sync ) | Adds the ability to sync squad members into filters of permissions |
+| [cryptaeve/seat-text](https://github.com/crypta-eve/seat-text) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-text/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-text) | A module to serve public static ascii, with editing access controlled by seat |
 | [denngarr/seat-fitting](https://github.com/dysath/seat-fitting) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-fitting/v/stable)](https://packagist.org/packages/denngarr/seat-fitting) | Module to check fittings per character |
 | [denngarr/seat-srp](https://github.com/dysath/seat-srp) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-srp/v/stable)](https://packagist.org/packages/denngarr/seat-srp) | A module for SeAT that tracks SRP requests |
+| [humunuk/alliance-structure-mngmt](https://github.com/humunuk/alliance-structure-mngmt) | [![Latest Stable Version](https://poser.pugx.org/humunuk/alliance-structure-mngmt/v/stable?format=flat-square)](https://packagist.org/packages/humunuk/alliance-structure-mngmt) | Add "Structures" sub-menu to Alliance page and show all the structures that belong to corps in alliance |
 | [kassie/calendar](https://github.com/BenHUET/eveseat-calendar) | [![Latest Stable Version](https://poser.pugx.org/kassie/calendar/v/stable)](https://packagist.org/packages/kassie/calendar) | Calendar plugin |
 | [warlof/seat-connector](https://github.com/warlof/seat-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-connector/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-connector) | A generic connector module that handles invites and roles management with any registered platform |
 | [warlof/seat-discord-connector](https://github.com/warlof/seat-discord-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-discord-connector/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-discord-connector) | A Discord driver to be used with `seat-connector` |
 | [warlof/seat-teamspeak](https://github.com/warlof/seat-teamspeak) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-teamspeak/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-teamspeak) | A Teamspeak driver to be used with `seat-connector` |
-| [cryptaeve/seat-squad-sync](https://github.com/crypta-eve/seat-squad-sync ) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-squad-sync/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-squad-sync ) | Adds the ability to sync squad members into filters of permissions |
-| [cryptaeve/seat-text](https://github.com/crypta-eve/seat-text) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-text/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-text) | A module to serve public static ascii, with editing access controlled by seat |
-| [humunuk/alliance-structure-mngmt](https://github.com/humunuk/alliance-structure-mngmt) | [![Latest Stable Version](https://poser.pugx.org/humunuk/alliance-structure-mngmt/v/stable?format=flat-square)](https://packagist.org/packages/humunuk/alliance-structure-mngmt) | Add "Structures" sub-menu to Alliance page and show all the structures that belong to corps in alliance |
 
 #### Incompatible packages with current stable SeAT version
 
