@@ -9,9 +9,11 @@ You may want to customise SeAT design to match either your corporation or allian
 To do so, you can use two available css hooks :
 
 * `custom-layout-mini.css` used by the sign-in page
-* `custom-layout.css` used bu all the entier application, globally
+* `custom-layout.css` used by all the entier application, globally
 
-For bare metal installs, both of them must be located into your `public` directory.
+# Bare Metal Installs
+
+Both files must be located into your `public` directory.
 
 !!! example
     Using the default base directory, you'll get the following path :
@@ -19,17 +21,30 @@ For bare metal installs, both of them must be located into your `public` directo
     - `/var/www/seat/public/custom-layout.css`
     
 These files are loaded automatically if they are detected - you have nothing else to do to enable them.
-    
 
-For Docker installs, you can create a new directory in `/opt/seat-docker/` called `custom` placing the above mentioned files into this directory.
-However for SeAT to recognize these files you must enter a new volume path for seat-web in your `.env` file. An example of this would be:
+# Docker Installs
 
-`- /opt/seat-docker/custom/custom-layout-mini.css:/var/www/seat/public/custom-layout-mini.css`
+An example of adding these to your seat-web container is provided below:<br>
+Do note the version in `docker-compose.yml` and reflect this in your override file otherwise version mismatches will occur.
 
-Once you have placed the files you will need to run `docker-compose up -d` for it to take affect.
+* Creating `custom` directory in `/opt/seat-docker/` and add files to new directory
+* Creating `docker-compose.override.yml` in `/opt/seat-docker/` directory
+* Adding following code to `docker-compose-override.yml` Note: Uncomment the needed file(s) by removing the `#`
+```YAML
+version: "3.2"
+
+services:
+
+  seat-web:
+    volumes:
+#      - /opt/seat-docker/custom/custom-layout-mini.css:/var/www/seat/public/custom-layout-mini.css
+#      - /opt/seat-docker/custom/custom-layout.css:/var/www/seat/public/custom-layout.css
+```
+
+Once you have placed the files you will need to run `docker-compose up -d` for it to take affect.<br>
 
 An example of a customized login page using `custom-layout-mini.css` would be: <br>
-NOTE: Either `corporations` or `alliances` for ID's the can be used for login.logo section.
+Note: Valid `corporations` or `alliances` ids in the URL can be used for login.logo::before section.
 
 ```CSS
 /**
