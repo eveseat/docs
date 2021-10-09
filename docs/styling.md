@@ -19,17 +19,21 @@ Both files must be located into your `public` directory.
     Using the default base directory, you'll get the following path :
     - `/var/www/seat/public/custom-layout-mini.css`
     - `/var/www/seat/public/custom-layout.css`
-    
+
 These files are loaded automatically if they are detected - you have nothing else to do to enable them.
 
 # Docker Installs
 
-An example of adding these to your seat-web container is provided below:<br>
-Do note the version in `docker-compose.yml` and reflect this in your override file otherwise version mismatches will occur.
+An example of adding these to your seat-web container is provided below:
+
+!!! note
+
+    Do note the version in `docker-compose.yml` and reflect this in your override file otherwise version mismatches will occur.
 
 * Creating `custom` directory in `/opt/seat-docker/` and add files to new directory
 * Creating `docker-compose.override.yml` in `/opt/seat-docker/` directory
 * Adding following code to `docker-compose-override.yml` Note: Uncomment the needed file(s) by removing the `#`
+
 ```YAML
 version: "3.2"
 
@@ -41,10 +45,13 @@ services:
 #      - /opt/seat-docker/custom/custom-layout.css:/var/www/seat/public/custom-layout.css
 ```
 
-Once you have placed the files you will need to run `docker-compose up -d` for it to take affect.<br>
+Once you have placed the files you will need to run `docker-compose up -d` for it to take effect.
 
-An example of a customized login page using `custom-layout-mini.css` would be: <br>
-Note: Valid `corporations` or `alliances` ids in the URL can be used for login.logo::before section.
+An example of a customized login page using `custom-layout-mini.css` would be:
+
+!!! note
+
+    Valid `corporations` or `alliances` ids in the URL can be used for `login.logo::before` section.
 
 ```CSS
 /**
@@ -105,5 +112,6 @@ Note: Valid `corporations` or `alliances` ids in the URL can be used for login.l
 }
 ```
 
-The above code will create the login page below:<br>
-<img src="https://i.imgur.com/ONUeYOi.png" width="600">
+The above code will create the login page below:
+
+![Customized Login Page](img/customized-signin-page.png)
