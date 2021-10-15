@@ -15,68 +15,69 @@ There are multiple kinds of squad. The way they work and the automations they ap
 
 ### Automatic
 
-This is the simplest squad.
-When you define an automatic squad, all end user which meet the squad filters will be attached to it automatically.
+This is the simplest squad type.
+Membership of a squad of this type is controlled by the filters (see below) set for the squad.
 
-An user who's part of an automatic squad cannot leave it by himself.
-If for some reason, an user beeing part of a squad was non longer meeting the squad filter - he will be automatically kicked from it.
+A member of an automatic squad cannot remove themselves from the group.
+If a user no longer fulfils the criteria of the filter set for the squad they will be automatically removed from it.
 
 ### Manual
 
-Manual squads need end user action, called an application.
-Then flow of manual squad depends on it's is being moderated or not.
+Manual squads have to be applied to, the processing of the application depends on whether there is a moderator for the group or not.
 
-In case the squad is not moderated, the end user will become a member of that squad as soon as he applied to it.
-Otherwise, his application will need a review.
+If there is no moderator the application will be automatically accepted.
 
-Reviews can be done by any moderator of a squad, at any time.
+If there is at least one moderator they can accept or reject applications.
+
+Filters applied to a squad of this type will have two effects:
+- hide the "Apply" button if the filter criteria are not met
+- kick the member from the group if the filter criteria are not met
 
 ### Hidden
 
-Hidden squads are visible by its member and admin users only.
-To be part of an hidden squad, an user need to be added to it by an admin user.
+Hidden squads are visible exclusively to their members and admins.
+To be part of a hidden squad, the user needs to be added to it by an admin.
 
-This mean, only admin user can invite another user to an hidden squad.
+This mean, only admin user can invite another user to a hidden squad.
 
 ## Squads Filters
 
-Filters have different behaviors depending on the Squad Type on which they have been set.
+Filters have different behaviors depending on the Squad Type.
 In case the Squad is of auto type, filters will be applied continuously to invite and kick members from the Squad - based on user changes.
 
 Otherwise, filters are used to automatically kick members from a Squad and determine the availability of the "Apply" button on Squad Card.
 
-Squads Filters have been designed to assist you to build rules which will determine whether an user can be part of a Squad.
+Squads Filters have been designed to assist you to build rules which will determine whether a given user is eligible for a Squad.
 You pair different conditions together and link them with match keywords.
 
 Match keywords can be either `All` or `Any`.
-`All` mean all conditions must be met by the user to be part of the Squad.
-`Any` mean any of the listed condition can be met.
+`All` mean all conditions must be met by the user for them to be eligible.
+`Any` means that a user is eligible if they meet any of the conditions.
 
 To add a condition, use `Add Rule` button located at the end of the modal.
-In case you have to build a complex rule, use `Add Group` which will allow you to pair multiple condition in a single one.
+In case you have to build a complex rule, use `Add Group` which will allow you to pair multiple conditions in a single rule.
 
 !!! info
-    Filters are ship with multiple operators. All operators are not working with all filters.
-    `Is` and `Is not` are used to indicate either equality with criteria or inequality. Those operators are the most common and work with near all filter type.
-    `Contains` is used to indicate that criteria must be included in a domain. This operator is currently only working with `Scopes` filter.
+    Filters come with multiple operators. Not all operators work with all filters.
+    `Is` and `Is not` are used to indicate either equality with criteria or inequality. Those operators are the most common and work with nearly all filter types.
+    `Contains` is used to indicate that criteria must be included in a domain. This operator currently only works with the `Scopes` filter.
 
 ![Squads Filters](../img/squads_filters.png)
 
 !!! example
-    In the example upper, we want only users who own at least one character (inside either **Get Off My Lawn** OR **Toilet Paper.** alliances) AND with skill **Capital Ships** been eligible to our Squad.
+    In the example above, we want only users who own at least one character (inside either **Get Off My Lawn** OR **Toilet Paper.** alliances) AND with skill **Capital Ships** to be eligible for membership in our Squad.
 
-## Squads Applications
+## Squad Applications
 
 Applications are only available to manual squads.
 
-When an user want to apply to a manual squad, he needs to meet the squad filters.
-Otherwise, application button will not be available to him.
+For a user to be able to apply to a manual squad they need to meed the squads filter criteria. Otherwise, application button will not be available.
 
-If the user submit to a moderated squad, he will have to fill an application form.
+If the user applies to a moderated squad, they are required to fill an application form.
 This will leave you the ability to build workflow internally and allow moderators to check any incoming members.
 Users can also cancel squad applications at any time using the Cancel button which will replace the Join button.
 
-## Squads Moderators
+## Squad Moderators
 
 Moderators of a Squad don't need to be part of that squad.
 They will be able to see a list of every member of each squad they moderate, allowing them to invite further members or kick existing ones.
@@ -175,4 +176,4 @@ You also can upload a shiny logo which will be used instead the generated icon a
 
 !!! hint
     Don't pay attention to your Squads Description. If it's too long, it will be shortened when displayed on the Squad Tile.
-    However, the full description will always been available on the Squad Card into the general pane.
+    However, the full description will always be available on the Squad Card into the general pane.
