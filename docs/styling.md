@@ -32,7 +32,7 @@ An example of adding these to your seat-web container is provided below:
 
 * Creating `custom` directory in `/opt/seat-docker/` and add files to new directory
 * Creating `docker-compose.override.yml` in `/opt/seat-docker/` directory
-* Adding following code to `docker-compose-override.yml` Note: Uncomment the needed file(s) by removing the `#`
+* Adding following code to `docker-compose.override.yml` Note: Uncomment the needed file(s) by removing the `#`
 
 ```YAML
 version: "3.2"
