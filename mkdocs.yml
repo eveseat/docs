@@ -47,6 +47,7 @@ nav:
       - Developer Installation: developer_guides/developer_installation.md
       - Job Queue Flow: developer_guides/job_queue_flow.md
       - Development Tips: developer_guides/development_tips.md
+      - Notifications Implementation: developer_guides/notifications_implementation.md
       - Core Package Breakdown: developer_guides/core_package_breakdown.md
       - Package Development: developer_guides/package_development.md
       - SeAT API: developer_guides/seat_api.md
