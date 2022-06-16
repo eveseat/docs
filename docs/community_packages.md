@@ -101,6 +101,7 @@ After running the above command wait for containers affected to rebuild. If SeAT
 | [simplyunnamed/seat-user-last-login](https://github.com/SimplyUnnamed/seat-user-last-logins) | [![Latest Stable Version](http://poser.pugx.org/simplyunnamed/seat-user-last-login/v)](https://packagist.org/packages/simplyunnamed/seat-user-last-login) | Tool to help find potential AFK's in your corporation. |
 | [recursivetree/seat-billing](https://github.com/recursivetree/seat-billing) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-billing/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-billing) | A billing module to help you with ore and rating taxes |
 | [recursivetree/seat-pushx-blamer](https://github.com/recursivetree/seat-pushx-blamer) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-pushx-blamer/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-pushx-blamer) | A module to tell you who's guilty of blocking the PushX queue. |
+| [recursivetree/seat-alliance-industry](https://github.com/recursivetree/seat-alliance-industry) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-alliance-industry/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-alliance-industry) | A corporation/alliance/coalition industry order marketplace |
 
 #### Incompatible packages with current stable SeAT version
 
