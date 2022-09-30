@@ -124,10 +124,13 @@ After running the above command wait for containers affected to rebuild. If SeAT
 | [warlof/seat-slack-sso](https://github.com/warlof/seat-slack-sso) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-slack-sso/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-slack-sso) | Slack SSO integration for seat 2.x |
 | [warlof/eveseat-mining-ledger](https://github.com/warlof/eveseat-mining-ledger) | [![Latest Stable Version](https://poser.pugx.org/warlof/eveseat-mining-ledger/v/stable?format=flat-square)](https://github.com/warlof/eveseat-mining-ledger) | ESI capability that provides a mining ledger to SeAT 2.x |
 
-!!! danger
-    Packages in this section are provided as history and idea database. They will not work on the stable version since they are non longer maintained by their author or have been integrated in core.
-
 ### Other SeAT related packages
+
+- [nullsecurity-australia/helm-charts](https://github.com/nullsecurity-australia/helm-charts/tree/main/charts/eveseat)
+Allows to install EVE SeAT on a Kubernetes Cluster
+
+!!! danger
+    Packages after this message are provided as history and idea database. They will not work on the stable version since they are non longer maintained by their author or have been integrated in core.
 
 - [Betriebsrat/err-seat](https://github.com/Betriebsrat/err-seat)  
 Seat Api Interface for errbot
@@ -135,5 +138,4 @@ Seat Api Interface for errbot
 Passport strategy for authenticating with EVE SeAT using the OAuth 2.0 API.
 - [eve-scout/nodebb-plugin-sso-eveseat](https://github.com/eve-scout/nodebb-plugin-sso-eveseat)  
 This NodeBB plugin allows users login/register via their EVE SeAT account.
-- [tarioch/helm](https://github.com/tarioch/helm/tree/master/charts/eveseat)
-Allows to install EVE SeAT on a Kubernetes Cluster
+
