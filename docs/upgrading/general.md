@@ -16,10 +16,10 @@ This means updates are super simple in the docker world. To update your instance
 # Update to the latest dockerhub images
 docker-compose pull
 
-# (Optional) Take the stack down - This applies if the docker images has not been updated but you expect plugin updates
+# Take the stack down nicely
 docker-compose down
 
-# Apply the updates to your installation
+# Bring the stack back up
 docker-compose up -d
 
 # Cleanup any dangling images
