@@ -24,7 +24,6 @@ docker-compose pull
 # Take the stack down
 docker-compose down
 
-# Bring the stack up
 # Bring the stack back up
 docker-compose up -d
 
