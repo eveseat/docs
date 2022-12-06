@@ -16,9 +16,6 @@ This means updates are super simple in the docker world. To update your instance
 # Update to the latest dockerhub images
 docker-compose pull
 
-# Update images
-docker-compose pull
-
 # Take the stack down
 docker-compose down
 
