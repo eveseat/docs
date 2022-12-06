@@ -17,7 +17,15 @@ This means updates are super simple in the docker world. To update your instance
 docker-compose pull
 
 # Take the stack down nicely
+
+# Update images
+docker-compose pull
+
+# Take the stack down
 docker-compose down
+
+# Bring the stack up
+docker-compose up -d
 
 # Bring the stack back up
 docker-compose up -d
