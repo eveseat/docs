@@ -40,8 +40,8 @@ When your container will start, mapping from `autoload` property in your `overri
 
 !!! tips
 
-    1. If you need access the console of any container, access it via `docker exec seat-web sh` where `seat-web` is the name of the target container.
-    2. You can execute `artisan` commands from outside of docker with `docker exec seat-web php artisan <command>`
+    1. If you need access the console of any container, access it via `docker exec front sh` where `front` is the name of the target container.
+    2. You can execute `artisan` commands from outside of docker with `docker exec front php artisan <command>`
 
 ## Teach things by example
 
