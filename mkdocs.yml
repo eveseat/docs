@@ -15,7 +15,8 @@ nav:
     - Home: index.md
     - Installation:
       - Requirements: installation/requirements.md
-      - Docker Installation: installation/docker_installation.md
+      - Docker Installation (4.x): installation/docker_installation.md
+      - Docker Installation (5.x): installation/docker_installation_5.md
       - Manual Installation: installation/manual_installation.md
     - Upgrading:
       - General: upgrading/general.md
