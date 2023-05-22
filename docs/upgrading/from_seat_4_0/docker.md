@@ -3,7 +3,9 @@
 The upgrade path from SeAT 4.0 to SeAT 5.0 requires a tiny amount of manual work. 
 
 !!! info    
-    Before starting the upgrade, pay check the plugins you may be using and ensure that they are compatible with SeAT 5. If you are unsure, join us on [Discord] so that we can tru and assist or redirect you to proper person.
+    Before starting the upgrade, pay check the plugins you may be using and ensure that they are compatible with SeAT 5. 
+    A compatibility table can be found on the [Community Packages](../../community_packages.md#seat-5-compatibility) page.
+    If you are unsure, join us on [Discord] so that we can tru and assist or redirect you to proper person.
 
     Users of [recursivetree/seat-info](https://github.com/recursivetree/seat-info) need to follow separate instructions after the migrating the core to seat 5.
 
