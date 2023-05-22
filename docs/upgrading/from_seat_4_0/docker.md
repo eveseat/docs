@@ -5,6 +5,8 @@ The upgrade path from SeAT 4.0 to SeAT 5.0 requires a tiny amount of manual work
 !!! info    
     Before starting the upgrade, pay check the plugins you may be using and ensure that they are compatible with SeAT 5. If you are unsure, join us on [Discord] so that we can tru and assist or redirect you to proper person.
 
+    Users of [recursivetree/seat-info](https://github.com/recursivetree/seat-info) need to follow separate instructions after the migrating the core to seat 5.
+
 !!! warning
     Before you do anything, read and understand this entire upgrade guide.
     
@@ -45,7 +47,7 @@ We highly reccomend that you read the details of this upgrade guide to get famil
 
 ### Docker changes since SeAT 4
 
-There have been a few minor changes to the `docker-compose.yml` file. Most notably, the containers have been renamed to disclose their purpose easier, we have moved from Dockerhub to GitHub Container Registry, and the stack now has a persistent storage volume.
+There have been a few minor changes to the `docker-compose.yml` file. Most notably, the containers have been renamed to disclose their purpose easier, we have moved from Dockerhub to [GitHub Container Registry], and the stack now has a persistent storage volume.
 
 If you customized your docker stack deployment, it is recommended that you take a look at the new `docker-compose.yml` file yourselves to see what exactly changed.
 
@@ -211,3 +213,4 @@ Should you have any issue with the installation, please contact us on [Discord].
 [docker db backup section]: ../../admin_guides/docker_admin.md#database-backups-and-restore
 [bare metal instructions]: bare_metal.md
 [Discord]: ../../about/contact.md
+[GitHub Container Registry]: https://github.com/eveseat/seat-docker/pkgs/container/seat

@@ -19,6 +19,9 @@ nav:
       - Manual Installation: installation/manual_installation.md
     - Upgrading:
       - General: upgrading/general.md
+      - From SeAT 4.0:
+          - Docker: upgrading/from_seat_4_0/docker.md
+          - Bare metal: upgrading/from_seat_4_0/bare_metal.md
       - From SeAT 3.0:
         - Docker: upgrading/from_seat_3_0/docker.md
         - Bare metal: upgrading/from_seat_3_0/bare_metal.md
