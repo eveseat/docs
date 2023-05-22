@@ -3,11 +3,9 @@
 # Docker
 
 !!! warning
-    This guide has not been updated yet. Please install seat 4 and then upgrade to seat 5.
-!!! warning
-    This guide walks you through the process of installing seat 5.x, which is still under development
+    This guide walks you through the process of installing seat 5.x, which is still under development. It is advised that you only install it in a testing environments until a full release is made.
 
-Docker is ideally the installation route you want to go. Docker enables us to run SeAT on any platform capable of running docker itself (which includes Windows!). Additionally, upgrades and service maintenance are really low effort as you don't have to care about any dependencies. All of it is maintained within a docker stack and dockerhub.
+Docker is ideally the installation route you want to go. Docker enables us to run SeAT on any platform capable of running docker itself (which includes Windows!). Additionally, upgrades and service maintenance are really low effort as you don't have to care about any dependencies. All of it is maintained within a docker stack, dockerhub and they GitHub Container Registry.
 
 !!! info
     If you plan on running Docker on Windows, for the best performance it is suggested that you run Docker using the Windows Subsystem for Linux 2 (WSL2) backend, available starting in Windows 10/Windows Server 20H1 (build 2004) releases.
@@ -30,17 +28,17 @@ The setup for SeAT's docker installation orchestrated using [docker-compose](htt
 The previously mentioned compose file is really simple. A high-level overview of its contents is:
 
 - A single docker network called `seat-network` is defined. All containers are connected to this network and is used as the primary means for inter-container communications.
-- A single volume called `mariadb-data` is defined. This is the *most important* volume as it contains all of the database data. This is the one volume that you should configure a backup solution for!
-- Six services (or containers) are used within the SeAT docker stack. Three services use basic images pulled directly from [Dockerhub](https://hub.docker.com/) and three others use a custom-built image, also hosted on DockerHub. The container images used are:
+- A volume called `mariadb-data` and `seat-storage` is defined. These are the *most important* volumes as they contain all of the seat data. You should configure a backup solution for them!
+- Six services (or containers) are used within the SeAT docker stack. Three services use basic images pulled directly from [Dockerhub](https://hub.docker.com/) and three others use a custom-built image, hosted in the GitHub container registry. The container images used are:
 
 | Image Name | Image Repository |
 | ---------- | ---------------- |
 | `mariadb:10` | [https://hub.docker.com/_/mariadb/](https://hub.docker.com/_/mariadb/) |
 | `redis:5-alpine` | [https://hub.docker.com/_/redis/](https://hub.docker.com/_/redis/) |
 | `traefik:2.2` | [https://hub.docker.com/_/traefik](https://hub.docker.com/_/traefik) |
-| `eveseat/seat` | [https://hub.docker.com/r/eveseat/seat](https://hub.docker.com/r/eveseat/seat) |
+| `eveseat/seat` | [https://github.com/eveseat/seat-docker/pkgs/container/seat](https://github.com/eveseat/seat-docker/pkgs/container/seat) |
 
-- The environment is configured using a top-level `.env` file (not to be confused with the SeAT specific `.env` file.
+- The environment is configured using a top-level `.env` file.
 - Only too ports are exposed by default. Those are `tcp/80` and `tcp/443`. These can be connected to in order to access the SeAT web interface.
 - All containers are configured to restart on failure, so if your server reboots or a container dies for whatever reason it should automatically start up again.
 
@@ -49,6 +47,9 @@ The previously mentioned compose file is really simple. A high-level overview of
 Depending on whether you already have `docker` and `docker-compose` already installed, you may choose how to start the installation. If you already have the required tooling installed and running their latest versions, all you need to do is download the latest `docker-compose.yml` and `.env` files to get started.
 
 ### Automated Setup Script
+
+!!!warning
+    The script hasn't been updated to seat 5 yet. Please follow the [manual deployment instructions](#manual-deployment) instead.
 
 If you do not have the required software installed yet, consider running the [bootstrap script](https://github.com/eveseat/seat-docker/blob/master/bootstrap.sh) that will check for `docker` and `docker-compose`, install it and start the SeAT stack up for you. The script can be run with:
 
@@ -96,24 +97,24 @@ Then, download the `docker-compose.yml` file with:
 
 === "Linux"
     ```bash
-    curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml
+    curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.yml -o docker-compose.yml
     ```
 
 === "Windows"
     ```powershell
-    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -OutFile docker-compose.yml
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.yml -OutFile docker-compose.yml
     ```
 
 Next, download the docker `.env` file with:
 
 === "Linux"
     ```bash
-    curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
+    curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/.env -o .env
     ```
 
 === "Windows"
     ```powershell
-    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -OutFile .env
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/.env -OutFile .env
     ```
 
 Next, we will generate a unique application key - this is used internally for encryption:
@@ -170,7 +171,7 @@ cd /opt/seat-docker
 docker-compose logs --tail 10 -f
 ```
 
-These commands will `cd` to the directory containing the stacks `docker-compose.yml` file and run the `logs` command, showing the last *10* log entries and then printing new ones as they arrive.
+These commands will `cd` to the directory containing the stacks `docker-compose.yml` file and run the `logs` command, showing the last *10* log entries and then printing new ones as they arrive. If you leave away the `--tail 10`part, you can view all logs since the container startup.
 
 ## Configuration Changes
 
