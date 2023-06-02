@@ -81,7 +81,7 @@ mysql_secure_installation
 
 This will ask you a series of questions where you should generally just answer yes to. If you already set a `root` password in the previous step then you dont have to set it again, otherwise, make sure you choose a long, strong password for the `root` account. An example run is shown below:
 
-```bash
+```bash linenums="1"
 [...]
 
 Enter current password for root (enter for none):  IF ONE WAS SET, IGNORE THIS
@@ -132,7 +132,7 @@ This will prompt you for a password. Use the password you configured for the `ro
 
 If the password was correct, you should see a prompt similar to the one below:
 
-```bash
+```bash linenums="1"
 root@ubuntu:~# mysql -uroot -p
 Enter password:
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
@@ -152,7 +152,7 @@ create database seat;
 
 The output should be similar to the below:
 
-```bash
+```bash linenums="1"
 MariaDB [(none)]> create database seat;
 Query OK, 1 row affected (0.00 sec)
 ```
@@ -166,7 +166,7 @@ GRANT ALL ON seat.* to seat@localhost IDENTIFIED BY 's_p3rs3c3r3tp455w0rd';
 Of course, you need to replace `s_p3rs3c3r3tp455w0rd` with your own unique and strong password.
 Successfully running this should present you with output similar to the below:
 
-```bash
+```bash linenums="1"
 MariaDB [(none)]> GRANT ALL ON seat.* to seat@localhost IDENTIFIED BY 's_p3rs3c3r3tp455w0rd';
 Query OK, 0 rows affected (0.00 sec)
 ```
@@ -192,13 +192,13 @@ Since SeAT is written primarily in PHP, we will need to install PHP packages. Ub
 Depending on the version of Ubuntu you are using, a release specific repository URL should be used for the PPA. Select the tab applicable to your Ubuntu version and run the commands within.
 
 === "Bionic 18.04"
-    ```bash
+    ```bash linenums="1"
     echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
     echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
     ```
 
 === "Focal 20.04"
-    ```bash
+    ```bash linenums="1"
     echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" >> /etc/apt/sources.list.d/php.list
     echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu focal main" >> /etc/apt/sources.list.d/php.list
     ```
@@ -217,7 +217,7 @@ apt-get update
 
 Finally, install the required PHP packages with:
 
-```bash
+```bash linenums="1"
 apt-get install libpng-dev libfreetype6-dev libjpeg-dev
 apt-get install curl openssl zip php7.3-bz2 php7.3-cli php7.3-curl php7.3-dom php7.3-gd php7.3-gmp php7.3-intl php7.3-mbstring php7.3-mysql php7.3-opcache php7.3-redis php7.3-zip
 ```
@@ -308,7 +308,7 @@ Application key [base64:CmhqYNkaIcHo8nYC8LiEWa3U5/+BiTLih5dZftxlV2k=] set succes
 
 You may have noticed a warning about `composer` running as `root`. For now this can be safely ignored. Post the installation of the SeAT source code, we need to fix up the permissions of the downloaded files. Do that with:
 
-```bash
+```bash linenums="1"
 chown -R www-data:www-data /var/www/seat
 chmod -R guo+w /var/www/seat/storage/
 ```
@@ -323,7 +323,7 @@ With SeAT downloaded, we need to configure it. There are a number of configurati
 
 The first task would be to configure the applications database connection. Open the file located at `/var/www/seat/.env` with something like `vi` or `nano` and update the database options with your values. Typically, only the password would really need to be updated. If you are making use of an existing database somewhere else over the network, update the applicable fields such as `DB_HOST` accordingly.
 
-```yaml
+```yaml linenums="1"
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -377,7 +377,7 @@ apt-get install supervisor
 
 Next, we will create a dedicated configuration file which will ask supervisor to keep an eye on Horizon. This file will live in `/etc/supervisor/conf.d/seat.conf`. Create this file with its recommended configuration with:
 
-```bash
+```bash linenums="1"
 cat > /etc/supervisor/conf.d/seat.conf << EOL
 [program:seat]
 command=/usr/bin/php /var/www/seat/artisan horizon
@@ -437,7 +437,7 @@ With the webserver installed, we need to configure `nginx` to serve SeAT. For th
 
 The configuration file will live at `/etc/nginx/sites-available/seat`. It can be created with the following command:
 
-```bash
+```bash linenums="1"
 cat > /etc/nginx/sites-available/seat << EOL
 server {
 
@@ -491,14 +491,14 @@ The configuration file as is at `/etc/nginx/sites-available/seat` itself won't b
 
 Let's symlink to the new configuration and drop the default one as a hardening exercise at the same time:
 
-```bash
+```bash linenums="1"
 ln -s /etc/nginx/sites-available/seat /etc/nginx/sites-enabled/seat
 rm /etc/nginx/sites-enabled/default
 ```
 
 Finally, reload `nginx` and `php-fpm` for the new changes to take affect:
 
-```bash
+```bash linenums="1"
 systemctl restart nginx.service
 systemctl restart php7.3-fpm.service
 ```

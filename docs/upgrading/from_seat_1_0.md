@@ -23,7 +23,7 @@ The upgrade process has a large amount of database migrations that need to run s
 
 If users are using your SeAT instance, or the workers are churning away in the background, then you may risk losing some information (although unlikely). Its therefore recommended that you start by putting SeAT into maintenance mode before starting the upgrade. Do this by running the following command in your SeAT path.
 
-```bash
+```bash linenums="1"
 $ cd /var/www/seat
 $ php artisan down
 ```
@@ -39,7 +39,7 @@ You should see the message *Application is now in maintenance mode.*.
 
 Install PHP7 if you don't have it already. You can check your PHP version by running `php -v`:
 
-```bash
+```bash linenums="1"
 $ php -v
 PHP 7.0.14 (cli) (built: Dec  7 2016 10:25:25) ( NTS )
 Copyright (c) 1997-2016 The PHP Group
@@ -52,7 +52,7 @@ SeAT 2.0 can be installed in exactly the same place as where you had your v1.x i
 
 - First, move the old installation out of the way:
 
-```bash
+```bash linenums="1"
 $ cd /var/www
 $ mv seat seat.old
 ```
@@ -61,7 +61,7 @@ You can double check that this was successful by running `ls` and ensuring that 
 
 - Next, get the new SeAT code by running `composer create-project eveseat/seat seat --no-dev`:
 
-```bash
+```bash linenums="1"
 $ cd /var/www
 $ composer create-project eveseat/seat seat --no-dev
 Installing eveseat/seat (2.0.0)
@@ -86,7 +86,7 @@ With the new code ready to use, the next thing that is required is to reconnect 
 
 Important keys to populate with the correct values are:
 
-```bash
+```bash linenums="1"
 DB_HOST=
 DB_PORT=
 DB_DATABASE=
@@ -102,7 +102,7 @@ With the database reconnected, its time to run the migrations for SeAT 2.0. This
 
 To run the migrations, make sure you are still in your seat path (`/var/www/seat`) and run `php artisan migrate`:
 
-```bash
+```bash linenums="1"
 $ cd /var/www/seat
 $ php artisan migrate
 ```
@@ -113,7 +113,7 @@ You will see a bunch of messages and eventually your shell prompt again, indicat
 
 With the database migration complete, its time to seed it with some of the static data SeAT needs. Do this with the following commands:
 
-```bash
+```bash linenums="1"
 php artisan db:seed --class=Seat\\Notifications\\database\\seeds\\ScheduleSeeder
 php artisan db:seed --class=Seat\\Services\\database\\seeds\\NotificationTypesSeeder
 php artisan db:seed --class=Seat\\Services\\database\\seeds\\ScheduleSeeder
@@ -131,7 +131,7 @@ command=/usr/bin/php /var/www/seat/artisan queue:work --queue=high,medium,low,de
 
 A full block for SeAT 2.0 should therefore be:
 
-```bash
+```bash linenums="1"
 [program:seat]
 command=/usr/bin/php /var/www/seat/artisan queue:work --queue=high,medium,low,default --tries 1 --timeout=86100
 process_name = %(program_name)s-80%(process_num)02d

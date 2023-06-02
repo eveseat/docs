@@ -24,7 +24,7 @@ These files are loaded automatically if they are detected - you have nothing els
 
 # Docker Installs
 
-An example of adding these to your `front` container is provided below:
+An example of adding these to your Web UI container is provided below:
 
 !!! note
 
@@ -34,18 +34,50 @@ An example of adding these to your `front` container is provided below:
 * Creating `docker-compose.override.yml` in `/opt/seat-docker/` directory
 * Adding following code to `docker-compose.override.yml` Note: Uncomment the needed file(s) by removing the `#`
 
-```YAML
-version: "3.2"
+=== SeAT 4
 
-services:
+    ```YAML linenums="1"
+    version: "3.2"
+    
+    services:
+    
+      seat-web:
+        volumes:
+    #      - /opt/seat-docker/custom/custom-layout-mini.css:/var/www/seat/public/custom-layout-mini.css
+    #      - /opt/seat-docker/custom/custom-layout.css:/var/www/seat/public/custom-layout.css
+    ```
 
-  front:
-    volumes:
-#      - /opt/seat-docker/custom/custom-layout-mini.css:/var/www/seat/public/custom-layout-mini.css
-#      - /opt/seat-docker/custom/custom-layout.css:/var/www/seat/public/custom-layout.css
-```
+    Once you have placed the files you will need to run `docker-compose up -d` for it to take effect.
 
-Once you have placed the files you will need to run `docker-compose up -d` for it to take effect.
+=== SeAT 5 (using Traefik)
+
+    ```YAML linenums="1"
+    version: "3.2"
+    
+    services:
+    
+      front:
+        volumes:
+    #      - /opt/seat-docker/custom/custom-layout-mini.css:/var/www/seat/public/custom-layout-mini.css
+    #      - /opt/seat-docker/custom/custom-layout.css:/var/www/seat/public/custom-layout.css
+    ```
+
+    Once you have placed the files you will need to run `docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up` for it to take effect.
+
+=== SeAT 5 (using proxy)
+
+    ```YAML linenums="1"
+    version: "3.2"
+    
+    services:
+    
+      front:
+        volumes:
+    #      - /opt/seat-docker/custom/custom-layout-mini.css:/var/www/seat/public/custom-layout-mini.css
+    #      - /opt/seat-docker/custom/custom-layout.css:/var/www/seat/public/custom-layout.css
+    ```
+
+    Once you have placed the files you will need to run `docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up` for it to take effect.
 
 An example of a customized login page using `custom-layout-mini.css` would be:
 
@@ -53,7 +85,7 @@ An example of a customized login page using `custom-layout-mini.css` would be:
 
     Valid `corporations` or `alliances` ids in the URL can be used for `login.logo::before` section.
 
-```CSS
+```CSS linenums="1"
 /**
  * SeAT login page layout
  */

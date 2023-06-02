@@ -24,7 +24,7 @@ The very first thing to do is prepare the empty git repository on say Github, as
 
 As mentioned in the package [breakdowns], the *eveseat/seat* repository bootstraps packages via service providers or package discovery. This is actually a Laravel convention that SeAT just follows. To get our package ready, we need to create a service provider. For the API package, I create an `ApiServiceProvider` class in `src/` directory which extends `Seat\Services\AbstractSeatPlugin`. Our packages file structure now looks as follows:
 
-```text
+```text linenums="1"
 ├── composer.json
 └── src
     └── ApiServiceProvider.php
@@ -39,7 +39,7 @@ As mentioned in the package [breakdowns], the *eveseat/seat* repository bootstra
 
 From here you pretty much free to do what you want. How you structure the package will obviously depend on what exactly your package provides. In principle, I prefer to follow the same package structure as Laravel does for web / console features. Since we are going to be providing web features with the API, we will quickly create a few folders in preparation for this. I know beforehand that we are going to need a model to store API tokens; middleware to authenticate API requests; routes and controllers for the actual api logic (preferably making use of the *eveapi/services* repository classes for data access) as well as a few web views for administrators to generate API tokens for applications. With that in mind, the initial structure looks as follows:
 
-```text
+```text linenums="1"
 ├── composer.json
 └── src
     ├── ApiServiceProvider.php
@@ -60,7 +60,7 @@ This will obviously change as we progress building the package.
 
 To start testing the API, we need to add a route and controller to process some requests and responses. My `routes.php` file will have a global `Route::group()` to encapsulate the routes in the **Seat\Api** namespace as well as prefix them with `api/`.
 
-```php
+```php linenums="1"
 // File: routes.php
 Route::group([ 'namespace' => 'Seat\Api\Http\Controllers',
     'prefix' => 'api'
@@ -76,7 +76,7 @@ Next, I add some logic with a route to `/`, update the base frameworks `composer
 
 See the complete service provider [here](https://github.com/eveseat/api/blob/master/src/ApiServiceProvider.php)
 
-```php
+```php linenums="1"
 /**
 * Include the routes
 */
@@ -97,7 +97,7 @@ As a final test, I check that my route is accessible from a booted SeAT app. :)
 
 Obviously, some routes are not for everyone's eyes. SeAT comes with middleware that can be used to filter out requests that may not be authorized for your route. As can be seen in the example below (from [here](https://github.com/eveseat/api/blob/85590fbf0b18b7078d977cade50fdfc3d22709d7/src/Http/routes.php#L34)), we are filtering out requests to `api-admin` for only superusers.
 
-```php
+```php linenums="1"
 Route::group([
         'namespace'  => 'Admin',
         'middleware' => ['auth', 'can:global.superuser'], // The ACL specification.
@@ -117,7 +117,7 @@ To auth our API requests, we are going to go with token based authentication for
 
 See the complete middleware [here](https://github.com/eveseat/api/blob/master/src/Http/Middleware/ApiToken.php)
 
-```php
+```php linenums="1"
 /**
  * Include the middleware needed
  *
@@ -143,7 +143,7 @@ Note how we are re-using views that exist in the `web` namespace. All we have to
 
 Integrating with the sidebar is also really easy. All you have to do is create a config file, bootstrap it in the service provider and viola. The config file itself has a set structure for the `web` package to interpret and can be seen [here](https://github.com/eveseat/api/blob/master/src/Config/package.sidebar.php).
 
-```php
+```php linenums="1"
 return [
     'api' => [
         'permission'    => 'global.superuser',
@@ -167,7 +167,7 @@ The format is generally an array, whereby the first key is the name of your pack
 
 Integrating with the character sub menus is also really easy. Just like the sidebar, all you have to do is create a config file, bootstrap it in the service provider and viola. The namespace should be named `package.character.menu` in your service provider. A sample config file can be seen below:
 
-```php
+```php linenums="1"
 // file: package.character.menu.php
 
 return [
@@ -184,7 +184,7 @@ return [
 
 Integrating with the corporation sub menus is also really easy. Just like the sidebar and character menus, all you have to do is create a config file, bootstrap it in the service provider and viola. The namespace should be named `package.corporation.menu` in your service provider. A sample config file can be seen below:
 
-```php
+```php linenums="1"
 // file: package.corporation.menu.php
 
 return [
@@ -201,7 +201,7 @@ return [
 
 In the above items, we refer to the files needing to be *bootstrapped* via the service provider. All this really means is that we have to tell the Laravel application where to find configuration information for a namespace. So, if we wanted to add a sidebar item, we would add the following line to the `register()` method of the service provider:
 
-```php
+```php linenums="1"
 // Include this packages menu items
 $this->mergeConfigFrom(__DIR__ . '/Config/package.sidebar.php', 'package.sidebar');
 ```
@@ -212,7 +212,7 @@ The first argument is the file with the sidebar definitions, the second is the n
 
 You are able to register and use your own permissions for use within SeAT. This is relatively simple and done by creating a config file in the location `Config/Permissions/package.permissions.php`. It should return an array of the following format:
 
-```php
+```php linenums="1"
 [
     'sheet' => [
         'label'       => 'Grant access to Character Sheet',

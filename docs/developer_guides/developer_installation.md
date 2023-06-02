@@ -22,7 +22,7 @@ When it is found, it will be merged together with standard `composer.json` file 
 It's designed to override both `autoload` and `providers`.
 Here is a complete `override.json` structure:
 
-```json
+```json linenums="1"
 {
   "autoload": {
     "namespace_to_load\\": "packages/sources_path"
@@ -38,7 +38,12 @@ Do not forget to escape `\` in order to get a valid json file.
 
 When your container will start, mapping from `autoload` property in your `override.json` file will be merged with `autoload-dev` property from official `composer.json`.
 
-!!! tips
+!!! tips "SeAT 4.x"
+
+    1. If you need access the console of any container, access it via `docker exec seat-web sh` where `seat-web` is the name of the target container.
+    2. You can execute `artisan` commands from outside of docker with `docker exec seat-web php artisan <command>`
+
+!!! tips "SeAT 5.x"
 
     1. If you need access the console of any container, access it via `docker exec front sh` where `front` is the name of the target container.
     2. You can execute `artisan` commands from outside of docker with `docker exec front php artisan <command>`
@@ -52,7 +57,7 @@ Last but not least, I'll create an `override.json` file to inform SeAT there are
 2. Cloning core web package into `packages/eveseat/web` directory `git clone https://github.com/eveseat/web.git packages/eveseat/web`
 3. Create an `override.json` to use custom web sources
 
-```shell
+```shell linenums="1"
 cat > packages/override.json << EOL
 {
   "autoload": {

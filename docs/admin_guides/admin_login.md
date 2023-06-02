@@ -9,8 +9,14 @@ You need an admin account in order to do certain tasks like configuring your ins
 
 In order to authenticate with built-in admin user, use command disclosed bellow (choose your context).
 
-=== "Docker"
-    ```bash
+=== "Docker (SeAT 4.x)"
+    ```bash linenums="1"
+    cd /opt/seat-docker
+    docker-compose exec seat-web php artisan seat:admin:login
+    ```
+
+=== "Docker (SeAT 5.x)"
+    ```bash linenums="1"
     cd /opt/seat-docker
     docker-compose exec front php artisan seat:admin:login
     ```
@@ -22,7 +28,7 @@ In order to authenticate with built-in admin user, use command disclosed bellow 
 
 You'll get a link after the command has finished running, which looks similar to the one bellow:
 
-```txt
+```txt linenums="1"
 SeAT Admin Login URL Generator
 User 'admin' does not exist. It will be created.
 Checking if 'admin' is a super user

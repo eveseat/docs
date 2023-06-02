@@ -32,13 +32,25 @@ docker-compose up -d
 
 Getting an idea of what is happening inside of the containers may be useful for many things, including debugging any issues that may occur. All of the containers generate logs that can be viewed either in isolation, or all of the containers in the stack.
 
-To view a single services' logs (`front` in this examples case), run:
+=== Docker (SeAT 4.x)
 
-```bash
-docker-compose logs --tail 10 -f front
-```
+    To view a single services' logs (`seat-web` in this examples case), run:
+    
+    ```bash
+    docker-compose logs --tail 10 -f seat-web
+    ```
 
-All services can referenced by their name using `docker-compose`. You can see the service names [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml). At the time of writing this doc, the available services were: `mariadb`, `redis`, `traefik`, `front`, `worker` and `scheduler`.
+    All services can referenced by their name using `docker-compose`. You can see the service names [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml). At the time of writing this doc, the available services were: `mariadb`, `redis`, `traefik`, `seat-web`, `seat-worker` and `seat-cron`.
+
+=== Docker (SeAT 5.x)
+
+    To view a single services' logs (`front` in this examples case), run:
+    
+    ```bash
+    docker-compose logs --tail 10 -f front
+    ```
+
+    All services can referenced by their name using `docker-compose`. You can see the service names [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml). At the time of writing this doc, the available services were: `mariadb`, `redis`, `traefik`, `front`, `worker` and `scheduler`.
 
 To view all service logs at once, run:
 
@@ -54,31 +66,55 @@ While most processes will output information to stdout (which is what you will s
 
 ### Logs - Web UI
 
-If you are getting HTTP 500's, or other exception when using the web interface, the best place to find the relevant logs will be in the `front` service, in the `/var/www/seat/storage/logs` directory. To reach them, run `docker-compose exec front bash`. This will drop you into bash shell in the container:
+=== Docker (SeAT 4.x)
 
-```text
-$ docker-compose exec front bash
-root@9aff5b002ca0:/var/www/seat#
-```
+    If you are getting HTTP 500's, or other exception when using the web interface, the best place to find the relevant logs will be in the `seat-web` service, in the `/var/www/seat/storage/logs` directory. To reach them, run `docker-compose exec seat-web bash`. This will drop you into bash shell in the container:
+    
+    ```text linenums="1"
+    $ docker-compose exec seat-web bash
+    root@9aff5b002ca0:/var/www/seat#
+    ```
 
-Next, cd to the logds directory with:
+=== Docker (SeAT 5.x)
+
+    If you are getting HTTP 500's, or other exception when using the web interface, the best place to find the relevant logs will be in the `front` service, in the `/var/www/seat/storage/logs` directory. To reach them, run `docker-compose exec front bash`. This will drop you into bash shell in the container:
+    
+    ```text linenums="1"
+    $ docker-compose exec front bash
+    root@9aff5b002ca0:/var/www/seat#
+    ```
+
+Next, cd to the logs directory with:
 
 ```bash
 cd storage/logs/
 ```
 
-This directory shoul have daily log files for you to view.
+This directory should have daily log files for you to view.
 
 ### Logs - Worker / Updaters
 
-If you think your workers may be causing some exceptions, or you want to investigate why they may be failing, you can do so in the `worker` service. Just like for the web UI, get a bash shell and cd to the logs directory.
+=== Docker (SeAT 4.x)
 
-```text
-# docker-compose exec worker bash
-root@8ed8967348f1:/var/www/seat# cd storage/logs/
-root@8ed8967348f1:/var/www/seat/storage/logs# ls
-eseye-2020-08-23.log
-```
+    If you think your workers may be causing some exceptions, or you want to investigate why they may be failing, you can do so in the `seat-worker` service. Just like for the web UI, get a bash shell and cd to the logs directory.
+    
+    ```text linenums="1"
+    # docker-compose exec seat-worker bash
+    root@8ed8967348f1:/var/www/seat# cd storage/logs/
+    root@8ed8967348f1:/var/www/seat/storage/logs# ls
+    eseye-2020-08-23.log
+    ```
+
+=== Docker (SeAT 5.x)
+
+    If you think your workers may be causing some exceptions, or you want to investigate why they may be failing, you can do so in the `worker` service. Just like for the web UI, get a bash shell and cd to the logs directory.
+    
+    ```text linenums="1"
+    # docker-compose exec worker bash
+    root@8ed8967348f1:/var/www/seat# cd storage/logs/
+    root@8ed8967348f1:/var/www/seat/storage/logs# ls
+    eseye-2020-08-23.log
+    ```
 
 The eseye log as well as Laravel log should help you debug what is going on.
 
@@ -88,7 +124,7 @@ SeAT provides the ability for third party developers to integrate with the core 
 
 For example. Open the `.env` file (which is most probably at `/opt/seat-docker/.env`) and edit the `SEAT_PLUGINS` variable to include the package you want to install. In our example we use the pseudo package called user/seat-plugin:
 
-```yaml
+```yaml linenums="1"
 # SeAT Plugins
 # This is a list of the all of the third party plugins that you
 # would like to install as part of SeAT. Package names should be

@@ -95,7 +95,7 @@ Those stats are list in the same order as the indicator column :
 Moons Reporter can only accept reports using Eve Online raw format. As a result, you will probably not be able to import data from an existing sheet without process.
 Luckily, the used format is quite simple to recover from collected data. You will find bellow a sample :
 
-```text
+```text linenums="1"
 Moon	Moon Product	Quantity	Ore TypeID	SolarSystemID	PlanetID	MoonID
 
 OP9L-F II - Moon 1

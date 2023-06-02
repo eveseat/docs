@@ -71,7 +71,7 @@ If you are on Windows, download and install [Docker Desktop].
 
 If you do not have `docker-compose`, install it now with the following command as `root` (Docker Compose is included with Docker Desktop on Windows):
 
-```bash
+```bash linenums="1"
 # Downloads docker-compose
 curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 
@@ -132,7 +132,7 @@ Open up the `.env` file in a text editor and fill in a few of the configuration 
 
 For TLS configuration, you need to set the `TRAEFIK_ACME_EMAIL` value, and then in the `docker-compose.yml` file uncomment the labels that relating to `certResolver`. They typically look like this: `traefik.http.routers.api.tls.certResolver=primary`. Finally, create an ACME configuration file with:
 
-```bash
+```bash linenums="1"
 mkdir acme
 touch acme/acme.json
 chmod 600 acme/acme.json
@@ -160,7 +160,7 @@ docker-compose up -d
 
 Knowing what is going on inside of your containers is crucial to understanding how everything is running as well as useful when debugging any problems that may occur. While the containers are starting up or have been running for a while, you can always `cd` to the directory where your `docker-compose.yml` file lives and run the `logs` command to see the output of all of the containers in the stack. For example:
 
-```bash
+```bash linenums="1"
 cd /opt/seat-docker
 docker-compose logs --tail 10 -f
 ```

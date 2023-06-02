@@ -15,7 +15,7 @@ As with anything Laravel, the config for mailgun will live in your installs `.en
 To use the Mailgun driver, first  set the `MAIL_DRIVER` option in your `.env` configuration file to `mailgun`.
 Next, we will add two options to specify details about our mailgun account.
 
-```php
+```text linenums="1"
 // File: .env
 
 MAILGUN_DOMAIN=whateveritis

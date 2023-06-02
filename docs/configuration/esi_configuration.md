@@ -51,7 +51,7 @@ We are almost done. The next thing to do is to add the configuration parameters 
 
 Look for the following section of the file and populate the values with those you got when you created an application on the developers site:
 
-```bash
+```text linenums="1"
 EVE_CLIENT_ID=null
 EVE_CLIENT_SECRET=null
 EVE_CALLBACK_URL=http://seat.test/auth/eve/callback

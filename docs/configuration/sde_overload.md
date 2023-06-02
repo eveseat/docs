@@ -6,7 +6,7 @@ SeAT sources information about the SDE from a json file hosted [here]. It may ha
 
 Check the version of SDE dumps available on [www.fuzzwork.co.uk]. At the time of this writing, `frostline-1.0-116241` was the latest. Once you have the version string ready, open the `.env` configuration file and add a key as follows:
 
-```php
+```text
 SDE_VERSION=frostline-1.0-116241
 ```
 

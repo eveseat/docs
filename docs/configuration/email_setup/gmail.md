@@ -11,7 +11,7 @@ This guide will attempt to describe how to go about setting up your email using 
 
 As with anything Laravel, the config for your email setup will live in your installs `.env` file. To use GMail as an SMTP service, set the `MAIL_DRIVER` option in your `.env` configuration file to `smtp`. Next, specify the SMTP details:
 
-```php
+```text linenums="1"
 // File: .env
 
 MAIL_DRIVER=smtp

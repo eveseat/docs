@@ -74,7 +74,7 @@ The `docker-compose` binary should be upgraded so that we can make use of `${VAR
 
 If you installed `docker-compose` using your OS' package manager, upgrade the tool using that. Otherwise, a `curl` invocation to download the latest version should also work.
 
-```bash
+```bash linenums="1"
 curl -L https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ```
@@ -89,7 +89,7 @@ docker-compose down
 
 The output should be similar to this:
 
-```text
+```text linenums="1"
 root@seat:/opt/seat-docker# docker-compose down
 Stopping seat-nginx   ... done
 Stopping seat-cron    ... done
@@ -115,7 +115,7 @@ Removing network seat-docker_seat-network
 
 Next, we will download the new SeAT 4 docker-compose file. Do that with:
 
-```bash
+```bash linenums="1"
 mv docker-compose.yml docker-compose.yml.back
 curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml
 ```
@@ -128,7 +128,7 @@ The next step is to get a fresh copy of the new `.env` file to use together with
 
 Get it with:
 
-```bash
+```bash linenums="1"
 mv .env .env.back
 curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
 ```
@@ -147,7 +147,7 @@ There are four main settings categories that need to be updated in the new `.env
 
 All of these categories will be described below in detail. For all of them, you have to open the newly downloaded `.env` file in a text editor and update the values. To be sure you are editing the correct file, check its header. It should say:
 
-```text
+```text linenums="1"
 # SeAT Docker Compose Configuration
 
 # Web server configuration.
@@ -164,7 +164,7 @@ As mentioned earlier. The web server has been swapped out in favour of Traefik. 
 
 Inside the `.env` file, Traefik specific configuration options are prefixed with `TRAEFIK_`. They are:
 
-```text
+```text linenums="1"
 TRAEFIK_DOMAIN=seat.local
 TRAEFIK_HTTPS_PORT=443
 TRAEFIK_HTTP_PORT=80
@@ -188,7 +188,7 @@ Traefik should handle all of the relevant configuration to get your site to list
 
 Prepare the json file from within `/opt/seat-docker` with:
 
-```bash
+```bash linenums="1"
 mkdir acme
 touch acme/acme.json
 chmod 600 acme/acme.json
@@ -221,7 +221,7 @@ This is one of the more important steps. The database configuration needs to mat
 
 The variable names have remained unchanged, but for referece they are:
 
-```text
+```text linenums="1"
 DB_DATABASE=seat
 DB_USERNAME=seat
 DB_HOST=mariadb
@@ -238,7 +238,7 @@ docker-compose up
 
 You should see something like this happen when you run the above command:
 
-```text
+```text linenums="1"
 root@seat:/opt/seat-docker# docker-compose up
 Creating network "seat-docker_seat-network" with the default driver
 Pulling mariadb (mariadb:10)...
@@ -252,7 +252,7 @@ e7cb79d19722: Already exists
 
 After a while, migrations should start running:
 
-```text
+```text linenums="1"
 ...
 
 seat-web_1     | starting web service
@@ -273,7 +273,7 @@ Be patient, there are many, many database changes that need to apply.
 
 Eventually, when everything is done you should start seeing the following output:
 
-```text
+```text linenums="1"
 seat-worker_1  | [2020-08-19 21:11:45][2] Processing: Seat\Eveapi\Jobs\Status\Status
 seat-worker_1  | [2020-08-19 21:11:45][1] Processing: Seat\Eveapi\Jobs\Status\Esi
 seat-worker_1  | [2020-08-19 21:11:46][2] Processed:  Seat\Eveapi\Jobs\Status\Status
@@ -288,7 +288,7 @@ The first obvious step will be to check that you can access the web UI. If not, 
 
 If everything seems to be working fine, you can hit `crtl + c` which will bring the stack down gracefully.
 
-```text
+```text linenums="1"
 ^CGracefully stopping... (press Ctrl+C again to force)
 Stopping seat-docker_seat-cron_1   ...
 Stopping seat-docker_seat-worker_1 ...

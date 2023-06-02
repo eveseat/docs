@@ -15,7 +15,7 @@ However, thanks to Laravel, if you need to support another platform - you simply
 All notifications must be declared inside `notifications.alerts.php`. This file is available at root of your SeAT installation under `config` directory.
 Every entry must follow this pattern :
 
-```php
+```php linenums="1"
 'created_user' => [
     'label' => 'notifications::alerts.created_user',
     'handlers' => [

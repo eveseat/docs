@@ -68,20 +68,28 @@ theme:
     palette:
         primary: 'grey'
         accent: 'indigo'
-
-google_analytics:
-  - 'UA-119530306-1'
-  - 'auto'
+    features:
+      - content.code.copy
 
 # Customization
 markdown_extensions:
     - admonition
-    - codehilite
+    - pymdownx.details
+    - pymdownx.highlight:
+        anchor_linenums: true
+        line_spans: __span
+        pygments_lang_class: true
+    - pymdownx.inlinehilite
+    - pymdownx.keys
     - pymdownx.superfences
-    - pymdownx.tabbed
+    - pymdownx.tabbed:
+        alternate_style: true
     - toc:
         permalink: true
 extra:
+  analytics:
+    provider: google
+    property: UA-119530306-1
   social:
     - icon: fontawesome/brands/github-alt
       link: 'https://github.com/eveseat/seat'

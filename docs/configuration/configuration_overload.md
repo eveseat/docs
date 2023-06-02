@@ -29,7 +29,7 @@ To start, create the file `eveapi.config.php` inside the `config` folder.
 Next, we add the contents in the file to return an array, specifying the `eseye_loglevel` key and its new value.
 The file would look something like this:
 
-```php
+```php linenums="1"
 <?php
 
 // File: config/eveapi.config.php

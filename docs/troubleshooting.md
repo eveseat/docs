@@ -48,7 +48,7 @@ For the change to take effect, you need to reload the stack with `docker-compose
 
 Logs are always written to one of two log files irrespective of whether the application is in debug mode or not. Application logs go to the Laravel frameworks log files. API requests sent to ESI are stored int he Eseye log file. Logs are stored in the applications storage directory which can be found in the `storage/logs` folder.
 
-Assuming you followed the guides on this documentation site, the full path to the directory where log files are will be `/var/www/seat/storage/logs/`. In the case of Docker installations, this will also be the path within the `front` or `worker` container. Log files are rotated daily and are kept for a maximum of 10 days by default. Therefore, to get to todays application logs, the log file itself may be called `laravel-2018-05-31.log`. To find todays ESI requests logs, the log file will be called `eseye-2018-05-31.log`.
+Assuming you followed the guides on this documentation site, the full path to the directory where log files are will be `/var/www/seat/storage/logs/`. In the case of Docker installations, this will also be the path within the `seat-web`/`front` or `seat-worker`/`worker` container. Log files are rotated daily and are kept for a maximum of 10 days by default. Therefore, to get to todays application logs, the log file itself may be called `laravel-2018-05-31.log`. To find today's ESI requests logs, the log file will be called `eseye-2018-05-31.log`.
 
 ### Live Logs - Host Installs
 
@@ -68,13 +68,21 @@ tail -f /var/www/seat/storage/logs/eseye-$(date +%Y-%m-%d).log
 
 ### Live Logs - Docker Installs
 
-Application source code and log files are shared between the `front`, `worker` and `scheduler` containers. Therefore the following commands can be executed on any of those containers. For purposes of demonstration, we are going to tail the logs from the `front` container.
+Application source code and log files are shared between the `seat-web`/`front`, `seat-worker`/`worker` and `seat-cron`/`scheduler` containers. Therefore, the following commands can be executed on any of those containers. For purposes of demonstration, we are going to tail the logs from the `seat-web`/`front` container.
 
-First, enter get a shell within the `front` container while in the `/opt/seat-docker/` directory with:
+First, enter get a shell within the `seat-web`/`front` container while in the `/opt/seat-docker/` directory with:
 
-```bash
-docker-compose exec front sh
-```
+=== SeAT 4.x
+
+    ```bash
+    docker-compose exec seat-web sh
+    ```
+
+=== SeAT 5.x
+
+    ```bash
+    docker-compose exec front sh
+    ```
 
 Next, tail the log files you want to see.
 
@@ -106,6 +114,14 @@ su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
 
 For Docker installations, the only requirement to run the diagnose command would be to ensure that you are currently in the same folder as that where the stacks `docker-compose.yml` file lives. If you followed the guides on this website that would be in `/opt/seat-docker`. Next, run the command with:
 
-```bash
-docker-compose exec front su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
-```
+=== SeAT 4.x
+
+    ```bash
+    docker-compose exec seat-web su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
+    ```
+
+=== SeAT 5.x
+    
+    ```bash
+    docker-compose exec front su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
+    ```

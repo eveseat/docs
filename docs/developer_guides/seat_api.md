@@ -17,7 +17,7 @@ Since SeAT 3.0, API documentation is generated from source code annotations and 
 
 Authentication to the SeAT API is done via a `X-Token` header. A token may be obtained by browsing to the API settings page in the SeAT WebUI and generating one. A sample request using `curl` with an authentication token can be seen below:
 
-```bash
+```bash linenums="1"
 $ curl -X GET -H "X-Token:123456" -H "Accept: application/json" http://localhost:8000/api/v1/key
 *   Trying ::1...
 * Connected to localhost (::1) port 8000 (#0)
@@ -41,7 +41,7 @@ Make sure you specify the Accepted content-type header as `application/json`. Wh
 
 Example:
 
-```bash
+```bash linenums="1"
 $ curl -X POST https://seat.testsite.local/api/v1/key -H "Accept: application/json" -H "X-Token: L3SxgdX4XUw6pVWVSCftgsh16eAbBF3D" -d "key_id=123&v_code=123"
 {"v_code":["The v code must be 64 characters."]}
 ```

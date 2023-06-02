@@ -70,7 +70,7 @@ mv /var/www/seat /var/www/seat3
 If it's not already the case, you'll have to deploy at least PHP 7.3 on the server.
 The provided command bellow will help you in this task and add newly required PHP extensions in the meantime.
 
-```bash
+```bash linenums="1"
 apt-get update
 apt-get install libpng-dev libfreetype6-dev libjpeg-dev
 apt-get install curl openssl zip php7.3-bz2 php7.3-cli php7.3-curl php7.3-dom php7.3-gd php7.3-gmp php7.3-intl php7.3-mbstring php7.3-mysql php7.3-opcache php7.3-redis php7.3-zip
@@ -98,7 +98,7 @@ composer create-project eveseat/seat /var/www/seat "4.0.*" --no-dev --no-interac
 
 Once the download is done, you should have seen output such as:
 
-```bash
+```bash linenums="1"
 Writing lock file
 Generating optimized autoload files
 > Illuminate\Foundation\ComposerScripts::postAutoloadDump
@@ -117,7 +117,7 @@ Application key [base64:CmhqYNkaIcHo8nYC8LiEWa3U5/+BiTLih5dZftxlV2k=] set succes
 
 Finally, fix directories permissions using the two commands bellow:
 
-```bash
+```bash linenums="1"
 chown -R www-data:www-data /var/www/seat
 chmod -R guo+w /var/www/seat/storage/
 ```
@@ -139,7 +139,7 @@ Use information from backup located at `/var/www/seat3/.env` to update the newly
 
 We will convert database to work with new SeAT version. To do so, we're using common commands disclosed bellow:
 
-```bash
+```bash linenums="1"
 sudo -H -u www-data bash -c 'php /var/www/seat/artisan vendor:publish --force --all'
 sudo -H -u www-data bash -c 'php /var/www/seat/artisan migrate'
 sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Console\\database\\seeds\\ScheduleSeeder'

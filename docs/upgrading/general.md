@@ -12,7 +12,7 @@ As expected, updates for SeAT are deployed via images on the [GitHub Container R
 Every package version release will automatically start the build process to generate a new docker image.
 This means updates are super simple in the docker world. To update your instance, simply run:
 
-```bash
+```bash linenums="1"
 # Update to the latest dockerhub images
 docker-compose pull
 
@@ -88,7 +88,7 @@ php artisan cache:clear
 
 - Renew cached configuration and routes
 
-```bash
+```bash linenums="1"
 php artisan config:cache
 php artisan route:cache
 ```
