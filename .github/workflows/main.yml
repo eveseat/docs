@@ -10,6 +10,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Deploy MkDocs
-      uses: mhausenblas/mkdocs-deploy-gh-pages@1.12
+      uses: mhausenblas/mkdocs-deploy-gh-pages@1.26
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
