@@ -24,7 +24,7 @@ These files are loaded automatically if they are detected - you have nothing els
 
 # Docker Installs
 
-An example of adding these to your seat-web container is provided below:
+An example of adding these to your `front` container is provided below:
 
 !!! note
 
@@ -39,7 +39,7 @@ version: "3.2"
 
 services:
 
-  seat-web:
+  front:
     volumes:
 #      - /opt/seat-docker/custom/custom-layout-mini.css:/var/www/seat/public/custom-layout-mini.css
 #      - /opt/seat-docker/custom/custom-layout.css:/var/www/seat/public/custom-layout.css

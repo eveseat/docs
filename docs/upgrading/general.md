@@ -8,7 +8,7 @@ Should something go wrong, then you can simply re-install SeAT, restore the data
 
 ## Docker installation
 
-As expected, updates for SeAT are deployed via Dockerhub and the images within the [eveseat organization].
+As expected, updates for SeAT are deployed via images on the [GitHub Container Registry].
 Every package version release will automatically start the build process to generate a new docker image.
 This means updates are super simple in the docker world. To update your instance, simply run:
 
@@ -106,4 +106,4 @@ supervisorctl start all
 
 [here]: ../admin_guides/docker_admin.md#performing-updates
 [database backup]: ../admin_guides/docker_admin.md#database-backups-and-restore
-[eveseat organization]: https://hub.docker.com/u/eveseat/
+[GitHub Container Registry]: https://github.com/eveseat/seat-docker/pkgs/container/seat

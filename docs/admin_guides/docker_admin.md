@@ -32,13 +32,13 @@ docker-compose up -d
 
 Getting an idea of what is happening inside of the containers may be useful for many things, including debugging any issues that may occur. All of the containers generate logs that can be viewed either in isolation, or all of the containers in the stack.
 
-To view a single services' logs (`seat-web` in this examples case), run:
+To view a single services' logs (`front` in this examples case), run:
 
 ```bash
-docker-compose logs --tail 10 -f seat-web
+docker-compose logs --tail 10 -f front
 ```
 
-All services can referenced by their name using `docker-compose`. You can see the service names [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml). At the time of writing this doc, the available services were: `mariadb`, `redis`, `traefik`, `seat-web`, `seat-worker` and `seat-cron`.
+All services can referenced by their name using `docker-compose`. You can see the service names [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml). At the time of writing this doc, the available services were: `mariadb`, `redis`, `traefik`, `front`, `worker` and `scheduler`.
 
 To view all service logs at once, run:
 
@@ -54,10 +54,10 @@ While most processes will output information to stdout (which is what you will s
 
 ### Logs - Web UI
 
-If you are getting HTTP 500's, or other exception when using the web interface, the best place to find the relevant logs will be in the `seat-web` service, in the `/var/www/seat/storage/logs` directory. To reach them, run `docker-compose exec seat-web bash`. This will drop you into bash shell in the container:
+If you are getting HTTP 500's, or other exception when using the web interface, the best place to find the relevant logs will be in the `front` service, in the `/var/www/seat/storage/logs` directory. To reach them, run `docker-compose exec front bash`. This will drop you into bash shell in the container:
 
 ```text
-$ docker-compose exec seat-web bash
+$ docker-compose exec front bash
 root@9aff5b002ca0:/var/www/seat#
 ```
 
@@ -71,10 +71,10 @@ This directory shoul have daily log files for you to view.
 
 ### Logs - Worker / Updaters
 
-If you think your workers may be causing some exceptions, or you want to investigate why they may be failing, you can do so in the `seat-worker` service. Just like for the web UI, get a bash shell and cd to the logs directory.
+If you think your workers may be causing some exceptions, or you want to investigate why they may be failing, you can do so in the `worker` service. Just like for the web UI, get a bash shell and cd to the logs directory.
 
 ```text
-# docker-compose exec seat-worker bash
+# docker-compose exec worker bash
 root@8ed8967348f1:/var/www/seat# cd storage/logs/
 root@8ed8967348f1:/var/www/seat/storage/logs# ls
 eseye-2020-08-23.log

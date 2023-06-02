@@ -81,7 +81,7 @@ After running the above command wait for containers affected to rebuild. If SeAT
 
 ### SeAT specific packages
 
-#### Maintained packages
+#### Maintained packages for SeAT 4
 
 | Package | Version | Installation | Description |
 | ------- | ------- | ------------ | ----------- |
@@ -112,6 +112,20 @@ These packages provide utilities for other packages and usually don't need to be
 | ------- | ------- | ----------- |
 | [warlof/seat-connector](https://github.com/warlof/seat-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-connector/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-connector) | A generic connector module that handles invites and roles management with any registered platform |
 | [recursivetree/seat-treelib](https://github.com/recursivetree/seat-treelib) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-treelib/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-treelib) | A module that contains shared code for all `recursivetree/*` plugins |
+
+
+#### SeAT 5 compatibility
+
+You might need to install a [different branch](#installing-different-versions) of a plugin, as the main branch is still on seat 4.
+
+| Package | Version | Notes |
+| ------- | ------- | ----------- |
+| [recursivetree/seat-info](https://github.com/recursivetree/seat-info) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-info/v/unstable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-info) | You need to follow special steps after upgrading to retain your resource files. Instructions [here](https://github.com/recursivetree/seat-info#4x---5x). Still considered unstable. Install the `5.0.x-dev` branch. |
+| [recursivetree/seat-rat](https://github.com/recursivetree/seat-rat) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-rat/v/unstable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-rat) | Still considered unstable. Install the `5.0.x-dev` branch. |
+| [recursivetree/seat-billing](https://github.com/recursivetree/seat-billing) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-billing/v/unstable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-billing) | Still considered unstable. Install the `5.0.x-dev` branch. |
+| [recursivetree/seat-alliance-industry](https://github.com/recursivetree/seat-alliance-industry) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-alliance-industry/v/unstable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-alliance-industry) | Still considered unstable. Install the `5.0.x-dev` branch. |
+| [recursivetree/seat-inventory](https://github.com/recursivetree/seat-inventory) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-inventory/v/unstable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-inventory) | Still considered unstable. Install the `5.0.x-dev` branch. |
+| [recursivetree/seat-transport](https://github.com/recursivetree/seat-transport) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-transport/v/unstable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-transport) | Still considered unstable. Install the `5.0.x-dev` branch. |
 
 
 #### Incompatible packages with current stable SeAT version
