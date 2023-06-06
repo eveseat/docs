@@ -2,23 +2,23 @@
 
 # Docker
 
-!!! danger
-    This guide walks you through the process of installing SeAT 5.x, which is still under development. It is advised that you only install it in a testing environments until a full release is made.
-
 Docker is ideally the installation route you want to go. Docker enables us to run SeAT on any platform capable of running docker itself (which includes Windows!). Additionally, upgrades and service maintenance are really low effort as you don't have to care about any dependencies. All of it is maintained within a docker stack, DockerHub and the GitHub Container Registry.
 
-!!! info
+!!! danger "SeAT 5.x is in preview"
+    This guide walks you through the process of installing SeAT 5.x, which is still under development. It is advised that you only install it in a testing environments until a full release is made.
+
+!!! info "Windows owner recommendation"
     If you plan on running Docker on Windows, for the best performance it is suggested that you run Docker using the Windows Subsystem for Linux 2 (WSL2) backend, available starting in Windows 10/Windows Server 20H1 (build 2004) releases.
 
-!!! hint
+!!! warning "Windows owner special installation path"
+    If you are using Docker on Windows, you will need to use the [Manual Deployment](#manual-deployment) option below.
+
+!!! tip
     Before starting the installation process, be sure you read this complete document first. It will help you understand all the steps from an installation process.
 
     If you feel like docker might not be your cup of tea, checkout some of the other [getting started](https://docs.docker.com/get-started/) guides that are available.
 
-!!! warning
-    If you are using Docker on Windows, you will need to use the [Manual Deployment](#manual-deployment) option below.
-
-!!! note "Eve Application and ESI"
+!!! abstract "Eve Application and ESI"
     SeAT uses CCP's [ESI](https://esi.evetech.net/) service in order to retrieve EVE Online-related information. Before you can make any authenticated calls to ESI, you have to register a third-party EVE application on the [developers portal](developers.eveonline.com/). This is an absolute must for SeAT to be of any use. The configuration of this step is covered in a later stage of the documentation.
 
 ## Internal Container Setup Overview
@@ -33,7 +33,8 @@ The official SeAT repository for Docker is shipped with a total of 4 `YAML` file
 - An alternative to Traefik `docker-compose.proxy.yml` file in which is adapted `front` SeAT container to be server behind a reverse proxy of your choice
 - A volume called `mariadb-data` and `seat-storage` is defined. These are the *most important* volumes as they contain all SeAT data. You should configure a backup solution for them!
 - The environment is configured using a top-level `.env` file.
-- Only two ports are exposed by default. Those are `tcp/80` and `tcp/443`. These can be connected to in order to access the SeAT web interface.
+- Only one port is exposed by default. This is `tcp/8080`. It can be connected to in order to access the SeAT web interface.
+- When using the stack with Traefik (which is the easier and recommended approach), ports `tcp/80` and `tcp/443` are exposed and `tcp/8080` remain unbound.
 - All containers are configured to restart on failure, so if your server reboots or a container dies for whatever reason it should automatically start up again.
 
 The table bellow is listed overall consumed Docker image, including SeAT custom one - together with their source repository.
@@ -47,14 +48,14 @@ The table bellow is listed overall consumed Docker image, including SeAT custom 
 
 ## SeAT Docker Installation
 
-Depending on whether you already have `docker` and `docker-compose` already installed, you may choose how to start the installation. If you already have the required tooling installed and running their latest versions, all you need to do is download the latest **SeAT Docker template archive** to get started.
+Depending on whether you already have `docker` and `docker compose` already installed, you may choose how to start the installation. If you already have the required tooling installed and running their latest versions, all you need to do is download the latest **SeAT Docker template archive** to get started.
 
 ### Automated Setup Script
 
 !!!warning
     The script hasn't been updated to seat 5 yet. Please follow the [manual deployment instructions](#manual-deployment) instead.
 
-If you do not have the required software installed yet, consider running the [bootstrap script](https://github.com/eveseat/seat-docker/blob/5.0.x/bootstrap.sh) that will check for `docker` and `docker-compose`, install it and start the SeAT stack up for you. The script can be run with:
+If you do not have the required software installed yet, consider running the [bootstrap script](https://github.com/eveseat/seat-docker/blob/5.0.x/bootstrap.sh) that will check for `docker` and `docker compose`, install it and start the SeAT stack up for you. The script can be run with:
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/bootstrap.sh)
@@ -68,29 +69,33 @@ If you don't want to run this script, follow along in the next section of this g
 
 #### Docker Download
 
-If you do not have `docker`, install it now with the following command as `root`:
+If you do not have `docker`, install it now.
 
-```bash
-sh <(curl -fsSL get.docker.com)
-```
+=== "Linux"
 
-If you are on Windows, download and install [Docker Desktop].
+    Under Linux, you can achieve this action by using the following command as `root`:
+    
+    ```bash
+    sh <(curl -fsSL get.docker.com)
+    ```
+
+=== "Windows"
+
+    Under Windows, you can achieve this action by downloading and installing [Docker Desktop].
 
 #### Docker-compose Download
 
-If you do not have `docker-compose`, install it now with the following command as `root` (Docker Compose is included with Docker Desktop on Windows):
+If you do not have `docker compose`, install it now with the following command as `root` (Docker Compose is included with Docker Desktop on Windows):
 
 ```bash linenums="1"
-# Downloads docker-compose
-curl -L https://github.com/docker/compose/releases/download/2.18.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-
-# Makes docker-compose executable
-chmod +x /usr/local/bin/docker-compose
+# Downloads and install docker compose from Docker repository
+sudo apt-get update
+sudo apt-get install docker-compose-plugin
 ```
 
 #### Docker compose working directory
 
-With `docker` and `docker-compose` ready, create yourself a directory in `/opt` with `mkdir -p /opt/seat-docker` and `cd` to it. Remember this directory as you will need to come back to it often.
+With `docker` and `docker compose` ready, create yourself a directory in `/opt` with `mkdir -p /opt/seat-docker` and `cd` to it. Remember this directory as you will need to come back to it often.
 
 On Windows, create the `C:\seat-docker` directory with `mkdir C:\seat-docker` and `cd` to it.
 
@@ -112,7 +117,7 @@ Next, decompress the template archive:
 
 === "Linux"
     ```bash
-    unzip seat-docker.zip -d /opt/seat-docker
+    unzip seat-docker.zip -d /opt/seat-docker -j
     ```
 
 === "Windows"
@@ -173,12 +178,12 @@ With the configuration files ready, start up the stack with:
 
 === "Using Traefik"
     ```bash
-    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml up
     ```
 
 === "Using proxy"
     ```bash
-    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml up
     ```
 
 ## Monitoring the Stack
@@ -187,14 +192,25 @@ Knowing what is going on inside your containers is crucial to understanding how 
 
 ```bash linenums="1"
 cd /opt/seat-docker
-docker-compose logs --tail 10 -f
+docker compose logs --tail 10 -f
 ```
 
 These commands will `cd` to the directory containing the stacks `docker-compose.yml` file and run the `logs` command, showing the last *10* log entries and then printing new ones as they arrive. If you leave away the `--tail 10`part, you can view all logs since the container startup.
 
 ## Configuration Changes
 
-All the relevant configuration lives inside the `.env` file, next to your `docker-compose.yml` file. Modify their values by opening it in a text editor, making the appropriate changes, and saving it again. Once that is done, run `docker-compose up -d` again to restart the container environment.
+All the relevant configuration lives inside the `.env` file, next to your `docker-compose.yml` file. Modify their values by opening it in a text editor, making the appropriate changes, and saving it again.
+Once that is done, restart the container environment:
+
+=== "Using Traefik"
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml up -d
+    ```
+
+=== "Using proxy"
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml up -d
+    ```
 
 !!! success
     You made it! Use a browser and browse to the domain / subdomain of your server to access SeAT!
