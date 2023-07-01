@@ -11,12 +11,15 @@ No doubt, there are no limits to what code you can write, how you structure it a
 - Prefix your github repository name with `seat` eg: `seat-teamspeak`.
 - Tag your github repository with `seat`.
 - Use a unique package namespace such as `Author\Seat\Package\` eg: `Warlof\Seat\Teamspeak\`.
-- Prefix your database table names with something unique to your package. eg `warlof_teamspeak_users`.
+- Prefix your database table names with something unique to your package. eg `warlof_teamspeak_users`. 
+  Although you shouldn't make your prefix too long, as there is a 64 character table length limit.
 - Do not modify core tables. This will break future updates for users of your package.
 - Prefix your settings with both an author and package eg: `warlof.teamspeak.address`.
 - Prefix redis records with both author and package eg: `warlof.teamspeak.channels`.
 - In your `composer.json` file, set the `type` to `seat-plugin`.
 - Avoid altering core tables, especially introducing relationship - this might break core migrations. Prefer to use observer if you need to maintain your data across core models.
+- If you need and API or something the seat core doesn't provide, consider contributing it. The seat core is not set in stone.
+- Scope your routes: For example all routes from the seat core start with `seatcore`like this: `seatcore::my.route.to.someting`. You should follow a similar format: `seat<plugin name>::<route>`
 
 ## Model Observers
 
@@ -26,4 +29,4 @@ For example, should a `User` model get deleted, the `deleted` event will get fir
 
 Examples of where this may be interesting could be if you need to have cleanup code for tables that your package includes.
 
-For more information, checkout the Laravel documentation on [Eloquent Observers](https://laravel.com/docs/5.5/eloquent#observers).
+For more information, checkout the Laravel documentation on [Eloquent Observers](https://laravel.com/docs/10.x/eloquent#observers).
