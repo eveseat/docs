@@ -58,7 +58,7 @@ Every formatter is composed of the following method:
 
 ## Observers
 
-In SeAT, notifications are event based and sent by jobs queued in `notifications` queue. This prevents to lock a system while sending the information.
+In SeAT, notifications are event based and sent by jobs queued in `notifications` queue. This prevents to lock system while sending the information.
 
 To send your notification, you will listen for system events (ie: a character notification created in the database) in order to dispatch the selected notification.
 
