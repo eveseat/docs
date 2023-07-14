@@ -10,6 +10,7 @@ SeAT 5 mainly upgrades the php and laravel version as well as all dependencies t
 - PHP 8.2: SeAT now runs on php 8.2, enabling new features like enums and better type hinting, but also breaking a few things.
 - Route Prefixing: All routes from the seat core start with `seatcore::`. For example, `notifications.integrations.list` turns into `seatcore::notifications.integrations.list`. If your plugin uses routes pointing to the seat core, you will have to update them.
 - Notifications: All notifications from SeAT 4 continue to work, but by updating them you can unlock more features like discord pings. See the [notifications guide](notifications_implementation.md) for more details.
+- The `Seat\Eveapi\Jobs\Middleware\WithoutOverlapping` job middleware backport is now provided by laravel and got removed from the SeAT core. Use `Illuminate\Queue\Middleware\WithoutOverlapping` instead. Just swapping the import should be enough, as they are compatible.
 - Some, but not all ways of exporting data from DataTables are broken. Just check whether they work and fix if required.
 - There are a few minor breaking changes between Laravel 6 and 10:
   - `MyJob::dispatchNow()` got replaced with `MyJob::dispatchSync()`
