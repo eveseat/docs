@@ -18,7 +18,7 @@ No doubt, there are no limits to what code you can write, how you structure it a
 - Prefix redis records with both author and package eg: `warlof.teamspeak.channels`.
 - In your `composer.json` file, set the `type` to `seat-plugin`.
 - Avoid altering core tables, especially introducing relationship - this might break core migrations. Prefer to use observer if you need to maintain your data across core models.
-- If you need and API or something the seat core doesn't provide, consider contributing it. The seat core is not set in stone.
+- If you need an API or something the SeAT core doesn't provide, consider contributing it. The SeAT core is not set in stone.
 - Scope your routes: For example all routes from the seat core start with `seatcore`like this: `seatcore::my.route.to.someting`. You should follow a similar format: `seat<plugin name>::<route>`
 
 ## Model Observers
