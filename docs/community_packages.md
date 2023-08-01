@@ -4,11 +4,12 @@
 
 Below is a list of packages contributed by the community. These packages normally follow the same installation procedure, however, its best you consult the documentation of the package itself in case there is anything special you need to get it working.
 
-## Blade package installation
+## Generic package installation
 
 Packages will normally come in the form of a composer package that you need to include in your SeAT install, as well as a Service Provider that you need to bootstrap. So, generically speaking, installing a package will mean that you:
 
-- Ensure that you are in the *path* where you installed. By default, this should be `/var/www/seat`.
+- Ensure that you are in the *path* where you installed. By default this should be 
+`/var/www/seat`.
 
 - Put your application into *maintenance mode*. This will ensure that no request from the outside will hit your applications logic, and also help you perform an upgrade uninterrupted. Do this with the following commands issued as the webserver user:
 
@@ -36,7 +37,7 @@ sudo -H -u www-data bash -c 'php artisan migrate'
 
 - *Renew config and route cache* to benefit of newly added functionalities:
 
-```bash linenums="1"
+```bash
 sudo -H -u www-data bash -c 'php artisan route:cache'
 sudo -H -u www-data bash -c 'php artisan config:cache'
 ```
@@ -59,7 +60,7 @@ Installing packages like this will ensure that none of the core SeAT packages ar
 
 Applying community packages to your SeAT instance with Docker requires you to update your .env file located in `/opt/seat-docker` and uncommenting SEAT_PLUGINS by removing '#' and entering the package(s) to be installed separating each package with a comma. An example of how to enter packages in your .env would be:
 
-```yaml linenums="1"
+```yaml
 # SeAT Plugins
 # This is a list of the all of the third party plugins that you
 # would like to install as part of SeAT. Package names should be
@@ -70,23 +71,9 @@ SEAT_PLUGINS=denngarr/seat-fitting,cryptaeve/seat-squad-sync
 
 - Once you have entered the package(s) to be installed run the below command in `/opt/seat-docker`:
 
-=== Docker (SeAT 4.x)
-    
-    ```bash
-    docker-compose up -d
-    ```
-
-=== Docker (SeAT 5.x - using Traefik)
-
-    ```bash
-    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
-    ```
-
-=== Docker (SeAT 5.x - using reverse proxy)
-
-    ```bash
-    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
-    ```
+```bash
+docker-compose up -d
+```
 
 After running the above command wait for containers affected to rebuild. If SeAT does not come back up refer to [Troubleshooting](https://eveseat.github.io/docs/troubleshooting/) for more insight.
 
@@ -96,54 +83,56 @@ After running the above command wait for containers affected to rebuild. If SeAT
 
 #### Maintained packages
 
-| Package | Version (SeAT 4.x)                                                                                                                                                                                                | Version (SeAT 5.x)                                                                                                                                                                             | Installation                                                                           | Description                                                                                                                                                                                                                                                                                                                    |
-| ------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [alliancewaw/seat-mumble-register](https://github.com/waw-eve/seat-mumble-register) | [![Latest Stable Version](https://poser.pugx.org/alliancewaw/seat-mumble-register/v/stable?style=flat-square)](https://packagist.org/packages/alliancewaw/seat-mumble-register) | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square)                                                                              |                                                                                        | [Read the docs](https://github.com/waw-eve/seat-mumble-register-backend/blob/main/README.md)                                                                                                                                                                                                                                   | This plugin provide an extension to generate a certificate for SeAT user and regist it to mumble server |
-| [cryocaustik/seat-hr](https://github.com/cryocaustik/seat-hr) | [![Latest Stable Version](http://poser.pugx.org/cryocaustik/seat-hr/v/stable?style=flat-square)](https://packagist.org/packages/cryocaustik/seat-hr)                                                                                | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        |                                                                                                                                                                                                                                                                                                                                | Human Resources plugin for SeAT with Applications (with customized questions per corporation), Blacklist, Intel, Kick History, Notes, and Sheet |
-| [cryptaeve/seat-squad-sync](https://github.com/crypta-eve/seat-squad-sync ) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-squad-sync/v/stable?style=flat-square)](https://packagist.org/packages/crypta-eve/seat-squad-sync )                                              | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        | Adds the ability to sync squad members into filters of permissions                                                                                                                                                                                                                                                             |
-| [cryptaeve/seat-text](https://github.com/crypta-eve/seat-text) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-text/v/stable?style=flat-square)](https://packagist.org/packages/crypta-eve/seat-text)                                                           | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        | A module to serve public static ascii, with editing access controlled by seat                                                                                                                                                                                                                                                  |
-| [denngarr/seat-fitting](https://github.com/dysath/seat-fitting) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-fitting/v/stable?style=flat-square)](https://packagist.org/packages/denngarr/seat-fitting)                                                                           | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        | Module to check fittings per character                                                                                                                                                                                                                                                                                         |
-| [denngarr/seat-srp](https://github.com/dysath/seat-srp) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-srp/v/stable?style=flat-square)](https://packagist.org/packages/denngarr/seat-srp)                                                                                   | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        | A module for SeAT that tracks SRP requests                                                                                                                                                                                                                                                                                     |
-| [h4zz4rddev/seat-buyback](https://github.com/h4zz4rddev/seat-buyback) | [![Latest Stable Version](https://poser.pugx.org/h4zz4rddev/seat-buyback/v/stable?style=flat-square)](https://packagist.org/packages/h4zz4rddev/seat-buyback)                                                                       | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        |                                                                                                                                                                                                                                                                                                                                | A SeAT module for buyback functionality                                                                      |
-| [humunuk/alliance-structure-mngmt](https://github.com/humunuk/alliance-structure-mngmt) | [![Latest Stable Version](https://poser.pugx.org/humunuk/alliance-structure-mngmt/v/stable?style=flat-square)](https://packagist.org/packages/humunuk/alliance-structure-mngmt)                                  | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        |                                                                                                                                                                                                                                                                                                                                | Add "Structures" sub-menu to Alliance page and show all the structures that belong to corps in alliance      |
-| [kassie/calendar](https://github.com/BenHUET/eveseat-calendar) | [![Latest Stable Version](https://poser.pugx.org/kassie/calendar/v/stable?style=flat-square)](https://packagist.org/packages/kassie/calendar)                                                                                       | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) | [Read the docs](https://github.com/BenHUET/eveseat-calendar/blob/master/README.md)     | Calendar plugin                                                                                                                                                                                                                                                                                                                |
-| [warlof/seat-discord-connector](https://github.com/warlof/seat-discord-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-discord-connector/v/stable?style=flat-square)](https://packagist.org/packages/warlof/seat-discord-connector)                                        | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        | [Read the docs](https://github.com/warlof/seat-discord-connector/blob/5.0.x/README.md)                                                                                                                                                                                                                                         | A Discord driver to be used with `seat-connector`                                                            |
-| [warlof/seat-teamspeak](https://github.com/warlof/seat-teamspeak) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-teamspeak/v/stable?style=flat-square)](https://packagist.org/packages/warlof/seat-teamspeak)                                                        | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) | [Read the docs](https://github.com/warlof/seat-teamspeak/blob/5.0.x/README.md)         | A Teamspeak driver to be used with `seat-connector`                                                                                                                                                                                                                                                                            |
-| [recursivetree/seat-info](https://github.com/recursivetree/seat-info) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-info/v/stable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-info) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-info/v/unstable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-info)                           | [Read the docs](https://github.com/recursivetree/seat-info/blob/master/README.md)      | A module that adds a small wiki-like article systems for example as a corporation bulletin.<br/><br/>**SeAT 5.x**<br/>You need to follow [special steps](https://github.com/recursivetree/seat-info#4x---5x) after upgrading to retain your resource files.<br/>Still considered unstable.<br/>Install the `5.0.x-dev` branch. |
-| [recursivetree/seat-rat](https://github.com/recursivetree/seat-rat) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-rat/v/stable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-rat) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-rat/v/unstable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-rat)                             |                                                                                        | A module to monitor ratting usage in a system, e.g. to prevent dropping the bounty risk modifier in nullsec.<br/><br/>**SeAT 5.x**<br/>Still considered unstable.<br/>Install the `5.0.x-dev` branch.                                                                                                                          |
-| [simplyunnamed/seat-user-last-login](https://github.com/SimplyUnnamed/seat-user-last-logins) | [![Latest Stable Version](http://poser.pugx.org/simplyunnamed/seat-user-last-login/v?style=flat-square)](https://packagist.org/packages/simplyunnamed/seat-user-last-login)                                                         | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        | Tool to help find potential AFK's in your corporation.                                                                                                                                                                                                                                                                         |
-| [recursivetree/seat-billing](https://github.com/recursivetree/seat-billing) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-billing/v/stable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-billing) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-billing/v/unstable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-billing)                     |                                                                                        | A billing module to help you with ore and rating taxes.<br/><br/>**SeAT 5.x**<br/>Still considered unstable.<br/>Install the `5.0.x-dev` branch.                                                                                                                                                                               |
-| [recursivetree/seat-pushx-blamer](https://github.com/recursivetree/seat-pushx-blamer) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-pushx-blamer/v/stable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-pushx-blamer)                                    | ![SeAT 5.x incompatible](https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square) |                                                                                        | A module to tell you who's guilty of blocking the PushX queue.                                                                                                                                                                                                                                                                 |
-| [recursivetree/seat-alliance-industry](https://github.com/recursivetree/seat-alliance-industry) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-alliance-industry/v/stable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-alliance-industry) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-alliance-industry/v/unstable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-alliance-industry) | | A corporation/alliance/coalition industry order marketplace<br/><br/>**SeAT 5.x**<br/>Still considered unstable.<br/>Install the `5.0.x-dev` branch.                                                                                                                                                                           |
-| [recursivetree/seat-inventory](https://github.com/recursivetree/seat-inventory) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-inventory/v/stable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-inventory) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-inventory/v/unstable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-inventory)                 |                    | Inventory manager for contracts and corporation hangars.<br/><br/>**SeAT 5.x**<br/>Still considered unstable.<br/>Install the `5.0.x-dev` branch.                                                                                                                                                                                                                                                                       |
-| [recursivetree/seat-transport](https://github.com/recursivetree/seat-transport) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-transport/v/stable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-transport) | [![Latest Development Version](https://poser.pugx.org/recursivetree/seat-transport/v/unstable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-transport)                 |                    | This plugin is a calculator for hauling costs, for example for an alliance JF service.<br/><br/>**SeAT 5.x**<br/>Still considered unstable.<br/>Install the `5.0.x-dev` branch.|
-
-!!! info
-
-    You might need to install a [different branch](#installing-different-versions) of a plugin, as the main branch is still on SeAT 4.
+| Package | Version | Installation | Description |
+| ------- | ------- | ------------ | ----------- |
+| [alliancewaw/seat-mumble-register](https://github.com/waw-eve/seat-mumble-register) | [![Latest Stable Version](https://poser.pugx.org/alliancewaw/seat-mumble-register/v/stable)](https://packagist.org/packages/alliancewaw/seat-mumble-register) | [Read the docs](https://github.com/waw-eve/seat-mumble-register-backend/blob/main/README.md) | This plugin provide an extension to generate a certificate for SeAT user and regist it to mumble server |
+| [cryocaustik/seat-hr](https://github.com/cryocaustik/seat-hr) | [![Latest Stable Version](http://poser.pugx.org/cryocaustik/seat-hr/v/stable)](https://packagist.org/packages/cryocaustik/seat-hr) |  | Human Resources plugin for SeAT with Applications (with customized questions per corporation), Blacklist, Intel, Kick History, Notes, and Sheet |
+| [cryptaeve/seat-squad-sync](https://github.com/crypta-eve/seat-squad-sync ) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-squad-sync/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-squad-sync ) |  | Adds the ability to sync squad members into filters of permissions |
+| [cryptaeve/seat-text](https://github.com/crypta-eve/seat-text) | [![Latest Stable Version](https://poser.pugx.org/cryptaeve/seat-text/v/stable?format=flat-square)](https://packagist.org/packages/crypta-eve/seat-text) |  | A module to serve public static ascii, with editing access controlled by seat |
+| [denngarr/seat-fitting](https://github.com/dysath/seat-fitting) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-fitting/v/stable)](https://packagist.org/packages/denngarr/seat-fitting) |  | Module to check fittings per character |
+| [denngarr/seat-srp](https://github.com/dysath/seat-srp) | [![Latest Stable Version](https://poser.pugx.org/denngarr/seat-srp/v/stable)](https://packagist.org/packages/denngarr/seat-srp) |  | A module for SeAT that tracks SRP requests |
+| [h4zz4rddev/seat-buyback](https://github.com/h4zz4rddev/seat-buyback) | [![Latest Stable Version](https://poser.pugx.org/h4zz4rddev/seat-buyback/v/stable)](https://packagist.org/packages/h4zz4rddev/seat-buyback) |  | A SeAT module for buyback functionality |
+| [humunuk/alliance-structure-mngmt](https://github.com/humunuk/alliance-structure-mngmt) | [![Latest Stable Version](https://poser.pugx.org/humunuk/alliance-structure-mngmt/v/stable?format=flat-square)](https://packagist.org/packages/humunuk/alliance-structure-mngmt) |  | Add "Structures" sub-menu to Alliance page and show all the structures that belong to corps in alliance |
+| [kassie/calendar](https://github.com/BenHUET/eveseat-calendar) | [![Latest Stable Version](https://poser.pugx.org/kassie/calendar/v/stable)](https://packagist.org/packages/kassie/calendar) | [Read the docs](https://github.com/BenHUET/eveseat-calendar/blob/master/README.md) | Calendar plugin |
+| [warlof/seat-discord-connector](https://github.com/warlof/seat-discord-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-discord-connector/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-discord-connector) | [Read the docs](https://github.com/warlof/seat-discord-connector/blob/5.0.x/README.md) | A Discord driver to be used with `seat-connector` |
+| [warlof/seat-teamspeak](https://github.com/warlof/seat-teamspeak) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-teamspeak/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-teamspeak) | [Read the docs](https://github.com/warlof/seat-teamspeak/blob/5.0.x/README.md) | A Teamspeak driver to be used with `seat-connector` |
+| [recursivetree/seat-info](https://github.com/recursivetree/seat-info) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-info/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-info) | [Read the docs](https://github.com/recursivetree/seat-info/blob/master/README.md) | A module that adds a small wiki-like article systems for example as a corporation bulletin |
+| [recursivetree/seat-rat](https://github.com/recursivetree/seat-rat) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-rat/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-rat) |  | A module to monitor ratting usage in a system, e.g. to prevent dropping the bounty risk modifier in nullsec. |
+| [simplyunnamed/seat-user-last-login](https://github.com/SimplyUnnamed/seat-user-last-logins) | [![Latest Stable Version](http://poser.pugx.org/simplyunnamed/seat-user-last-login/v)](https://packagist.org/packages/simplyunnamed/seat-user-last-login) |  | Tool to help find potential AFK's in your corporation. |
+| [recursivetree/seat-billing](https://github.com/recursivetree/seat-billing) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-billing/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-billing) |  | A billing module to help you with ore and rating taxes |
+| [recursivetree/seat-pushx-blamer](https://github.com/recursivetree/seat-pushx-blamer) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-pushx-blamer/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-pushx-blamer) |  | A module to tell you who's guilty of blocking the PushX queue. |
+| [recursivetree/seat-alliance-industry](https://github.com/recursivetree/seat-alliance-industry) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-alliance-industry/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-alliance-industry) | | A corporation/alliance/coalition industry order marketplace |
+| [recursivetree/seat-inventory](https://github.com/recursivetree/seat-inventory) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-inventory/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-inventory) | | Inventory manager for contracts and corporation hangars |
+| [recursivetree/seat-transport](https://github.com/recursivetree/seat-transport) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-transport/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-transport) | | This plugin is a calculator for hauling costs, for example for an alliance JF service. |
 
 #### Library Packages
 These packages provide utilities for other packages and usually don't need to be installed manually.
 
-| Package | Version                                                                                                                                                             | Description |
-| ------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------| ----------- |
-| [warlof/seat-connector](https://github.com/warlof/seat-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-connector/v/stable?style=flat-square)](https://packagist.org/packages/warlof/seat-connector)           | A generic connector module that handles invites and roles management with any registered platform |
-| [recursivetree/seat-treelib](https://github.com/recursivetree/seat-treelib) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-treelib/v/stable?style=flat-square)](https://packagist.org/packages/recursivetree/seat-treelib) | A module that contains shared code for all `recursivetree/*` plugins |
+| Package | Version | Description |
+| ------- | ------- | ----------- |
+| [warlof/seat-connector](https://github.com/warlof/seat-connector) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-connector/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-connector) | A generic connector module that handles invites and roles management with any registered platform |
+| [recursivetree/seat-treelib](https://github.com/recursivetree/seat-treelib) | [![Latest Stable Version](https://poser.pugx.org/recursivetree/seat-treelib/v/stable?format=flat-square)](https://packagist.org/packages/recursivetree/seat-treelib) | A module that contains shared code for all `recursivetree/*` plugins |
+
+
+#### Incompatible packages with current stable SeAT version
+
+| Package | Version | Description |
+| ------- | ------- | ----------- |
+| [flyingferret/seat-whtools](https://github.com/flyingferret/seat-whtools) | [![Latest Stable Version](https://poser.pugx.org/flyingferret/seat-whtools/v/stable?format=flat-square)](https://packagist.org/packages/flyingferret/seat-whtools) | A small collection of tools for helping with Wh-Life corporation management, including calculating doctrine stocking levels (based on contracts and `denngarr/seat-fitting` plugin), a blue loot tax calculator, and a skill base certificate management.  Currently very much a  work in progress. |
+| [warlof/slackbot](https://github.com/warlof/slackbot) | [![Latest Stable Version](https://poser.pugx.org/warlof/slackbot/v/stable?format=flat-square)](https://packagist.org/packages/warlof/slackbot) | A slack bot that handles invites and kicks based on an api key |
 
 #### Deprecated packages
 
-| Package | Version                                                                                                                                                                       | Description |
-| ------- |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ----------- |
-| [eve-scout/eveseat-oauth2-server](https://github.com/eve-scout/eveseat-oauth2-server) | [![Latest Stable Version](https://poser.pugx.org/eve-scout/eveseat-oauth2-server/v/stable?style=flat-square)](https://packagist.org/packages/eve-scout/eveseat-oauth2-server) | This EVE SeAT package enables an OAuth2 server for Single sign-on. |
-| [flyingferret/seat-whtools](https://github.com/flyingferret/seat-whtools) | [![Latest Stable Version](https://poser.pugx.org/flyingferret/seat-whtools/v/stable?style=flat-square)](https://packagist.org/packages/flyingferret/seat-whtools)            | A small collection of tools for helping with Wh-Life corporation management, including calculating doctrine stocking levels (based on contracts and `denngarr/seat-fitting` plugin), a blue loot tax calculator, and a skill base certificate management.  Currently very much a  work in progress. |
-| [freedenizen/eveseat-notes](https://github.com/freedenizen/eveseat-notes) | [![Latest Stable Version](https://poser.pugx.org/freedenizen/eveseat-notes/v/stable?style=flat-square)](https://packagist.org/packages/freedenizen/eveseat-notes)            | A notes addon for seat 1.x |
-| [herpaderpaldent/seat-discourse](https://github.com/herpaderpaldent/seat-discourse) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-discourse/v/stable?style=flat-square)](https://packagist.org/packages/herpaderpaldent/seat-discourse)                     | SeAT Discourse enables SeAT to act as SSO provider for your Discourse-Forum instance. Groups and Categories do respect roles of members. With this package you can create hidden sections for your member and public sections for potential recruits to which members get automatically access to. **Important:** Check installation instructions on Github. |
-| [herpaderpaldent/seat-groups](https://github.com/herpaderpaldent/seat-groups) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-groups/v/stable?style=flat-square)](https://packagist.org/packages/herpaderpaldent/seat-groups)                           | Module to create auto, open and managed role groups to which user can be automatically be assigned, user can opt-in or user can apply to. |
-| [herpaderpaldent/seat-notifications](https://github.com/herpaderpaldent/seat-notifications) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-notifications/v/stable?style=flat-square)](https://packagist.org/packages/herpaderpaldent/seat-notifications)             | This is a fully functional notification package for discord and slack notifications. This package is very easily extendable by other packages and should replace core notifications at some point. Currently seat-groups provide many useful notifications. Notifications are send out by slack or discord bot and uses twice a full oAuth2 authentication of the user. |
-| [warlof/seat-migrator](https://github.com/warlof/seat-migrator) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-migrator/v/stable?style=flat-square)](https://packagist.org/packages/warlof/seat-migrator)                                         | A migration script between SeAT 2 and SeAT 3 |
-| [warlof/seat-slack-sso](https://github.com/warlof/seat-slack-sso) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-slack-sso/v/stable?style=flat-square)](https://packagist.org/packages/warlof/seat-slack-sso)                    | Slack SSO integration for seat 2.x |
-| [warlof/eveseat-mining-ledger](https://github.com/warlof/eveseat-mining-ledger) | [![Latest Stable Version](https://poser.pugx.org/warlof/eveseat-mining-ledger/v/stable?style=flat-square)](https://github.com/warlof/eveseat-mining-ledger)                  | ESI capability that provides a mining ledger to SeAT 2.x |
-| [warlof/slackbot](https://github.com/warlof/slackbot) | [![Latest Stable Version](https://poser.pugx.org/warlof/slackbot/v/stable?style=flat-square)](https://packagist.org/packages/warlof/slackbot)                                | A slack bot that handles invites and kicks based on an api key |
+| Package | Version | Description |
+| ------- | ------- | ----------- |
+| [eve-scout/eveseat-oauth2-server](https://github.com/eve-scout/eveseat-oauth2-server) | [![Latest Stable Version](https://poser.pugx.org/eve-scout/eveseat-oauth2-server/v/stable?format=flat-square)](https://packagist.org/packages/eve-scout/eveseat-oauth2-server) | This EVE SeAT package enables an OAuth2 server for Single sign-on. |
+| [freedenizen/eveseat-notes](https://github.com/freedenizen/eveseat-notes) | [![Latest Stable Version](https://poser.pugx.org/freedenizen/eveseat-notes/v/stable?format=flat-square)](https://packagist.org/packages/freedenizen/eveseat-notes) | A notes addon for seat 1.x |
+| [herpaderpaldent/seat-discourse](https://github.com/herpaderpaldent/seat-discourse) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-discourse/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-discourse) | SeAT Discourse enables SeAT to act as SSO provider for your Discourse-Forum instance. Groups and Categories do respect roles of members. With this package you can create hidden sections for your member and public sections for potential recruits to which members get automatically access to. **Important:** Check installation instructions on Github. |
+| [herpaderpaldent/seat-groups](https://github.com/herpaderpaldent/seat-groups) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-groups/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-groups) | Module to create auto, open and managed role groups to which user can be automatically be assigned, user can opt-in or user can apply to. |
+| [herpaderpaldent/seat-notifications](https://github.com/herpaderpaldent/seat-notifications) | [![Latest Stable Version](https://poser.pugx.org/herpaderpaldent/seat-notifications/v/stable)](https://packagist.org/packages/herpaderpaldent/seat-notifications) | This is a fully functional notification package for discord and slack notifications. This package is very easily extendable by other packages and should replace core notifications at some point. Currently seat-groups provide many useful notifications. Notifications are send out by slack or discord bot and uses twice a full oAuth2 authentication of the user. |
+| [warlof/seat-migrator](https://github.com/warlof/seat-migrator) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-migrator/v/stable)](https://packagist.org/packages/warlof/seat-migrator) | A migration script between SeAT 2 and SeAT 3 |
+| [warlof/seat-slack-sso](https://github.com/warlof/seat-slack-sso) | [![Latest Stable Version](https://poser.pugx.org/warlof/seat-slack-sso/v/stable?format=flat-square)](https://packagist.org/packages/warlof/seat-slack-sso) | Slack SSO integration for seat 2.x |
+| [warlof/eveseat-mining-ledger](https://github.com/warlof/eveseat-mining-ledger) | [![Latest Stable Version](https://poser.pugx.org/warlof/eveseat-mining-ledger/v/stable?format=flat-square)](https://github.com/warlof/eveseat-mining-ledger) | ESI capability that provides a mining ledger to SeAT 2.x |
 
 ### Other SeAT related packages
 
@@ -161,55 +150,24 @@ Passport strategy for authenticating with EVE SeAT using the OAuth 2.0 API.
 This NodeBB plugin allows users login/register via their EVE SeAT account.
 
 ### Installing different versions
+Sometimes it can be useful to install a version different than the latest version, for example if you want to install an older version of a plugin or if you want to test a bugfix. The easiest way to find all available versions is to go to the packagist site of the plugin by clicking on the version in the available plugins list. On packagist, if you scroll down, to the right you will find a list of all available versions.
 
-Sometimes it can be useful to install a version different from the latest version, for example if you want to install an older version of a plugin or if you want to test a bugfix. The easiest way to find all available versions is to go to the packagist site of the plugin by clicking on the version in the available plugins list. On packagist, if you scroll down, to the right you will find a list of all available versions.
+#### Blade
+Follow the normal installation steps, but change the `composer require` command to include the package according to the following example:
 
-=== Blade
+```bash
+sudo -H -u www-data bash -c 'composer require <package vendor>/<package-name>:<version-name>'
+```
 
-    Follow the normal installation steps, but change the `composer require` command to include the package according to the following example:
+#### Docker
+In your `.env` file, add the version to the package like this:
 
-    ```bash
-    sudo -H -u www-data bash -c 'composer require <package vendor>/<package-name>:<version-name>'
-    ```
+```
+SEAT_PLUGINS=<vendor>/<package>:<version>,cryptaeve/seat-squad-sync:4.0.2
+```
+Next, restart the stack as usual.
 
-=== Docker (SeAT 4.x)
-
-    In your `.env` file, add the version to the package like this:
-    
-    ```
-    SEAT_PLUGINS=<vendor>/<package>:<version>,cryptaeve/seat-squad-sync:4.0.2
-    ```
-    Next, restart the stack as usual.
-    
-    ```bash linenums="1"
-    docker-compose down
-    docker-compose up -d
-    ```
-
-=== Docker (SeAT 5.x - using Traefik)
-
-    In your `.env` file, add the version to the package like this:
-    
-    ```
-    SEAT_PLUGINS=<vendor>/<package>:<version>,cryptaeve/seat-squad-sync:4.0.2
-    ```
-    Next, restart the stack as usual.
-    
-    ```bash linenums="1"
-    docker-compose down
-    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
-    ```
-
-=== Docker (SeAT 5.x - using proxy)
-
-    In your `.env` file, add the version to the package like this:
-    
-    ```
-    SEAT_PLUGINS=<vendor>/<package>:<version>,cryptaeve/seat-squad-sync:4.0.2
-    ```
-    Next, restart the stack as usual.
-    
-    ```bash linenums="1"
-    docker-compose down
-    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
-    ```
+```bash
+docker-compose down
+docker-compose up -d
+```
