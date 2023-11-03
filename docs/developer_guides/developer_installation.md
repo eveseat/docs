@@ -2,7 +2,7 @@
 
 # Developer Installation
 
-With SeAT 4, starting with Docker build 4.1.0, spawning a development environment has been made easier.
+Since SeAT 4, starting with Docker build 4.1.0, spawning a development environment has been made easier.
 You can use the same image as of production environment - either you're working on core packages or third party ones.
 
 ## General
@@ -13,6 +13,9 @@ The official docker-compose wrapper is shipped with a `packages` directory.
 It is mounted readonly, and you can store your development sources in it.
 
 To make things easier, we recommend you keep vendor path convention to split your sources across every single package you want to play with.
+
+Developing plugins and core packages doesn't differ at all, modules installed in the `packages` directory always take priority.
+In the case of core modules, this means the version from `packages` and not the version provided by the docker container will be used.
 
 ## Overrider
 
@@ -47,6 +50,8 @@ When your container will start, mapping from `autoload` property in your `overri
 
     1. If you need access the console of any container, access it via `docker exec front sh` where `front` is the name of the target container.
     2. You can execute `artisan` commands from outside of docker with `docker exec front php artisan <command>`
+
+Please note that there is currently no way to install dependencies with the package override. 
 
 ## Teach things by example
 

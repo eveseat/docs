@@ -52,9 +52,9 @@ If you don't do this, the API will respond with a redirect and not give you the 
 
 All SeAT API responses will include the appropriate HTTP response codes. You should check this for error handling purposes. Some sample response codes could be:
 
-| Code | Status | Description |
-| ---- | ------ | ----------- |
-| 200 | OK | The request was successful. |
-| 404 | Not Found | The requested endpoint could not be found. |
-| 422 | Unprocessable Entity | Typically, input validation has failed. The response json should contain the errors. |
-| 500 | Internal Server Error | Something bad has happened. Check the server and Laravel log files for more details. |
+| Code | Status                | Description                                                                          |
+|------|-----------------------|--------------------------------------------------------------------------------------|
+| 200  | OK                    | The request was successful.                                                          |
+| 404  | Not Found             | The requested endpoint could not be found.                                           |
+| 422  | Unprocessable Entity  | Typically, input validation has failed. The response json should contain the errors. |
+| 500  | Internal Server Error | Something bad has happened. Check the server and Laravel log files for more details. |

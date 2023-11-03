@@ -12,9 +12,11 @@ Be sure to also have a look at the [Development Tips] page!
 
 I think its important to keep in mind a few things about how SeAT is put together. The most important being a brief description of what each core package offers, and how you can integrate with them. For a breakdown on what the core packages provide, please refer the to [breakdown].
 
-SeAT 4 is written on [Laravel 6](http://laravel.com/docs/6.x). A **very** good thing to do would be to actually read the documentation top->bottom and get an idea of what is possible with the framework. SeAT core packages make heavy use of many of the features, based directly of what has been interpreted by this very documentation.
+SeAT 4 is written on [Laravel 6](http://laravel.com/docs/6.x), while SeAT 5 uses [Laravel 10](http://laravel.com/docs/10.x). A **very** good thing to do would be to actually read the documentation top->bottom and get an idea of what is possible with the framework. SeAT core packages make heavy use of many of the features, based directly of what has been interpreted by this very documentation.
 
 If you really want to start contributing packages, but just cant get your head around this whole Laravel thing, then I can suggest you have a look at this excellent free course material covering the basics of what you will encounter in the SeAT codebase. [https://laracasts.com/series/laravel-6-from-scratch](https://laracasts.com/series/laravel-6-from-scratch)
+
+Other plugins and the SeAT core are also a good learning resource.
 
 ## Getting started
 
@@ -104,12 +106,14 @@ Route::group([
         'prefix'     => 'api-admin'
     ], function () {
         Route::get('/', [
-            'as'   => 'api-admin.list',
+            'as'   => 'seatcore::api-admin.list',
             'uses' => 'ApiAdminController@listTokens']);
     });
 ```
 
 I suggest you have a look at the `eveseat/web` packages routes definitions for more examples on how the middleware is used. [https://github.com/eveseat/web/tree/master/src/Http/Routes](https://github.com/eveseat/web/tree/master/src/Http/Routes)
+
+It is recommended that you scope the route name defined in `'as' => 'seatcore::api-admin.list'`. For example all routes from the seat core start with `seatcore` like this: `seatcore::my.route.to.someting`. You should follow a similar format: `seat<plugin name>::<route>`
 
 #### Middleware
 
@@ -233,7 +237,7 @@ You are able to register and use your own permissions for use within SeAT. This 
 ```
 
 | property    | mandatory | purpose                                                                                                                                                           |
-| ----------- | ----------| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-------------|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | label       | yes       | The displayed name of your permission. It must be a translation token.                                                                                            |
 | description |           | The displayed permission description. It should help user to determine what the permission is doing. It must be a translation token.                              |
 | division    |           | It will show a "category" icon to help user figures what will be impacted by the permission. Value can be one of `military`, `assets`, `financial`, `industrial`. |
@@ -255,29 +259,6 @@ The definition key (`sheet`, `intel`, `planetary` in the upper sample) will be u
     
     In SeAT 4, a permission is made of a scope and an ability. The ability is defined by the permissions configuration file and the scope is defined on registration.
 
-!!! hint
-
-    If you're upgrading a SeAT 3.x plugin, the cheat sheet bellow will probably helps you.
-    
-    | SeAT 3.x                                      | SeAT 4.x                          | Purpose                                                                 |
-    | --------------------------------------------- | --------------------------------- | ----------------------------------------------------------------------- |
-    | `auth()->user()`                              | `auth()->user()`                  | Retrieve the currently authenticated user.                              |
-    | `auth()->user()->group->main_character`       | `auth()->user()->main_character`  | Retrieve the main character from the currently authenticated user.      |
-    | `auth()->user()->group->main_character->name` | `auth()->user()->name`            | Retrieve the main character name from the currently authenticated user. |
-    | `auth()->user()->group->characters`           | `auth()->user()->characters`      | Retrieve all characters from the currently authenticated user.          |
-    | `auth()->user()->refresh_token`               | `CharacterInfo()->refresh_token`  | Retrieve the refresh token attached to a character.                     |
-    | `auth()->user()->group->refresh_tokens`       | `auth()->user()->refresh_tokens`  | Retrieve all refresh tokens attached to authenticated user.             |
-    
-    Also, if you need it, a table called `mig_groups` is available in database containing a list of all converted group into standalone user.
-    This table will stay here until next SeAT major update.
-    
-    | Field               | Purpose                                                                                  |
-    | ------------------- | ---------------------------------------------------------------------------------------- |
-    | `group_id`          | The unique ID from SeAT 3 user group                                                     |
-    | `old_user_id`       | The unique ID from SeAT 3 user (match to Character ID)                                   |
-    | `new_user_id`       | The unique ID from SeAT 4 user                                                           |
-    | `main_character_id` | The SeAT 3 registered main character ID - or random from the User Group if none were set |
-
 This config file is then loaded from your app service provider as below:
 
 ```php
@@ -293,6 +274,10 @@ Registering these migrations looks like the following:
 ```php
 $this->loadMigrationsFrom(__DIR__ . '/database/migrations/');
 ```
+
+## Releasing the plugin
+The usual setup is to host the code on github and distribute the code via [packagist](https://packagist.org/). 
+When you submit your plugin on packagist, it will be installable like the other plugins by adding `<vendor>/<package>` to the appropriate section of your `.env` file.
 
 [Development Tips]: development_tips.md
 [breakdowns]: core_package_breakdown.md
