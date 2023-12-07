@@ -70,19 +70,19 @@ SEAT_PLUGINS=denngarr/seat-fitting,cryptaeve/seat-squad-sync
 
 - Once you have entered the package(s) to be installed run the below command in `/opt/seat-docker`:
 
-=== Docker (SeAT 4.x)
+=== "Docker (SeAT 4.x)"
     
     ```bash
     docker-compose up -d
     ```
 
-=== Docker (SeAT 5.x - using Traefik)
+=== "Docker (SeAT 5.x - using Traefik)"
 
     ```bash
     docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
     ```
 
-=== Docker (SeAT 5.x - using reverse proxy)
+=== "Docker (SeAT 5.x - using reverse proxy)"
 
     ```bash
     docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
@@ -165,7 +165,7 @@ This NodeBB plugin allows users login/register via their EVE SeAT account.
 
 Sometimes it can be useful to install a version different from the latest version, for example if you want to install an older version of a plugin or if you want to test a bugfix. The easiest way to find all available versions is to go to the packagist site of the plugin by clicking on the version in the available plugins list. On packagist, if you scroll down, to the right you will find a list of all available versions.
 
-=== Blade
+=== "Blade"
 
     Follow the normal installation steps, but change the `composer require` command to include the package according to the following example:
 
@@ -173,7 +173,7 @@ Sometimes it can be useful to install a version different from the latest versio
     sudo -H -u www-data bash -c 'composer require <package vendor>/<package-name>:<version-name>'
     ```
 
-=== Docker (SeAT 4.x)
+=== "Docker (SeAT 4.x)"
 
     In your `.env` file, add the version to the package like this:
     
@@ -187,7 +187,7 @@ Sometimes it can be useful to install a version different from the latest versio
     docker-compose up -d
     ```
 
-=== Docker (SeAT 5.x - using Traefik)
+=== "Docker (SeAT 5.x - using Traefik)"
 
     In your `.env` file, add the version to the package like this:
     
@@ -201,7 +201,7 @@ Sometimes it can be useful to install a version different from the latest versio
     docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
     ```
 
-=== Docker (SeAT 5.x - using proxy)
+=== "Docker (SeAT 5.x - using proxy)"
 
     In your `.env` file, add the version to the package like this:
     

@@ -34,7 +34,7 @@ An example of adding these to your Web UI container is provided below:
 * Creating `docker-compose.override.yml` in `/opt/seat-docker/` directory
 * Adding following code to `docker-compose.override.yml` Note: Uncomment the needed file(s) by removing the `#`
 
-=== SeAT 4
+=== "SeAT 4"
 
     ```YAML linenums="1"
     version: "3.2"
@@ -49,7 +49,7 @@ An example of adding these to your Web UI container is provided below:
 
     Once you have placed the files you will need to run `docker-compose up -d` for it to take effect.
 
-=== SeAT 5 (using Traefik)
+=== "SeAT 5 (using Traefik)"
 
     ```YAML linenums="1"
     version: "3.2"
@@ -64,7 +64,7 @@ An example of adding these to your Web UI container is provided below:
 
     Once you have placed the files you will need to run `docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up` for it to take effect.
 
-=== SeAT 5 (using proxy)
+=== "SeAT 5 (using proxy)"
 
     ```YAML linenums="1"
     version: "3.2"

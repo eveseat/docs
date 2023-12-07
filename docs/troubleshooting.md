@@ -72,13 +72,13 @@ Application source code and log files are shared between the `seat-web`/`front`,
 
 First, enter get a shell within the `seat-web`/`front` container while in the `/opt/seat-docker/` directory with:
 
-=== SeAT 4.x
+=== "SeAT 4.x"
 
     ```bash
     docker-compose exec seat-web sh
     ```
 
-=== SeAT 5.x
+=== "SeAT 5.x"
 
     ```bash
     docker-compose exec front sh
@@ -114,13 +114,13 @@ su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
 
 For Docker installations, the only requirement to run the diagnose command would be to ensure that you are currently in the same folder as that where the stacks `docker-compose.yml` file lives. If you followed the guides on this website that would be in `/opt/seat-docker`. Next, run the command with:
 
-=== SeAT 4.x
+=== "SeAT 4.x"
 
     ```bash
     docker-compose exec seat-web su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
     ```
 
-=== SeAT 5.x
+=== "SeAT 5.x"
     
     ```bash
     docker-compose exec front su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
