@@ -46,16 +46,9 @@ Before we get to installing SeAT, lets ensure that your operating system is up t
 SeAT relies **heavily** on a database to function. Everything it learns is stored here, along with things such as user accounts for your users.
 It comes without saying that database security is a very important aspect too. So, ensure that you choose very strong passwords for your installation where required.
 
-This document describes using MariaDB, but you can use MySQL as well. Just double check the [requirements](requirements.md).
+This document describes using MariaDB, but you can use MySQL as well. Just double check the [requirements](../requirements.md).
 
 We need to ensure that we have the latest MariaDB installed. To help with this, MariaDB provides an official repository to get the latest versions.
-
-To download and install the repo, you need `curl`. Install it with:
-
-```bash
-apt-get install curl
-```
-
 Let's add this repository with:
 
 ```bash
@@ -73,12 +66,6 @@ With the repository now setup, lets install the database server:
 apt-get install mariadb-server
 ```
 
-Before we can configure the database, we have to start it:
-
-```bash
-systemctl enable mariadb.service
-```
-
 Next, we are going to secure the database server by removing anonymous access and setting a `root` password (if you have not been prompted for it yet).
 
 !!! note
@@ -89,7 +76,7 @@ Next, we are going to secure the database server by removing anonymous access an
 To secure the database, run:
 
 ```bash
-mariadb-secure-installation
+mysql_secure_installation
 ```
 
 This will ask you a series of questions where you should generally just answer yes to. If you already set a `root` password in the previous step then you dont have to set it again, otherwise, make sure you choose a long, strong password for the `root` account. An example run is shown below:
@@ -138,7 +125,7 @@ Next, we need to create an actual user and database for SeAT to use on the newly
 Fire up the `mysql` client as root by running:
 
 ```bash
-mariadb -uroot -p
+mysql -uroot -p
 ```
 
 This will prompt you for a password. Use the password you configured for the `root` account when we ran `mysql_secure_installation`. This will most probably be the last time you need to use this password :)
@@ -204,22 +191,16 @@ Since SeAT is written primarily in PHP, we will need to install PHP packages. Ub
 
 Depending on the version of Ubuntu you are using, a release specific repository URL should be used for the PPA. Select the tab applicable to your Ubuntu version and run the commands within.
 
-=== "Jammy 22.04"
+=== "Bionic 18.04"
     ```bash linenums="1"
-    echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu jammy main" >> /etc/apt/sources.list.d/php.list
-    echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu jammy main" >> /etc/apt/sources.list.d/php.list
+    echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
+    echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
     ```
 
 === "Focal 20.04"
     ```bash linenums="1"
     echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu focal main" >> /etc/apt/sources.list.d/php.list
     echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu focal main" >> /etc/apt/sources.list.d/php.list
-    ```
-
-=== "Bionic 18.04"
-    ```bash linenums="1"
-    echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
-    echo "deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" >> /etc/apt/sources.list.d/php.list
     ```
 
 Next, we will have to download the new repositories GPG signing key and add it into our keychain
@@ -238,7 +219,7 @@ Finally, install the required PHP packages with:
 
 ```bash linenums="1"
 apt-get install libpng-dev libfreetype6-dev libjpeg-dev
-apt-get install openssl zip php8.2-bz2 php8.2-cli php8.2-curl php8.2-dom php8.2-gd php8.2-gmp php8.2-intl php8.2-mbstring php8.2-mysql php8.2-opcache php8.2-redis php8.2-zip
+apt-get install curl openssl zip php7.3-bz2 php7.3-cli php7.3-curl php7.3-dom php7.3-gd php7.3-gmp php7.3-intl php7.3-mbstring php7.3-mysql php7.3-opcache php7.3-redis php7.3-zip
 ```
 
 ### Redis
@@ -259,11 +240,6 @@ apt-get install redis-server
     
     If you are on a small server, You may also want to limit the part of memory used by redis (by default, it will consume all available memory).
     To do so, into the redis configuration file, search line `# maxmemory <bytes>` and change it for `maxmemory xGB` where `x` is the memory limit you want to set.
-
-You might also need to start redis:
-```bash
-systemctl enable redis-server.service
-```
 
 ## SeAT Installation
 
@@ -306,7 +282,7 @@ cd /var/www
 With all of the prerequisites installed as well as our `www` directory ready we can finally download SeAT. Do that with:
 
 ```bash
-composer create-project eveseat/seat:5.0.x-dev --no-dev --no-interaction
+composer create-project eveseat/seat --no-dev --no-interaction
 ```
 
 Once the download is done, you should have seen output such as:
@@ -376,7 +352,7 @@ sudo -H -u www-data bash -c 'php /var/www/seat/artisan migrate'
 Seed the SeAT schedule with:
 
 ```bash
-sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Services\\Database\\Seeders\\PluginDatabaseSeeder'
+sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Console\\database\\seeds\\ScheduleSeeder'
 ```
 
 #### EVE Sde Update
@@ -419,7 +395,7 @@ EOL
 Finally, reload supervisor to apply the new configuration with the following command:
 
 ```bash
-systemctl enable supervisor.service
+systemctl restart supervisor.service
 ```
 
 ### Crontab
@@ -452,7 +428,7 @@ The SeAT web interface requires a web server to serve the HTML goodies it has. W
 Together with an `nginx` installation we also need to install `php-fpm` to handle the PHP execution for us. Let's install `nginx` and `php-fpm` with:
 
 ```bash
-apt-get install nginx php8.2-fpm
+apt-get install nginx php7.3-fpm
 ```
 
 #### Nginx Configuration
@@ -487,7 +463,7 @@ server {
     # PHP-FPM configuration.
     location ~ \.php\$ {
        try_files \$uri /index.php =404;
-       fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+       fastcgi_pass unix:/run/php/php7.3-fpm.sock;
        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
        include fastcgi_params;
     }
@@ -524,7 +500,7 @@ Finally, reload `nginx` and `php-fpm` for the new changes to take affect:
 
 ```bash linenums="1"
 systemctl restart nginx.service
-systemctl restart php8.2-fpm.service
+systemctl restart php7.3-fpm.service
 ```
 
 ## ESI Configuration
@@ -542,6 +518,6 @@ For instructions how to do this, please refer to the [ESI Setup Guide].
 
     You made it! Use a browser and browse to the IP address / hostname of your server to access SeAT!
 
-[here]: ../configuration/env_file_reference.md
-[ESI Setup Guide]: ../configuration/esi_configuration.md
+[here]: ../../configuration/env_file_reference.md
+[ESI Setup Guide]: ../../configuration/esi_configuration.md
 [Certbot Documentation]: https://certbot.eff.org

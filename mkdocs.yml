@@ -15,10 +15,11 @@ nav:
     - Home: index.md
     - Installation:
       - Requirements: installation/requirements.md
-      - Docker Installation (4.x): installation/docker_installation.md
-      - Docker Installation (5.x): installation/docker_installation_5.md
-      - Manual Installation (4.x): installation/manual_installation.md
-      - Manual Installation (5.x): installation/manual_installation_5.md
+      - Docker Installation (5.x): installation/docker_installation.md
+      - Manual Installation (5.x): installation/manual_installation.md
+      - Older Versions:
+        - Docker Installation (4.x): installation/old_versions/docker_installation_seat_4.md
+        - Manual Installation (4.x): installation/old_versions/manual_installation_seat_4.md
     - Upgrading:
       - General: upgrading/general.md
       - From SeAT 4.0:

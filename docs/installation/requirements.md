@@ -77,7 +77,6 @@ If you already have it installed, check your current version with `docker versio
 | Type           | Requirement                                              | Version Check            |
 | -------------- | -------------------------------------------------------- | ------------------------ |
 | Docker         | [Docker: ^18.0](https://www.docker.com/)                 | `docker -v`              |
-| Docker Compose | [Docker compose: ^1.26](https://docs.docker.com/compose/)| `docker-compose version` |
 
 !!! info
 
@@ -102,15 +101,15 @@ If you already have it installed, check your current version with `docker versio
 
 Software version requirements are based on a *minimum* requirement.
 
-| Type                       | Requirement   | State Check |
-| -------------------------- | ------------- | ----------- |
+| Type                       | Requirement                                                                                                           | State Check |
+| -------------------------- |-----------------------------------------------------------------------------------------------------------------------| ----------- |
 | Operating System           | Linux (any distribution is suitable, however, Ubuntu tends to get more up-to-date packages on official repositories). | Usually, running `cat /etc/issue` should give you a good idea. |
-| Architecture               | 64-bit only                                                                                                         | `uname -p`               |
-| PHP                        | [PHP: ^7.3](http://php.net/) including mysql, gd, bz2, intl, pcntl, gmp, openssl, zip, opcache and redis extensions | `php -v` and `php -i`    |
-| Database                   | [MariaDB: ^10.2.7](https://mariadb.org/) or [MySQL: ^5.7](https://www.mysql.com/)                                   | `mysql -V`               |
-| Caching Service            | [Redis](https://redis.io/)                                                                                          | `redis-server -v`        |
-| Service Supervisor         | [Supervisor : 3](http://supervisord.org/)                                                                           | `supervisord -v`         |
-| Web Server                 | [NGinX](https://www.nginx.com/) or [Apache](https://httpd.apache.org/)                                              | `nginx -v` or `httpd -v` |
+| Architecture               | 64-bit only                                                                                                           | `uname -p`               |
+| PHP                        | [PHP: ^8.3](http://php.net/) including mysql, gd, bz2, intl, pcntl, gmp, openssl, zip, opcache and redis extensions   | `php -v` and `php -i`    |
+| Database                   | [MariaDB: ^10.2.7](https://mariadb.org/) or [MySQL: ^5.7](https://www.mysql.com/)                                     | `mysql -V`               |
+| Caching Service            | [Redis](https://redis.io/)                                                                                            | `redis-server -v`        |
+| Service Supervisor         | [Supervisor : 3](http://supervisord.org/)                                                                             | `supervisord -v`         |
+| Web Server                 | [NGinX](https://www.nginx.com/) or [Apache](https://httpd.apache.org/)                                                | `nginx -v` or `httpd -v` |
 
 !!! tip
 
