@@ -2,7 +2,7 @@
 
 # Developer Installation
 
-Since SeAT 4, starting with Docker build 4.1.0, spawning a development environment has been made easier.
+Since SeAT 4 and including SeAT 5, starting with Docker build 4.1.0, spawning a development environment has been made easier.
 You can use the same image as of production environment - either you're working on core packages or third party ones.
 
 ## General
