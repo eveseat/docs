@@ -96,7 +96,7 @@ systemctl restart nginx.service
 Once packages have been updated, we will deploy the new SeAT's version using composer.
 
 ```bash linenums="1"
-composer create-project eveseat/seat /var/www/seat "5.0.x-dev" --no-dev --no-interaction
+composer create-project eveseat/seat /var/www/seat "5.0" --no-dev --no-interaction
 ```
 
 Once the download is done, you should have seen output such as:

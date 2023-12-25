@@ -13,7 +13,7 @@ It is supporting e-mail, Slack and Discord out of the box.
 
 However, thanks to Laravel, if you need to support another platform - you simply need to implement the related driver. See official [Laravel Notification Channels](https://laravel-notification-channels.com) website to get more about this. 
 
-Additionally, there is a system to mention certain users when a notification gets sent. Since we don't assume that many people need to implement this for a new platform, there is no written documentation. This is a good starting point to read the code: [Config/notifications.mentions.php](https://github.com/eveseat/notifications/blob/5.0.x/src/Config/notifications.mentions.php)
+Additionally, there is a system to mention certain users when a notification gets sent. Since we don't assume that many people need to implement this for a new platform, there is no written documentation. This is a good starting point to read the code: [Config/notifications.mentions.php](https://github.com/eveseat/notifications/blob/master/src/Config/notifications.mentions.php)
 
 ## Configuration
 

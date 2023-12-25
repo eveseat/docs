@@ -34,14 +34,38 @@ This guide is going to step through some quick preparation steps, then perform t
 We highly recommend that you read the details of this upgrade guide to get familiar with what has changed. But, if this is your nth upgrade, maybe you just want to get the summary of everything, so here it is:
 
 - Make a [backup] of your database.
-- `cd` to your install dir (which is probably `/opt/seat-docker`) and bring the stack down with `docker compose down`
-- Make a copy of your `.env` file using `cp .env .env.seat4.bak`
-- Make a copy of your current compose file using `cp docker-compose.yml docker-compose.yml.seat4.bak`
-- Download the new `docker-compose.yml` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.yml -o docker-compose.yml`.
-- Download the new database override `docker-compose.mariadb.yml` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.mariadb.yml -o docker-compose.mariadb.yml`. 
-- Download the new traefik override `docker-compose.traefik.yml` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.mariadb.yml -o docker-compose.traefik.yml`. 
-- Download the new proxy override `docker-compose.proxy.yml` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.mariadb.yml -o docker-compose.proxy.yml`.
-- Download the new `.env` file template using `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/.env -o .env`.
+- `cd` to your install dir (which is probably `/opt/seat-docker`) and bring the stack down with 
+  ```bash
+  docker compose down
+  ```
+- Make a copy of your `.env` file using 
+  ```bash
+  cp .env .env.seat4.bak
+  ```
+- Make a copy of your current compose file using 
+  ```bash
+  cp docker-compose.yml docker-compose.yml.seat4.bak
+  ```
+- Download the new `docker-compose.yml` file with 
+  ```bash
+  curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml`
+  ```
+- Download the new database override `docker-compose.mariadb.yml` file with 
+  ```bash
+  curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.mariadb.yml -o docker-compose.mariadb.yml
+  ```
+- Download the new traefik override `docker-compose.traefik.yml` file with 
+  ```bash
+  curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.mariadb.yml -o docker-compose.traefik.yml
+  ```
+- Download the new proxy override `docker-compose.proxy.yml` file with 
+  ```bash
+  curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.mariadb.yml -o docker-compose.proxy.yml
+  ```
+- Download the new `.env` file template using 
+  ```bash
+  curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
+  ```
 - Update the new `.env` file using your backup `.env.seat4.bak` 
 
 The table bellow is provided as a variable mapping between SeAT 4.x and SeAT 5.x. You can use it as a reference.
@@ -173,16 +197,17 @@ Removing network seat-docker_seat-network
 #### Get the new docker-compose files
 
 !!! warning
-    If you have made customisations to how you deployed SeAT with docker-compose, then you should probably **not** be replacing the compose file like we are about to do. Instead, have a look at the new one [here](https://github.com/eveseat/seat-docker/blob/5.0.x/docker-compose.yml) and adapt.
+    If you have made customisations to how you deployed SeAT with docker-compose, then you should probably **not** 
+be replacing the compose file like we are about to do. Instead, have a look at the new one [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml) and adapt.
 
 Next, we will download the new SeAT 5 docker-compose files. Do that with:
 
 ``` bash linenums="1"
 mv docker-compose.yml docker-compose.yml.seat4.bak
-curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.yml -o docker-compose.yml
-curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.mariadb.yml -o docker-compose.mariadb.yml
-curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.traefik.yml -o docker-compose.traefik.yml
-curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/docker-compose.proxy.yml -o docker-compose.proxy.yml
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.mariadb.yml -o docker-compose.mariadb.yml
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.traefik.yml -o docker-compose.traefik.yml
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.proxy.yml -o docker-compose.proxy.yml
 ```
 
 With this we have created a copy of the older docker-compose file (just in case), and downloaded the new one.
@@ -195,10 +220,10 @@ some of them have been removed, newest appeared and overall have been reordered.
 
 ```bash linenums="1"
 mv .env .env.seat4.bak
-curl -L https://raw.githubusercontent.com/eveseat/seat-docker/5.0.x/.env -o .env.yml
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env.yml
 ```
 
-You can refer at any time to the online version of `.env` file on [GitHub](https://github.com/eveseat/seat-docker/blob/5.0.x/.env)
+You can refer at any time to the online version of `.env` file on [GitHub](https://github.com/eveseat/seat-docker/blob/master/.env)
 The table bellow is provided as a variable mapping between SeAT 4.x and SeAT 5.x. You can use it as a reference.
 
 | SeAT 4.x                    | SeAT 5.x                       |
