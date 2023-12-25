@@ -57,10 +57,26 @@ EVE_CLIENT_SECRET=null
 EVE_CALLBACK_URL=http://seat.test/auth/eve/callback
 ```
 
-!!! warning "Docker Installations"
-     Your `.env` file is located in `/opt/seat-docker`. Rebuild your app after setting the ESI Details in it using:
+### Notes for Docker Users
+Your `.env` file is located in `/opt/seat-docker`. Rebuild your app after setting the ESI Details in it using:
 
-     `docker-compose up -d`
+=== "Docker (SeAT 4.x)"
+    ```bash linenums="1"
+    docker-compose down
+    docker-compose up -d
+    ```
+
+=== "Docker (SeAT 5.x - using Traefik)"
+    ```bash linenums="1"
+    docker-compose down
+    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
+    ```
+
+=== "Docker (SeAT 5.x - using proxy)"
+    ```bash linenums="1"
+    docker-compose down
+    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
+    ```
 
 [EVE Online Developers portal]: https://developers.eveonline.com/applications
 [file]: https://github.com/eveseat/seat/blob/b067bd3e742a79c35b5fa44ff77380a9187a27cf/.env.example#L21-L23
