@@ -220,7 +220,7 @@ some of them have been removed, newest appeared and overall have been reordered.
 
 ```bash linenums="1"
 mv .env .env.seat4.bak
-curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env.yml
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
 ```
 
 You can refer at any time to the online version of `.env` file on [GitHub](https://github.com/eveseat/seat-docker/blob/master/.env)
