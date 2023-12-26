@@ -37,8 +37,8 @@ We highly reccomend that you read the details of this upgrade guide to get famil
 - Make a [backup] of your database.
 - `cd` to your install dir (which is probably `/opt/seat-docker`) and bring the stack down with `docker-compose down`
 - Make a copy of your `.env` and `docker-compose.yml` files.
-- Download the new `docker-compose.yml` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml`.
-- Down the new `.env` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env`.
+- Download the new `docker-compose.yml` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/4.x/docker-compose.yml -o docker-compose.yml`.
+- Down the new `.env` file with `curl -L https://raw.githubusercontent.com/eveseat/seat-docker/4.x/.env -o .env`.
 - Upgrade your `docker-compose` installation. It should be version `1.26` and up.
 - Configure the new `.env` file. Important configs include the `TRAEFIK_` variables, the `SEAT_SUBDOMAIN` variable. Copy over existing values from your old `.env` file for the `EVE_CLIENT_` variables, the `APP_KEY` varaible and finally the `DB_` variables.
 - Bring the stack back up with `docker-compose up -d` and watch the migration process.
@@ -111,13 +111,13 @@ Removing network seat-docker_seat-network
 #### Get the new docker-compose file
 
 !!! warning
-    If you have made customisations to how you deployed SeAT with docker-compose, then you should probably **not** be replacing the compose file like we are about to do. Instead, have a look at the new one [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml) and adapt.
+    If you have made customisations to how you deployed SeAT with docker-compose, then you should probably **not** be replacing the compose file like we are about to do. Instead, have a look at the new one [here](https://github.com/eveseat/seat-docker/blob/4.x/docker-compose.yml) and adapt.
 
 Next, we will download the new SeAT 4 docker-compose file. Do that with:
 
 ```bash linenums="1"
 mv docker-compose.yml docker-compose.yml.back
-curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/4.x/docker-compose.yml -o docker-compose.yml
 ```
 
 With this we have created a copy of the older docker-compose file (just in case), and downloaded the new one.
@@ -130,7 +130,7 @@ Get it with:
 
 ```bash linenums="1"
 mv .env .env.back
-curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
+curl -L https://raw.githubusercontent.com/eveseat/seat-docker/4.x/.env -o .env
 ```
 
 #### Configure the new .env file

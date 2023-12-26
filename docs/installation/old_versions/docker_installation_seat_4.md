@@ -45,7 +45,7 @@ Depending on whether you already have `docker` and `docker-compose` already inst
 
 ### Automated Setup Script
 
-If you do not have the required software installed yet, consider running the [bootstrap script](https://github.com/eveseat/seat-docker/blob/master/bootstrap.sh) that will check for `docker` and `docker-compose`, install it and start the SeAT stack up for you. The script can be run with:
+If you do not have the required software installed yet, consider running the [bootstrap script](https://github.com/eveseat/seat-docker/blob/4.x/bootstrap.sh) that will check for `docker` and `docker-compose`, install it and start the SeAT stack up for you. The script can be run with:
 
 ```bash
 bash <(curl -fsSL https://git.io/get-seat)
@@ -91,24 +91,24 @@ Then, download the `docker-compose.yml` file with:
 
 === "Linux"
     ```bash
-    curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -o docker-compose.yml
+    curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/4.x/docker-compose.yml -o docker-compose.yml
     ```
 
 === "Windows"
     ```powershell
-    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml -OutFile docker-compose.yml
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/seat-docker/4.x/docker-compose.yml -OutFile docker-compose.yml
     ```
 
 Next, download the docker `.env` file with:
 
 === "Linux"
     ```bash
-    curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
+    curl -fsSL https://raw.githubusercontent.com/eveseat/seat-docker/4.x/.env -o .env
     ```
 
 === "Windows"
     ```powershell
-    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -OutFile .env
+    Invoke-WebRequest -Uri https://raw.githubusercontent.com/eveseat/seat-docker/4.x/.env -OutFile .env
     ```
 
 Next, we will generate a unique application key - this is used internally for encryption:
