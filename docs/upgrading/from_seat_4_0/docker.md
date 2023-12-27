@@ -56,11 +56,11 @@ We highly recommend that you read the details of this upgrade guide to get famil
   ```
 - Download the new traefik override `docker-compose.traefik.yml` file with 
   ```bash
-  curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.mariadb.yml -o docker-compose.traefik.yml
+  curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.treafik.yml -o docker-compose.traefik.yml
   ```
 - Download the new proxy override `docker-compose.proxy.yml` file with 
   ```bash
-  curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.mariadb.yml -o docker-compose.proxy.yml
+  curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.proxy.yml -o docker-compose.proxy.yml
   ```
 - Download the new `.env` file template using 
   ```bash
