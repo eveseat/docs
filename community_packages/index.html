@@ -1,0 +1,1861 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Simple EVE Api Tool Documentation">
+      
+      
+      
+        <link rel="canonical" href="https://eveseat.github.io/docs/community_packages/">
+      
+      
+        <link rel="prev" href="../styling/">
+      
+      
+        <link rel="next" href="../troubleshooting/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Community Packages - SeAT Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/extra_footer.css">
+    
+      <link rel="stylesheet" href="../css/extra_typo.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-119530306-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");ga("send","event","feedback","click",t,e),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){ga("send","pageview",e.pathname)})});var e=document.createElement("script");e.async=!0,e.src="https://www.google-analytics.com/analytics.js",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#community-packages" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SeAT Documentation" class="md-header__button md-logo" aria-label="SeAT Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SeAT Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Community Packages
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/eveseat/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SeAT Documentation" class="md-nav__button md-logo" aria-label="SeAT Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    SeAT Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/eveseat/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="false">
+          Installation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Installation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/requirements/" class="md-nav__link">
+        Requirements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/docker_installation/" class="md-nav__link">
+        Docker Installation (5.x)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/manual_installation/" class="md-nav__link">
+        Manual Installation (5.x)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Older Versions
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Older Versions" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Older Versions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/old_versions/docker_installation_seat_4/" class="md-nav__link">
+        Docker Installation (4.x)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/old_versions/manual_installation_seat_4/" class="md-nav__link">
+        Manual Installation (4.x)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="false">
+          Upgrading
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Upgrading" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Upgrading
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading/general/" class="md-nav__link">
+        General
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" tabindex="0" aria-expanded="false">
+          From SeAT 4.0
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="From SeAT 4.0" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          From SeAT 4.0
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading/from_seat_4_0/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading/from_seat_4_0/bare_metal/" class="md-nav__link">
+        Bare metal
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" tabindex="0" aria-expanded="false">
+          From SeAT 3.0
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="From SeAT 3.0" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          From SeAT 3.0
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading/from_seat_3_0/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading/from_seat_3_0/bare_metal/" class="md-nav__link">
+        Bare metal
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading/from_seat_2_0/" class="md-nav__link">
+        From SeAT 2.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upgrading/from_seat_1_0/" class="md-nav__link">
+        From SeAT 1.0
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          Configuration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Configuration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/esi_configuration/" class="md-nav__link">
+        ESI Configuration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" tabindex="0" aria-expanded="false">
+          Email Setup
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Email Setup" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Email Setup
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/email_setup/mailgun/" class="md-nav__link">
+        Mailgun
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/email_setup/gmail/" class="md-nav__link">
+        GMail
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/env_file_reference/" class="md-nav__link">
+        Env File Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/eve_administrative_contact/" class="md-nav__link">
+        EVE Administrative Contact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/configuration_overload/" class="md-nav__link">
+        Configuration Overload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/sde_overload/" class="md-nav__link">
+        SDE Overload
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Admin Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Admin Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Admin Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../admin_guides/admin_login/" class="md-nav__link">
+        Admin Login
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../admin_guides/docker_admin/" class="md-nav__link">
+        Docker Admin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../admin_guides/authorizations/" class="md-nav__link">
+        Authorizations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../admin_guides/buckets/" class="md-nav__link">
+        Buckets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../admin_guides/squads/" class="md-nav__link">
+        Squads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../admin_guides/understanding_tracking/" class="md-nav__link">
+        Understanding Tracking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../admin_guides/scaled_deployments/" class="md-nav__link">
+        Scaled Deployments
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          User Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          User Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_guides/moons_reporter/" class="md-nav__link">
+        Moons Reporter
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+          Developer Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer_guides/developer_installation/" class="md-nav__link">
+        Developer Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer_guides/job_queue_flow/" class="md-nav__link">
+        Job Queue Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer_guides/development_tips/" class="md-nav__link">
+        Development Tips
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer_guides/notifications_implementation/" class="md-nav__link">
+        Notifications Implementation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer_guides/core_package_breakdown/" class="md-nav__link">
+        Core Package Breakdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer_guides/package_development/" class="md-nav__link">
+        Package Development
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer_guides/updating_plugins/" class="md-nav__link">
+        Updating Plugins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer_guides/seat_api/" class="md-nav__link">
+        SeAT API
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../styling/" class="md-nav__link">
+        Styling
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Community Packages
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Community Packages
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#blade-package-installation" class="md-nav__link">
+    Blade package installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-package-installation" class="md-nav__link">
+    Docker package installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-list" class="md-nav__link">
+    Package list
+  </a>
+  
+    <nav class="md-nav" aria-label="Package list">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seat-specific-packages" class="md-nav__link">
+    SeAT specific packages
+  </a>
+  
+    <nav class="md-nav" aria-label="SeAT specific packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maintained-packages" class="md-nav__link">
+    Maintained packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#library-packages" class="md-nav__link">
+    Library Packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deprecated-packages" class="md-nav__link">
+    Deprecated packages
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-seat-related-packages" class="md-nav__link">
+    Other SeAT related packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-different-versions" class="md-nav__link">
+    Installing different versions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        Troubleshooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11" tabindex="0" aria-expanded="false">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../about/reporting_bugs/" class="md-nav__link">
+        Reporting Bugs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#blade-package-installation" class="md-nav__link">
+    Blade package installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-package-installation" class="md-nav__link">
+    Docker package installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-list" class="md-nav__link">
+    Package list
+  </a>
+  
+    <nav class="md-nav" aria-label="Package list">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seat-specific-packages" class="md-nav__link">
+    SeAT specific packages
+  </a>
+  
+    <nav class="md-nav" aria-label="SeAT specific packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#maintained-packages" class="md-nav__link">
+    Maintained packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#library-packages" class="md-nav__link">
+    Library Packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deprecated-packages" class="md-nav__link">
+    Deprecated packages
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-seat-related-packages" class="md-nav__link">
+    Other SeAT related packages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installing-different-versions" class="md-nav__link">
+    Installing different versions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<p><img alt="SeAT" src="https://i.imgur.com/aPPOxSK.png" /></p>
+<h1 id="community-packages">Community Packages<a class="headerlink" href="#community-packages" title="Permanent link">&para;</a></h1>
+<p>Below is a list of packages contributed by the community. These packages normally follow the same installation procedure, however, its best you consult the documentation of the package itself in case there is anything special you need to get it working.</p>
+<h2 id="blade-package-installation">Blade package installation<a class="headerlink" href="#blade-package-installation" title="Permanent link">&para;</a></h2>
+<p>Packages will normally come in the form of a composer package that you need to include in your SeAT install, as well as a Service Provider that you need to bootstrap. So, generically speaking, installing a package will mean that you:</p>
+<ul>
+<li>
+<p>Ensure that you are in the <em>path</em> where you installed. By default, this should be <code>/var/www/seat</code>.</p>
+</li>
+<li>
+<p>Put your application into <em>maintenance mode</em>. This will ensure that no request from the outside will hit your applications logic, and also help you perform an upgrade uninterrupted. Do this with the following commands issued as the webserver user:</p>
+</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>-H<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;php artisan down&#39;</span>
+</span></code></pre></div>
+<ul>
+<li><em>Require</em> the package via composer:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>-H<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;composer require &lt;package vendor&gt;/&lt;package-name&gt;&#39;</span>
+</span></code></pre></div>
+<ul>
+<li><em>Publish</em> the assets with artisan:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo<span class="w"> </span>-H<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;php artisan vendor:publish --force --all&#39;</span>
+</span></code></pre></div>
+<ul>
+<li><em>Run migration</em> in order to update database:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>-H<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;php artisan migrate&#39;</span>
+</span></code></pre></div>
+<ul>
+<li><em>Renew config and route cache</em> to benefit of newly added functionalities:</li>
+</ul>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1"></a>sudo<span class="w"> </span>-H<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;php artisan route:cache&#39;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2"></a>sudo<span class="w"> </span>-H<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;php artisan config:cache&#39;</span>
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li><em>Clear SeAT cache</em> after installation:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>-H<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;php artisan seat:cache:clear&#39;</span>
+</span></code></pre></div>
+<ul>
+<li>Bring your application <em>live</em> and back out of maintenance mode:</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>-H<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;php artisan up&#39;</span>
+</span></code></pre></div>
+<p>Installing packages like this will ensure that none of the core SeAT packages are affected and you should be free to upgrade SeAT core at anytime.</p>
+<h2 id="docker-package-installation">Docker package installation<a class="headerlink" href="#docker-package-installation" title="Permanent link">&para;</a></h2>
+<p>Applying community packages to your SeAT instance with Docker requires you to update your .env file located in <code>/opt/seat-docker</code> and uncommenting SEAT_PLUGINS by removing '#' and entering the package(s) to be installed separating each package with a comma. An example of how to enter packages in your .env would be:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span>
+<span class="normal"><a href="#__codelineno-7-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># SeAT Plugins</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="c1"># This is a list of the all of the third party plugins that you</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="c1"># would like to install as part of SeAT. Package names should be</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="c1"># comma seperated if multiple packages should be installed.</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="l l-Scalar l-Scalar-Plain">SEAT_PLUGINS=denngarr/seat-fitting,cryptaeve/seat-squad-sync</span>
+</span></code></pre></div></td></tr></table></div>
+<ul>
+<li>Once you have entered the package(s) to be installed run the below command in <code>/opt/seat-docker</code>:</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Docker (SeAT 4.x)</label><label for="__tabbed_1_2">Docker (SeAT 5.x - using Traefik)</label><label for="__tabbed_1_3">Docker (SeAT 5.x - using reverse proxy)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker-compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.mariadb.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.traefik.yml<span class="w"> </span>-d<span class="w"> </span>up
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker-compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.mariadb.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.proxy.yml<span class="w"> </span>-d<span class="w"> </span>up
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p>After running the above command wait for containers affected to rebuild. If SeAT does not come back up refer to <a href="https://eveseat.github.io/docs/troubleshooting/">Troubleshooting</a> for more insight.</p>
+<h2 id="package-list">Package list<a class="headerlink" href="#package-list" title="Permanent link">&para;</a></h2>
+<h3 id="seat-specific-packages">SeAT specific packages<a class="headerlink" href="#seat-specific-packages" title="Permanent link">&para;</a></h3>
+<h4 id="maintained-packages">Maintained packages<a class="headerlink" href="#maintained-packages" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Version (SeAT 4.x)</th>
+<th>Version (SeAT 5.x)</th>
+<th>Installation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/waw-eve/seat-mumble-register">alliancewaw/seat-mumble-register</a></td>
+<td><a href="https://packagist.org/packages/alliancewaw/seat-mumble-register"><img alt="Latest Stable Version" src="https://poser.pugx.org/alliancewaw/seat-mumble-register/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td><a href="https://github.com/waw-eve/seat-mumble-register-backend/blob/main/README.md">Read the docs</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/cryocaustik/seat-hr">cryocaustik/seat-hr</a></td>
+<td><a href="https://packagist.org/packages/cryocaustik/seat-hr"><img alt="Latest Stable Version" src="http://poser.pugx.org/cryocaustik/seat-hr/v/stable?style=flat-square" /></a></td>
+<td><a href="https://packagist.org/packages/cryocaustik/seat-hr"><img alt="Latest Unstable Version" src="http://poser.pugx.org/cryocaustik/seat-hr/v/unstable" /></a></td>
+<td></td>
+<td>Human Resources plugin for SeAT with Applications (with customized questions per corporation), Blacklist, Intel, Kick History, Notes, and Sheet</td>
+</tr>
+<tr>
+<td><a href="https://github.com/crypta-eve/seat-squad-sync">cryptaeve/seat-squad-sync</a></td>
+<td><a href="https://packagist.org/packages/crypta-eve/seat-squad-sync"><img alt="Latest Stable Version" src="https://poser.pugx.org/cryptaeve/seat-squad-sync/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td>Adds the ability to sync squad members into filters of permissions</td>
+</tr>
+<tr>
+<td><a href="https://github.com/crypta-eve/seat-text">cryptaeve/seat-text</a></td>
+<td><a href="https://packagist.org/packages/crypta-eve/seat-text"><img alt="Latest Stable Version" src="https://poser.pugx.org/cryptaeve/seat-text/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td>A module to serve public static ascii, with editing access controlled by seat</td>
+</tr>
+<tr>
+<td><a href="https://github.com/dysath/seat-fitting">denngarr/seat-fitting</a></td>
+<td><a href="https://packagist.org/packages/denngarr/seat-fitting"><img alt="Latest Stable Version" src="https://poser.pugx.org/denngarr/seat-fitting/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td>Module to check fittings per character</td>
+</tr>
+<tr>
+<td><a href="https://github.com/dysath/seat-srp">denngarr/seat-srp</a></td>
+<td><a href="https://packagist.org/packages/denngarr/seat-srp"><img alt="Latest Stable Version" src="https://poser.pugx.org/denngarr/seat-srp/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td>A module for SeAT that tracks SRP requests</td>
+</tr>
+<tr>
+<td><a href="https://github.com/h4zz4rddev/seat-buyback">h4zz4rddev/seat-buyback</a></td>
+<td><a href="https://packagist.org/packages/h4zz4rddev/seat-buyback"><img alt="Latest Stable Version" src="https://poser.pugx.org/h4zz4rddev/seat-buyback/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/humunuk/alliance-structure-mngmt">humunuk/alliance-structure-mngmt</a></td>
+<td><a href="https://packagist.org/packages/humunuk/alliance-structure-mngmt"><img alt="Latest Stable Version" src="https://poser.pugx.org/humunuk/alliance-structure-mngmt/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/BenHUET/eveseat-calendar">kassie/calendar</a></td>
+<td><a href="https://packagist.org/packages/kassie/calendar"><img alt="Latest Stable Version" src="https://poser.pugx.org/kassie/calendar/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td><a href="https://github.com/BenHUET/eveseat-calendar/blob/master/README.md">Read the docs</a></td>
+<td>Calendar plugin</td>
+</tr>
+<tr>
+<td><a href="https://github.com/pyTonicis/seat-corp-mining-tax">pyTonicis/seat-corp-mining-tax</a></td>
+<td><a href="https://packagist.org/packages/pytonicis/seat-corp-mining-tax"><img alt="Latest Stable Version" src="https://poser.pugx.org/pyTonicis/seat-corp-mining-tax/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td><a href="https://github.com/pyTonicis/seat-corp-mining-tax/blob/master/README.md">Read the docs</a></td>
+<td>A Modul to manage corporation mining tax</td>
+</tr>
+<tr>
+<td><a href="https://github.com/warlof/seat-discord-connector">warlof/seat-discord-connector</a></td>
+<td><a href="https://packagist.org/packages/warlof/seat-discord-connector"><img alt="Latest Stable Version" src="https://poser.pugx.org/warlof/seat-discord-connector/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td><a href="https://github.com/warlof/seat-discord-connector/blob/5.0.x/README.md">Read the docs</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/warlof/seat-teamspeak">warlof/seat-teamspeak</a></td>
+<td><a href="https://packagist.org/packages/warlof/seat-teamspeak"><img alt="Latest Stable Version" src="https://poser.pugx.org/warlof/seat-teamspeak/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td><a href="https://github.com/warlof/seat-teamspeak/blob/5.0.x/README.md">Read the docs</a></td>
+<td>A Teamspeak driver to be used with <code>seat-connector</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/recursivetree/seat-info">recursivetree/seat-info</a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-info"><img alt="Latest Stable Version" src="https://poser.pugx.org/recursivetree/seat-info/v/stable?style=flat-square" /></a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-info"><img alt="Latest Development Version" src="https://poser.pugx.org/recursivetree/seat-info/v/unstable?style=flat-square" /></a></td>
+<td><a href="https://github.com/recursivetree/seat-info/blob/master/README.md">Read the docs</a></td>
+<td>A module that adds a small wiki-like article systems for example as a corporation bulletin.<br/><br/><strong>SeAT 5.x</strong><br/>You need to follow <a href="https://github.com/recursivetree/seat-info#4x---5x">special steps</a> after upgrading to retain your resource files.<br/>Still considered unstable.<br/>Install the <code>5.0.x-dev</code> branch.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/recursivetree/seat-rat">recursivetree/seat-rat</a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-rat"><img alt="Latest Stable Version" src="https://poser.pugx.org/recursivetree/seat-rat/v/stable?style=flat-square" /></a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-rat"><img alt="Latest Development Version" src="https://poser.pugx.org/recursivetree/seat-rat/v/unstable?style=flat-square" /></a></td>
+<td></td>
+<td>A module to monitor ratting usage in a system, e.g. to prevent dropping the bounty risk modifier in nullsec.<br/><br/><strong>SeAT 5.x</strong><br/>Still considered unstable.<br/>Install the <code>5.0.x-dev</code> branch.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/SimplyUnnamed/seat-user-last-logins">simplyunnamed/seat-user-last-login</a></td>
+<td><a href="https://packagist.org/packages/simplyunnamed/seat-user-last-login"><img alt="Latest Stable Version" src="http://poser.pugx.org/simplyunnamed/seat-user-last-login/v?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td>Tool to help find potential AFK's in your corporation.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/recursivetree/seat-billing">recursivetree/seat-billing</a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-billing"><img alt="Latest Stable Version" src="https://poser.pugx.org/recursivetree/seat-billing/v/stable?style=flat-square" /></a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-billing"><img alt="Latest Development Version" src="https://poser.pugx.org/recursivetree/seat-billing/v/unstable?style=flat-square" /></a></td>
+<td></td>
+<td>A billing module to help you with ore and rating taxes.<br/><br/><strong>SeAT 5.x</strong><br/>Still considered unstable.<br/>Install the <code>5.0.x-dev</code> branch.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/recursivetree/seat-pushx-blamer">recursivetree/seat-pushx-blamer</a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-pushx-blamer"><img alt="Latest Stable Version" src="https://poser.pugx.org/recursivetree/seat-pushx-blamer/v/stable?style=flat-square" /></a></td>
+<td><img alt="SeAT 5.x incompatible" src="https://img.shields.io/badge/SeAT%205.x-not--available--yett-critical?style=flat-square" /></td>
+<td></td>
+<td>A module to tell you who's guilty of blocking the PushX queue.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/recursivetree/seat-alliance-industry">recursivetree/seat-alliance-industry</a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-alliance-industry"><img alt="Latest Stable Version" src="https://poser.pugx.org/recursivetree/seat-alliance-industry/v/stable?style=flat-square" /></a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-alliance-industry"><img alt="Latest Development Version" src="https://poser.pugx.org/recursivetree/seat-alliance-industry/v/unstable?style=flat-square" /></a></td>
+<td></td>
+<td>A corporation/alliance/coalition industry order marketplace<br/><br/><strong>SeAT 5.x</strong><br/>Still considered unstable.<br/>Install the <code>5.0.x-dev</code> branch.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/recursivetree/seat-inventory">recursivetree/seat-inventory</a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-inventory"><img alt="Latest Stable Version" src="https://poser.pugx.org/recursivetree/seat-inventory/v/stable?style=flat-square" /></a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-inventory"><img alt="Latest Development Version" src="https://poser.pugx.org/recursivetree/seat-inventory/v/unstable?style=flat-square" /></a></td>
+<td></td>
+<td>Inventory manager for contracts and corporation hangars.<br/><br/><strong>SeAT 5.x</strong><br/>Still considered unstable.<br/>Install the <code>5.0.x-dev</code> branch.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/recursivetree/seat-transport">recursivetree/seat-transport</a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-transport"><img alt="Latest Stable Version" src="https://poser.pugx.org/recursivetree/seat-transport/v/stable?style=flat-square" /></a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-transport"><img alt="Latest Development Version" src="https://poser.pugx.org/recursivetree/seat-transport/v/unstable?style=flat-square" /></a></td>
+<td></td>
+<td>This plugin is a calculator for hauling costs, for example for an alliance JF service.<br/><br/><strong>SeAT 5.x</strong><br/>Still considered unstable.<br/>Install the <code>5.0.x-dev</code> branch.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>You might need to install a <a href="#installing-different-versions">different branch</a> of a plugin, as the main branch is still on SeAT 4.</p>
+</div>
+<h4 id="library-packages">Library Packages<a class="headerlink" href="#library-packages" title="Permanent link">&para;</a></h4>
+<p>These packages provide utilities for other packages and usually don't need to be installed manually.</p>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Version</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/warlof/seat-connector">warlof/seat-connector</a></td>
+<td><a href="https://packagist.org/packages/warlof/seat-connector"><img alt="Latest Stable Version" src="https://poser.pugx.org/warlof/seat-connector/v/stable?style=flat-square" /></a></td>
+<td>A generic connector module that handles invites and roles management with any registered platform</td>
+</tr>
+<tr>
+<td><a href="https://github.com/recursivetree/seat-treelib">recursivetree/seat-treelib</a></td>
+<td><a href="https://packagist.org/packages/recursivetree/seat-treelib"><img alt="Latest Stable Version" src="https://poser.pugx.org/recursivetree/seat-treelib/v/stable?style=flat-square" /></a></td>
+<td>A module that contains shared code for all <code>recursivetree/*</code> plugins</td>
+</tr>
+</tbody>
+</table>
+<h4 id="deprecated-packages">Deprecated packages<a class="headerlink" href="#deprecated-packages" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Version</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/eve-scout/eveseat-oauth2-server">eve-scout/eveseat-oauth2-server</a></td>
+<td><a href="https://packagist.org/packages/eve-scout/eveseat-oauth2-server"><img alt="Latest Stable Version" src="https://poser.pugx.org/eve-scout/eveseat-oauth2-server/v/stable?style=flat-square" /></a></td>
+<td>This EVE SeAT package enables an OAuth2 server for Single sign-on.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/flyingferret/seat-whtools">flyingferret/seat-whtools</a></td>
+<td><a href="https://packagist.org/packages/flyingferret/seat-whtools"><img alt="Latest Stable Version" src="https://poser.pugx.org/flyingferret/seat-whtools/v/stable?style=flat-square" /></a></td>
+<td>A small collection of tools for helping with Wh-Life corporation management, including calculating doctrine stocking levels (based on contracts and <code>denngarr/seat-fitting</code> plugin), a blue loot tax calculator, and a skill base certificate management.  Currently very much a  work in progress.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/freedenizen/eveseat-notes">freedenizen/eveseat-notes</a></td>
+<td><a href="https://packagist.org/packages/freedenizen/eveseat-notes"><img alt="Latest Stable Version" src="https://poser.pugx.org/freedenizen/eveseat-notes/v/stable?style=flat-square" /></a></td>
+<td>A notes addon for seat 1.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/herpaderpaldent/seat-discourse">herpaderpaldent/seat-discourse</a></td>
+<td><a href="https://packagist.org/packages/herpaderpaldent/seat-discourse"><img alt="Latest Stable Version" src="https://poser.pugx.org/herpaderpaldent/seat-discourse/v/stable?style=flat-square" /></a></td>
+<td>SeAT Discourse enables SeAT to act as SSO provider for your Discourse-Forum instance. Groups and Categories do respect roles of members. With this package you can create hidden sections for your member and public sections for potential recruits to which members get automatically access to. <strong>Important:</strong> Check installation instructions on Github.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/herpaderpaldent/seat-groups">herpaderpaldent/seat-groups</a></td>
+<td><a href="https://packagist.org/packages/herpaderpaldent/seat-groups"><img alt="Latest Stable Version" src="https://poser.pugx.org/herpaderpaldent/seat-groups/v/stable?style=flat-square" /></a></td>
+<td>Module to create auto, open and managed role groups to which user can be automatically be assigned, user can opt-in or user can apply to.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/herpaderpaldent/seat-notifications">herpaderpaldent/seat-notifications</a></td>
+<td><a href="https://packagist.org/packages/herpaderpaldent/seat-notifications"><img alt="Latest Stable Version" src="https://poser.pugx.org/herpaderpaldent/seat-notifications/v/stable?style=flat-square" /></a></td>
+<td>This is a fully functional notification package for discord and slack notifications. This package is very easily extendable by other packages and should replace core notifications at some point. Currently seat-groups provide many useful notifications. Notifications are send out by slack or discord bot and uses twice a full oAuth2 authentication of the user.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/warlof/seat-migrator">warlof/seat-migrator</a></td>
+<td><a href="https://packagist.org/packages/warlof/seat-migrator"><img alt="Latest Stable Version" src="https://poser.pugx.org/warlof/seat-migrator/v/stable?style=flat-square" /></a></td>
+<td>A migration script between SeAT 2 and SeAT 3</td>
+</tr>
+<tr>
+<td><a href="https://github.com/warlof/seat-slack-sso">warlof/seat-slack-sso</a></td>
+<td><a href="https://packagist.org/packages/warlof/seat-slack-sso"><img alt="Latest Stable Version" src="https://poser.pugx.org/warlof/seat-slack-sso/v/stable?style=flat-square" /></a></td>
+<td>Slack SSO integration for seat 2.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/warlof/eveseat-mining-ledger">warlof/eveseat-mining-ledger</a></td>
+<td><a href="https://github.com/warlof/eveseat-mining-ledger"><img alt="Latest Stable Version" src="https://poser.pugx.org/warlof/eveseat-mining-ledger/v/stable?style=flat-square" /></a></td>
+<td>ESI capability that provides a mining ledger to SeAT 2.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/warlof/slackbot">warlof/slackbot</a></td>
+<td><a href="https://packagist.org/packages/warlof/slackbot"><img alt="Latest Stable Version" src="https://poser.pugx.org/warlof/slackbot/v/stable?style=flat-square" /></a></td>
+<td>A slack bot that handles invites and kicks based on an api key</td>
+</tr>
+</tbody>
+</table>
+<h3 id="other-seat-related-packages">Other SeAT related packages<a class="headerlink" href="#other-seat-related-packages" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://github.com/nullsecurity-australia/helm-charts/tree/main/charts/eveseat">nullsecurity-australia/helm-charts</a>
+Allows to install EVE SeAT on a Kubernetes Cluster</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Packages after this message are provided as history and idea database. They will not work on the stable version since they are non longer maintained by their author or have been integrated in core.</p>
+</div>
+<ul>
+<li><a href="https://github.com/Betriebsrat/err-seat">Betriebsrat/err-seat</a><br />
+Seat Api Interface for errbot</li>
+<li><a href="https://github.com/eve-scout/passport-eveseat">eve-scout/passport-eveseat</a><br />
+Passport strategy for authenticating with EVE SeAT using the OAuth 2.0 API.</li>
+<li><a href="https://github.com/eve-scout/nodebb-plugin-sso-eveseat">eve-scout/nodebb-plugin-sso-eveseat</a><br />
+This NodeBB plugin allows users login/register via their EVE SeAT account.</li>
+</ul>
+<h3 id="installing-different-versions">Installing different versions<a class="headerlink" href="#installing-different-versions" title="Permanent link">&para;</a></h3>
+<p>Sometimes it can be useful to install a version different from the latest version, for example if you want to install an older version of a plugin or if you want to test a bugfix. The easiest way to find all available versions is to go to the packagist site of the plugin by clicking on the version in the available plugins list. On packagist, if you scroll down, to the right you will find a list of all available versions.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Blade</label><label for="__tabbed_2_2">Docker (SeAT 4.x)</label><label for="__tabbed_2_3">Docker (SeAT 5.x - using Traefik)</label><label for="__tabbed_2_4">Docker (SeAT 5.x - using proxy)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Follow the normal installation steps, but change the <code>composer require</code> command to include the package according to the following example:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sudo<span class="w"> </span>-H<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;composer require &lt;package vendor&gt;/&lt;package-name&gt;:&lt;version-name&gt;&#39;</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>In your <code>.env</code> file, add the version to the package like this:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>SEAT_PLUGINS=&lt;vendor&gt;/&lt;package&gt;:&lt;version&gt;,cryptaeve/seat-squad-sync:4.0.2
+</span></code></pre></div>
+Next, restart the stack as usual.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a>docker-compose<span class="w"> </span>down
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<p>In your <code>.env</code> file, add the version to the package like this:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>SEAT_PLUGINS=&lt;vendor&gt;/&lt;package&gt;:&lt;version&gt;,cryptaeve/seat-squad-sync:4.0.2
+</span></code></pre></div>
+Next, restart the stack as usual.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1"></a>docker-compose<span class="w"> </span>down
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2"></a>docker-compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.mariadb.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.traefik.yml<span class="w"> </span>-d<span class="w"> </span>up
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<p>In your <code>.env</code> file, add the version to the package like this:</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>SEAT_PLUGINS=&lt;vendor&gt;/&lt;package&gt;:&lt;version&gt;,cryptaeve/seat-squad-sync:4.0.2
+</span></code></pre></div>
+Next, restart the stack as usual.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a>docker-compose<span class="w"> </span>down
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a>docker-compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.mariadb.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.proxy.yml<span class="w"> </span>-d<span class="w"> </span>up
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2015 - 2020 Leon Jacobs
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/eveseat/seat" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy"], "search": "../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>
