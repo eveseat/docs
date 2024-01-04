@@ -4,15 +4,26 @@
 
 Occasionally you will need to perform administrative tasks in your SeAT instance running within docker. Be it because you would like to configure TLS for the web interface, change the port of the SeAT webserver or simply generate an admin login URL, this guide aims to help you get familiar for the commands needed for this.
 
-Many of the commands are exactly the same as those used in a bare metal installation, except for the fact that they are always prefixed with `docker-compose` and run from the same directory that you have the seat `docker-compose.yml` file stored. If your `docker-compose.yml` lives in `/opt/seat-docker`, you will need to `cd` to that directory first and then execute the `docker-compose` commands.
+Many of the commands are exactly the same as those used in a bare metal installation, except for the fact that they are always prefixed with `docker compose` and run from the same directory that you have the seat `docker-compose.yml` file stored. If your `docker-compose.yml` lives in `/opt/seat-docker`, you will need to `cd` to that directory first and then execute the `docker compose` commands.
+
+!!! info
+With SeAT 5, we migrated from the `docker-compose` command to `docker compose`. Besides the name, they are fully compatible. If you are still on SeAT 4, you have to use `docker-compose` instead of `docker compose` for all actions. This applies to all actions, not just the ones listed on this page.
 
 ## Container Status
 
 For a quick, birds-eye view on the status of the containers within the SeAT docker stack, the following command may be run:
 
-```bash
-docker-compose ps
-```
+=== "SeAT 4.x"
+
+    ```bash
+    docker-compose ps
+    ```
+
+=== "SeAT 5.x"
+
+    ```bash
+    docker compose ps
+    ```
 
 This should give you the name, entry point, current status and internal ports used within the docker network as output.
 
@@ -24,9 +35,24 @@ Making changes to this file requires the docker stack to be restarted so that th
 
 Once you have made a configuration change, save the `.env` file and restart the stack by simply running the following command from the path where the `docker-compose.yml` lives:
 
-```bash
-docker-compose up -d
-```
+=== "Docker (SeAT 4.x)"
+
+    ```bash
+    docker-compose up -d
+    ```
+
+=== "Docker (SeAT 5.x - using Traefik)"
+
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
+    ```
+
+=== "Docker (SeAT 5.x - using reverse proxy)"
+
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
+    ```
+
 
 ## Live Container Logs
 
@@ -40,23 +66,31 @@ Getting an idea of what is happening inside of the containers may be useful for 
     docker-compose logs --tail 10 -f seat-web
     ```
 
-    All services can referenced by their name using `docker-compose`. You can see the service names [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml). At the time of writing this doc, the available services were: `mariadb`, `redis`, `traefik`, `seat-web`, `seat-worker` and `seat-cron`.
+    All services can referenced by their name using `docker compose`. You can see the service names [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml). At the time of writing this doc, the available services were: `mariadb`, `redis`, `traefik`, `seat-web`, `seat-worker` and `seat-cron`.
 
 === "Docker (SeAT 5.x)"
 
     To view a single services' logs (`front` in this examples case), run:
     
     ```bash
-    docker-compose logs --tail 10 -f front
+    docker compose logs --tail 10 -f front
     ```
 
-    All services can referenced by their name using `docker-compose`. You can see the service names [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml). At the time of writing this doc, the available services were: `mariadb`, `redis`, `traefik`, `front`, `worker` and `scheduler`.
+    All services can referenced by their name using `docker compose`. You can see the service names [here](https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml) and in the adjacent `docker-compose.x.yml` files. At the time of writing this doc, the available services were: `mariadb`, `cache`, `traefik`, `front`, `worker` and `scheduler`.
 
 To view all service logs at once, run:
 
-```bash
-docker-compose logs --tail 10 -f
-```
+=== "Docker (SeAT 4.x)"
+
+    ```bash
+    docker-compose logs --tail 10 -f
+    ```
+
+=== "Docker (SeAT 5.x)"
+
+    ```bash
+    docker compose logs --tail 10 -f
+    ```
 
 Once you are done viewing the output, simply pressing ^C will exit the log viewer.
 
@@ -110,7 +144,7 @@ This directory should have daily log files for you to view.
     If you think your workers may be causing some exceptions, or you want to investigate why they may be failing, you can do so in the `worker` service. Just like for the web UI, get a bash shell and cd to the logs directory.
     
     ```text linenums="1"
-    # docker-compose exec worker bash
+    # docker compose exec worker bash
     root@8ed8967348f1:/var/www/seat# cd storage/logs/
     root@8ed8967348f1:/var/www/seat/storage/logs# ls
     eseye-2020-08-23.log
@@ -136,22 +170,46 @@ Save your `.env` file and run `docker-compose up -d` to restart the stack with t
 
 You can monitor the installation process by running:
 
-```bash
-docker-compose logs --tail 5 -f seat-app
-```
+=== "Docker (SeAT 4.x)"
+
+    ```bash
+    docker-compose logs --tail 10 -f
+    ```
+
+=== "Docker (SeAT 5.x)"
+
+    ```bash
+    docker compose logs --tail 10 -f
+    ```
 
 ## Database Backups and Restore
 
 Backups. They are important and really simple to do. To perform a backup of the current database used within the docker stack, compressing and saving it to a file called `seat_backup.sql.gz`, run:
 
-```bash
-docker-compose exec mariadb sh -c 'exec mysqldump "$MYSQL_DATABASE" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD"' | gzip > seat_backup.sql.gz
-```
+=== "Docker (SeAT 4.x)"
+
+    ```bash
+    docker-compose exec mariadb sh -c 'exec mysqldump "$MYSQL_DATABASE" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD"' | gzip > seat_backup.sql.gz
+    ```
+
+=== "Docker (SeAT 5.x)"
+
+    ```bash
+    docker compose exec mariadb sh -c 'exec mysqldump "$MYSQL_DATABASE" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD"' | gzip > seat_backup.sql.gz
+    ```
 
 To restore a backup to a new dockerized instance of SeAT, run:
 
-```bash
-zcat seat_backup.sql.gz | docker-compose exec -T mariadb sh -c 'exec mysql "$MYSQL_DATABASE" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD"'
-```
+=== "Docker (SeAT 4.x)"
+
+    ```bash
+    zcat seat_backup.sql.gz | docker-compose exec -T mariadb sh -c 'exec mysql "$MYSQL_DATABASE" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD"'
+    ```
+
+=== "Docker (SeAT 5.x)"
+
+    ```bash
+    zcat seat_backup.sql.gz | docker compose exec -T mariadb sh -c 'exec mysql "$MYSQL_DATABASE" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD"'
+    ```
 
 [configure SSO]: ../configuration/esi_configuration.md
