@@ -18,7 +18,7 @@ In order to authenticate with built-in admin user, use command disclosed bellow 
 === "Docker (SeAT 5.x)"
     ```bash linenums="1"
     cd /opt/seat-docker
-    docker-compose exec front php artisan seat:admin:login
+    docker compose exec front php artisan seat:admin:login
     ```
 
 === "Bare metal"
