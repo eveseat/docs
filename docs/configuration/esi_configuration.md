@@ -68,14 +68,14 @@ Your `.env` file is located in `/opt/seat-docker`. Rebuild your app after settin
 
 === "Docker (SeAT 5.x - using Traefik)"
     ```bash linenums="1"
-    docker-compose down
-    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
+    docker compose down
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
     ```
 
 === "Docker (SeAT 5.x - using proxy)"
     ```bash linenums="1"
-    docker-compose down
-    docker-compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
+    docker compose down
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
     ```
 
 [EVE Online Developers portal]: https://developers.eveonline.com/applications
