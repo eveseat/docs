@@ -20,7 +20,28 @@ In either case, the next steps to perform when seeing this would be to either [e
 
 > Fatal error: Allowed memory size of #### bytes exhausted (tried to allocate 4096 bytes)...
 
-If you are presented with an error below similar to this after "Updating Dependencies" you must append your .ENV file with `COMPOSER_MEMORY_LIMIT= -1` and run `docker-compose up -d` if you are using docker. Note: spacing is important for this parameter, if you are unsure copy/paste the needed line into your .ENV file.
+If you are presented with an error below similar to this after "Updating Dependencies" you must append your .ENV file with `COMPOSER_MEMORY_LIMIT= -1` and restart the stack with the following if you are using docker:
+
+=== "Docker (SeAT 4.x)"
+
+    ```bash
+    docker-compose up -d
+    ```
+
+=== "Docker (SeAT 5.x - using Traefik)"
+
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
+    ```
+
+=== "Docker (SeAT 5.x - using reverse proxy)"
+
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
+    ```
+
+!!! note
+    Note: spacing is important for this parameter, if you are unsure copy/paste the needed line into your .ENV file.
 
 ## Enabling Debug Mode
 
@@ -42,7 +63,27 @@ The change would immediately take effect and you can simply reload the failed re
 
 If you installed using Docker, cd to the directory where the `docker-compose.yml` file is located. Assuming you followed the guides on this website, that would be in `/opt/seat-docker`. Next, open the `.env` file in a text editor and modify the line that says `APP_DEBUG=false` to say `APP_DEBUG=true`.
 
-For the change to take effect, you need to reload the stack with `docker-compose up -d` from within the same folder. The containers will take a few moments to settle down after which you can reload the failed the request for a detailed error message and code stack trace.
+For the change to take effect, you need to reload the stack:
+
+=== "Docker (SeAT 4.x)"
+
+    ```bash
+    docker-compose up -d
+    ```
+
+=== "Docker (SeAT 5.x - using Traefik)"
+
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml -d up
+    ```
+
+=== "Docker (SeAT 5.x - using reverse proxy)"
+
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml -d up
+    ```
+
+The containers will take a few moments to settle down after which you can reload the failed the request for a detailed error message and code stack trace.
 
 ## Checking Log Files
 
@@ -81,7 +122,7 @@ First, enter get a shell within the `seat-web`/`front` container while in the `/
 === "SeAT 5.x"
 
     ```bash
-    docker-compose exec front sh
+    docker compose exec front sh
     ```
 
 Next, tail the log files you want to see.
@@ -123,5 +164,5 @@ For Docker installations, the only requirement to run the diagnose command would
 === "SeAT 5.x"
     
     ```bash
-    docker-compose exec front su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
+    docker compose exec front su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
     ```
