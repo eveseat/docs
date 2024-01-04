@@ -71,12 +71,12 @@ The more jobs you'll get, the more workers you'll need to process queue in less 
 
 ### Docker Environment
 
-For Docker based installations, all you need is `docker` and `docker-compose`.
-If you already have it installed, check your current version with `docker version` and `docker-compose version` respectively.
+For Docker based installations, all you need is `docker`.
+If you already have it installed, check your current version with `docker version`.
 
-| Type           | Requirement                                              | Version Check            |
-| -------------- | -------------------------------------------------------- | ------------------------ |
-| Docker         | [Docker: ^18.0](https://www.docker.com/)                 | `docker -v`              |
+| Type           | Requirement                              | Version Check            |
+| -------------- |------------------------------------------| ------------------------ |
+| Docker         | [Docker: ^24.0](https://www.docker.com/) | `docker -v`              |
 
 !!! info
 
