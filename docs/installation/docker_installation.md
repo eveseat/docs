@@ -119,6 +119,18 @@ Next, decompress the template archive:
     Expand-Archive -Path c:\seat-docker\seat-docker.zip -DestinationPath c:\seat-docker
     ```
 
+Next, we will rename the file .env.example to .env in the root directory of seat-docker
+
+=== "Linux"
+    ```bash
+    mv /opt/seat-docker/.env.example /opt/seat-docker/.env
+    ```
+
+=== "Windows"
+    ```powershell
+    Rename-Item -Path "c:\seat-docker\.env.example" -NewName ".env"
+    ```
+
 Next, we will generate a unique application key - this is used internally for encryption:
 
 === "Linux"
