@@ -27,3 +27,17 @@ In both the case of a Docker installation as well as a host based installation (
 | EVE_CALLBACK_URL | https://seat.local/auth/eve/callback | This is the EVE Application Callback URL you filled when you created an application over https://developers.eveonline.com. You should have only to fix `seat.local` |
 | QUEUE_BALANCING_MODE | false | Determine the workers balancing mode used by the Jobs Manager. Value can be `false`, `auto` or `simple`. See [official Laravel documentation](https://laravel.com/docs/5.8/horizon#balance-options) for more details |
 | QUEUE_WORKERS | 4 | Determine the amount of worker which have to be spawn to process jobs over all queues. In `auto` and `simple` balancing, this value cannot be lower than `4` as it's correspond to the available queues. |
+
+## Configuration in Portainer
+
+Portainer uses a Web UI to define environmental variables instead of a configuration file.
+
+When creating a new Stack in the Portainer Web Editor, the environmental variables are referenced differetly. You just need to reference the env file created in the service definition. The portainer file is called "stack.env" and it contains all of the variables read in from the external env file. See [Portainer Blog](https://www.portainer.io/blog/using-env-files-in-stacks-with-portainer) for more details.
+
+Example for the docker compose file in Portainer:
+```
+    env_file:
+      - stack.env
+```
+
+Note: The relative values defined in the docker compose `.env` don't work in Portainer (except for the variable SEAT_SUBDOMAIN). For example, the EVE_CALLBACK_URL needs to be written out as `https://seat.yourdomain.com/auth/eve/callback`.
