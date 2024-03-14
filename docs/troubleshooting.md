@@ -158,11 +158,11 @@ For Docker installations, the only requirement to run the diagnose command would
 === "SeAT 4.x"
 
     ```bash
-    docker-compose exec seat-web su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
+    docker-compose exec seat-web php artisan seat:admin:diagnose
     ```
 
 === "SeAT 5.x"
     
     ```bash
-    docker compose exec front su -c 'php artisan seat:admin:diagnose' -s /bin/sh www-data
+    docker compose exec front php artisan seat:admin:diagnose
     ```
