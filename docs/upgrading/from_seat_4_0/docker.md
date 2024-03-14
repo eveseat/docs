@@ -62,6 +62,7 @@ We highly recommend that you read the details of this upgrade guide to get famil
   ```bash
   curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.proxy.yml -o docker-compose.proxy.yml
   ```
+- If you are using a [custom stylesheet], open your `docker-compose.override.yml` file and replace the container name `seat-web` with `front`.
 - Download the new `.env` file template using 
   ```bash
   curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/.env -o .env
@@ -213,6 +214,31 @@ curl -L https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-comp
 
 With this we have created a copy of the older docker-compose file (just in case), and downloaded the new one.
 
+##### Updating custom styles
+If you've customized the appearance of seat using [this guide](../../styling.md), follow these additional steps. Otherwise, skip to the next section and update your `.env` file.
+
+Open your `docker-compose.override.yml` file using nano:
+```bash
+nano docker-compose.override.yml
+```
+
+Go to the following line that says `seat-web`:
+```YAML
+    services:
+      seat-web: # <--- Here
+        volumes:
+```
+
+Update the line to say `front` instead of `seat-web`:
+```YAML
+    services:
+      front: # <--- Here
+        volumes:
+```
+It is important to keep the indentation as it is.
+
+Exit using Control-X and type `y` for yes when asked whether you want to save the changes.
+
 #### Update the .env file
 This is one of the more important steps. The database configuration needs to be updated.
 
@@ -319,3 +345,4 @@ Should you have any issue with the installation, please contact us on [Discord].
 [bare metal instructions]: bare_metal.md
 [Discord]: ../../about/contact.md
 [GitHub Container Registry]: https://github.com/eveseat/seat-docker/pkgs/container/seat
+[custom stylesheet]: ../../styling.md
