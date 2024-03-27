@@ -2,10 +2,17 @@
 
 # Developer Installation
 
-Since SeAT 4 and including SeAT 5, starting with Docker build 4.1.0, spawning a development environment has been made easier.
-You can use the same image as of production environment - either you're working on core packages or third party ones.
+This document describes how to set up a development environment for both core package and third party package development. 
+The easiest way to set up a development environment is to use docker. You can use the same image as in a production environment.
 
-## General
+For development, plugins and the seat core are treated the same. When working on the core, you install a core package like
+any other plugin. This is also how core packages are implemented: Internally they are also just a plugin, only that they 
+are considered the core and that other plugins build on top of them.
+
+The SeAT docker image is built in a way to prefer development installations of packages over plugins from `.env` and the core. While the docker image always downloads and installs
+the core packages, when it finds a local development install of a core package, it uses that over the latest version from packagist.
+
+## Setup Process
 
 First, start with [standard installation](../installation/docker_installation.md) to get a working environment.
 
@@ -14,10 +21,8 @@ It is mounted readonly, and you can store your development sources in it.
 
 To make things easier, we recommend you keep vendor path convention to split your sources across every single package you want to play with.
 
-Developing plugins and core packages doesn't differ at all, modules installed in the `packages` directory always take priority.
-In the case of core modules, this means the version from `packages` and not the version provided by the docker container will be used.
-
-## Overrider
+### Overrider
+In the next step, we need to let laravel, the php framework used by seat, know that our plugin is there.
 
 The image has been designed to look for a file called `override.json` inside `packages` directory.
 When it is found, it will be merged together with standard `composer.json` file from `eveseat/seat` package.
@@ -52,6 +57,8 @@ When your container will start, mapping from `autoload` property in your `overri
     2. You can execute `artisan` commands from outside of docker with `docker exec front php artisan <command>`
 
 Please note that there is currently no way to install dependencies with the package override. 
+
+When installing already existing packages (e.g. a core package), you can find all required autoloads and service providers in it's `composer.json` file.
 
 ## Teach things by example
 

@@ -2,9 +2,6 @@
 
 # Developers Guides - Notifications Implementation
 
-!!! warning "Seat 5"
-    This guide is already updated for seat 5. Older versions of this guide can be found on [github](https://github.com/eveseat/docs/tree/8a33fdb141cb8d5f0733f0a936a06fdffd3781c4).
-
 ## Introduction
 
 SeAT is shipped with a built-in notification system which is able to send message across the world to almost any platform.
@@ -125,13 +122,13 @@ All notifications continue to work without any changes, even though there have b
 
 - Start extending from the platform specific classes instead of `Seat\Notifications\Notifications\AbstractNotification`. 
   - Discord: extend `Seat\Notifications\Notifications\AbstractDiscordNotification`
-  - Slack: extend `Seat\Notifications\Notifications\AbstractSlackDiscordNotification`
+  - Slack: extend `Seat\Notifications\Notifications\AbstractSlackNotification`
   - Mail: extend `Seat\Notifications\Notifications\AbstractMailNotification`
 - Remove the via method. It moved to the abstract notification class.
-- Refactor your public `toX()` method to a protected `populateMessage(Messagetype $message, $notifiable)`. Instead of creating a new message, use the parameter `$message`. The type `Message` must be adjusted depending on your platform:
+- Refactor your public `toX()` method to a protected `populateMessage(MessageType $message, $notifiable)`. Instead of creating a new message, use the parameter `$message`. The type `MessageType` must be adjusted depending on your platform:
   - discord: `Seat\Notifications\Services\Discord\Messages\DiscordMessage`
   - slack: `Illuminate\Notifications\Messages\SlackMessage`
   - mail: `Illuminate\Notifications\Messages\MailMessage`
 - Consider using the `Seat\Notifications\Traits\NotificationDispatchTool` trait to dispatch notification. It helps to deduplicate the most common logic.
 
-The old plugin structure will stop working in seat 6.
+The old notification structure will stop working in seat 6.

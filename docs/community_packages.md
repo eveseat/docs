@@ -47,6 +47,12 @@ sudo -H -u www-data bash -c 'php artisan config:cache'
 sudo -H -u www-data bash -c 'php artisan seat:cache:clear'
 ```
 
+- *Seed schedule* so that new and missing commands get added to your schedule:
+
+```bash
+sudo -H -u www-data bash -c 'php /var/www/seat/artisan db:seed --class=Seat\\Services\\Database\\Seeders\\PluginDatabaseSeeder'
+```
+
 - Bring your application *live* and back out of maintenance mode:
 
 ```bash

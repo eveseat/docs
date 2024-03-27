@@ -275,6 +275,51 @@ Registering these migrations looks like the following:
 $this->loadMigrationsFrom(__DIR__ . '/database/migrations/');
 ```
 
+## Jobs & Schedules
+Many packages need to run certain actions in a regular interval. For example, a mining tax plugin might want to calculate taxes once a day. This can be done with the job queue and the schedule system.
+
+First, create your job containing the logic you want to run on a schedule. You can refer to the [laravel docs](https://laravel.com/docs/10.x/queues) for this.
+
+Next, create an artisan command that launches your job. Again, you can refer to the [laravel docs](https://laravel.com/docs/10.x/artisan) for this.
+
+In a last step, we create a database seeder that adds your command to the schedule. In your `database/seeders/` directory, create a class that extends from `\Seat\Services\Seeding\AbstractScheduleSeeder`.
+The required `getSchedules()` function should return an array describing the command you wish to schedule, according to the following format:
+```php
+public function getSchedules(): array
+{
+    return [
+        [   
+            'command' => 'horizon:snapshot', // your artisan command
+            'expression' => '*/5 * * * *', // this is a cron expression describing how often your command should be run
+            'allow_overlap' => false,
+            'allow_maintenance' => false,
+            'ping_before' => null,
+            'ping_after' => null,
+        ],
+        [   
+            'command' => 'other:command',
+            'expression' => '*/5 * * * *',
+            'allow_overlap' => false,
+            'allow_maintenance' => false,
+            'ping_before' => null,
+            'ping_after' => null,
+        ],
+    ];
+}
+```
+
+You can let the `getDeprecatedSchedules()` function return an empty array for now.
+
+Lastly, register your seeder in your service provider's `register()` method using
+```php
+$this->registerDatabaseSeeders(MyScheduleSeeder::class);
+```
+
+When you restart the stack, the seeder should add the command to the schedule. For testing, it might also be useful to run the seeder manually using 
+```
+php artisan db:seed --class=Seat\\Services\\Database\\Seeders\\PluginDatabaseSeeder
+``
+
 ## Releasing the plugin
 The usual setup is to host the code on github and distribute the code via [packagist](https://packagist.org/). 
 When you submit your plugin on packagist, it will be installable like the other plugins by adding `<vendor>/<package>` to the appropriate section of your `.env` file.
