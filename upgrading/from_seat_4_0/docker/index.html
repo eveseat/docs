@@ -1,0 +1,1970 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Simple EVE Api Tool Documentation">
+      
+      
+      
+        <link rel="canonical" href="https://eveseat.github.io/docs/upgrading/from_seat_4_0/docker/">
+      
+      
+        <link rel="prev" href="../../general/">
+      
+      
+        <link rel="next" href="../bare_metal/">
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.6">
+    
+    
+      
+        <title>Docker - SeAT Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.558e4712.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/extra_footer.css">
+    
+      <link rel="stylesheet" href="../../../css/extra_typo.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-119530306-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");ga("send","event","feedback","click",t,e),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){ga("send","pageview",e.pathname)})});var e=document.createElement("script");e.async=!0,e.src="https://www.google-analytics.com/analytics.js",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#seat-4x-to-50-docker" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="SeAT Documentation" class="md-header__button md-logo" aria-label="SeAT Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SeAT Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/eveseat/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="SeAT Documentation" class="md-nav__button md-logo" aria-label="SeAT Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    SeAT Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/eveseat/docs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    eveseat/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" tabindex="0" aria-expanded="false">
+          Installation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Installation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../installation/requirements/" class="md-nav__link">
+        Requirements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../installation/docker_installation/" class="md-nav__link">
+        Docker Installation (5.x)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../installation/manual_installation/" class="md-nav__link">
+        Manual Installation (5.x)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4" tabindex="0" aria-expanded="false">
+          Older Versions
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Older Versions" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Older Versions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../installation/old_versions/docker_installation_seat_4/" class="md-nav__link">
+        Docker Installation (4.x)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../installation/old_versions/manual_installation_seat_4/" class="md-nav__link">
+        Manual Installation (4.x)
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" tabindex="0" aria-expanded="true">
+          Upgrading
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Upgrading" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Upgrading
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/" class="md-nav__link">
+        General
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" tabindex="0" aria-expanded="true">
+          From SeAT 4.0
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="From SeAT 4.0" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          From SeAT 4.0
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Docker
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Docker
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-upgrade-procedure" class="md-nav__link">
+    Docker Upgrade Procedure
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Upgrade Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tldr-upgrades" class="md-nav__link">
+    tl;dr upgrades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-changes-since-seat-4" class="md-nav__link">
+    Docker changes since SeAT 4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preperation" class="md-nav__link">
+    Preperation
+  </a>
+  
+    <nav class="md-nav" aria-label="Preperation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backup-your-database" class="md-nav__link">
+    Backup your database
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-your-env-file" class="md-nav__link">
+    Backup your env file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-seat-4" class="md-nav__link">
+    Stop SeAT 4
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-to-seat-5" class="md-nav__link">
+    Upgrading to SeAT 5
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrading to SeAT 5">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-new-docker-compose-files" class="md-nav__link">
+    Get the new docker-compose files
+  </a>
+  
+    <nav class="md-nav" aria-label="Get the new docker-compose files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#updating-custom-styles" class="md-nav__link">
+    Updating custom styles
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-the-env-file" class="md-nav__link">
+    Update the .env file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bringing-seat-5-up" class="md-nav__link">
+    Bringing SeAT 5 up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-your-installation" class="md-nav__link">
+    Check your installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bare_metal/" class="md-nav__link">
+        Bare metal
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" tabindex="0" aria-expanded="false">
+          From SeAT 3.0
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="From SeAT 3.0" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          From SeAT 3.0
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../from_seat_3_0/docker/" class="md-nav__link">
+        Docker
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../from_seat_3_0/bare_metal/" class="md-nav__link">
+        Bare metal
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../from_seat_2_0/" class="md-nav__link">
+        From SeAT 2.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../from_seat_1_0/" class="md-nav__link">
+        From SeAT 1.0
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" tabindex="0" aria-expanded="false">
+          Configuration
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Configuration" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Configuration
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../configuration/esi_configuration/" class="md-nav__link">
+        ESI Configuration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" tabindex="0" aria-expanded="false">
+          Email Setup
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Email Setup" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Email Setup
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../configuration/email_setup/mailgun/" class="md-nav__link">
+        Mailgun
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../configuration/email_setup/gmail/" class="md-nav__link">
+        GMail
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../configuration/env_file_reference/" class="md-nav__link">
+        Env File Reference
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../configuration/eve_administrative_contact/" class="md-nav__link">
+        EVE Administrative Contact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../configuration/configuration_overload/" class="md-nav__link">
+        Configuration Overload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../configuration/sde_overload/" class="md-nav__link">
+        SDE Overload
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" tabindex="0" aria-expanded="false">
+          Admin Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Admin Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Admin Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin_guides/admin_login/" class="md-nav__link">
+        Admin Login
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin_guides/docker_admin/" class="md-nav__link">
+        Docker Admin
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin_guides/authorizations/" class="md-nav__link">
+        Authorizations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin_guides/buckets/" class="md-nav__link">
+        Buckets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin_guides/squads/" class="md-nav__link">
+        Squads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin_guides/understanding_tracking/" class="md-nav__link">
+        Understanding Tracking
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../admin_guides/scaled_deployments/" class="md-nav__link">
+        Scaled Deployments
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" tabindex="0" aria-expanded="false">
+          User Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="User Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          User Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../user_guides/moons_reporter/" class="md-nav__link">
+        Moons Reporter
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" tabindex="0" aria-expanded="false">
+          Developer Guides
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Developer Guides" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Developer Guides
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developer_guides/developer_installation/" class="md-nav__link">
+        Developer Installation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developer_guides/core_package_breakdown/" class="md-nav__link">
+        Core Package Breakdown
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developer_guides/package_development/" class="md-nav__link">
+        Package Development
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developer_guides/development_tips/" class="md-nav__link">
+        Development Tips
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developer_guides/job_queue_flow/" class="md-nav__link">
+        Job Queue Flow
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developer_guides/notifications_implementation/" class="md-nav__link">
+        Notifications Implementation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developer_guides/updating_plugins/" class="md-nav__link">
+        Updating Plugins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../developer_guides/seat_api/" class="md-nav__link">
+        SeAT API
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../styling/" class="md-nav__link">
+        Styling
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../community_packages/" class="md-nav__link">
+        Community Packages
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../troubleshooting/" class="md-nav__link">
+        Troubleshooting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " data-md-toggle="__nav_11" type="checkbox" id="__nav_11" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_11" tabindex="0" aria-expanded="false">
+          About
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="About" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          About
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/contact/" class="md-nav__link">
+        Contact
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/reporting_bugs/" class="md-nav__link">
+        Reporting Bugs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-upgrade-procedure" class="md-nav__link">
+    Docker Upgrade Procedure
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker Upgrade Procedure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tldr-upgrades" class="md-nav__link">
+    tl;dr upgrades
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-changes-since-seat-4" class="md-nav__link">
+    Docker changes since SeAT 4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preperation" class="md-nav__link">
+    Preperation
+  </a>
+  
+    <nav class="md-nav" aria-label="Preperation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backup-your-database" class="md-nav__link">
+    Backup your database
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup-your-env-file" class="md-nav__link">
+    Backup your env file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-seat-4" class="md-nav__link">
+    Stop SeAT 4
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upgrading-to-seat-5" class="md-nav__link">
+    Upgrading to SeAT 5
+  </a>
+  
+    <nav class="md-nav" aria-label="Upgrading to SeAT 5">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-the-new-docker-compose-files" class="md-nav__link">
+    Get the new docker-compose files
+  </a>
+  
+    <nav class="md-nav" aria-label="Get the new docker-compose files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#updating-custom-styles" class="md-nav__link">
+    Updating custom styles
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-the-env-file" class="md-nav__link">
+    Update the .env file
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bringing-seat-5-up" class="md-nav__link">
+    Bringing SeAT 5 up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-your-installation" class="md-nav__link">
+    Check your installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="seat-4x-to-50-docker">SeAT 4.x to 5.0 (Docker)<a class="headerlink" href="#seat-4x-to-50-docker" title="Permanent link">&para;</a></h1>
+<p>The upgrade path from SeAT 4.0 to SeAT 5.0 requires a tiny amount of manual work.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Before starting the upgrade, pay check the plugins you may be using and ensure that they are compatible with SeAT 5. 
+A compatibility table can be found on the <a href="../../../community_packages/#maintained-packages">Community Packages</a> page.
+If you are unsure, join us on <a href="../../../about/contact/">Discord</a> so that we can tru and assist or redirect you to proper person.</p>
+<p>Users of <a href="https://github.com/recursivetree/seat-info">recursivetree/seat-info</a> need to follow separate instructions after the migrating the core to seat 5.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before you do anything, read and understand this entire upgrade guide.</p>
+<p>Those instructions are valid for Docker deployment only.
+Please refer to <a href="../bare_metal/">bare metal instructions</a> for a non-docker installation.</p>
+<p><strong>Remember</strong> to do make a complete backup of your current database making a copy off the server where SeAT runs together with the <code>.env</code> file. Both of these are the only things required to rebuilt your instance in case of failure.</p>
+</div>
+<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A database backup is an absolute <strong>must</strong>. Everything in SeAT can be recovered in some way or form except <em>for your database</em>.</li>
+<li>Enough storage space to have SeAT 4, SeAT 5 and a backup of your SeAT 4 database.</li>
+<li>Ensure all your SeAT 4 packages are up-to-date (check this in <strong>Settings &gt; SeAT Settings</strong>)</li>
+</ul>
+<h2 id="docker-upgrade-procedure">Docker Upgrade Procedure<a class="headerlink" href="#docker-upgrade-procedure" title="Permanent link">&para;</a></h2>
+<p>If you are currently using a docker installation for SeAT 4, upgrading is easy as never before. You need to make a few changes to your docker stack configuration, restart the stack, and you're good to go.</p>
+<p>This guide is going to step through some quick preparation steps, then perform the upgrade and finally, check that everything worked out as expected. Let's dive in.</p>
+<h3 id="tldr-upgrades">tl;dr upgrades<a class="headerlink" href="#tldr-upgrades" title="Permanent link">&para;</a></h3>
+<p>We highly recommend that you read the details of this upgrade guide to get familiar with what has changed. But, if this is your nth upgrade, maybe you just want to get the summary of everything, so here it is:</p>
+<ul>
+<li>Make a <a href="../../../admin_guides/docker_admin/#database-backups-and-restore">backup</a> of your database.</li>
+<li><code>cd</code> to your install dir (which is probably <code>/opt/seat-docker</code>) and bring the stack down with 
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+</span></code></pre></div></li>
+<li>Make a copy of your <code>.env</code> file using 
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cp<span class="w"> </span>.env<span class="w"> </span>.env.seat4.bak
+</span></code></pre></div></li>
+<li>Make a copy of your current compose file using 
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cp<span class="w"> </span>docker-compose.yml<span class="w"> </span>docker-compose.yml.seat4.bak
+</span></code></pre></div></li>
+<li>Download the new <code>docker-compose.yml</code> file with 
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml<span class="w"> </span>-o<span class="w"> </span>docker-compose.yml<span class="sb">`</span>
+</span></code></pre></div></li>
+<li>Download the new database override <code>docker-compose.mariadb.yml</code> file with 
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.mariadb.yml<span class="w"> </span>-o<span class="w"> </span>docker-compose.mariadb.yml
+</span></code></pre></div></li>
+<li>Download the new traefik override <code>docker-compose.traefik.yml</code> file with 
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.traefik.yml<span class="w"> </span>-o<span class="w"> </span>docker-compose.traefik.yml
+</span></code></pre></div></li>
+<li>Download the new proxy override <code>docker-compose.proxy.yml</code> file with 
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.proxy.yml<span class="w"> </span>-o<span class="w"> </span>docker-compose.proxy.yml
+</span></code></pre></div></li>
+<li>If you are using a <a href="../../../styling/">custom stylesheet</a>, open your <code>docker-compose.override.yml</code> file and replace the container name <code>seat-web</code> with <code>front</code>.</li>
+<li>Download the new <code>.env</code> file template using 
+  <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/.env.example<span class="w"> </span>-o<span class="w"> </span>.env
+</span></code></pre></div></li>
+<li>Update the new <code>.env</code> file using your backup <code>.env.seat4.bak</code> </li>
+</ul>
+<p>The table bellow is provided as a variable mapping between SeAT 4.x and SeAT 5.x. You can use it as a reference.</p>
+<table>
+<thead>
+<tr>
+<th>SeAT 4.x</th>
+<th>SeAT 5.x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TRAEFIK_DOMAIN=seat.local</code></td>
+<td><code>SEAT_DOMAIN=seat.seat.local</code></td>
+</tr>
+<tr>
+<td><code>SEAT_SUBDOMAIN=seat</code></td>
+<td><code>SEAT_DOMAIN=seat.seat.local</code></td>
+</tr>
+<tr>
+<td><code>REDIS_HOST=redis</code></td>
+<td><code>REDIS_HOST=cache</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>PROXY_BACKEND_HTTP_PORT=8080</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>LOG_LEVEL=error</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>With SeAT 5.x, there is non longer default database and proxy. You can mix services are your needs.
+However, we continue to provide a few default layout usable out of the box as an option.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Using Traefik</label><label for="__tabbed_1_2">Using reverse proxy</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>In case you want to use Traefik front of SeAT ui container, you'll need to setup the following environment variable: <code>TRAEFIK_ACME_EMAIL</code>.
+You'll then use the following command to boot the stack <code>docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml up</code></p>
+</div>
+<div class="tabbed-block">
+<p>In case you want to use a custom reverse proxy front of SeAT ui container, you'll need to setup the new environment variable <code>PROXY_BACKEND_HTTP_PORT</code>.
+You'll then use the following command to boot the stack <code>docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml up</code></p>
+</div>
+</div>
+</div>
+<p>Since we didn't startup the stack using daemon mode - the overall migration and process is run at front. This will allow you to detect any issue without having a container running in panic mode.
+When SeAT will be ready to serve your requests and have successfully been upgrade, you'll see the following output :</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1"></a>2023-06-02 09:49:33          ****////////////                                                   
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2"></a>2023-06-02 09:49:33      ***                 ///                                                   
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3"></a>2023-06-02 09:49:33   ***                      //                                                 
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4"></a>2023-06-02 09:49:33   **     **  //   ///        //                                                
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5"></a>2023-06-02 09:49:33  **      ***  ///             //      ////////@@@@@@@@@@@@@@@(/////@@@//////////
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6"></a>2023-06-02 09:49:33            **/   ///   /////////     *///&amp;@@@@@@@&amp;/////#@@@@%//%///#@@@@@(///@ 
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7"></a>2023-06-02 09:49:33  **     *** //////// /                @///////@@///@@@///@@@///@@///@@@@@(///@ 
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8"></a>2023-06-02 09:49:33  **      ***   ///   //       //      @@@@@////@/////////@@//////////@@@@(///@ 
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9"></a>2023-06-02 09:49:33   **         ///  //   /     //      *////////@@@///////@@///@@@@@@///@@@(///@ 
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10"></a>2023-06-02 09:49:33    ***         //// ///    ///                                              
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11"></a>2023-06-02 09:49:33       ***                ///                                              
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12"></a>2023-06-02 09:49:33          ****////////////
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13"></a>2023-06-02 09:49:33 
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14"></a>2023-06-02 09:49:33 
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15"></a>2023-06-02 09:49:33 SeAT is now ready to serve requests
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16"></a>2023-06-02 09:49:33 
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17"></a>2023-06-02 09:49:33 Open your browser and go to &#39;https://seat.domain.tld&#39;
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18"></a>2023-06-02 09:49:33 Run &#39;docker compose exec front php artisan seat:admin:login&#39; to get a temporary link in order to sign-in as built-in admin user account (or use bellow one)
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19"></a>2023-06-02 09:49:33 
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20"></a>2023-06-02 09:49:33 SeAT Admin Login URL Generator
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21"></a>2023-06-02 09:49:33 Checking if &#39;admin&#39; is a super user
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22"></a>2023-06-02 09:49:33 Generating authentication token
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23"></a>2023-06-02 09:49:33 
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24"></a>2023-06-02 09:49:33 Your authentication URL is valid for 60 seconds.
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25"></a>2023-06-02 09:49:33 https://seat.domain.tld/auth/login/admin/aDvMAcd7GQPXFfhS3aIH9dh4opwcvASB
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26"></a>2023-06-02 09:49:33 
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27"></a>2023-06-02 09:49:33 
+</span><span id="__span-8-28"><a id="__codelineno-8-28" name="__codelineno-8-28"></a>2023-06-02 09:49:33 AH00558: apache2: Could not reliably determine the server&#39;s fully qualified domain name, using 172.19.0.4. Set the &#39;ServerName&#39; directive globally to suppress this message
+</span><span id="__span-8-29"><a id="__codelineno-8-29" name="__codelineno-8-29"></a>2023-06-02 09:49:33 AH00558: apache2: Could not reliably determine the server&#39;s fully qualified domain name, using 172.19.0.4. Set the &#39;ServerName&#39; directive globally to suppress this message
+</span><span id="__span-8-30"><a id="__codelineno-8-30" name="__codelineno-8-30"></a>2023-06-02 09:49:33 [Fri Jun 02 07:49:33.524019 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.56 (Debian) PHP/8.2.6 configured -- resuming normal operations
+</span><span id="__span-8-31"><a id="__codelineno-8-31" name="__codelineno-8-31"></a>2023-06-02 09:49:33 [Fri Jun 02 07:49:33.524084 2023] [core:notice] [pid 1] AH00094: Command line: &#39;apache2 -D FOREGROUND&#39;
+</span></code></pre></div></td></tr></table></div>
+<p>Try to authenticate yourself and verify everything is working well. If you don't find any issue, you can now restart the stack in daemon mode 🎉.</p>
+<p>Use <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span> in order to kill the stack and restart it in background:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Using Traefik</label><label for="__tabbed_2_2">Using reverse proxy</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.mariadb.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.traefik.yml<span class="w"> </span>up
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.mariadb.yml<span class="w"> </span>-f<span class="w"> </span>docker-compose.proxy.yml<span class="w"> </span>up
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="docker-changes-since-seat-4">Docker changes since SeAT 4<a class="headerlink" href="#docker-changes-since-seat-4" title="Permanent link">&para;</a></h3>
+<p>There have been a few minor changes to the <code>docker-compose.yml</code> file. Most notably, the containers have been renamed to disclose their purpose easier, we have moved from Dockerhub to <a href="https://github.com/eveseat/seat-docker/pkgs/container/seat">GitHub Container Registry</a>, and the stack now has a persistent storage volume.</p>
+<p>If you customized your docker stack deployment, it is recommended that you take a look at the new <code>docker-compose.yml</code> file yourselves to see what exactly changed.
+Last but not least, try to avoid tuning standard files as must as possible and use override syntax instead with a <code>docker-compose.override.yml</code> file <a href="https://docs.docker.com/compose/extends/">(see official documentation)</a>.</p>
+<h3 id="preperation">Preperation<a class="headerlink" href="#preperation" title="Permanent link">&para;</a></h3>
+<p>Before you upgrade, you need to backup.</p>
+<h4 id="backup-your-database">Backup your database<a class="headerlink" href="#backup-your-database" title="Permanent link">&para;</a></h4>
+<p>The single most important thing you need is a backup of your SeAT 4 database. Without a backup you will <em>not</em> be able to recover in case of a disaster. So, head on over to the <a href="../../../admin_guides/docker_admin/#database-backups-and-restore">docker db backup section</a> and do that right now.</p>
+<h4 id="backup-your-env-file">Backup your env file<a class="headerlink" href="#backup-your-env-file" title="Permanent link">&para;</a></h4>
+<p>The <code>.env</code> file is the one that has your SeAT installations' configuration. It contains things like your SSO Client ID and Secret (aka: credentials). By default, SeAT docker installations live in <code>/opt/seat-docker</code> meaning your <code>.env</code> file will be at <code>/opt/seat-docker/.env</code>. Make a copy of this file and store it somewhere safe.</p>
+<h4 id="stop-seat-4">Stop SeAT 4<a class="headerlink" href="#stop-seat-4" title="Permanent link">&para;</a></h4>
+<p>First, we need to stop the SeAT 4 stack. Assuming you have the default <code>/opt/seat-docker</code> location for your installation, cd to it first and then run:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+</span></code></pre></div>
+<p>The output should be similar to this:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1"></a>root@seat:/opt/seat-docker# docker compose down
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2"></a>Stopping seat-web   ... done
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3"></a>Stopping seat-cron    ... done
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4"></a>Stopping seat-worker  ... done
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5"></a>Removing seat-traefik     ... done
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6"></a>Stopping seat-mariadb ... done
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7"></a>Stopping seat-redis   ... done
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8"></a>Removing seat-web   ... done
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9"></a>Removing seat-cron    ... done
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10"></a>Removing seat-worker  ... done
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11"></a>Removing seat-traefik     ... done
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12"></a>Removing seat-mariadb ... done
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13"></a>Removing seat-redis   ... done
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14"></a>Removing network seat-docker_seat-network
+</span></code></pre></div></td></tr></table></div>
+<h3 id="upgrading-to-seat-5">Upgrading to SeAT 5<a class="headerlink" href="#upgrading-to-seat-5" title="Permanent link">&para;</a></h3>
+<h4 id="get-the-new-docker-compose-files">Get the new docker-compose files<a class="headerlink" href="#get-the-new-docker-compose-files" title="Permanent link">&para;</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you have made customisations to how you deployed SeAT with docker-compose, then you should probably <strong>not</strong> </p>
+</div>
+<p>be replacing the compose file like we are about to do. Instead, have a look at the new one <a href="https://github.com/eveseat/seat-docker/blob/master/docker-compose.yml">here</a> and adapt.</p>
+<p>Next, we will download the new SeAT 5 docker-compose files. Do that with:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1"></a>mv<span class="w"> </span>docker-compose.yml<span class="w"> </span>docker-compose.yml.seat4.bak
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.yml<span class="w"> </span>-o<span class="w"> </span>docker-compose.yml
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.mariadb.yml<span class="w"> </span>-o<span class="w"> </span>docker-compose.mariadb.yml
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.traefik.yml<span class="w"> </span>-o<span class="w"> </span>docker-compose.traefik.yml
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/docker-compose.proxy.yml<span class="w"> </span>-o<span class="w"> </span>docker-compose.proxy.yml
+</span></code></pre></div></td></tr></table></div>
+<p>With this we have created a copy of the older docker-compose file (just in case), and downloaded the new one.</p>
+<h5 id="updating-custom-styles">Updating custom styles<a class="headerlink" href="#updating-custom-styles" title="Permanent link">&para;</a></h5>
+<p>If you've customized the appearance of seat using <a href="../../../styling/">this guide</a>, follow these additional steps. Otherwise, skip to the next section and update your <code>.env</code> file.</p>
+<p>Open your <code>docker-compose.override.yml</code> file using nano:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nano<span class="w"> </span>docker-compose.override.yml
+</span></code></pre></div></p>
+<p>Go to the following line that says <code>seat-web</code>:
+<div class="language-YAML highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="w">    </span><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">      </span><span class="nt">seat-web</span><span class="p">:</span><span class="w"> </span><span class="c1"># &lt;--- Here</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span>
+</span></code></pre></div></p>
+<p>Update the line to say <code>front</code> instead of <code>seat-web</code>:
+<div class="language-YAML highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="w">    </span><span class="nt">services</span><span class="p">:</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">      </span><span class="nt">front</span><span class="p">:</span><span class="w"> </span><span class="c1"># &lt;--- Here</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span>
+</span></code></pre></div>
+It is important to keep the indentation as it is.</p>
+<p>Exit using Control-X and type <code>y</code> for yes when asked whether you want to save the changes.</p>
+<h4 id="update-the-env-file">Update the .env file<a class="headerlink" href="#update-the-env-file" title="Permanent link">&para;</a></h4>
+<p>This is one of the more important steps. The database configuration needs to be updated.</p>
+<p>The easier is probably to download the new template and adapt variables according to your previous configuration as
+some of them have been removed, newest appeared and overall have been reordered.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1"></a>mv<span class="w"> </span>.env<span class="w"> </span>.env.seat4.bak
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://raw.githubusercontent.com/eveseat/seat-docker/master/.env.example<span class="w"> </span>-o<span class="w"> </span>.env
+</span></code></pre></div></td></tr></table></div>
+<p>You can refer at any time to the online version of <code>.env</code> file on <a href="https://github.com/eveseat/seat-docker/blob/master/.env">GitHub</a>
+The table bellow is provided as a variable mapping between SeAT 4.x and SeAT 5.x. You can use it as a reference.</p>
+<table>
+<thead>
+<tr>
+<th>SeAT 4.x</th>
+<th>SeAT 5.x</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TRAEFIK_DOMAIN=seat.local</code></td>
+<td><code>SEAT_DOMAIN=seat.seat.local</code></td>
+</tr>
+<tr>
+<td><code>SEAT_SUBDOMAIN=seat</code></td>
+<td><code>SEAT_DOMAIN=seat.seat.local</code></td>
+</tr>
+<tr>
+<td><code>REDIS_HOST=redis</code></td>
+<td><code>REDIS_HOST=cache</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>PROXY_BACKEND_HTTP_PORT=8080</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>LOG_LEVEL=error</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="bringing-seat-5-up">Bringing SeAT 5 up<a class="headerlink" href="#bringing-seat-5-up" title="Permanent link">&para;</a></h3>
+<p>The only thing that is left to do is to start the stack up again. The first time we are going to start SeAT 5 we won't use the <code>-d</code> flag. This is just so that you can see what's happening during the upgrade procedure. So, start SeAT with:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Using Traefik</label><label for="__tabbed_3_2">Using reverse proxy</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>In case you want to use Traefik front of SeAT ui container, you'll need to setup the following environment variable: <code>TRAEFIK_ACME_EMAIL</code>.
+You'll then use the following command to boot the stack <code>docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml up</code></p>
+</div>
+<div class="tabbed-block">
+<p>In case you want to use a custom reverse proxy front of SeAT ui container, you'll need to setup the new environment variable <code>PROXY_BACKEND_HTTP_PORT</code>.
+You'll then use the following command to boot the stack <code>docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml up</code></p>
+</div>
+</div>
+</div>
+<p>You should first see some download progress bars downloading the new SeAT version.</p>
+<p>After a while, seat should start up similar to this:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1"></a>...
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2"></a>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3"></a>seat_local-front-1  | mysqld is alive
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4"></a>seat_local-front-1  | PONG
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5"></a>seat_local-front-1  | starting web service
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6"></a>seat_local-front-1  | Processing plugins from SEAT_PLUGINS
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7"></a>seat_local-front-1  | Loading composer repositories with package information
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8"></a>seat_local-front-1  | Info from https://repo.packagist.org: #StandWithUkraine
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9"></a>seat_local-front-1  | Updating dependencies
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10"></a>...
+</span></code></pre></div></td></tr></table></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do <strong>not</strong> interrupt SeAT during this phase. It will leave your database in a potentially corrupt state, meaning you are going to have to do some extra pluming to get a backup restored. Not a train smash, but not worth it.</p>
+</div>
+<p>Eventually, when everything is done you should start seeing the following output:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span>
+<span class="normal"><a href="#__codelineno-19-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1"></a>seat_local-front-1  | AH00558: apache2: Could not reliably determine the server&#39;s fully qualified domain name, using 172.25.0.5. Set the &#39;ServerName&#39; directive globally to suppress this message
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2"></a>seat_local-front-1  | AH00558: apache2: Could not reliably determine the server&#39;s fully qualified domain name, using 172.25.0.5. Set the &#39;ServerName&#39; directive globally to suppress this message
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3"></a>seat_local-front-1  | [Sun May 21 21:10:46.869842 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.56 (Debian) PHP/8.1.19 configured -- resuming normal operations
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4"></a>seat_local-front-1  | [Sun May 21 21:10:46.869944 2023] [core:notice] [pid 1] AH00094: Command line: &#39;apache2 -D FOREGROUND&#39;
+</span></code></pre></div></td></tr></table></div>
+<p>This is a good sign, and means everything is now ready!</p>
+<h3 id="check-your-installation">Check your installation<a class="headerlink" href="#check-your-installation" title="Permanent link">&para;</a></h3>
+<p>The first obvious step will be to check that you can access the web UI. If not, something is probably weird with the web server configuration and needs some tweaking.</p>
+<p>If everything seems to be working fine, you can hit ++crtl+c++ which will bring the stack down gracefully. This might take up to 30 seconds.</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<span class="normal"><a href="#__codelineno-20-2">2</a></span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span>
+<span class="normal"><a href="#__codelineno-20-4">4</a></span>
+<span class="normal"><a href="#__codelineno-20-5">5</a></span>
+<span class="normal"><a href="#__codelineno-20-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1"></a>^CGracefully stopping... (press Ctrl+C again to force)
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2"></a>Stopping seat-docker_scheduler_1 ...
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3"></a>Stopping seat-docker_worker_1    ...
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4"></a>Stopping seat-docker_front_1     ...
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5"></a>Stopping seat-docker_traefik_1   ... done
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6"></a>Stopping seat-docker_cache_1     ...
+</span></code></pre></div></td></tr></table></div>
+<p>Then, bring it back up with the <code>-d</code> flag.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Using Traefik</label><label for="__tabbed_4_2">Using reverse proxy</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>In case you want to use Traefik front of SeAT ui container, you'll need to setup the following environment variable: <code>TRAEFIK_ACME_EMAIL</code>.
+You'll then use the following command to boot the stack <code>docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml up -d</code></p>
+</div>
+<div class="tabbed-block">
+<p>In case you want to use a custom reverse proxy front of SeAT ui container, you'll need to setup the new environment variable <code>PROXY_BACKEND_HTTP_PORT</code>.
+You'll then use the following command to boot the stack <code>docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml up -d</code></p>
+</div>
+</div>
+</div>
+<p>Congrats, and welcome to SeAT 5!</p>
+<h3 id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h3>
+<p>Should you have any issue with the installation, please contact us on <a href="../../../about/contact/">Discord</a>.</p>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2015 - 2020 Leon Jacobs
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/eveseat/seat" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.e5c33ebb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.51d95adb.min.js"></script>
+      
+    
+  </body>
+</html>
