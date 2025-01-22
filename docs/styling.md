@@ -2,14 +2,14 @@
 
 # Styling
 
-By default, SeAT uses [Bootstrap 3](https://getbootstrap.com/docs/3.4/) and the [Admin LTE](https://adminlte.io/) template.
+By default, SeAT uses [Bootstrap 4](https://getbootstrap.com/docs/4.6/) and the [Admin LTE](https://adminlte.io/) template.
 
 You may want to customise SeAT design to match either your corporation or alliance colours.
 
 To do so, you can use two available css hooks :
 
 * `custom-layout-mini.css` used by the sign-in page
-* `custom-layout.css` used by all the entier application, globally
+* `custom-layout.css` used by all the entire application, globally
 
 # Bare Metal Installs
 
@@ -121,16 +121,15 @@ An example of a customized login page using `custom-layout-mini.css` would be:
         text-align: center;
         margin-bottom: 25px;
         font-weight: 300;
+        content: url(https://images.evetech.net/corporations/98482334/logo?size=128);
         margin-top: 50px;
     }
 
     .login-logo::before, .register-logo::before {
-        content: " ";
         display: block;
         width: 128px;
         height:128px;
         margin: 0 auto;
-        background-image: url(https://images.evetech.net/corporations/98482334/logo?size=128);
         border-radius: 50%;
         margin-bottom: 50px;
     }
