@@ -35,3 +35,23 @@ Example:
 [Github issue]: https://github.com/eveseat/seat/issues/77
 [eveseat/eveapi:Traits/JobManager#L47-L56]: https://github.com/eveseat/eveapi/blob/master/src/Traits/JobManager.php#L47-L56
 [eveseat/eveapi:Helpers/PhealSetup#L77]: https://github.com/eveseat/eveapi/blob/master/src/Helpers/PhealSetup.php#L77
+
+## Required Action
+
+After the email address has been updated, in order for this change to flow through to the SeAT workers they need to be restarted.
+
+For Docker installation this is as simple as restarting the containers:
+=== "Using Traefik"
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.traefik.yml restart
+    ```
+
+=== "Using proxy"
+    ```bash
+    docker compose -f docker-compose.yml -f docker-compose.mariadb.yml -f docker-compose.proxy.yml restart
+    ```
+
+For Blade installations supervisor should restart all jobs
+```bash
+supervisorctl restart all
+```
